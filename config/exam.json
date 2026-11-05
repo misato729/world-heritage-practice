@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "site": {
+    "id": "world-heritage-lab",
+    "name": "世界遺産ラボ",
+    "short_name": "世界遺産ラボ",
+    "exam_name": "世界遺産検定2級",
+    "description": "日本と世界の遺産を、歴史・文化・自然のつながりから学ぶ、世界遺産検定2級の学習サービスです。",
+    "tagline": "世界遺産の価値を、一つずつ学ぶ。",
+    "logo_path": "/images/logo.svg",
+    "primary_color": "#28614f",
+    "contact_email": "",
+    "overview": [
+      {
+        "title": "2級の試験形式",
+        "body": "選択式の60問を60分で解答します。合格基準は100点満点中60点以上で、調整される場合があります。受検資格の制限はありません。"
+      },
+      {
+        "title": "学習範囲",
+        "body": "日本の全遺産と、世界の代表的な遺産300件を学習します。世界遺産条約の理念や関係機関、各地域の遺産の価値を理解することが大切です。"
+      },
+      {
+        "title": "分野ごとの配点比率",
+        "body": "基礎知識20％、日本の遺産25％、世界の自然遺産10％、世界の文化遺産35％、その他10％が目安です。"
+      },
+      {
+        "title": "学習のポイント",
+        "body": "文化的景観、宗教、建築、産業、地球の歴史、生態系など、テーマごとに共通点と違いを整理します。日本の遺産は登録基準や構成資産も確認し、世界遺産委員会の結果や日本の推薦物件にも目を向けます。"
+      }
+    ],
+    "notice": "問題は現在準備中です。公開後、このページから演習を始められます。"
+  },
+  "exam": {
+    "set_count": 10,
+    "questions_per_exam": 60,
+    "choice_labels": [
+      "①",
+      "②",
+      "③",
+      "④"
+    ]
+  },
+  "categories": {
+    "major": [
+      {
+        "value": "fundamentals",
+        "label": "基礎知識"
+      },
+      {
+        "value": "japan",
+        "label": "日本の遺産"
+      },
+      {
+        "value": "world_nature",
+        "label": "世界の自然遺産"
+      },
+      {
+        "value": "world_culture",
+        "label": "世界の文化遺産"
+      },
+      {
+        "value": "other",
+        "label": "その他"
+      }
+    ],
+    "minor": [
+      {
+        "value": "convention",
+        "label": "世界遺産条約・保護の歴史",
+        "major_category_value": "fundamentals"
+      },
+      {
+        "value": "organizations",
+        "label": "関係機関・登録の仕組み",
+        "major_category_value": "fundamentals"
+      },
+      {
+        "value": "criteria",
+        "label": "登録基準・文化的景観",
+        "major_category_value": "fundamentals"
+      },
+      {
+        "value": "japan_culture",
+        "label": "日本の文化遺産",
+        "major_category_value": "japan"
+      },
+      {
+        "value": "japan_nature",
+        "label": "日本の自然遺産",
+        "major_category_value": "japan"
+      },
+      {
+        "value": "japan_components",
+        "label": "構成資産・登録基準",
+        "major_category_value": "japan"
+      },
+      {
+        "value": "earth_history",
+        "label": "地球の歴史・地形・地質",
+        "major_category_value": "world_nature"
+      },
+      {
+        "value": "ecosystems",
+        "label": "生態系・生物多様性",
+        "major_category_value": "world_nature"
+      },
+      {
+        "value": "natural_landscapes",
+        "label": "自然景観・保全",
+        "major_category_value": "world_nature"
+      },
+      {
+        "value": "civilizations",
+        "label": "古代文明・考古遺跡",
+        "major_category_value": "world_culture"
+      },
+      {
+        "value": "religion",
+        "label": "宗教・信仰",
+        "major_category_value": "world_culture"
+      },
+      {
+        "value": "architecture_cities",
+        "label": "建築・都市・文化交流",
+        "major_category_value": "world_culture"
+      },
+      {
+        "value": "industry_landscape",
+        "label": "産業遺産・文化的景観",
+        "major_category_value": "world_culture"
+      },
+      {
+        "value": "heritage_current_affairs",
+        "label": "世界遺産委員会・時事",
+        "major_category_value": "other"
+      },
+      {
+        "value": "heritage_conservation",
+        "label": "危機遺産・負の遺産",
+        "major_category_value": "other"
+      },
+      {
+        "value": "related_programs",
+        "label": "無形文化遺産・世界の記憶",
+        "major_category_value": "other"
+      }
+    ]
+  },
+  "payments": {
+    "enabled": true,
+    "free_exam_count": 5,
+    "amount": 500,
+    "currency": "jpy"
+  }
+}

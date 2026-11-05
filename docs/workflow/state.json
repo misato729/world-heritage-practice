@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "revision": 0,
+  "updated_at": null,
+  "workspace_relative_to_repo": ".",
+  "active_context": "development",
+  "last_checkpoint": null,
+  "gate_policy": {
+    "version": 1,
+    "legacy_task_ids": []
+  },
+  "contexts": [
+    {
+      "id": "product",
+      "title": "学習設計・サービスの方針",
+      "card": "docs/workflow/contexts/product.md"
+    },
+    {
+      "id": "development",
+      "title": "実装・検証",
+      "card": "docs/workflow/contexts/development.md"
+    },
+    {
+      "id": "operations",
+      "title": "資料・データ・配信の運用",
+      "card": "docs/workflow/contexts/operations.md"
+    }
+  ],
+  "watch_files": [
+    "AGENTS.md",
+    "README.md",
+    "docs/testing.md",
+    "docs/workflow/README.md",
+    "docs/workflow/policy.json",
+    "docs/workflow/task.example.json",
+    "docs/workflow/contexts/product.md",
+    "docs/workflow/contexts/development.md",
+    "docs/workflow/contexts/operations.md",
+    "scripts/context.mjs",
+    "scripts/context.test.mjs",
+    "scripts/workflow-policy.mjs",
+    "scripts/workflow-policy.test.mjs",
+    "scripts/workspace-policy.mjs",
+    "scripts/workspace-policy.test.mjs",
+    "scripts/check-private-sources.mjs",
+    "scripts/check-private-sources.test.mjs",
+    ".gitignore",
+    ".dockerignore",
+    ".githooks/pre-push"
+  ],
+  "tasks": [
+    {
+      "id": "heritage_setup_20261105",
+      "context": "development",
+      "title": "世界遺産ラボの初期構築とリモート保存",
+      "status": "doing",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-05 テンプレートをクローンし世界遺産ラボへ最適化してリモートへ保存。問題は作成しない。",
+      "next_action": "設定・空データ・画面と資料保護を検証し独立レビュー後に送信する",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "未実施。例示ファイルは自動でタスクに登録されない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "2級設定・教材0件・資料保護・テスト・型・ビルド・PC/SP確認・新規remote保存を確認する",
+          "verification": "共有スキーマ、単体/API、隔離Playwright、空DBのPC/SP表示、Git送信範囲とremote照合",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "設定・教材0件・資料保護・画面・検証根拠を独立して確認する",
+          "verification": "実装担当と異なる担当のソース・検証結果レビュー",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "heritage_setup_implementer",
+        "max_attempts": 3,
+        "attempts": []
+      }
+    }
+  ]
+}

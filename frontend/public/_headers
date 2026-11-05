@@ -1,0 +1,15 @@
+
+/forgot-password
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+/forgot-password/
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+/reset-password
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+  Cache-Control: no-store
+/reset-password/
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+  Cache-Control: no-store
