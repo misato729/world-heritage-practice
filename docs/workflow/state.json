@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 19,
-  "updated_at": "2026-11-05T14:20:36.363Z",
+  "revision": 21,
+  "updated_at": "2026-11-05T14:32:24.132Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T14-20-36-363Z-r19.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T14-32-24-132Z-r21.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -301,42 +301,56 @@
       "id": "mock_exam_delivery_20261105",
       "context": "development",
       "title": "模試1までの変更をコミットしてリモートへ保存",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "mock_exam_01_20261105",
         "mock_exam_01_revision_20261105"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-05 ここまでの変更をコミットしてリモートに上げる",
-      "next_action": "軽量検査・明示ステージ・レビュー後にmainへ送信する",
-      "evidence": [],
-      "last_verified_at": null,
-      "verification_scope": "既存の原典/DB/PCSP確認を教材hash一致で継承し、共有schema/資料保護/ステージ対象/remote一致とpush後CIを確認。本番公開は含めない。",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "docs/mock-exam-01-delivery-20261105.md"
+      ],
+      "last_verified_at": "2026-11-05T14:32:23.806Z",
+      "verification_scope": "教材hash27c031...と既存原典/PCSP証拠一致を確認して継承。共有schema60問240肢、追跡/履歴/ignore/明示stage27ファイルとdiff検査、独立送信範囲レビューPASS。空教材テストを専用fixture化し隔離operations13件成功・skip0。実装9e6e6dfをorigin/mainへcommit/pushしGitHub ref一致・divergence0/0、同SHA CI4ジョブ成功。原本/OCR/秘密設定未送信、本番公開なし。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "教材最終hash/スキーマ/資料保護、明示送信範囲、commit/pushとremote一致、同実装SHAのCIを確認",
           "verification": "既存成功記録照合、軽量検査、staged diff、GitHub main refとCI run照合",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/mock-exam-01-delivery-20261105.md"
+          ],
+          "checked_at": "2026-11-05T14:32:23.806Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "別担当が送信範囲と資料保護・記録整合を確認する",
           "verification": "原本/派生資料/秘密値が含まれない候補差分の独立レビュー",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/mock-exam-01-delivery-20261105.md"
+          ],
+          "checked_at": "2026-11-05T14:32:23.806Z",
+          "reviewer": "revision_review"
         }
       ],
       "execution": {
         "worker": "git_deliverer",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "承認範囲の27ファイルをコミットしorigin/mainへ送信。原本保護・対象テスト13件・独立レビューとremote一致、同実装SHAのCI4ジョブ成功を確認。",
+            "at": "2026-11-05T14:32:23.919Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]

@@ -19,4 +19,4 @@
 
 ## 送信結果
 
-送信後に実装コミット、remote参照一致、同実装SHAのCI結果を追記する。サイト本番配信・クラウドDBへの反映は行わない。
+実装コミット`9e6e6df6549feac66ba2f3ea7e8ea657d4b7ef8e`を`origin/main`へ送信し、GitHubのmain参照と一致、ローカルとの差分0/0を確認した。同SHAの[CI実行42044982735](https://github.com/misato729/world-heritage-practice/actions/runs/42044982735)は、`harness`・`verify`・`browser`・`netlify-static`の4ジョブすべて成功した。完了記録だけを後続のdocsコミット（`[skip ci] [skip netlify]`）へ保存し、確認済み実装に対するCIと区別する。サイト本番配信・クラウドDBへの反映は行っていない。
