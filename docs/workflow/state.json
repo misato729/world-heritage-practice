@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 4,
-  "updated_at": "2026-11-05T03:34:08.596Z",
+  "revision": 6,
+  "updated_at": "2026-11-05T06:25:07.944Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T03-34-08-596Z-r4.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T06-25-07-944Z-r6.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -100,6 +100,45 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "major_categories_db_20261105",
+      "context": "development",
+      "title": "指定5大分類のDB登録",
+      "status": "doing",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-05 分類が未登録なら基礎知識・日本の遺産・世界の自然遺産・世界の文化遺産・その他を設定してDB登録",
+      "next_action": "最終結果レビューとリモート保存、検証専用DBの後片付けを行う",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "未実施。例示ファイルは自動でタスクに登録されない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "指定5分類が設定と永続DBで一致し、再実行で重複・不要更新がなく教材0件を維持する",
+          "verification": "Prisma追加マイグレーションと専用test DBで登録/再実行/更新/rollbackを確認、型検査と開発DBの実行前後を照合",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "スキーマ・同期・DB接続先・検証結果を独立して確認する",
+          "verification": "別担当が差分・非破壊性・5件と教材0件・実施範囲を確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "major_categories_implementer",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]

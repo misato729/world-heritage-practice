@@ -25,7 +25,7 @@ docker compose up --build -d
 
 ホームは `http://localhost:3110` です。独立したComposeプロジェクト `world-heritage-practice` とDB `world_heritage_development` を使用します。既存サービスの環境変数・利用者・DBをコピーしないでください。
 
-初回起動でPrismaのマイグレーションを適用します。developmentでのseedは、問題0件のJSONでは正常に何も投入しません。既存DBの内容を上書きしません。
+初回起動でPrismaのマイグレーションを適用します。developmentでのseedは、設定から大分類をDBへ同期します。問題0件のJSONでは教材問題を投入しません。既存の教材問題を上書きしません。
 
 ## 設定と教材
 
@@ -33,10 +33,19 @@ docker compose up --build -d
 | --- | --- |
 | `config/exam.json` | 名称、配色、試験構成、分類、公開状況の案内 |
 | `content/questions.json` | 初期教材。現在は空配列 |
+| DBの `major_categories` | 設定から同期する5大分類のコード・表示名・表示順 |
 | `frontend/test-support/` | テスト内だけで使う合成データ生成 |
 | `past-exam/` / `local-only/` | ローカル専用資料。GitとDockerから除外 |
 
 教材は問題・解答解説をMarkdownで作成し、内容と利用条件の確認後に別途登録します。資料PDFや抽出本文をリモートへ送らないでください。問題を公開する際は `site.notice` の案内も更新します。
+
+大分類は設定ファイルを正本とし、DBへ次のコマンドで同期します。再実行しても同じ行を重複登録・不要更新しません。既存の設定外分類は削除しません。
+
+```bash
+docker compose exec frontend npm run operations -- categories:sync
+```
+
+分類登録の実施結果は[大分類のDB登録](docs/categories-db-20261105.md)に記録しています。
 
 課金の枠組みはテンプレートの設定（模試1〜5が無料、6以降が会員向け）を維持しています。販売は無効です。Stripe・販売者情報・問い合わせ先・規約を整え、別途確認してから販売を開始します。
 

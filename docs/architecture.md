@@ -98,6 +98,7 @@ DSNの解釈、認証、エンベロープの生成はSDKへ委ねます。送�
 | テーブル | 内容 |
 | --- | --- |
 | `users` | 会員・管理者。役割は一般ユーザーと管理者 |
+| `major_categories` | 設定から同期する大分類のコード・表示名・表示順 |
 | `questions` | 試験番号・問題番号、分類、本文、解説、出典、公開状態 |
 | `question_choices` | 選択肢、表示順、正答フラグ |
 | `answer_histories` | 利用者の回答と判定 |
@@ -158,6 +159,7 @@ docker compose cp \
 | --- | --- |
 | `db:migrate` | DB接続。未適用のPrismaマイグレーションを適用 |
 | `db:baseline` | DB接続。バックアップ済みの既存DBに対する明示的な初回履歴登録 |
+| `categories:sync` | 設定の大分類をDBへ同期。削除・不要更新なし |
 | `db:seed` | 開発環境のみ。任意の`INPUT` |
 | `questions:import_content` | `CONFIRM=IMPORT_INTO_EMPTY_DATABASE`、任意の`INPUT` |
 | `questions:import` | `CONFIRM=IMPORT_INTO_EMPTY_DATABASE`、`INPUT` |

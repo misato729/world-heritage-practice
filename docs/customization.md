@@ -44,11 +44,13 @@
 - `categories.major`：大分類の`value`と`label`。
 - `categories.minor`：小分類の`value`・`label`・`major_category_value`。最後の値は登録済み大分類の`value`を指します。
 
+大分類のコード・表示名・表示順は、`npm run operations -- categories:sync`でDBの`major_categories`へ同期します。設定を正本とし、同じ値の行は更新せず、設定外の既存行は削除しません。development起動の`db:seed`でも同期します。productionではマイグレーション適用後にこの同期を明示して実行します。
+
 分類の`value`は問題データから参照する識別子です。表示名だけを変える場合は`label`を変更します。各問題の`major_category_code`と`category_code`は、上記設定と一致させてください。
 
 ## 問題JSONの形式
 
-`content/questions.json`は現在、`schema_version: 1`と空の`questions`配列です。空配列は正常な初期状態で、seedは何も投入しません。以下は将来の登録形式を示す骨組みで、教材問題ではありません。
+`content/questions.json`は現在、`schema_version: 1`と空の`questions`配列です。空配列は正常な初期状態で、seedは教材問題を投入しません。大分類の同期とは別です。以下は将来の登録形式を示す骨組みで、教材問題ではありません。
 
 ```json
 {
