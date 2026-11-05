@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 62,
-  "updated_at": "2026-11-05T22:38:58.958Z",
+  "revision": 64,
+  "updated_at": "2026-11-05T22:46:41.631Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T22-38-58-958Z-r62.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T22-46-41-631Z-r64.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1036,41 +1036,59 @@
       "id": "mocks_02_05_git_delivery_20261106",
       "context": "development",
       "title": "模試2〜5の変更をコミット・リモート保存",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "mocks_02_05_integration_20261106"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-06 ここまでの変更をコミットして、リモートにpushしてください。",
-      "next_action": "stage独立レビュー後commit/push・remote/CI照合",
-      "evidence": [],
-      "last_verified_at": null,
-      "verification_scope": "教材240問と関連UI/文書/検査。原本・OCR・DB・秘密値除外。本番/Stripe変更なし。",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "docs/mock-exams-02-05-delivery-20261106.md",
+        "local-only/git-delivery-mocks-02-05/ci-result.json",
+        "local-only/git-delivery-mocks-02-05/review.json"
+      ],
+      "last_verified_at": "2026-11-06",
+      "verification_scope": "37明示stage/独立レビュー、原本・秘密除外、workflow162/6517教材比較/diff/sourceguard成功。実装a981e07をorigin/mainへpushし0/0一致、同SHA CI4ジョブ成功。追補は文書/stateのみ、教材/app/config不変。本番/Stripe変更なし。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "stage/資料保護/版適合/remote/CI",
           "verification": "明示stage、diff/privateguard、remoteとCI",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/mock-exams-02-05-delivery-20261106.md",
+            "local-only/git-delivery-mocks-02-05/ci-result.json"
+          ],
+          "checked_at": "2026-11-06"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "送信範囲の独立確認",
           "verification": "author_mock03の読取レビュー",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
+          "status": "passed",
+          "evidence": [
+            "docs/mock-exams-02-05-delivery-20261106.md",
+            "local-only/git-delivery-mocks-02-05/review.json"
+          ],
+          "checked_at": "2026-11-06",
           "reviewer": "author_mock03"
         }
       ],
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "37明示stage/独立レビュー、162検査・資料保護成功。a981e07をpushしremote一致、同SHA CI4ジョブ成功",
+            "at": "2026-11-05T22:46:39.595Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]
