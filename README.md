@@ -2,7 +2,7 @@
 
 世界遺産検定2級の学習サービスです。日本と世界の遺産を、歴史・文化・自然のつながりから学べる演習基盤を用意しています。
 
-現在は初期構築段階で、教材問題は0件です。模擬試験10回・各60問・選択肢①〜④の構成を設定していますが、問題はまだ作成・投入・公開していません。ホームと試験概要には準備中の案内を表示します。
+公式2級テキスト第5版第2刷と2025/2026年の公式時事情報に基づく、分野混在順の模試1（60問・四肢択一）を収録しています。模試2〜10は未作成です。[問題原稿](content/mock-exam-01.questions.md)と[解答解説](content/mock-exam-01.answers.md)を参照してください。開発DBへの投入・画面確認の記録は[模試1の改訂・検証記録](docs/mock-exam-01-revision-20261105.md)を参照してください。
 
 ## 構成と機能
 
@@ -25,17 +25,17 @@ docker compose up --build -d
 
 ホームは `http://localhost:3110` です。独立したComposeプロジェクト `world-heritage-practice` とDB `world_heritage_development` を使用します。既存サービスの環境変数・利用者・DBをコピーしないでください。
 
-初回起動でPrismaのマイグレーションを適用します。developmentでのseedは、設定から大分類をDBへ同期します。問題0件のJSONでは教材問題を投入しません。既存の教材問題を上書きしません。
+初回起動でPrismaのマイグレーションを適用します。developmentでのseedは、設定から大分類をDBへ同期します。教材JSONは模試1の60問です。空の開発DBにだけ教材を投入し、既存の教材問題を上書きしません。
 
 ## 設定と教材
 
 | 場所 | 役割 |
 | --- | --- |
 | `config/exam.json` | 名称、配色、試験構成、分類、公開状況の案内 |
-| `content/questions.json` | 初期教材。現在は空配列 |
+| `content/questions.json` | 教材の正本。模試1の60問 |
 | DBの `major_categories` | 設定から同期する5大分類のコード・表示名・表示順 |
 | `frontend/test-support/` | テスト内だけで使う合成データ生成 |
-| `past-exam/` / `local-only/` | ローカル専用資料。GitとDockerから除外 |
+| `past-exam/` / `textbook/` / `local-only/` | ローカル専用資料。GitとDockerから除外 |
 
 教材は問題・解答解説をMarkdownで作成し、内容と利用条件の確認後に別途登録します。資料PDFや抽出本文をリモートへ送らないでください。問題を公開する際は `site.notice` の案内も更新します。
 

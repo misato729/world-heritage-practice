@@ -25,3 +25,7 @@
 # World Heritage reference PDFs and all derived source material stay local.
 **/[pP][aA][sS][tT]-[eE][xX][aA][mM]/
 **/[pP][aA][sS][tT]-[eE][xX][aA][mM]/**
+
+# Official textbook PDFs and source derivatives remain local.
+**/[tT][eE][xX][tT][bB][oO][oO][kK]/
+**/[tT][eE][xX][tT][bB][oO][oO][kK]/**

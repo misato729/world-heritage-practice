@@ -1,4 +1,4925 @@
 {
   "schema_version": 1,
-  "questions": []
+  "questions": [
+    {
+      "exam_number": 1,
+      "question_number": 1,
+      "major_category_code": "world_culture",
+      "category_code": "industry_landscape",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n「ベルゲンのブリッゲン地区」の説明として不適当なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ブリッゲン地区はたびたび火災に遭ったが、その都度、当時の図面を基に再建されてきた。現在の海沿いの木造家屋の街並みも1955年の火災後に再建されたものとして説明される。単に「再建された遺産」というだけでなく、再建の方法や残された記録にも注目したい。"
+        },
+        {
+          "type": "text",
+          "text": "①：適当。本文は在外ハンザ商人と干鱈取引を記す。"
+        },
+        {
+          "type": "text",
+          "text": "②：不適当。図面を基に再建され、海沿いには木造家屋が並ぶとされる。"
+        },
+        {
+          "type": "text",
+          "text": "③：適当。本文は中庭を火災対策と説明する。"
+        },
+        {
+          "type": "text",
+          "text": "④：適当。共同金庫に保管された記録が被害を受けなかったと明記される。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.218「ベルゲンのブリッゲン地区」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "在外ハンザ商人の居留地として、干鱈の取引で発展した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1955年の火災以後は当時の図面を参照せず、木造家屋をすべて石造家屋に置き換えた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "火災の被害を抑えるため、住居に中庭が設けられている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "会議場ショートスチューネが火災に遭った際も、共同金庫内の書類や議事録は被害を受けなかった。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 2,
+      "major_category_code": "japan",
+      "category_code": "japan_nature",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n小笠原諸島について、A・Bに入る正しい語の組合せはどれか。\n小笠原諸島は、これまで大陸や日本列島と陸続きになったことがない（ A ）である。起源が同じ生物が、異なる環境に適応して分化することを（ B ）といい、島々の生物に独自の進化が見られる。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "小笠原諸島は大陸や日本列島と陸続きになったことがない海洋島である。島に定着した生物が他地域の生物と交わりにくい環境で独自に進化し、起源が同じ生物が異なる環境に適応して分化する適応放散が見られる。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。Bの定義は適応放散であり、標高による植生変化をいう垂直分布ではない。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。小笠原諸島は大陸島ではなく海洋島である。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。陸続きになったことがない海洋島で、適応放散が見られる。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。Aは海洋島、Bは適応放散である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.086「小笠原諸島」／p.088「屋久島」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：海洋島　B：垂直分布"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：大陸島　B：適応放散"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：海洋島　B：適応放散"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：大陸島　B：垂直分布"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 3,
+      "major_category_code": "world_culture",
+      "category_code": "industry_landscape",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\nイランの『メイマンドの文化的景観』に見られる、季節に応じた生活の説明として、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "メイマンドでは、春や秋に一時的な住居を構えて山で放牧し、冬は渓谷へ下りて洞窟住居で生活する。人間が季節に合わせて居住地を変えることが、厳しい乾燥環境に適応した生活の特徴である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。季節と住居の対応が逆で、洞窟住居で暮らすのは冬である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。本文の生業は山での放牧であり、冬の住居は軟岩を掘った洞窟住居である。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。春・秋の山での放牧と冬の洞窟住居という組合せが本文に一致する。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。人間が移動する独自の生活様式が評価されている。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.109「メイマンドの文化的景観」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "春・秋には洞窟住居で暮らし、冬には山の上の一時的な住居へ移る。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "春・秋には海辺で漁業を行い、冬には山の上の高床住居で暮らす。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "春・秋には山で放牧し、冬には軟岩を掘った洞窟住居で暮らす。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "春・秋も冬も住居は変えず、家畜だけが別の集落へ移される。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 4,
+      "major_category_code": "world_nature",
+      "category_code": "ecosystems",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『ガラパゴス諸島』を観察して進化論の着想を得た人物（A）と、この遺産を保有する国（B）の組合せとして、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "エクアドルのガラパゴス諸島で生物を観察したチャールズ・ダーウィンは、島ごとに特徴が異なるフィンチなどから進化論の着想を得た。ドロミウは、ドロミテ山塊の地名につながる鉱物学者である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。人物は正しいが、保有国はベネズエラではなくエクアドルである。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。保有国は正しいが、観察した人物はドロミウではなくダーウィンである。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。人物・保有国ともに異なる。ドロミウはドロミテ山塊の項の鉱物学者、ベネズエラはカナイマ国立公園の保有国である。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。ダーウィンとエクアドルの両方が出典に一致する。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.103「ガラパゴス諸島／フィンチ」／p.240「ドロミテ山塊」／p.241「カナイマ国立公園」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：チャールズ・ダーウィン　B：ベネズエラ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：ドロミウ　B：エクアドル"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：ドロミウ　B：ベネズエラ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：チャールズ・ダーウィン　B：エクアドル"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 5,
+      "major_category_code": "japan",
+      "category_code": "japan_culture",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n平泉の寺院や庭園が表している、仏教の思想はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "平泉の寺院・庭園・遺跡は、仏教の浄土思想の宇宙観を表している。藤原清衡は中尊寺を再興して金色堂を建て、2代基衡は毛越寺を再興した。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。平泉の寺院や庭園の主題として挙げられているのは浄土思想である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。平泉の寺院や庭園の主題として挙げられているのは浄土思想である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。平泉の寺院や庭園の主題として挙げられているのは浄土思想である。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。平泉の構成資産は浄土思想の宇宙観を表す。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.044「平泉―仏国土（浄土）を表す建築・庭園及び考古学的遺跡群―」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "修験道"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "神仏分離"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "富士講"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "浄土思想"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 6,
+      "major_category_code": "world_culture",
+      "category_code": "architecture_cities",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\nメッカ巡礼の海の玄関口として発展し、木製の出窓や紅海のサンゴを用いた家々に地域の建築的伝統が残る都市はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ジッダはメッカ巡礼における海の玄関口として発展した。歴史地区の木製出窓やサンゴを用いた家は、高温多湿の環境に対応した通気性の高い設計を伝える。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。ベルゲンはノルウェーの港湾都市で、干鱈取引で発展した。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。p220はメッカ巡礼の玄関口と紅海建築を説明する。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。ストラスブールはフランスとドイツの文化が融合する都市である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。カトマンズの谷はネパールのヒンドゥー教と仏教が融合する聖地である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.220「ジッダの歴史地区：メッカの入口」／p.218「ベルゲンのブリッゲン地区」／p.224「ストラスブール：グラン・ディルからノースタットのヨーロッパの都市景観」／p.190「カトマンズの谷」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ベルゲン"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ジッダ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ストラスブール"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "カトマンズ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 7,
+      "major_category_code": "world_nature",
+      "category_code": "ecosystems",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『オカバンゴ・デルタ』の水の動きと生態系について、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "オカバンゴ・デルタが乾季の時期に、上流では雨季のため定期的な氾濫が起こる。水は数か月かけて砂漠へ浸透し、水を求めるアフリカゾウやバッファローなどの移動にも影響する。季節のずれと水の動きが生態系を支えている。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。デルタが乾季のときに上流は雨季で、定期的な氾濫が起きる。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。カラハリ砂漠内の内陸デルタであり、水は数か月かけて砂漠へ浸透する。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。デルタと源流の雨季・乾季のずれが本文の重要な説明である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。本文は水の動きに伴ってアフリカゾウやバッファローが水を求めて大移動するとする。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.252「オカバンゴ・デルタ」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "デルタが雨季のときにだけ上流でも雨季となり、氾濫は起こらない。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "水はデルタを通過すると、短時間で大西洋へ流れ出す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "上流の雨季に生じた氾濫水が、乾季のデルタへ届く。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "野生動物は、氾濫水の移動にかかわらず同じ場所にとどまる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 8,
+      "major_category_code": "other",
+      "category_code": "heritage_current_affairs",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n2026年の第48回世界遺産委員会の決定に関する、次の記述A・Bの正誤の組合せとして正しいものはどれか。\nA オーストリアの「ウィーン歴史地区」は、危機遺産リストから除外された。\nB スリナムの「パラマリボ市街歴史地区」は、危機遺産リストに追加された。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "A・Bともに正しい。2026年の委員会ではウィーン歴史地区を危機遺産リストから除外し、パラマリボ市街歴史地区を同リストに追加した。危機遺産リストからの除外と、同リストへの追加を区別する。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。AだけでなくBも正しい。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。ウィーンの除外とパラマリボの追加が報告されている。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。A・Bともに公式閉会報告の決定に一致する。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。BだけでなくAも正しい。"
+        }
+      ],
+      "source_text": "UNESCO: UNESCO World Heritage: 25 new sites inscribed（2026年7月28日公表・10月14日更新）（International community mobilized to protect World Heritage in danger、2026年11月5日確認） | https://www.unesco.org/en/articles/unesco-world-heritage-25-new-sites-inscribed",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：正しい／B：誤り"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：正しい／B：正しい"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：誤り／B：誤り"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：誤り／B：正しい"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 9,
+      "major_category_code": "fundamentals",
+      "category_code": "criteria",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n世界遺産登録を目指す際の条件として、不適当なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "世界遺産条約の締約国であることは必要だが、ユネスコの加盟国であることは登録の必須条件ではない。このほか、暫定リストへの記載、原則として保有する締約国自身からの推薦、不動産であること、国内法による保護などが求められる。"
+        },
+        {
+          "type": "text",
+          "text": "①：不適当。条約締約国である必要はあるが、ユネスコ加盟国である必要はない。"
+        },
+        {
+          "type": "text",
+          "text": "②：適当。暫定リストへの事前記載が必要である。"
+        },
+        {
+          "type": "text",
+          "text": "③：適当。不動産であり、保有国の法律などで守られている必要がある。"
+        },
+        {
+          "type": "text",
+          "text": "④：適当。世界遺産条約の締約国であることは前提条件である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.028「世界遺産登録の条件」／p.029「世界遺産登録の条件」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "遺産を保有する国が、必ずユネスコの加盟国でもあること。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "遺産が、あらかじめその国の暫定リストに記載されていること。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "遺産が不動産であり、保有国の法律などで保護されていること。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "遺産を保有する国が世界遺産条約の締約国であること。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 10,
+      "major_category_code": "japan",
+      "category_code": "japan_nature",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n白神山地の原生的な温帯林を代表する樹木はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "白神山地には、ブナなどの落葉広葉樹が原生的な状態で残っている。日本のブナの分布地域は氷河に覆われなかったため、原生林に根付く豊かな生物多様性が保たれていることが評価された。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。設問で述べられる白神山地の温帯林を代表するのはブナである。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。白神山地はブナの原生的な温帯林で知られる。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。設問で述べられる白神山地の温帯林を代表するのはブナである。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。設問で述べられる白神山地の温帯林を代表するのはブナである。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.084「白神山地」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "スギ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ブナ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "マングローブ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヤシ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 11,
+      "major_category_code": "world_culture",
+      "category_code": "religion",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n『サンティアゴ・デ・コンポステーラ（旧市街）』の大聖堂にある「栄光の門」は、どの建築様式の傑作とされるか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "彫刻家マテオが手がけた栄光の門は、ロマネスク様式の傑作とされる。この大聖堂には後世の増築もあり、異なる時期の建築や装飾を区別することが大切である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。栄光の門について指定される様式はロマネスクであり、ロココではない。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。大聖堂の正面門はロマネスク様式の傑作と記される。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。栄光の門は中世のロマネスク様式であり、アール・デコではない。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。出典は栄光の門をマヌエル様式とはしていない。正しくはロマネスク様式である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.138「サンティアゴ・デ・コンポステーラ（旧市街）」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ロココ様式"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ロマネスク様式"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "アール・デコ様式"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "マヌエル様式"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 12,
+      "major_category_code": "world_culture",
+      "category_code": "religion",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『サーンチーの仏教遺跡』についての説明で、正しくないものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "サーンチーのトラナには、ブッダの幼少期などを題材にしたレリーフがある。ただし、まだ仏像がつくられ始める前の時代であったため、ブッダは象徴的に表されている。人物像の仏像による直接的な表現だとする説明は誤りである。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。出典は3つの大型ストゥーパと祠堂、僧院などを挙げる。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。第1ストゥーパはアショーカ王がつくった仏塔のひとつを核とする。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。ストゥーパの四方にトラナという大きな門がある。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。出典は、仏像がつくられ始める前なのでブッダは象徴的に表現されたと説明する。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.152「サーンチーの仏教遺跡」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "大型のストゥーパのほか、祠堂や僧院も残る。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "第1ストゥーパは、アショーカ王がつくらせた仏塔のひとつを核としている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "第1ストゥーパの周囲には、トラナという門が四方に設けられている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "門のレリーフは、ブッダを人間の姿の仏像として直接表現した最初期の例である。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 13,
+      "major_category_code": "fundamentals",
+      "category_code": "organizations",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n1994年に採択された「グローバル・ストラテジー」の考え方として、不適当なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "グローバル・ストラテジーは、世界遺産リストの不均衡を是正し、代表性と信頼性を確保するための戦略である。世界遺産をもたない国や、産業遺産、先史時代・現代の遺産などの登録を促す。西欧の教会や城などに偏りがちだった登録を、さらに限定する考えではない。"
+        },
+        {
+          "type": "text",
+          "text": "①：不適当。登録の偏りを是正する戦略であり、対象を西欧の記念物に限定するものではない。"
+        },
+        {
+          "type": "text",
+          "text": "②：適当。産業遺産の登録強化が挙げられる。"
+        },
+        {
+          "type": "text",
+          "text": "③：適当。先史時代や現代の遺産の登録強化が挙げられる。"
+        },
+        {
+          "type": "text",
+          "text": "④：適当。世界遺産をもたない国からの登録強化が挙げられる。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.033「世界遺産登録の概念の変化」／p.034「グローバル・ストラテジー」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "登録の対象を、西欧の教会や城のような記念物に限定する。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "産業遺産の登録を促す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "先史時代や現代の遺産の登録を促す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "世界遺産をもたない国からの登録を促す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 14,
+      "major_category_code": "japan",
+      "category_code": "japan_nature",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n「奄美大島、徳之島、沖縄島北部及び西表島」の固有種について、A・Bに入る生息地の正しい組合せはどれか。\nアマミノクロウサギは（ A ）だけに生息し、イリオモテヤマネコは（ B ）だけに生息する。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "アマミノクロウサギは奄美大島と徳之島だけに生息する日本固有種で、イリオモテヤマネコは西表島だけに生息する。琉球列島では、島の隔離などと関わって独自の生物相が形成されてきた。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。2種の生息地が逆である。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。アマミノクロウサギは奄美大島・徳之島、イリオモテヤマネコは西表島に対応する。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。イリオモテヤマネコの生息地は西表島である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。アマミノクロウサギの生息地は奄美大島と徳之島である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.090「奄美大島、徳之島、沖縄島北部及び西表島」／p.091「奄美大島、徳之島、沖縄島北部及び西表島」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：西表島　B：奄美大島と徳之島"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：奄美大島と徳之島　B：西表島"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：奄美大島と徳之島　B：奄美大島と徳之島"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：西表島　B：西表島"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 15,
+      "major_category_code": "other",
+      "category_code": "heritage_current_affairs",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n2025年の第47回世界遺産委員会で、新たに世界遺産リストへ登録された物件は何件か。既存遺産の範囲拡大は含めない。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "2025年の第47回委員会では26件が新規登録された。既存遺産2件の拡大も承認されたが、新規登録件数とは分けて数える。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。UNESCOの閉会報告は新規登録26件とする。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。新規登録件数は25件ではない。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。新規登録件数は27件ではない。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。新規26件に拡大2件を足した数字であり、設問の新規登録件数とは異なる。"
+        }
+      ],
+      "source_text": "UNESCO: UNESCO World Heritage: 26 new sites inscribed（2025年7月17日公表）（冒頭／新規登録26件と既存2件の拡大、2026年11月5日確認） | https://www.unesco.org/en/articles/unesco-world-heritage-26-new-sites-inscribed-0",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "26件"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "25件"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "27件"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "28件"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 16,
+      "major_category_code": "japan",
+      "category_code": "japan_culture",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n富士山が「文化遺産」として登録された価値を説明したものとして、最も適当なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "富士山は、浅間神社などを通じて信仰の対象となるとともに、葛飾北斎や歌川広重らの浮世絵など多くの芸術作品に影響を与えた。そのため「信仰の対象と芸術の源泉」という文化的価値によって登録されている。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。信仰と芸術への影響が登録された文化的価値である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。火山であることだけではなく、信仰と芸術の文化的価値によって登録された。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。固有種の生息地だけを評価した自然遺産ではない。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。製鉄技術ではなく、信仰と芸術への影響を表す遺産である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.052「富士山―信仰の対象と芸術の源泉」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "信仰の対象となり、浮世絵などの芸術にも影響を与えてきた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "火山活動によって生まれた地形だけが評価された。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "固有の動植物を保護する生息地としてだけ評価された。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "近代的な製鉄技術の発達を示す遺産として評価された。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 17,
+      "major_category_code": "fundamentals",
+      "category_code": "criteria",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n文化的景観の分類のうち、現在も機能を保つ農林水産業などを通じて、自然環境との関わりの中で形づくられた景観が当てはまるものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "農林水産業などと結び付き、自然環境との関係の中で形づくられて現在も機能する景観は、「有機的に進化する景観」のうち「生きている景観」に当たる。庭園などの意図的な設計は「意匠された景観」、自然の要素と宗教・芸術・文学などとの強い結び付きは「関連する景観」である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。意匠された景観は、庭園など人が意図的に設計・創造した景観である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。関連する景観は、自然の要素と宗教・芸術・文学などとの強い関連をもつ景観である。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。現在も機能する農林水産業などの景観は、有機的に進化する景観の「生きている景観」に含まれる。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。複合遺産は文化・自然の両方の登録基準にまたがる遺産であり、文化的景観の3分類の名称ではない。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.030「登録基準」／p.033「世界遺産登録の概念の変化／文化的景観の3つのカテゴリー」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "意匠された景観"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "関連する景観"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "有機的に進化する景観"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "複合遺産"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 18,
+      "major_category_code": "world_culture",
+      "category_code": "civilizations",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n『殷墟』で、神託などの結果を記録した亀の腹甲などに見られる文字はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "殷墟では、亀の腹甲などに神託の結果を記した甲骨文字が発見されている。殷王朝の言語や信仰の発展を知るうえで、重要な遺物である。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。神託などの結果を甲骨文字で記した亀の腹甲などが出土したとされる。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。殷墟の亀の腹甲に記されるのは楔形文字ではなく甲骨文字である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。マヤ文字はパレンケやコパンなどのマヤ文明の遺跡に関わる。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。殷墟の項で確認される文字は甲骨文字であり、東巴文字ではない。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.184「殷墟」／p.188「コパンのマヤ遺跡」／p.189「パレンケの古代都市と国立公園」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "甲骨文字"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "楔形文字"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "マヤ文字"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "東巴文字"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 19,
+      "major_category_code": "world_culture",
+      "category_code": "religion",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n仏教4大聖地のうち、ブッダが初めて説法を行った場所はどこか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "仏教4大聖地は、誕生のルンビニー、悟りを開いたブッダガヤ、最初に説法したサールナート、入滅のクシナガルである。場所の名前と、ブッダの生涯の出来事を対応させて整理しよう。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。ルンビニーは生誕の地である。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。出典の仏教4大聖地の注はサールナートを最初に説法を説いた場所とする。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。クシナガルは入滅の地である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。ブッダガヤは悟りを開いた場所である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.153「仏陀の生誕地ルンビニー／ブッダガヤの大菩提寺／仏教4大聖地」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ルンビニー"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "サールナート"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "クシナガル"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ブッダガヤ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 20,
+      "major_category_code": "japan",
+      "category_code": "japan_components",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n「古都京都の文化財」の構成資産とその説明の組合せで、誤っているものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "二条城は徳川家康が1603年に造営した城である。藤原頼通が1052年に仏堂に改め、阿弥陀堂（鳳凰堂）が残るのは平等院である。慈照寺は観音殿や東求堂、龍安寺は15個の石を配置した枯山水の石庭が代表的である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。藤原頼通が1052年に仏堂へ改めたのは平等院で、二条城は徳川家康が1603年に造営した。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。慈照寺には観音殿と東求堂がある。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。龍安寺の石庭は15個の石を配した枯山水の代表作である。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。平等院には阿弥陀堂（鳳凰堂）が残る。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.057「「古都京都の文化財」のおもな構成資産」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "二条城―藤原頼通が1052年に仏堂へ改めた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "慈照寺―観音殿（銀閣）や東求堂がある。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "龍安寺―15個の石を配した石庭で知られる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "平等院―阿弥陀堂（鳳凰堂）が残る。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 21,
+      "major_category_code": "japan",
+      "category_code": "japan_nature",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n屋久島の植生について述べた文の空欄に入るものはどれか。\n屋久島では、海岸線から山頂に向かって亜熱帯から亜寒帯まで植生が移り変わる。このような植生の変化を（　）という。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "屋久島は標高の高い山々をもち、海岸から山頂へ上がるにつれて植生が亜熱帯から亜寒帯へと変化する。この標高に伴う変化を垂直分布という。島の多雨な環境も多様な植生を支えている。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。適応放散は、起源が同じ生物が異なる環境に適応して分化することをいう。設問は標高に伴う植生の変化である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。神仏習合は神道と仏教の融合に関する語で、植生の分布ではない。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。標高に伴って植生が変わる垂直分布である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。灰吹法は銀の精錬技術で、植生の分布ではない。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.062「紀伊山地の霊場と参詣道」／p.068「石見銀山遺跡とその文化的景観」／p.086「小笠原諸島」／p.088「屋久島」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "適応放散"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "神仏習合"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "垂直分布"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "灰吹法"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 22,
+      "major_category_code": "world_culture",
+      "category_code": "civilizations",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n古代ギリシャに関わる世界遺産についての説明で、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "パルテノン神殿は、ペルシア戦争でのギリシャの勝利を祝って再建され、完成まで約10年を要した。エピダウロスのアスクレピオス神殿はドーリア式である。デルフィはアポロンの聖地で、ピュティアによる神託が行われた。デロス同盟は、ギリシャの諸ポリスがペルシアに対抗して結成した。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。エピダウロスの項はアスクレピオス神殿をドーリア式とする。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。アテネのアクロポリスの項は、パルテノン神殿がペルシア戦争の勝利を祝って再建されたと説明する。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。デルフィはアポロンの聖地で、アポロンの神託が行われた。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。デロス同盟はアテネを中心とするギリシャのポリスが、アケメネス朝ペルシアに対抗して結成した。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.166「アテネのアクロポリス」／p.167「エピダウロスにあるアスクレピオスの聖域／デルフィの考古遺跡」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "エピダウロスのアスクレピオス神殿は、コリント式の神殿である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "パルテノン神殿は、ギリシャのペルシア戦争での勝利を祝って再建された。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "デルフィでは、女神アテナによる神託が行われた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "デロス同盟は、アケメネス朝ペルシアがギリシャの諸都市を率いるために結成した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 23,
+      "major_category_code": "japan",
+      "category_code": "japan_components",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n「明治日本の産業革命遺産」の構成資産とその説明の組合せで、誤っているものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "官営八幡製鐵所は、日本の重工業の主力産業化を担った銑鋼一貫製鉄所である。蒸気機関による船舶修理の施設という説明は、小菅修船場跡に対応する。松下村塾・韮山反射炉・三池炭鉱と三池港は、それぞれ人材育成・大砲鋳造・石炭の採掘輸送の役割を伝える。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。松下村塾は吉田松陰の私塾で、後の人材を育てた。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。韮山反射炉は海防のための大砲鋳造に関わる。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。三池炭鉱・三池港は採掘から輸送までを結ぶ物流システムを伝える。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。船舶修理施設は小菅修船場跡の説明で、官営八幡製鐵所は銑鋼一貫製鉄所である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.079「「明治日本の産業革命遺産」のおもな構成資産」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "松下村塾―吉田松陰の私塾で、幕末の人材を育てた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "韮山反射炉―大砲鋳造のために造られた反射炉である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "三池炭鉱・三池港―採掘から輸送までの総合的な物流システムを伝える。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "官営八幡製鐵所―日本の蒸気機関による船舶修理の施設として造られた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 24,
+      "major_category_code": "world_culture",
+      "category_code": "religion",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n「カトマンズの谷」で、マッラ朝の時代に融合が進んだ二つの宗教の組合せはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "カトマンズの谷では14世紀にマッラ朝が支配し、ヒンドゥー教と仏教の融合が進んだ。インドとチベットをつなぐ中継都市としての発展と、複数の宗教が共存する都市文化を結び付けて理解したい。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。本文が挙げる組合せはイスラム教・キリスト教ではない。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。本文はヒンドゥー教と仏教の融合を説明する。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。仏教と組み合わされるのはヒンドゥー教である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。ヒンドゥー教と組み合わされるのは仏教である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.190「カトマンズの谷」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "イスラム教とキリスト教"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヒンドゥー教と仏教"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "仏教とキリスト教"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヒンドゥー教とイスラム教"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 25,
+      "major_category_code": "world_culture",
+      "category_code": "industry_landscape",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n次の二つの産業遺産と、それぞれの発展に関わった企業・人物の組合せで正しいものはどれか。\nA イヴレーア：20世紀の産業都市\nB ダーウェント峡谷の工場群"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "イヴレーアはタイプライターなどを製造・販売したオリベッティ社の企業都市として発展した。ダーウェント峡谷には、アークライトが開発した水力紡績機を導入した工場などが残る。企業都市と紡績工場の二つの対応を整理する。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。Bは正しいが、Aの企業都市に関わるのはオリベッティ社である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。AとBの企業・人物を逆にしている。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。Aは正しいが、Bの水力紡績機に関わるのはアークライトである。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。Aはオリベッティ社、Bはアークライトに対応する。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.233「イヴレーア：20世紀の産業都市／ダーウェント峡谷の工場群」／p.206「バウハウス関連遺産群：ヴァイマールとデッサウ、ベルナウ」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A ヴァルター・グロピウス／B リチャード・アークライト"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A リチャード・アークライト／B オリベッティ社"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A オリベッティ社／B ヴァルター・グロピウス"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A オリベッティ社／B リチャード・アークライト"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 26,
+      "major_category_code": "other",
+      "category_code": "heritage_current_affairs",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n2026年7月に開かれた第48回世界遺産委員会の開催都市はどこか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "第48回世界遺産委員会は、2026年7月19日から29日まで韓国の釜山で開催された。開催都市と国、委員会の回次を対応させて確認したい。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。第48回の実際の開催都市はソフィアではない。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。第48回の実際の開催都市はパリではない。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。公式会議ページに韓国の釜山と開催期間が記載されている。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。第48回の実際の開催都市はニューデリーではない。"
+        }
+      ],
+      "source_text": "UNESCO World Heritage Centre: 48th session of the World Heritage Committee（会議冒頭の開催地・期間／採択決議 WHC/26/48.COM/16、2026年11月5日確認） | https://whc.unesco.org/en/sessions/48COM/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ソフィア（ブルガリア）"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "パリ（フランス）"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "釜山（韓国）"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ニューデリー（インド）"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 27,
+      "major_category_code": "world_culture",
+      "category_code": "industry_landscape",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n「ペルシア湾の真珠産業関連遺産：島嶼経済の証拠」についての説明で、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "バーレーン近海の真珠産業は長い繁栄を築いたが、日本で真珠養殖が確立された1930年代以降に衰退した。登録対象には沖合の養殖床だけでなく、ムハラク市内の建物や島の南端の要塞なども含まれる。産業を支えた採取地・取引・居住のつながりを示す遺産である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。住居・店舗・倉庫・モスクなどの建物も登録対象である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。日本の養殖技術は成立ではなく衰退の契機として記される。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。本文に成立時期と日本の養殖技術による衰退が説明される。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。要塞はバーレーンのムハラク島南端に位置する。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.220「ペルシア湾の真珠産業関連遺産：島嶼経済の証拠」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "登録対象は沖合の真珠貝養殖床だけであり、真珠商人の住居や店舗は含まれない。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "日本で真珠養殖の方法が確立されたことによって、バーレーンの伝統的な真珠産業は初めて成立した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "バーレーンの近海では2世紀から真珠産業が栄え、1930年代に日本で真珠養殖の方法が確立されると衰退した。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "構成資産のカラット・ブ・マヒール要塞は、紅海にあるジッダの旧市街に位置する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 28,
+      "major_category_code": "japan",
+      "category_code": "japan_culture",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n石見銀山で銀の生産量を増やすことに役立った「灰吹法」の説明として、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "灰吹法は、鉱石をいったん鉛に溶かし、そこから銀を効率よく取り出す技術である。16世紀に石見銀山へ伝えられ、良質な銀を大量生産できるようになったことが発展を支えた。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。鉛に溶かして銀を効率よく取り出す方法である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。本文で説明される灰吹法は、鉛に溶かして銀を取り出す技術である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。海水に沈める方法ではなく、鉛を用いた銀の精錬技術である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。糸状に延ばす加工ではなく、鉛を用いて銀を取り出す精錬技術である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.068「石見銀山遺跡とその文化的景観」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "鉱石をいったん鉛に溶かし込み、銀を効率よく取り出す方法。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "鉱石を水だけで洗い、比重の軽い銀を浮かべる方法。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "鉱石を木炭に混ぜず、そのまま海水に沈める方法。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "銀を含む鉱石を焼かず、細かい糸状に延ばす方法。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 29,
+      "major_category_code": "world_culture",
+      "category_code": "architecture_cities",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n『シュトルーヴェの測地弧』に関わる三角測量が、解明に大きく貢献した対象はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "シュトルーヴェは、ノルウェーから黒海へ至る長い区間に測地点を設けて三角測量を行った。この経線の測量は、地球の大きさや形状を明らかにするきっかけとなり、地球科学の発展に貢献した。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。出典が説明するのは地磁気の測定ではなく、三角測量を用いた経線測量である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。出典が示す調査成果は経線測量による地球の大きさ・形状であり、公転周期ではない。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。出典は地球内部の温度測定ではなく、地球の大きさ・形状の計測を説明している。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。測量の成果として、地球の大きさや形状の解明が示されている。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.115「シュトルーヴェの測地弧」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "地磁気の向き"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "地球の公転周期"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "地球内部の温度"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "地球の大きさや形状"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 30,
+      "major_category_code": "fundamentals",
+      "category_code": "organizations",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n世界遺産に関係する機関の説明として、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "世界遺産委員会は21か国で構成され、通常は年1回開かれる。世界遺産リストへの記載や危機遺産リストなどを審議する。全締約国が参加するのは世界遺産条約締約国会議であり、ローマに本部を置く保存修復の研究機関はICCROMである。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。21か国で構成され、通常年1回開かれる政府間委員会である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。全締約国による会議は世界遺産条約締約国会議で、世界遺産委員会とは異なる。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。ローマに本部を置く保存修復の研究機関はICCROMである。世界遺産センターはパリのユネスコ本部内にある。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。IUCNは諮問機関として自然遺産の調査などを行い、最終的な審議は世界遺産委員会が行う。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.031「世界遺産登録の流れ」／p.032「世界遺産に関係する機関」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "世界遺産委員会は、21か国の委員国からなり、通常は年1回開かれる。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "世界遺産委員会は、世界遺産条約の全締約国が参加する総会の別名である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "世界遺産センターは、イタリアのローマに本部を置く保存修復の研究機関である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "IUCNは、世界遺産委員会に代わって世界遺産リストへの登録を最終決定する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 31,
+      "major_category_code": "world_culture",
+      "category_code": "architecture_cities",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n公式テキスト第5版第2刷の説明に照らし、「アントニ・ガウディの作品群」について不適当なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "サグラダ・ファミリア贖罪聖堂で登録されているのは、誕生のファサードと地下聖堂である。建物全体が登録されているわけではない。ガウディの作品を知っているだけでなく、登録対象の範囲を区別する問題である。"
+        },
+        {
+          "type": "text",
+          "text": "①：適当。p202の登録対象7件にグエル公園が挙がる。"
+        },
+        {
+          "type": "text",
+          "text": "②：適当。p202は植物・生物から得た着想を説明する。"
+        },
+        {
+          "type": "text",
+          "text": "③：適当。p202にコロニア・グエル聖堂の地下聖堂と明記される。"
+        },
+        {
+          "type": "text",
+          "text": "④：不適当。p203は誕生のファサードと地下聖堂のみを登録対象としている。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.202「アントニ・ガウディの作品群」／p.203「アントニ・ガウディの作品群（続き）」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "グエル公園は世界遺産の登録対象に含まれる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ガウディは植物や生物の形から着想を得て建築をデザインした。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "コロニア・グエル聖堂では地下聖堂が登録対象となっている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "サグラダ・ファミリア贖罪聖堂は、建物全体が世界遺産の登録対象である。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 32,
+      "major_category_code": "world_culture",
+      "category_code": "architecture_cities",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『バンディアガラの断崖』のドゴン族の集落に関する説明で、正しくないものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ドゴン族の集落は、アンマの神話に由来する、人間をかたどった配置をもつ。北端の集会所トグナに加え、円錐形の屋根をもつ穀物倉庫が独特の景観をつくっている。したがって、屋根がすべて平らだとする説明は誤りである。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。出典は、頭を北に向けた人間に見立てて家屋を配置すると説明する。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。穀物倉庫は円錐形の屋根をもつと本文・写真説明で確認できる。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。集落の北端にトグナという集会所がある。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。配置はアンマを信仰するドゴン族の神話に由来する。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.119「バンディアガラの断崖」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "頭を北に向けて横たわる人間に見立て、家屋が配置されている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "集落を特徴付ける穀物倉庫の屋根は、すべて平らである。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "北端には、トグナと呼ばれる集会所がある。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "家屋の配置には、アンマという神への信仰が反映されている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 33,
+      "major_category_code": "world_nature",
+      "category_code": "earth_history",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『ドロミテ山塊』の地質や地形についての説明で、正しくないものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ドロミテ山塊にはドロマイトを含む石灰岩がつくる尖峰や断崖があり、三畳紀の海洋生物の化石も残る。先カンブリア時代の岩盤からなるテーブルマウンテンが広がるのは、ベネズエラのカナイマ国立公園である。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。ドロミテ山塊の項に三畳紀の海洋生物の化石があると記される。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。鉱物学者ドロミウにちなむ岩石名ドロマイトが地名の由来となった。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。テーブルマウンテンと先カンブリア時代の岩盤はカナイマ国立公園の説明である。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。同項に氷河地形とカルスト地形も見られると明記される。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.240「ドロミテ山塊」／p.241「カナイマ国立公園」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "三畳紀の海洋生物の化石が見つかる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "炭酸マグネシウムを多く含むドロマイトに由来する地名である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "先カンブリア時代の岩盤が残るテーブルマウンテンが、公園の大部分を占める。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "氷河地形やカルスト地形も見られる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 34,
+      "major_category_code": "world_nature",
+      "category_code": "ecosystems",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n『コモド国立公園』についての説明で、正しくないものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "コモド国立公園は、小スンダ列島のコモド島やフロレス島などにあるコモドオオトカゲの生息地である。陸上の生物に加え、サンゴ礁などを含む海洋生物の保護区でもある。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。国立公園はインドネシア南東部の小スンダ列島に位置する。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。本文は海洋生物の保護区でもあると明記している。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。皮を目的とする乱獲により生息数が激減したと記される。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。コモドオオトカゲの生息地であることが説明されている。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.273「コモド国立公園」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "インドネシアの小スンダ列島に位置する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "陸上の動物だけを保護し、周辺の海洋生物は保護対象に含まれない。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "皮を得るための乱獲が、コモドオオトカゲの減少につながった。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "コモドオオトカゲの生息地を含む。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 35,
+      "major_category_code": "japan",
+      "category_code": "japan_culture",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n姫路城についての説明として、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "姫路城の大天守を中心とする天守群は、関ヶ原の戦いの後に城主となった池田輝政による大改修で整えられた。外壁の白漆喰の姿から白鷺城とも呼ばれ、迷路のように複雑な通路などの防御の工夫をもつ。江戸時代初頭の姿を伝える木造城郭である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。江戸時代初頭の姿を残す木造城郭であり、戦後新築の鉄筋コンクリート造ではない。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。外壁は白漆喰の総塗籠で、その白い姿が白鷺城の呼称につながる。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。通路は螺旋状に構築された複雑で巧妙な縄張りをもつ。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。池田輝政が9年間に及ぶ大改修を行い、外観5層の大天守を中心とする天守群などを築いた。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.066「姫路城」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "現存する天守は、第二次世界大戦後に初めて建てられた鉄筋コンクリート造である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "白漆喰ではなく、全面を黒い板壁で覆う外観から白鷺城と呼ばれた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "城内への通路は、敵が天守へ最短距離で到達できる直線状に統一された。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "現在の大天守を中心とする天守群は、池田輝政による大改修で整えられた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 36,
+      "major_category_code": "world_culture",
+      "category_code": "architecture_cities",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『パリのセーヌ河岸』に含まれる建物のうち、アンヴァリッドの当初の役割（A）と、オルセー美術館に転用される前の建物の用途（B）の組合せとして、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "アンヴァリッドは、戦傷者や老兵を収容する施設として建設され、その後ナポレオン1世の墓所にもなった。オルセー美術館は、駅舎として建てられた建物を美術館へ転用したものである。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。アンヴァリッドとオルセーの両方の用途が本文に一致する。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。アンヴァリッドは正しいが、オルセーは王宮ではなく駅舎を転用した。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。オルセーは正しいが、アンヴァリッドは天文観測施設ではない。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。両方の用途が異なり、戦傷者・老兵の収容施設と駅舎が正しい。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.132「パリのセーヌ河岸」／p.133「パリのセーヌ河岸」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：戦傷者・老兵の収容施設　B：駅舎"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：戦傷者・老兵の収容施設　B：王宮"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：天文観測施設　B：駅舎"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：天文観測施設　B：王宮"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 37,
+      "major_category_code": "world_culture",
+      "category_code": "architecture_cities",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n総合造形学校バウハウスを創立し、初代校長を務めた人物は誰か。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "バウハウスの初代校長はヴァルター・グロピウスである。工芸などの技術を建築へ結び付ける教育を目指し、モダニズム建築に大きな影響を与えた。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。ガウディはバルセロナを中心に作品を残した建築家である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。ディエステはウルグアイのアトランティーダの教会を築いた技術者である。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。p206本文・脚注が創立者・初代校長とする。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。ヴィルヘルミーネはバイロイトの辺境伯オペラハウスを造らせた人物である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.206「バウハウス関連遺産群：ヴァイマールとデッサウ、ベルナウ／技術者エラディオ・ディエステの作品：アトランティーダの教会」／p.202「アントニ・ガウディの作品群」／p.199「バイロイトの辺境伯オペラハウス」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "アントニ・ガウディ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "エラディオ・ディエステ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヴァルター・グロピウス"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヴィルヘルミーネ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 38,
+      "major_category_code": "fundamentals",
+      "category_code": "organizations",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n世界遺産への推薦を受けた物件の専門調査を行う機関について、A・Bに入る正しい組合せはどれか。\n文化遺産は主に（ A ）、自然遺産は主に（ B ）が調査する。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ICOMOS（イコモス、国際記念物遺跡会議）は文化遺産を、IUCN（アイユーシーエヌ、国際自然保護連合）は自然遺産を専門的に調査する。世界遺産センターは推薦書の受理や事務などを担う。ICCROMは文化財の保存・修復の研究や技術支援などを行う国際的な機関である。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。文化遺産はICOMOS、自然遺産はIUCNが担当する。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。ICCROMと世界遺産センターは、この文化・自然の専門調査の組合せではない。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。文化遺産と自然遺産の担当が逆である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。世界遺産センターとICCROMは、この文化・自然の専門調査の組合せではない。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.031「世界遺産登録の流れ」／p.032「世界遺産に関係する機関」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：ICOMOS　B：IUCN"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：ICCROM　B：世界遺産センター"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：IUCN　B：ICOMOS"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：世界遺産センター　B：ICCROM"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 39,
+      "major_category_code": "fundamentals",
+      "category_code": "convention",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n世界遺産条約やユネスコについての説明で、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ユネスコは教育・科学・文化を通じた国際協力を進める国連の専門機関で、本部はパリにある。1972年に採択された世界遺産条約は文化遺産と自然遺産を共通の枠組みで保護する。遺産の保護・保全にまず責任を負うのは、その遺産を保有する国である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。世界遺産条約は文化遺産と自然遺産をひとつの条約の下で保護する。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。第一義的な責任は遺産を保有する国にある。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。ユネスコ憲章の採択は1945年、世界遺産条約の採択は1972年である。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。『ユネスコ』の項に、本部がパリにある国連の専門機関と明記される。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.024「世界遺産条約と世界遺産／世界遺産条約」／p.025「ユネスコ／世界遺産誕生までの流れ」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "世界遺産条約は、文化遺産だけを保護対象としている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "世界遺産を保護・保全する第一義的な責任は、ユネスコが負う。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "世界遺産条約は、ユネスコ憲章と同じ1945年に採択された。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ユネスコは、パリに本部を置く国連の専門機関である。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 40,
+      "major_category_code": "japan",
+      "category_code": "japan_nature",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n知床で海と陸を結び付ける生態系について、最も適当な説明はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "知床の流氷は栄養塩を含み、春の融解時には植物プランクトンを大量に育む。動物プランクトンや魚類へと続く食物連鎖は、サケやマスを捕らえるヒグマなどを通して陸にもつながり、海と陸が連続する生態系を形成する。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。遡上するサケやマスをヒグマやキタキツネなどが捕食し、海と陸をつないでいる。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。海氷は栄養塩をもたらし、海と陸の食物連鎖は結び付いている。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。栄養塩を含む海氷から植物プランクトン、魚類、陸上動物へつながる関係が説明される。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。海と陸の連続する生態系と生物多様性が評価されている。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.082「知床」／p.083「知床／知床の食物連鎖」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "知床の食物連鎖では、川を遡上するサケやマスが陸の動物と関わることはない。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "海氷は海の栄養塩を全て取り去るため、知床の食物連鎖は海から独立している。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "海氷に含まれる栄養塩による植物プランクトンの増殖が、魚類や、それらを捕食する陸上の動物にもつながる。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "知床では海だけが世界遺産の価値をもち、陸の生態系は評価されていない。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 41,
+      "major_category_code": "japan",
+      "category_code": "japan_culture",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n「法隆寺地域の仏教建造物群」のうち、世界最古の木造建築として知られる金堂や五重塔があるのはどこか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "法隆寺は西院と東院からなり、西院に金堂や五重塔が残る。東院には夢殿がある。法隆寺の建造物群は、聖徳太子ゆかりの仏教文化と大陸からの影響を伝える。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。法起寺も構成資産だが、設問の金堂や五重塔は法隆寺西院にある。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。東院の代表的な建造物は夢殿であり、設問の金堂や五重塔は西院にある。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。金堂や五重塔は法隆寺西院にあり、世界最古の木造建築として知られる。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。平城宮跡は古都奈良の文化財の構成資産であり、設問は法隆寺西院について述べている。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.058「古都奈良の文化財」／p.060「法隆寺地域の仏教建造物群」／p.061「法隆寺地域の仏教建造物群」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "法起寺"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "法隆寺東院"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "法隆寺西院"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "平城宮跡"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 42,
+      "major_category_code": "other",
+      "category_code": "related_programs",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\nユネスコの「世界の記憶」が始まった年と、その登録例の組合せで正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "「世界の記憶」は1992年に始まったユネスコのプログラムで、書物・楽譜・手紙などの記録物を保護する。「山本作兵衛炭坑記録画・記録文書」や朝鮮通信使の関連資料が日本からの登録例として挙がる。祭礼や芸能を保護する無形文化遺産とは制度が異なる。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。1992年に始まり、山本作兵衛の記録画・記録文書が登録例として挙げられる。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。開始年は正しいが、風流踊は無形文化遺産の登録例である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。記録資料は正しいが、開始年は1992年である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。開始年と登録例の両方が「世界の記憶」に一致しない。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.041「無形文化遺産、世界の記憶」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1992年―山本作兵衛炭坑記録画・記録文書"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1992年―風流踊"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "2003年―山本作兵衛炭坑記録画・記録文書"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "2003年―風流踊"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 43,
+      "major_category_code": "world_culture",
+      "category_code": "architecture_cities",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\nヴィルヘルミーネが建設を命じた建築物はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "バイロイトの辺境伯オペラハウスは、辺境伯の妃ヴィルヘルミーネが造らせたバロック様式の劇場である。ジュゼッペ・ガッリ・ビビエーネが設計し、1745年から1750年にかけて建てられた。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。ヴィースの巡礼教会はロココ様式の教会である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。アトランティーダの教会はディエステの技術による近代建築である。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。p199に建設を命じた人物・様式・年代が説明される。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。バウハウスはモダニズム建築に関わる総合造形学校である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.199「バイロイトの辺境伯オペラハウス／ヴィースの巡礼教会」／p.206「バウハウス関連遺産群／技術者エラディオ・ディエステの作品：アトランティーダの教会」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヴィースの巡礼教会"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "アトランティーダの教会"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "バイロイトの辺境伯オペラハウス"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "デッサウのバウハウス校舎"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 44,
+      "major_category_code": "world_nature",
+      "category_code": "earth_history",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『テ・ワヒポウナム』にあるミルフォード・サウンドなどのフィヨルドは、（A）が削った谷へ（B）が入り込んだ地形である。A・Bの組合せとして、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "テ・ワヒポウナムでは、サザン・アルプスから流れ出した氷河が谷を削り、そこへ海水が入ってフィヨルドが形成された。地殻変動と氷河作用が、この地域の景観の大きな要因である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。形成作用と流入したものの両方が異なり、氷河と海水が正しい。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。谷に入ったのは溶岩ではなく海水である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。谷を削ったのは風ではなく氷河である。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。氷河による侵食の後、海水が入り込んだという形成順序である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.248「テ・ワヒポウナム／フィヨルド」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：風　B：溶岩"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：氷河　B：溶岩"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：風　B：海水"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：氷河　B：海水"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 45,
+      "major_category_code": "other",
+      "category_code": "heritage_current_affairs",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n2025年の第47回世界遺産委員会で危機遺産リストから除外された「アブ・メナ」について、所在国（A）と、それまで保全上の問題となっていたこと（B）の正しい組合せはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "アブ・メナはエジプトの遺産で、周辺農場の灌漑に伴う地下水位の上昇などが問題となっていた。排水・揚水による改善が進み、2025年に危機遺産リストから除外された。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。所在国と危機の要因がともに公式報告と一致する。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。国は正しいが、違法伐採は同報告が挙げるアツィナナナの雨林の問題である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。地下水の問題は正しいが、アブ・メナの所在国はエジプトである。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。所在国と問題の両方がアブ・メナに一致しない。"
+        }
+      ],
+      "source_text": "UNESCO：アフリカ3遺産の危機遺産リスト除外に関する公式発表（2025年7月9日公表）（アブ・メナ（エジプト）／アツィナナナの雨林（マダガスカル）、2026年11月5日確認） | https://www.unesco.org/en/articles/three-sites-african-continent-removed-list-world-heritage-danger\nUNESCO世界遺産センター：アブ・メナ（顕著な普遍的価値／完全性／所在国、2026年11月5日確認） | https://whc.unesco.org/en/list/90/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：エジプト／B：地下水位の上昇"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：エジプト／B：貴重な木材の違法伐採"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：リビア／B：地下水位の上昇"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：リビア／B：貴重な木材の違法伐採"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 46,
+      "major_category_code": "world_culture",
+      "category_code": "religion",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『メテオラの修道院群』で、岩山の上に修道院が築かれた背景（A）と、15〜16世紀のフレスコ画に用いられた様式（B）の組合せとして、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "メテオラでは、修道士が隔絶された環境で修行生活を送るため、岩山の頂上に修道院を築いた。後期ビザンツ様式のカトリコンや聖ニコラス修道院などには、クレタ様式のフレスコ画が残されている。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。クレタ様式は正しいが、岩山の上を選んだのは隔絶した環境で修行するためである。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。修行の背景は正しいが、出典が挙げるフレスコ画はクレタ様式である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。立地の理由・壁画様式ともに本文と一致しない。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。修行のための隔絶性とクレタ様式の両方が確認できる。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.142「メテオラの修道院群／クレタ様式」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：大都市の市場へ近づくため　B：クレタ様式"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：隔絶した環境で修行するため　B：ロマネスク様式"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：大都市の市場へ近づくため　B：ロマネスク様式"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：隔絶した環境で修行するため　B：クレタ様式"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 47,
+      "major_category_code": "world_culture",
+      "category_code": "architecture_cities",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\nストラスブールに関する二つの記述の正誤の組合せとして、正しいものはどれか。\nA 旧市街グラン・ディルは、イル川の中州にある。\nB プティット・フランス地区には、柱や梁を外壁に露出させた伝統的な木組みの家々が残る。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "グラン・ディルは「大きな島」を意味し、イル川の中州に旧市街がある。プティット・フランス地区に残る伝統的な木組みは、コロンバージュ（ハーフティンバー）と呼ばれる。河川と市街の位置関係、建築の特徴を併せて確認する問題である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。Aは正しいが、Bも正しい。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。Bは正しいが、Aも正しい。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。A・Bとも本文に一致する。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。中州の位置と木組みの説明は、いずれも本文に記載される。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.224「ストラスブール：グラン・ディルからノースタットのヨーロッパの都市景観」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A 正しい／B 誤り"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A 誤り／B 正しい"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A 誤り／B 誤り"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A 正しい／B 正しい"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 48,
+      "major_category_code": "japan",
+      "category_code": "japan_components",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n「日光の社寺」の構成資産と人物の関係について、正しい組合せはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "東照宮は徳川家康の霊廟として造営され、のちに徳川家光によって大改修された。輪王寺の大猷院は1653年に家光の霊廟として造営された。勝道上人は日光山の開山に関わる僧である。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。家康と家光の対応が逆である。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。東照宮が家康、大猷院が家光の霊廟である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。東照宮は勝道上人ではなく家康、大猷院は家康ではなく家光の霊廟である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。東照宮は家康、大猷院は家光の霊廟である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.046「日光の社寺」／p.047「日光の社寺／構成資産」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "東照宮―徳川家光の霊廟／輪王寺の大猷院―徳川家康の霊廟"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "東照宮―徳川家康の霊廟／輪王寺の大猷院―徳川家光の霊廟"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "東照宮―勝道上人の霊廟／輪王寺の大猷院―徳川家康の霊廟"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "東照宮―徳川家光の霊廟／輪王寺の大猷院―勝道上人の霊廟"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 49,
+      "major_category_code": "fundamentals",
+      "category_code": "convention",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\nヌビアの遺跡群救済キャンペーンでは、アブ・シンベル神殿などが移築された。この救済が必要になった直接の理由はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "エジプトのアスワン・ハイ・ダム建設計画によって、ヌビア地方の遺跡がダム湖に沈むおそれが生じた。ユネスコは1960年に救済を始め、各国の協力による保護の経験が世界遺産条約の理念につながった。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。火山噴火ではなく、ダム建設に伴う水没の危機である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。ここで問題となった危機は地震ではなく、ダム建設による水没である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。海岸侵食ではなく、ナイル川のダム建設に伴う水没の危機である。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。ダム建設に伴う水没の危機が救済の理由である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.027「ヌビアの遺跡群救済キャンペーン」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "噴火で、遺跡が溶岩に覆われたため。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "大地震で、遺跡が倒壊したため。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "海岸侵食で、遺跡が海に流出したため。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ダム建設によって、遺跡が水没するおそれがあったため。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 50,
+      "major_category_code": "world_culture",
+      "category_code": "industry_landscape",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『紅河ハニ族棚田群の文化的景観』を支える水利用について、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ハニ族は、山頂部の森林を守り、その森林を水の供給源として棚田を潤してきた。水は用水路を通って上段から下段へ流れる。森林・水系・棚田・村を結び付けた仕組みが、この文化的景観を支えている。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。森林は天然の貯水池として重要であり、長年保護されてきた。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。森林の貯水機能と用水路による配水を説明している。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。山頂部の森林が棚田の水の供給源となっている。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。出典は水が上段から下段へ流れるとする。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.108「紅河ハニ族棚田群の文化的景観」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "山頂の森林を伐採し、雨水がすぐに流出するようにした。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "山頂の森林に蓄えられた水を、用水路で棚田へ送っている。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "棚田へ送る水は、山頂の森林とは無関係である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "水は棚田の下段から上段へ自然に流れる仕組みになっている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 51,
+      "major_category_code": "world_culture",
+      "category_code": "civilizations",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n『パレンケの古代都市と国立公園』の「碑文の神殿」で発見された王の墓は、誰のものか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "パレンケの碑文の神殿からは、王家の歴史を記したマヤ文字の碑文とパカル王の墓が発見された。ピラミッドは神殿であるという従来の考えを見直す発見でもあった。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。ダレイオス1世はペルセポリスを築いたアケメネス朝ペルシアの王である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。クフ王はメンフィスのピラミッド地帯に含まれる巨大ピラミッドの建造者である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。アショーカ王はサーンチーなどの仏教遺産に関わるマウリヤ朝の王である。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。碑文の神殿でパカル王の墓が見つかったと記される。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.189「パレンケの古代都市と国立公園」／p.185「ペルセポリス」／p.152「サーンチーの仏教遺跡／アショーカ王」／p.181「メンフィスのピラミッド地帯」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ダレイオス1世"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "クフ王"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "アショーカ王"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "パカル王"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 52,
+      "major_category_code": "japan",
+      "category_code": "japan_components",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『北海道・北東北の縄文遺跡群』では、構成資産を定住の開始・発展・成熟という3つの段階から捉えている。このうち『定住の発展』の段階に位置付けられる遺跡はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "三内丸山遺跡は、定住が発展して拠点となる集落が現れた段階に位置付けられる。竪穴建物や掘立柱建物、道路、大型建物などが計画的に配置され、長期間にわたる生活や祭祀の様子が読み取れる。大平山元遺跡と垣ノ島遺跡は定住の開始、大湯環状列石は定住の成熟に対応する。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。三内丸山遺跡はステージ2『定住の発展』のうち『拠点集落の出現』に位置付く。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。垣ノ島遺跡はステージ1『定住の開始』のうち『集落の成立』に位置付く。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。大平山元遺跡はステージ1『定住の開始』のうち『居住地の形成』に位置付く。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。大湯環状列石はステージ3『定住の成熟』のうち『共同の祭祀場と墓地の進出』に位置付く。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.042「北海道・北東北の縄文遺跡群」／p.043「北海道・北東北の縄文遺跡群／集落展開及び精神文化に関する6つのステージ」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "三内丸山遺跡"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "垣ノ島遺跡"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "大平山元遺跡"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "大湯環状列石"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 53,
+      "major_category_code": "fundamentals",
+      "category_code": "criteria",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n世界遺産の登録基準のうち、ある文化的伝統や文明の存在を伝える証拠という観点に対応するものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "登録基準（iii）は、現存するか、あるいは消滅した文化的伝統や文明の存在を伝える証拠という観点である。（i）は創造的資質、（vii）は自然美や自然景観、（ix）は生態学的・生物学的な過程などを評価する。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。（i）は人類の創造的資質を示す傑作に関する基準である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。（ix）は生態学的・生物学的過程などに関する基準である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。（vii）は自然美や自然景観などに関する基準である。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。（iii）は文化的伝統や文明の存在を伝える証拠に関する基準である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.030「登録基準」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "登録基準（i）"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "登録基準（ix）"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "登録基準（vii）"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "登録基準（iii）"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 54,
+      "major_category_code": "fundamentals",
+      "category_code": "organizations",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n世界遺産基金についての説明で、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "世界遺産基金は、締約国の分担金（ユネスコ分担金の1％）や、政府間機関・団体・個人などの寄付で運営される。使途は世界遺産委員会が決定し、災害や紛争への緊急援助、推薦書や暫定リストの作成などの準備援助、保全・管理援助などに用いられる。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。分担金はユネスコ分担金の1％であり、用途も観光宣伝だけではない。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。入場料全額による運営ではなく、条約締約国の分担金や寄付などが財源である。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。分担金や寄付などをもとに、複数の形の保護・保全援助を行う。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。基金は世界遺産の価値を守るためのもので、自然遺産だけに限られない。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.034「世界遺産基金」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ユネスコ分担金の10％を各国が拠出し、観光宣伝だけに用いる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "世界遺産に入場料を徴収する義務を課し、その全額で運営する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "世界遺産条約締約国の分担金や寄付などで運営され、緊急援助や準備援助などに用いる。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "自然遺産のためだけの基金であり、文化遺産の保存には使わない。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 55,
+      "major_category_code": "world_culture",
+      "category_code": "religion",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n『ダマスカスの旧市街』のウマイヤ・モスクが建つ場所について、古代ローマ時代の宗教施設（A）とビザンツ時代の宗教施設（B）の組合せとして、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ウマイヤ・モスクの場所は古くから聖地とされ、ローマ時代にはユピテル神殿、ビザンツ時代には聖ヨハネ聖堂があった。異なる勢力や宗教が重なるダマスカスの歴史を示している。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。ビザンツ時代の聖堂は正しいが、ローマ時代はアポロンではなくユピテルの神殿である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。ローマ時代は正しいが、ビザンツ時代は聖ヨハネ聖堂である。アスクレピオス神殿はエピダウロスの遺産に関わる。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。ユピテル神殿と聖ヨハネ聖堂の順序が本文に一致する。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。いずれも別のギリシャの聖地の神殿との取り違えである。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.147「ダマスカスの旧市街」／p.167「デルフィの考古遺跡／エピダウロスにあるアスクレピオスの聖域」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：アポロン神殿　B：聖ヨハネ聖堂"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：ユピテル神殿　B：アスクレピオス神殿"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：ユピテル神殿　B：聖ヨハネ聖堂"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：アポロン神殿　B：アスクレピオス神殿"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 56,
+      "major_category_code": "japan",
+      "category_code": "japan_components",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n「長崎と天草地方の潜伏キリシタン関連遺産」についての説明で、誤っているものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "この遺産は、10の集落と城跡・聖堂各1つの計12の構成資産からなり、教会堂だけの遺産ではない。禁教期には身を隠して信仰を続け、神道や仏教を装うなどの独自の方法が生まれた。大浦天主堂での信徒発見は1865年である。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。信仰を隠すため神道の信者や仏教徒などを装ったと説明される。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。10集落・城跡1・聖堂1からなり、教会堂だけではない。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。17世紀初めから19世紀まで、約250年間の信仰の姿と伝統を伝える。"
+        },
+        {
+          "type": "text",
+          "text": "④：正しい。1865年に大浦天主堂で信徒発見が起きた。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.076「長崎と天草地方の潜伏キリシタン関連遺産」／p.077「長崎と天草地方の潜伏キリシタン関連遺産」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "禁教期に、神道の信者や仏教徒などを装いながら信仰を続けた人々がいた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "構成資産は全て禁教期に建てられた教会堂であり、集落や城跡を含まない。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "約250年にわたる禁教期の信仰の姿や伝統を伝えている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "大浦天主堂で、1865年に潜伏キリシタンが信仰を告白する「信徒発見」があった。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 57,
+      "major_category_code": "other",
+      "category_code": "heritage_conservation",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n公式テキストの「危機遺産リスト」（2024年8月時点）で、ペルーの「チャンチャンの考古地区」の危機の主な原因として挙げられているものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "同リストはチャンチャンの危機の原因として、日干しレンガが潮風や降雨で浸食されることと、農民による不法占拠を挙げる。遺産の素材と環境条件を結び付けて保全上の課題を理解する問題である。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。p038のチャンチャンの行に、両方の要因が記載される。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。チャンチャンの行にダム建設による水没は挙がらない。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。チャンチャンの行が挙げる原因とは一致しない。鉄鉱石採掘や動物密猟は同じ表の別の遺産の行に記載される要因である。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。同じ行に火山噴火やサンゴの白化は挙がらない。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.038「危機遺産リスト（2024年8月時点）／チャンチャンの考古地区」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "潮風や降雨による日干しレンガの浸食と、農民の不法占拠"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "周辺のダム建設による遺跡全体の水没"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "開発計画による鉄鉱石の採掘と、密猟による動物個体数の減少"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "火山噴火による溶岩の流入と、海面上昇によるサンゴの白化"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 58,
+      "major_category_code": "fundamentals",
+      "category_code": "criteria",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n世界遺産に求められる「真正性」と「完全性」の説明の組合せとして、正しいものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "真正性は、主に文化遺産について、建築物や景観などが文化的背景の独自性や伝統を継承しているかという観点である。完全性は、顕著な普遍的価値を構成するために必要な要素が揃っているかという観点で、保全体制や面積なども関係する。"
+        },
+        {
+          "type": "text",
+          "text": "①：正しい。真正性は文化的な独自性・伝統の継承、完全性は必要な要素の充足という対応である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。真正性と完全性の説明が逆である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。締約国であることや提出期限は登録手続の条件であり、両概念の定義ではない。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。提出期限や締約国であることは、両概念の定義ではない。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.029「真正性・完全性」／p.032「世界遺産登録の流れ」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "真正性：文化的背景の独自性や伝統が継承されること／完全性：価値を構成する必要な要素が全て揃うこと"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "真正性：価値を構成する必要な要素が全て揃うこと／完全性：文化的背景の独自性や伝統が継承されること"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "真正性：推薦国が条約締約国であること／完全性：推薦書が期限までに提出されること"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "真正性：推薦書が期限までに提出されること／完全性：推薦国が条約締約国であること"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 59,
+      "major_category_code": "world_nature",
+      "category_code": "ecosystems",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：1点）\n\n『グレート・バリア・リーフ』のサンゴ礁をつくるサンゴの基本構造は、どの名称で呼ばれるか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "サンゴはポリプと呼ばれる構造をもつ生物で、分裂しながら大きな群体となり、サンゴ礁を形成する。トラナはサーンチーの仏教遺跡にある門、マスタバは古代エジプトの墳墓、ジッグラトは古代メソポタミアの聖塔を指す。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。マスタバは古代エジプトの王や貴族の墳墓である。"
+        },
+        {
+          "type": "text",
+          "text": "②：誤り。トラナはサーンチーの仏教遺跡にある門である。"
+        },
+        {
+          "type": "text",
+          "text": "③：正しい。グレート・バリア・リーフの項はサンゴの基本構造をポリプとする。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。ジッグラトはアッシュルの項などに現れる聖塔である。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.270「グレート・バリア・リーフ／ポリプ」／p.152「サーンチーの仏教遺跡」／p.180「メンフィスのピラミッド地帯」／p.185「アッシュル（カラット・シェルカット）」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "マスタバ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "トラナ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ポリプ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ジッグラト"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 60,
+      "major_category_code": "fundamentals",
+      "category_code": "convention",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "（配点：2点）\n\n文化財の保護に関する文書について、空欄A・Bに入るものの組合せとして正しいものはどれか。\n1954年には、武力紛争の際の文化財保護を扱う（ A ）が採択された。1964年には、アテネ憲章を批判的に継承し、修復における「真正性」を重視する（ B ）が採択された。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ハーグ条約は1954年に採択され、武力紛争の際に文化財を守るための基本方針を示した。1964年のヴェネツィア憲章は、アテネ憲章の考えを受け継ぎつつ、修復で当初の工法や素材を尊重する真正性を重視した。"
+        },
+        {
+          "type": "text",
+          "text": "①：誤り。2つの名称が逆である。"
+        },
+        {
+          "type": "text",
+          "text": "②：正しい。Aがハーグ条約、Bがヴェネツィア憲章である。"
+        },
+        {
+          "type": "text",
+          "text": "③：誤り。世界遺産条約は1972年、アテネ憲章は1931年であり、A・Bに対応しない。"
+        },
+        {
+          "type": "text",
+          "text": "④：誤り。アテネ憲章は1931年、世界遺産条約は1972年であり、A・Bに対応しない。"
+        }
+      ],
+      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.026「世界遺産誕生までの流れ」 | https://www.sekaken.jp/books/2text/",
+      "choices": [
+        {
+          "choice_label": "①",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：ヴェネツィア憲章　B：ハーグ条約"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "②",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：ハーグ条約　B：ヴェネツィア憲章"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "③",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：世界遺産条約　B：アテネ憲章"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "④",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A：アテネ憲章　B：世界遺産条約"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    }
+  ]
 }

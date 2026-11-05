@@ -24,7 +24,9 @@ const integration = { skip: !Boolean(process.env.DATABASE_URL || process.env.PGH
 const content = createTestContent(configuration)
 const fixtureDirectory = await mkdtemp(join(tmpdir(), 'exam-operations-fixture-'))
 const fixturePath = join(fixtureDirectory, 'synthetic-questions.json')
+const emptyFixturePath = join(fixtureDirectory, 'empty-questions.json')
 await writeFile(fixturePath, JSON.stringify(content), { mode: 0o600 })
+await writeFile(emptyFixturePath, JSON.stringify({ schema_version: 1, questions: [] }), { mode: 0o600 })
 const archive = () => createArchive(structuredClone(content.questions))
 after(async () => {
   try { await closeDatabase() }
@@ -117,9 +119,9 @@ test('JSON import and development seed never overwrite existing questions', inte
   assert.deepEqual(await query('SELECT * FROM questions ORDER BY id', [], db), before)
 }))
 
-test('empty service content keeps development seeding empty across repeated runs', integration, async () => isolated(async db => {
+test('empty content fixture keeps development seeding empty across repeated runs', integration, async () => isolated(async db => {
   for (let run = 0; run < 2; run++) {
-    assert.deepEqual(await seedContent({ db, mode: 'development' }), { status: 'skipped' })
+    assert.deepEqual(await seedContent({ path: emptyFixturePath, db, mode: 'development' }), { status: 'skipped' })
     assert.equal(await countQuestions(db), 0)
     assert.equal(await db.questionChoice.count(), 0)
   }

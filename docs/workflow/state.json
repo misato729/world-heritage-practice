@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 8,
-  "updated_at": "2026-11-05T06:33:03.813Z",
+  "revision": 19,
+  "updated_at": "2026-11-05T14:20:36.363Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T06-33-03-813Z-r8.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T14-20-36-363Z-r19.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -153,6 +153,190 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "mock_exam_01_20261105",
+      "context": "product",
+      "title": "2026年版確認と公式2級テキストに基づく模試1回作成",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-05 2026年版過去問を確認し、textbookの公式テキストを出典として模試を1個作成。追加回答で開発DB登録とPC/SP画面確認まで指定。",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "docs/mock-exam-01-20261105.md",
+        "content/mock-exam-01.questions.md",
+        "content/mock-exam-01.answers.md"
+      ],
+      "last_verified_at": "2026-11-05T13:33:37.467Z",
+      "verification_scope": "2026年版3回180問を確認。公式2級第5版第2刷を出典に60問240肢/100点と全肢解説を作成、全問独立原典レビューPASS。原稿/MD/JSON全件一致、shared schemaとworkflow162検査成功。開発DBへ登録し反復/再接続digest一致、Q35更新後も全ID/他59問/大分類5件/会員0履歴0保持。初回UI検査側の応答読取を修正後、新規隔離DBでPC1280/SP390全120表示と分野代表/最終問回答・解説/出典・認証履歴を確認。実開発画面3110起動、health/home200と60件metadata確認。原本保護、commit/push/本番公開なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問・四択・一意正答・配点100点・分野比率・出典対応・教材整合を全件検査、開発DB60件とPC/SP回答・解説表示を検証",
+          "verification": "構造化原稿を集計し、Markdown出力と原典ページ対応、全肢根拠、ローカル資料保護を検査",
+          "status": "passed",
+          "evidence": [
+            "docs/mock-exam-01-20261105.md"
+          ],
+          "checked_at": "2026-11-05T13:33:37.467Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が最短解法と全選択肢、出典の直接性と試験形式を確認",
+          "verification": "代表問題の基準合わせと全60問の独立レビュー、指摘修正後再確認",
+          "status": "passed",
+          "evidence": [
+            "docs/mock-exam-01-20261105.md"
+          ],
+          "checked_at": "2026-11-05T13:33:37.467Z",
+          "reviewer": "mock_integration, textbook_blueprint"
+        }
+      ],
+      "execution": {
+        "worker": "mock_exam_author",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "PC/SP検証側がページ遷移後のレスポンス本文取得で停止。取得方法を修正して最新版Q35を含む教材で再検証する。",
+            "at": "2026-11-05T13:22:10.511Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "最新版60問の独立原典レビューとデータ整合、開発DB登録/ID保持更新/再接続照合、隔離PCSP120表示と代表回答を確認。3110の開発画面も起動し正常応答を確認。",
+            "at": "2026-11-05T13:33:38.036Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mock_exam_01_revision_20261105",
+      "context": "product",
+      "title": "模試1の時事追加と分野混在順への改訂",
+      "status": "done",
+      "depends_on": [
+        "mock_exam_01_20261105"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-05 その他に前年/今年の世界遺産委員会等の時事を含め、過去問同様に分野をランダムな順にする",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "docs/mock-exam-01-revision-20261105.md",
+        "content/mock-exam-01.questions.md",
+        "content/mock-exam-01.answers.md"
+      ],
+      "last_verified_at": "2026-11-05T14:08:38.908Z",
+      "verification_scope": "UNESCO一次資料で2025/2026時事4問の全肢独立レビューPASS。60問を固定混在順（同分野最大2連続/任意15問4分野以上）へ変更、100点と全分類配点保持。MD/JSON/旧新全単射/56問不変の独立全件照合、共有schema成功。隔離DB5ケースの履歴保持・rollback等成功、実開発DBの全ID/56教材時刻/分類/会員履歴お気に入り保持、反復と再接続digest一致。保存buildコピーの依存リンク修正後、新規隔離DBでPCSP120表示/各9回答（時事4全問）/複数公式出典/次問/認証履歴成功。実dev3110読取一致、test環境削除、原本保護。commit/push/本番公開なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "時事4問と年次/直接出典、全60固定混在順・配点保持・MD/JSON一致、DBID保持・反復/再接続・PCSPを確認",
+          "verification": "共有schema、構造集計、新旧全単射、隔離DBによる番号入替・更新/rollbackと画面操作、実開発DB適用後照合",
+          "status": "passed",
+          "evidence": [
+            "docs/mock-exam-01-revision-20261105.md"
+          ],
+          "checked_at": "2026-11-05T14:08:38.908Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が時事全肢の一次根拠と最短解法、混在順・DB保持方針・実施範囲を確認",
+          "verification": "時事代表例と全4問、番号/配点/出典と検証証拠を独立レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/mock-exam-01-revision-20261105.md"
+          ],
+          "checked_at": "2026-11-05T14:08:38.908Z",
+          "reviewer": "revision_review, mock_integration"
+        }
+      ],
+      "execution": {
+        "worker": "revision_implementer",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "保存済ビルドの再利用で依存解決が起動前に失敗したため、元と同じfrontend配下の一時位置へコピーしてPCSPを再実行する。DB改訂と原稿整合は合格済み。",
+            "at": "2026-11-05T14:02:56.471Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "保存buildの再配置でも依存解決に失敗。旧build絶対パスへの依存リンク7本が原因と判明したため再利用を止め、成功実績のある新規隔離buildから最終PCSPを検証する。",
+            "at": "2026-11-05T14:05:35.104Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "時事4問と固定混在順の全件照合・DB保持/反復/再接続、コピー内依存リンクを修正した隔離PCSP120表示/時事全4問回答が成功。旧保存物と実DBに検証用データの追加なし。",
+            "at": "2026-11-05T14:08:39.029Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mock_exam_delivery_20261105",
+      "context": "development",
+      "title": "模試1までの変更をコミットしてリモートへ保存",
+      "status": "doing",
+      "depends_on": [
+        "mock_exam_01_20261105",
+        "mock_exam_01_revision_20261105"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-05 ここまでの変更をコミットしてリモートに上げる",
+      "next_action": "軽量検査・明示ステージ・レビュー後にmainへ送信する",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "既存の原典/DB/PCSP確認を教材hash一致で継承し、共有schema/資料保護/ステージ対象/remote一致とpush後CIを確認。本番公開は含めない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "教材最終hash/スキーマ/資料保護、明示送信範囲、commit/pushとremote一致、同実装SHAのCIを確認",
+          "verification": "既存成功記録照合、軽量検査、staged diff、GitHub main refとCI run照合",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が送信範囲と資料保護・記録整合を確認する",
+          "verification": "原本/派生資料/秘密値が含まれない候補差分の独立レビュー",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "git_deliverer",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]
