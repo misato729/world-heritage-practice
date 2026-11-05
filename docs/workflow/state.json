@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 30,
-  "updated_at": "2026-11-05T19:02:21.879Z",
+  "revision": 32,
+  "updated_at": "2026-11-05T19:08:26.824Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T19-02-21-879Z-r30.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T19-08-26-824Z-r32.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -496,41 +496,60 @@
       "id": "multi_grade_delivery_20261106",
       "context": "development",
       "title": "3級統合・月額プランのコミットとリモート保存",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "multi_grade_subscription_implementation_20261106"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-06 一旦ここでコミット・pushしてください",
-      "next_action": "対象のステージ差分を確認しコミット・pushする",
-      "evidence": [],
-      "last_verified_at": null,
-      "verification_scope": "Git送信のみ。先行実装の検証根拠を確認し継承。販売/本番/Stripe操作なし。",
+      "next_action": "販売開始・本番反映・Stripe設定等の別途明示依頼を待つ",
+      "evidence": [
+        "docs/multi-grade-delivery-20261106.md",
+        "local-only/multi-grade-delivery-20261106/preflight.json",
+        "local-only/multi-grade-delivery-20261106/review.md",
+        "local-only/multi-grade-delivery-20261106/ci.json"
+      ],
+      "last_verified_at": "2026-11-05T19:08:17.324Z",
+      "verification_scope": "79ファイルを明示ステージし01643e2をorigin/mainへ送信・ls-remote一致。主要6ファイルの先行レビューSHA一致、資料保護/差分/独立送信レビューPASS。同実装SHAのGitHub Actions4ジョブ成功。記録追加のdocsのみ後続commit/push。販売・Stripe・本番操作なし。",
       "acceptance": [
         {
           "id": "delivery",
           "kind": "automated",
           "description": "資料保護/差分検査とリモートHEAD一致、CI成功",
           "verification": "Git差分・追跡履歴保護・ls-remote・CI照合",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/multi-grade-delivery-20261106.md",
+            "local-only/multi-grade-delivery-20261106/ci.json"
+          ],
+          "checked_at": "2026-11-05T19:08:17.324Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "承認範囲と送信対象の別担当確認",
           "verification": "delivery_review",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/multi-grade-delivery-20261106.md",
+            "local-only/multi-grade-delivery-20261106/review.md"
+          ],
+          "checked_at": "2026-11-05T19:08:17.324Z",
+          "reviewer": "delivery_review"
         }
       ],
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "承認範囲79ファイルを01643e2でorigin/mainへ送信。リモートSHA一致、GitHub Actions4ジョブ成功、資料保護/差分/独立レビューPASS。販売・本番・Stripe操作なし。",
+            "at": "2026-11-05T19:08:18.100Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]
