@@ -29,6 +29,7 @@
 | `logo_path` | `frontend/public`から配信するロゴのパス。例：`/images/logo.svg` |
 | `primary_color` | 基本色。`#2563eb`のような6桁のカラーコード |
 | `contact_email` | 問い合わせ先。空欄のまま一般公開しない |
+| `notice` | 準備中などの公開状況の案内。不要になったら空文字にする |
 | `overview` | 試験概要ページの本文。`title`と`body`の組を並べる |
 
 `site.id`はログインCookieの名前にも使います。本番環境でもlocalhostの別ポートでも、別サービスには異なる値を設定してください。運用途中で変更すると、以前のCookieを使ったログイン状態は引き継がれません。
@@ -38,7 +39,7 @@
 ## 問題数・選択肢・分野を変える
 
 - `exam.set_count`：静的な導線を用意する試験セット数（初期値10）。問題データの投入・公開件数とは別です。
-- `exam.questions_per_exam`：各セットの問題数とアコーディオンの問番号（初期値4）。公開するセットは問1からこの数までをそろえます。サンプルがないセットは導線だけを表示できます。
+- `exam.questions_per_exam`：各セットの問題数とアコーディオンの問番号（世界遺産ラボは60）。公開するセットは問1からこの数までをそろえます。問題がないセットは導線だけを表示できます。
 - `exam.choice_labels`：選択肢の表示順とラベル。例：`["A", "B", "C"]`。各問題の選択肢もこの順序・件数にそろえます。
 - `categories.major`：大分類の`value`と`label`。
 - `categories.minor`：小分類の`value`・`label`・`major_category_value`。最後の値は登録済み大分類の`value`を指します。
@@ -47,7 +48,7 @@
 
 ## 問題JSONの形式
 
-`content/questions.json`は次の構造です。以下は説明用の骨組みで、本文や選択肢を省略しています。完全なデータは同梱JSONを参照してください。
+`content/questions.json`は現在、`schema_version: 1`と空の`questions`配列です。空配列は正常な初期状態で、seedは何も投入しません。以下は将来の登録形式を示す骨組みで、教材問題ではありません。
 
 ```json
 {

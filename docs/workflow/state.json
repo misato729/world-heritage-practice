@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 0,
-  "updated_at": null,
+  "revision": 2,
+  "updated_at": "2026-11-05T03:25:49.767Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": null,
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T03-25-49-767Z-r2.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -57,7 +57,7 @@
       "depends_on": [],
       "authorization": "requested",
       "request_ref": "2026-11-05 テンプレートをクローンし世界遺産ラボへ最適化してリモートへ保存。問題は作成しない。",
-      "next_action": "設定・空データ・画面と資料保護を検証し独立レビュー後に送信する",
+      "next_action": "独立最終レビュー後、資料保護を検査して新規リモートへ送信する",
       "evidence": [],
       "last_verified_at": null,
       "verification_scope": "未実施。例示ファイルは自動でタスクに登録されない。",

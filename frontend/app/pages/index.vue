@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM } from '~/utils/examCatalog'
+import { MAX_REVIEW_POSITIONS } from '~/utils/reviewPositions'
 import {
   createPracticeSeed,
   createPracticeSequence,
@@ -103,8 +104,7 @@ const startConditionalPractice = async (order: PracticeOrder) => {
       .flatMap(exam => exam.question_numbers.map(number => `${exam.exam_number}.${number}`)))
     let sequence = positions.filter(position => published.has(`${position.examNumber}.${position.questionNumber}`))
     if (!sequence.length) { startError.value = '選択した条件に公開中の問題はありません。'; return }
-    // The existing exact-position route format supports at most 500 positions.
-    if (sequence.length > 500) { startError.value = '対象が500問を超えています。条件を絞ってください。'; return }
+    if (sequence.length > MAX_REVIEW_POSITIONS) { startError.value = `対象が${MAX_REVIEW_POSITIONS}問を超えています。条件を絞ってください。`; return }
     const query: Record<string, string> = {
       exams: sortedSelectedExamNumbers.value.join(','),
       questions: sortedSelectedQuestionNumbers.value.join(','),

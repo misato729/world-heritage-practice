@@ -21,10 +21,10 @@ const { apiStatus } = useApiStatus()
       </div>
       <div class="api-status" :class="apiStatus" role="status" aria-live="polite">
         <span class="status-dot" aria-hidden="true" />
-        <span v-if="apiStatus === 'idle'">API接続は利用時に確認</span>
-        <span v-else-if="apiStatus === 'checking'">API接続を確認中</span>
-        <span v-else-if="apiStatus === 'failed'">APIに接続できません</span>
-        <span v-else>API接続：正常</span>
+        <span v-if="apiStatus === 'idle'">学習機能は利用時に接続します</span>
+        <span v-else-if="apiStatus === 'checking'">学習機能に接続しています</span>
+        <span v-else-if="apiStatus === 'failed'">学習機能に接続できません</span>
+        <span v-else>学習機能：利用できます</span>
       </div>
     </div>
   </footer>
