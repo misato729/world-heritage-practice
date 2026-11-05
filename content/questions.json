@@ -2055,44 +2055,44 @@
       "exam_number": 1,
       "question_number": 26,
       "major_category_code": "other",
-      "category_code": "heritage_current_affairs",
+      "category_code": "related_programs",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：1点）\n\n2026年7月に開かれた第48回世界遺産委員会の開催都市はどこか。"
+          "text": "（配点：1点）\n\n次のうち、2024年にユネスコ無形文化遺産の代表一覧表へ新たに記載された日本の文化はどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "第48回世界遺産委員会は、2026年7月19日から29日まで韓国の釜山で開催された。開催都市と国、委員会の回次を対応させて確認したい。"
+          "text": "2024年に新たに記載されたのは「伝統的酒造り」です。和食は2013年、和紙は2014年、来訪神は2018年の記載です。伝統的酒造りは、こうじ菌を使う酒造りの知識と技術を対象としています。"
         },
         {
           "type": "text",
-          "text": "①：誤り。第48回の実際の開催都市はソフィアではない。"
+          "text": "①：和食が代表一覧表に記載されたのは2013年です。2024年の新たな記載ではありません。"
         },
         {
           "type": "text",
-          "text": "②：誤り。第48回の実際の開催都市はパリではない。"
+          "text": "②：「和紙：日本の手漉和紙技術」が代表一覧表に記載されたのは2014年です。"
         },
         {
           "type": "text",
-          "text": "③：正しい。公式会議ページに韓国の釜山と開催期間が記載されている。"
+          "text": "③：「伝統的酒造り」は、2024年12月の第19回無形文化遺産保護条約政府間委員会で代表一覧表への記載が決まりました。"
         },
         {
           "type": "text",
-          "text": "④：誤り。第48回の実際の開催都市はニューデリーではない。"
+          "text": "④：「来訪神：仮面・仮装の神々」は、2009年登録の「甑島のトシドン」を拡張して、2018年に記載されました。"
         }
       ],
-      "source_text": "UNESCO World Heritage Centre: 48th session of the World Heritage Committee（会議冒頭の開催地・期間／採択決議 WHC/26/48.COM/16、2026年11月5日確認） | https://whc.unesco.org/en/sessions/48COM/",
+      "source_text": "文化庁：「伝統的酒造り」のユネスコ無形文化遺産登録（2024年12月5日）（政府間委員会の審議結果／これまでの経緯、2026年11月6日確認） | https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/94142301.html\n文化庁・文化遺産オンライン：和食；日本人の伝統的な食文化（主情報：2013年登録、2026年11月6日確認） | https://online.bunka.go.jp/special_content/intangible/209802\n文化庁・文化遺産オンライン：和紙：日本の手漉和紙技術（主情報：2014年登録、2026年11月6日確認） | https://online.bunka.go.jp/special_content/intangible/209803\n文化庁・文化遺産オンライン：来訪神：仮面・仮装の神々（主情報：2018年登録／甑島のトシドンの拡張、2026年11月6日確認） | https://online.bunka.go.jp/special_content/ilink3\n国税庁：ユネスコ無形文化遺産登録「伝統的酒造り」（「伝統的酒造り」とは：こうじ菌を使う技術／2024年12月の登録、2026年11月6日確認） | https://www.nta.go.jp/traditional_sake_making/index.htm",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "ソフィア（ブルガリア）"
+              "text": "和食：日本人の伝統的な食文化"
             }
           ],
           "is_correct": false,
@@ -2103,7 +2103,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "パリ（フランス）"
+              "text": "和紙：日本の手漉和紙技術"
             }
           ],
           "is_correct": false,
@@ -2114,7 +2114,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "釜山（韓国）"
+              "text": "伝統的酒造り"
             }
           ],
           "is_correct": true,
@@ -2125,7 +2125,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "ニューデリー（インド）"
+              "text": "来訪神：仮面・仮装の神々"
             }
           ],
           "is_correct": false,
@@ -3372,39 +3372,39 @@
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：2点）\n\nユネスコの「世界の記憶」が始まった年と、その登録例の組合せで正しいものはどれか。"
+          "text": "（配点：2点）\n\n2025年4月にユネスコ「世界の記憶」へ国際登録された「増上寺が所蔵する三種の仏教聖典叢書」を構成する大蔵経の組合せはどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "「世界の記憶」は1992年に始まったユネスコのプログラムで、書物・楽譜・手紙などの記録物を保護する。「山本作兵衛炭坑記録画・記録文書」や朝鮮通信使の関連資料が日本からの登録例として挙がる。祭礼や芸能を保護する無形文化遺産とは制度が異なる。"
+          "text": "三大蔵は、宋版・元版・高麗版の三種の大蔵経です。17世紀初頭に徳川家康が収集し、増上寺に寄進しました。明版は、この三大蔵を構成する三種には含まれません。"
         },
         {
           "type": "text",
-          "text": "①：正しい。1992年に始まり、山本作兵衛の記録画・記録文書が登録例として挙げられる。"
+          "text": "①：増上寺の三大蔵は、宋版・元版・高麗版の三種です。"
         },
         {
           "type": "text",
-          "text": "②：誤り。開始年は正しいが、風流踊は無形文化遺産の登録例である。"
+          "text": "②：高麗版が抜け、三大蔵の一種ではない明版が入っています。"
         },
         {
           "type": "text",
-          "text": "③：誤り。記録資料は正しいが、開始年は1992年である。"
+          "text": "③：元版が抜け、三大蔵の一種ではない明版が入っています。"
         },
         {
           "type": "text",
-          "text": "④：誤り。開始年と登録例の両方が「世界の記憶」に一致しない。"
+          "text": "④：宋版が抜け、三大蔵の一種ではない明版が入っています。"
         }
       ],
-      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.041「無形文化遺産、世界の記憶」 | https://www.sekaken.jp/books/2text/",
+      "source_text": "文部科学省：「増上寺が所蔵する三種の仏教聖典叢書」のユネスコ「世界の記憶」登録決定について（2025年4月18日）（登録物件概要／これまでの経緯、2026年11月6日確認） | https://www.mext.go.jp/unesco/006/1373633_00034.htm\n大本山増上寺：宝物・文化財（大蔵経 宋版・元版・高麗版、2026年11月6日確認） | https://www.zojoji.or.jp/treasure/index.html\n大本山増上寺：増上寺三大蔵 ユネスコ「世界の記憶」国際登録決定（2025年5月1日）（増上寺「三大蔵」とは、2026年11月6日確認） | https://www.zojoji.or.jp/news/1268.html",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "1992年―山本作兵衛炭坑記録画・記録文書"
+              "text": "宋版・元版・高麗版"
             }
           ],
           "is_correct": true,
@@ -3415,7 +3415,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "1992年―風流踊"
+              "text": "宋版・元版・明版"
             }
           ],
           "is_correct": false,
@@ -3426,7 +3426,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "2003年―山本作兵衛炭坑記録画・記録文書"
+              "text": "宋版・明版・高麗版"
             }
           ],
           "is_correct": false,
@@ -3437,7 +3437,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "2003年―風流踊"
+              "text": "元版・明版・高麗版"
             }
           ],
           "is_correct": false,
@@ -3613,44 +3613,44 @@
       "exam_number": 1,
       "question_number": 45,
       "major_category_code": "other",
-      "category_code": "heritage_current_affairs",
+      "category_code": "related_programs",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：2点）\n\n2025年の第47回世界遺産委員会で危機遺産リストから除外された「アブ・メナ」について、所在国（A）と、それまで保全上の問題となっていたこと（B）の正しい組合せはどれか。"
+          "text": "（配点：2点）\n\n2022年にユネスコ無形文化遺産の代表一覧表に記載された「風流踊」の、登録時の41件の構成要素に含まれないものはどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "アブ・メナはエジプトの遺産で、周辺農場の灌漑に伴う地下水位の上昇などが問題となっていた。排水・揚水による改善が進み、2025年に危機遺産リストから除外された。"
+          "text": "2022年登録時の風流踊41件には、綾渡の夜念仏と盆踊、西馬音内の盆踊、郡上踊が含まれます。越中八尾おわら風の盆は富山市八尾町に伝わる唄と踊りの行事ですが、この41件には含まれません。"
         },
         {
           "type": "text",
-          "text": "①：正しい。所在国と危機の要因がともに公式報告と一致する。"
+          "text": "①：富山市八尾町で唄や踊りが伝えられている行事ですが、2022年登録時の風流踊41件の構成要素には含まれていません。"
         },
         {
           "type": "text",
-          "text": "②：誤り。国は正しいが、違法伐採は同報告が挙げるアツィナナナの雨林の問題である。"
+          "text": "②：愛知県豊田市の「綾渡の夜念仏と盆踊」は、2022年登録時の構成要素に含まれます。"
         },
         {
           "type": "text",
-          "text": "③：誤り。地下水の問題は正しいが、アブ・メナの所在国はエジプトである。"
+          "text": "③：秋田県羽後町の「西馬音内の盆踊」は、2022年登録時の構成要素に含まれます。"
         },
         {
           "type": "text",
-          "text": "④：誤り。所在国と問題の両方がアブ・メナに一致しない。"
+          "text": "④：岐阜県郡上市の「郡上踊」は、2022年登録時の構成要素に含まれます。"
         }
       ],
-      "source_text": "UNESCO：アフリカ3遺産の危機遺産リスト除外に関する公式発表（2025年7月9日公表）（アブ・メナ（エジプト）／アツィナナナの雨林（マダガスカル）、2026年11月5日確認） | https://www.unesco.org/en/articles/three-sites-african-continent-removed-list-world-heritage-danger\nUNESCO世界遺産センター：アブ・メナ（顕著な普遍的価値／完全性／所在国、2026年11月5日確認） | https://whc.unesco.org/en/list/90/",
+      "source_text": "文化庁：「風流踊」のユネスコ無形文化遺産登録（2022年11月30日）（PDF6頁・別紙2「民俗芸能『風流踊』一覧（都道府県順）」全41件、2026年11月6日確認） | https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/pdf/93797801_01.pdf\n富山市：越中八尾おわら風の盆（行事の名称・唄と踊り・開催場所、2026年11月6日確認） | https://www.city.toyama.lg.jp/bunka/kanko/1010540/1005747.html",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "A：エジプト／B：地下水位の上昇"
+              "text": "越中八尾おわら風の盆"
             }
           ],
           "is_correct": true,
@@ -3661,7 +3661,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "A：エジプト／B：貴重な木材の違法伐採"
+              "text": "綾渡の夜念仏と盆踊"
             }
           ],
           "is_correct": false,
@@ -3672,7 +3672,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "A：リビア／B：地下水位の上昇"
+              "text": "西馬音内の盆踊"
             }
           ],
           "is_correct": false,
@@ -3683,7 +3683,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "A：リビア／B：貴重な木材の違法伐採"
+              "text": "郡上踊"
             }
           ],
           "is_correct": false,
@@ -4597,44 +4597,44 @@
       "exam_number": 1,
       "question_number": 57,
       "major_category_code": "other",
-      "category_code": "heritage_conservation",
+      "category_code": "heritage_current_affairs",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：2点）\n\n公式テキストの「危機遺産リスト」（2024年8月時点）で、ペルーの「チャンチャンの考古地区」の危機の主な原因として挙げられているものはどれか。"
+          "text": "（配点：2点）\n\n世界遺産「グランド・キャニオン国立公園」で2025年7月に発生し、北リムの歴史的ロッジなどを焼失させたドラゴン・ブラボー火災について、米国国立公園局（NPS）が示す発火原因はどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "同リストはチャンチャンの危機の原因として、日干しレンガが潮風や降雨で浸食されることと、農民による不法占拠を挙げる。遺産の素材と環境条件を結び付けて保全上の課題を理解する問題である。"
+          "text": "NPSの時系列記録は、ドラゴン・ブラボー火災が2025年7月4日の落雷で発生したと説明している。同月13日にはグランド・キャニオン・ロッジなどの焼失が確認された。遺産の地形や登録価値に加え、保全を脅かす出来事にも目を向けたい。"
         },
         {
           "type": "text",
-          "text": "①：正しい。p038のチャンチャンの行に、両方の要因が記載される。"
+          "text": "①：正しい。NPSは7月4日の落雷を発火原因としている。"
         },
         {
           "type": "text",
-          "text": "②：誤り。チャンチャンの行にダム建設による水没は挙がらない。"
+          "text": "②：誤り。この火災の発火原因としてNPSが示すのは送電設備の故障ではなく落雷である。"
         },
         {
           "type": "text",
-          "text": "③：誤り。チャンチャンの行が挙げる原因とは一致しない。鉄鉱石採掘や動物密猟は同じ表の別の遺産の行に記載される要因である。"
+          "text": "③：誤り。NPSの記録は、焚き火の不始末ではなく落雷による発生とする。"
         },
         {
           "type": "text",
-          "text": "④：誤り。同じ行に火山噴火やサンゴの白化は挙がらない。"
+          "text": "④：誤り。NPSが示す発火原因は放火ではなく落雷である。"
         }
       ],
-      "source_text": "くわしく学ぶ世界遺産300〈第5版〉世界遺産検定2級公式テキスト 第2刷 p.038「危機遺産リスト（2024年8月時点）／チャンチャンの考古地区」 | https://www.sekaken.jp/books/2text/",
+      "source_text": "米国国立公園局（NPS）：Status of the North Rim（Dragon Bravo Fire Timeline：July 4, 2025／July 13, 2025（最終更新2026年11月3日）、2026年11月6日確認） | https://www.nps.gov/grca/northrimstatus.htm\nUNESCO世界遺産センター：Grand Canyon National Park（遺産名・所在国、2026年11月6日確認） | https://whc.unesco.org/en/list/75/",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "潮風や降雨による日干しレンガの浸食と、農民の不法占拠"
+              "text": "落雷による着火"
             }
           ],
           "is_correct": true,
@@ -4645,7 +4645,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "周辺のダム建設による遺跡全体の水没"
+              "text": "送電設備の故障"
             }
           ],
           "is_correct": false,
@@ -4656,7 +4656,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "開発計画による鉄鉱石の採掘と、密猟による動物個体数の減少"
+              "text": "焚き火の不始末"
             }
           ],
           "is_correct": false,
@@ -4667,7 +4667,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "火山噴火による溶岩の流入と、海面上昇によるサンゴの白化"
+              "text": "人為的な放火"
             }
           ],
           "is_correct": false,

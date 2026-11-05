@@ -59,7 +59,7 @@ const handleLogout = async () => {
       </GradeLink>
 
       <div class="header-actions">
-        <label>学習する級 <select aria-label="学習する級" :value="grade" @change="changeGrade"><option v-for="g in grades" :key="g.code" :value="g.code">{{ g.label }}</option></select></label>
+        <label class="grade-picker"><span class="grade-picker-label">学習する級 </span><select aria-label="学習する級" :value="grade" @change="changeGrade"><option v-for="g in grades" :key="g.code" :value="g.code">{{ g.label }}</option></select></label>
         <GradeLink v-if="!isLoggedIn" class="login-link" to="/login">ログイン</GradeLink>
         <GradeLink v-else class="account-link" to="/account" title="マイページ">
           <UIcon name="i-lucide-circle-user-round" />
@@ -186,14 +186,14 @@ nav a.mobile-login-link { display: none; }
 
 @media (max-width: 760px) {
   .header-inner { padding: 0 12px; gap: 10px; }
-  .brand { gap: 10px; }
-  .brand-tagline { font-size: 11px; }
-  .brand-tagline span { display: inline; white-space: normal; }
-  .account-label, .login-link { display: none; }
+  .brand { flex: 0 0 auto; }
+  .brand :deep(.site-logo) { flex-shrink: 0; white-space: nowrap; }
+  .brand-tagline, .grade-picker-label, .account-label, .login-link { display: none; }
+  .grade-picker select { width: 72px; }
   nav a.mobile-login-link { display: grid; }
   .header-actions { gap: 10px; }
 }
 @media (max-width: 420px) {
-  .brand { gap: 8px; }
+  .header-inner, .header-actions { gap: 6px; }
 }
 </style>

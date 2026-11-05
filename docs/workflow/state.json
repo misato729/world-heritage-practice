@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 32,
-  "updated_at": "2026-11-05T19:08:26.824Z",
+  "revision": 46,
+  "updated_at": "2026-11-05T20:28:37.544Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T19-08-26-824Z-r32.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T20-28-37-544Z-r46.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -55,7 +55,13 @@
     "frontend/app/middleware/grade.global.ts",
     "frontend/app/components/GradeLink.vue",
     "frontend/prisma/migrations/20261106000000_grades_subscription/migration.sql",
-    "docs/multi-grade-subscription-implementation.md"
+    "docs/multi-grade-subscription-implementation.md",
+    "content/questions.json",
+    "content/mock-exam-01.questions.md",
+    "content/mock-exam-01.answers.md",
+    "content/mock-exam-01.answer-sheet.md",
+    "frontend/app/components/SiteHeader.vue",
+    "docs/mock-exam-01-other-revision-20261106.md"
   ],
   "tasks": [
     {
@@ -550,6 +556,281 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "grade2_other_analysis_20261106",
+      "context": "product",
+      "title": "2級過去問のその他分野の抽出とテキスト範囲照合",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 その他は時事委員会に限定せずテキスト外分野（無形文化遺産等）。過去問をピックアップし出題内容を精査。",
+      "next_action": "精査結果を提示。模試の再分類や改訂は別途の依頼範囲を確認して行う",
+      "evidence": [
+        "local-only/grade2-other-analysis-20261106/analysis.md",
+        "local-only/grade2-other-analysis-20261106/pickup.md",
+        "local-only/grade2-other-analysis-20261106/checks.json",
+        "local-only/grade2-other-analysis-20261106/final-review.md"
+      ],
+      "last_verified_at": "2026-11-05T19:42:20.738Z",
+      "verification_scope": "2023〜2026年版（実施2022〜2025年）12回720問をOCR全文走査、97候補の問題/公式解答画像を照合。テキスト284頁OCR/関連33頁画像、最短解法6件修正。重点39/本文解法28/境界30。8入力SHA/720番号/194画像参照/原本頁/集計/リンク/資料保護検査、独立最終レビューPASS。公式の個別分野確定や旧版/第6版全文照合は未実施。全詳細local-only、作問/模試改訂/DB/app/commit/pushなし。",
+      "acceptance": [
+        {
+          "id": "coverage",
+          "kind": "automated",
+          "description": "4年版の収録回と全60問走査、候補のページ/問番号/テーマ/解答対応、集計/保護/リンク",
+          "verification": "抽出manifestと候補JSONの整合検査、画像確認記録、diff/資料保護検査",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-other-analysis-20261106/checks.json",
+            "local-only/grade2-other-analysis-20261106/statistics.json"
+          ],
+          "checked_at": "2026-11-05T19:42:20.738Z"
+        },
+        {
+          "id": "analysis",
+          "kind": "review",
+          "description": "その他の領域とテキスト掲載の確度、時事以外を含む精査の独立確認",
+          "verification": "年別抽出担当とテキスト照合担当による原典/最終成果レビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-other-analysis-20261106/final-review.md",
+            "local-only/grade2-other-analysis-20261106/textbook/review-checks.json"
+          ],
+          "checked_at": "2026-11-05T19:42:20.738Z",
+          "reviewer": "other_textbook/other_2025_26/other_2023_24"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回統合の重点候補で6問の過剰分類を独立レビューが指摘。直接掲載・他肢消去・下限判定を適用し本文解法へ変更、45/22/30から39/28/30へ修正して再検証。",
+            "at": "2026-11-05T19:40:31.360Z",
+            "failed_criteria": [
+              "analysis"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "2級12回720問を走査し97候補/対照を原本照合。テキスト・最短解法の精査で重点39/本文28/境界30、無形/世界の記憶/災害等を分析。自動整合検査・独立最終レビュー合格。全詳細をローカル専用へ保存。",
+            "at": "2026-11-05T19:42:21.234Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mock_exam_01_other_rebalance_20261106",
+      "context": "product",
+      "title": "模試1その他の分散構成への改訂",
+      "status": "done",
+      "depends_on": [
+        "grade2_other_analysis_20261106"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 分析を踏まえ模試1その他を委員会に偏らず無形等を含む構成へ見直し、開発DB反映と画面確認まで",
+      "next_action": "分類補正の開発DB/PCSP最終確認",
+      "evidence": [
+        "docs/mock-exam-01-other-revision-20261106.md",
+        "local-only/mock-exam-01-other-revision-20261106/review/content-review.md",
+        "local-only/mock-exam-01-other-revision-20261106/blind/result.json",
+        "local-only/mock-exam-01-other-revision-20261106/category-correction.json",
+        "local-only/mock-exam-01-other-revision-20261106/delivery-review/review.md"
+      ],
+      "last_verified_at": "2026-11-06",
+      "verification_scope": "その他6問を再検証。26/42/45/57変更、8/15と他54問はJSON/MD本文不変。参照版p41等と全肢公式根拠、最短解法、誤答肢、正答非提示の独立調査解答6/6。受験者正答率・等価難度は未測定。 最終QA後の問57小分類のみを既存時事枠へ補正。本文等/両MD不変を独立再確認し原典/盲解結果を継承。最終SHA714662dd30192fc0618c1bfbd88c5fc8829d8ff4931bb635b89a692f65930345。",
+      "acceptance": [
+        {
+          "id": "structure",
+          "kind": "automated",
+          "description": "6問10点・他54問/順番/四肢/100点保持、Markdown/JSON/出典対応",
+          "verification": "共有schema・独立比較・出典行/配点/答位置検査",
+          "status": "passed",
+          "evidence": [
+            "local-only/mock-exam-01-other-revision-20261106/structure-result.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/markdown-result.json",
+            "local-only/mock-exam-01-other-revision-20261106/review/final-delivery-checks.json",
+            "local-only/mock-exam-01-other-revision-20261106/category-correction.json",
+            "local-only/mock-exam-01-other-revision-20261106/delivery-review/independent-final-content-result.json"
+          ],
+          "checked_at": "2026-11-06"
+        },
+        {
+          "id": "quality",
+          "kind": "review",
+          "description": "正答を隠した独立盲解、全肢原典/一意性/誤答肢/最短解法の別確認",
+          "verification": "候補と最終正本の全肢/最短解法/誤答肢レビュー＋別担当の正答非提示・シャッフル独立解答（公式資料調査可）6/6",
+          "status": "passed",
+          "evidence": [
+            "local-only/mock-exam-01-other-revision-20261106/review/content-review.md",
+            "local-only/mock-exam-01-other-revision-20261106/blind/result.json",
+            "local-only/mock-exam-01-other-revision-20261106/blind/initial-review.md",
+            "local-only/mock-exam-01-other-revision-20261106/delivery-review/review.md"
+          ],
+          "checked_at": "2026-11-06",
+          "reviewer": "other_revision_review / other_revision_fresh_blind / other_final_delivery_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "その他6問の全肢原典・一意性・誤答肢・最短解法と最終正本照合、独立正答非提示解答6/6を確認",
+            "at": "2026-11-05T20:06:49.473Z",
+            "failed_criteria": []
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "問57小分類のみの補正を独立再確認。本文/肢/解説/出典と両Markdown不変により原典/盲解を継承。最終SHA714662dd30192fc0618c1bfbd88c5fc8829d8ff4931bb635b89a692f65930345",
+            "at": "2026-11-05T20:18:14.939Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mock_exam_01_other_integration_20261106",
+      "context": "development",
+      "title": "その他改訂の開発DB反映とPCSP確認",
+      "status": "done",
+      "depends_on": [
+        "mock_exam_01_other_rebalance_20261106"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 分析を踏まえ模試1その他を委員会に偏らず無形等を含む構成へ見直し、開発DB反映と画面確認まで",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "docs/mock-exam-01-other-revision-20261106.md",
+        "local-only/mock-exam-01-other-revision-20261106/integration/verification-summary-category-final.md",
+        "local-only/mock-exam-01-other-revision-20261106/root-visual-check.json",
+        "local-only/mock-exam-01-other-revision-20261106/delivery-review/acceptance-result.json"
+      ],
+      "last_verified_at": "2026-11-06",
+      "verification_scope": "承認済み開発DB: 改訂4問/維持56問/全IDを保持、最終全60問/240肢の正本一致を独立再取得確認。反復no-opと切断再読込、独立testで意味変更4問と分類追補1項目の履歴/お気に入り/他級/rollback確認。ヘッダー1ファイル表示修正を含む最終build、独立PC1280/SP390/320の15表示採点・正誤双方・3級/認証メニュー。実開発PCSP6問確認、最終小分類のみQ57PCSPを差分再確認。内容同一性から原典/盲解を継承。dev会員等0・使い捨てDB残0。新模試/commit/push/本番なし。アプリ全体の型検査/全機能回帰は未実施。",
+      "acceptance": [
+        {
+          "id": "integration",
+          "kind": "automated",
+          "description": "開発DB4問更新/6問再検証/反復不変/未変更56問とID等保持、API/PCSP表示採点一致",
+          "verification": "独立test環境の変更影響、開発DB前後比較、Playwright",
+          "status": "passed",
+          "evidence": [
+            "local-only/mock-exam-01-other-revision-20261106/integration/writer-test-result.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/category-writer-test-result.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/category-followup-applied-result.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/category-followup-repeat-result.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/live-result-category-final.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/browser-result-final.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/browser-result-development.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/browser-result-category-development.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/markdown-result-category-final.json"
+          ],
+          "checked_at": "2026-11-06"
+        },
+        {
+          "id": "delivery",
+          "kind": "review",
+          "description": "原稿/JSON/DB/画面と出典の最終独立確認",
+          "verification": "統合記録を別担当が読取レビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/mock-exam-01-other-revision-20261106/delivery-review/acceptance-result.json",
+            "local-only/mock-exam-01-other-revision-20261106/delivery-review/review.md",
+            "local-only/mock-exam-01-other-revision-20261106/delivery-review/independent-development-result.json",
+            "local-only/mock-exam-01-other-revision-20261106/delivery-review/independent-final-content-result.json"
+          ],
+          "checked_at": "2026-11-06",
+          "reviewer": "other_final_delivery_review"
+        },
+        {
+          "id": "mobile_header",
+          "kind": "automated",
+          "description": "実画面で検出した共通ヘッダー圧縮を最小修正しPC/SP320/390でブランド・級選択・メニューと導線を確認",
+          "verification": "SiteHeaderの差分確認とPlaywrightによる表示境界・級選択・メニュー開閉",
+          "status": "passed",
+          "evidence": [
+            "local-only/mock-exam-01-other-revision-20261106/integration/build-result-final.json",
+            "local-only/mock-exam-01-other-revision-20261106/integration/browser-result-final.json",
+            "local-only/mock-exam-01-other-revision-20261106/root-visual-check.json",
+            "local-only/mock-exam-01-other-revision-20261106/delivery-review/independent-build-result.json"
+          ],
+          "checked_at": "2026-11-06"
+        }
+      ],
+      "execution": {
+        "worker": "other_revision_integration",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "最終正本7146版の全60問DB/API一致を別担当が再取得。4問変更56保持/全ID/反復不変、独立変更影響test、ヘッダー修正を含むPCSP画面確認と最終Q57分類差分を確認",
+            "at": "2026-11-05T20:24:51.245Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mock_exam_01_other_delivery_20261106",
+      "context": "development",
+      "title": "その他改訂と分析記録のコミット・リモート保存",
+      "status": "doing",
+      "depends_on": [
+        "grade2_other_analysis_20261106",
+        "mock_exam_01_other_rebalance_20261106",
+        "mock_exam_01_other_integration_20261106"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ここまでの変更をコミットして、リモートにpushしてください。",
+      "next_action": "送信前検査とstageレビュー後にmainへcommit/pushする",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "模試1その他の4問改訂/2問再確認、解答用紙、SPヘッダー修正、分類方針と関連ドキュメント/分析進捗記録をmainへ。原本/抽出本文/作問内部/DB/秘密値は除外。本番配信なし。",
+      "acceptance": [
+        {
+          "id": "package",
+          "kind": "automated",
+          "description": "明示stage差分/資料保護/本文4問変更と56問保持/前工程の検証版一致",
+          "verification": "git diff --cached --check、source-protection、最終hashと既存検証照合",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "送信対象と前工程検証の継承範囲を独立確認",
+          "verification": "commit_push_reviewによる内容/版/情報保護とstaged対象レビュー",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        },
+        {
+          "id": "remote_ci",
+          "kind": "automated",
+          "description": "mainへのpushとremote/HEAD一致、実装commitのCI4ジョブ成功",
+          "verification": "Git remote refとdivergence確認、GitHub Actions harness/verify/browser/netlify-static",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]
