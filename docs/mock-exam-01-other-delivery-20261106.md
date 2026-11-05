@@ -15,8 +15,14 @@
 
 ## 送信前の確認
 
-送信対象の独立レビュー、stage差分・資料保護検査を実行し、結果を確定後に追記する。
+明示した25ファイルだけをstageし、manifestとの厳密一致、stageと作業ファイルの一致、差分検査、Git履歴を含む資料保護検査を確認した。独立担当 `commit_push_review` のレビューはPASS。原本・OCR・画像・DB・秘密設定や値の混入はなかった。
+
+今回のGit納品では、workflow・資料保護の既存162テストを実行し全て成功した。正本・問題/解説Markdown・解答用紙・ヘッダーのSHAを前工程の最終QA証拠と照合し、アプリ/設定の198ファイルも検証済みビルドと同一であることを独立確認した。前工程の原典照合・開発DB・PC/SP結果は同じ版の根拠として継承し、今回新たに実施した検査と区別した。
 
 ## リモートとCI
 
-送信先は `misato729/world-heritage-practice` の `main`。実装コミットには `[skip netlify]` を付け、本番配信を起動せずGitHub CIを実行する。push・CIの結果は実施後に追記する。
+送信先は `misato729/world-heritage-practice` の `main`。実装コミット `c43bf10af8bab1a9b47226f9a12e1074802ce5d5` をpushし、ローカルHEAD・origin/mainの一致と差分0/0、未コミット差分0を確認した。既存の送信前フックも資料保護検査に成功した。
+
+実装コミットには `[skip netlify]` を付け、本番配信の抑止とGitHub CIの実行を分けた。[今回のCI](https://github.com/misato729/world-heritage-practice/actions/runs/42104048527)は同じ実装SHAに対して、`harness`・`verify`・`browser`・`netlify-static` の4ジョブ全て成功した。Dockerビルド、共有スキーマ、API・セキュリティ、フロントテスト・型検査・ビルド、PC/SPの操作、静的出力を含む。監視担当と主担当がそれぞれGitHubの結果を取得して確認した。
+
+本記録とworkflow完了状態の追補は文書だけの変更とし、`[skip ci] [skip netlify]` を付けて保存する。教材・アプリの検査対象は上記実装コミットで、追補では教材・アプリ・設定を変更しない。納品後のリモート一致と作業ツリーの状態は最終報告で確認する。

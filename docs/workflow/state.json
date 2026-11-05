@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 46,
-  "updated_at": "2026-11-05T20:28:37.544Z",
+  "revision": 49,
+  "updated_at": "2026-11-05T20:36:26.556Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T20-28-37-544Z-r46.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T20-36-26-556Z-r49.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -61,7 +61,8 @@
     "content/mock-exam-01.answers.md",
     "content/mock-exam-01.answer-sheet.md",
     "frontend/app/components/SiteHeader.vue",
-    "docs/mock-exam-01-other-revision-20261106.md"
+    "docs/mock-exam-01-other-revision-20261106.md",
+    "docs/mock-exam-01-other-delivery-20261106.md"
   ],
   "tasks": [
     {
@@ -785,7 +786,7 @@
       "id": "mock_exam_01_other_delivery_20261106",
       "context": "development",
       "title": "その他改訂と分析記録のコミット・リモート保存",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "grade2_other_analysis_20261106",
         "mock_exam_01_other_rebalance_20261106",
@@ -793,44 +794,66 @@
       ],
       "authorization": "requested",
       "request_ref": "2026-11-06 ここまでの変更をコミットして、リモートにpushしてください。",
-      "next_action": "送信前検査とstageレビュー後にmainへcommit/pushする",
-      "evidence": [],
-      "last_verified_at": null,
-      "verification_scope": "模試1その他の4問改訂/2問再確認、解答用紙、SPヘッダー修正、分類方針と関連ドキュメント/分析進捗記録をmainへ。原本/抽出本文/作問内部/DB/秘密値は除外。本番配信なし。",
+      "next_action": "文書だけの完了記録をpush後、追加依頼を待つ",
+      "evidence": [
+        "docs/mock-exam-01-other-delivery-20261106.md",
+        "local-only/git-delivery-20261106-review/staged-review.json",
+        "local-only/git-delivery-20261106-review/ci-result.json"
+      ],
+      "last_verified_at": "2026-11-06",
+      "verification_scope": "25ファイルの明示stageと独立送信レビュー、原本/内部資料/DB/秘密値除外、workflow162件・資料保護・diff成功。正本7146版と検証済みアプリ198ファイルの版一致を継承確認。実装c43bf10をmainへpushしHEAD/origin/main0/0。GitHub CI42104048527はharness/verify/browser/netlify-staticの4ジョブ全成功。追補は納品文書と完了記録のみで[skip ci] [skip netlify]、教材/app/config不変。公開/本番/Stripe操作なし。",
       "acceptance": [
         {
           "id": "package",
           "kind": "automated",
           "description": "明示stage差分/資料保護/本文4問変更と56問保持/前工程の検証版一致",
           "verification": "git diff --cached --check、source-protection、最終hashと既存検証照合",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "local-only/git-delivery-20261106/workflow-result.json",
+            "local-only/git-delivery-20261106/package-paths.json",
+            "local-only/git-delivery-20261106/implementation-push-result.json"
+          ],
+          "checked_at": "2026-11-06"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "送信対象と前工程検証の継承範囲を独立確認",
           "verification": "commit_push_reviewによる内容/版/情報保護とstaged対象レビュー",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "local-only/git-delivery-20261106-review/staged-review.json"
+          ],
+          "checked_at": "2026-11-06",
+          "reviewer": "commit_push_review"
         },
         {
           "id": "remote_ci",
           "kind": "automated",
           "description": "mainへのpushとremote/HEAD一致、実装commitのCI4ジョブ成功",
           "verification": "Git remote refとdivergence確認、GitHub Actions harness/verify/browser/netlify-static",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/mock-exam-01-other-delivery-20261106.md",
+            "local-only/git-delivery-20261106/implementation-push-result.json",
+            "local-only/git-delivery-20261106-review/ci-result.json"
+          ],
+          "checked_at": "2026-11-06"
         }
       ],
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "25ファイル明示stage/独立レビューと保護検査、workflow162件成功。c43bf10をmainへpushしremote一致、GitHub CI4ジョブ全成功。追補は文書・完了記録だけ",
+            "at": "2026-11-05T20:36:25.663Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]
