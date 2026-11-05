@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 6,
-  "updated_at": "2026-11-05T06:25:07.944Z",
+  "revision": 8,
+  "updated_at": "2026-11-05T06:33:03.813Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T06-25-07-944Z-r6.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T06-33-03-813Z-r8.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -106,39 +106,53 @@
       "id": "major_categories_db_20261105",
       "context": "development",
       "title": "指定5大分類のDB登録",
-      "status": "doing",
+      "status": "done",
       "depends_on": [],
       "authorization": "requested",
       "request_ref": "2026-11-05 分類が未登録なら基礎知識・日本の遺産・世界の自然遺産・世界の文化遺産・その他を設定してDB登録",
-      "next_action": "最終結果レビューとリモート保存、検証専用DBの後片付けを行う",
-      "evidence": [],
-      "last_verified_at": null,
-      "verification_scope": "未実施。例示ファイルは自動でタスクに登録されない。",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "docs/categories-db-20261105.md"
+      ],
+      "last_verified_at": "2026-11-05T06:33:03.440Z",
+      "verification_scope": "指定5分類を専用の永続開発DBに登録。反復で追加/更新0・時刻不変、再接続一致、問題/選択肢0件。隔離DB/API128件と追加後分類4件、Prisma/型検査成功。独立レビューPASS。fe489aeをorigin/mainへ送信しremote一致、同SHA CI4ジョブ成功。検証DBのみ削除、開発DB保存。本番配信なし。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "指定5分類が設定と永続DBで一致し、再実行で重複・不要更新がなく教材0件を維持する",
           "verification": "Prisma追加マイグレーションと専用test DBで登録/再実行/更新/rollbackを確認、型検査と開発DBの実行前後を照合",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/categories-db-20261105.md"
+          ],
+          "checked_at": "2026-11-05T06:33:03.440Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "スキーマ・同期・DB接続先・検証結果を独立して確認する",
           "verification": "別担当が差分・非破壊性・5件と教材0件・実施範囲を確認",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/categories-db-20261105.md"
+          ],
+          "checked_at": "2026-11-05T06:33:03.440Z",
+          "reviewer": "heritage_final_review"
         }
       ],
       "execution": {
         "worker": "major_categories_implementer",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "指定5大分類の永続DB登録と反復/再接続、教材0件、関連検査と独立レビュー、remote一致およびCI4ジョブ成功を確認。",
+            "at": "2026-11-05T06:33:03.607Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]

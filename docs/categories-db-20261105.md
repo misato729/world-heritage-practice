@@ -40,4 +40,6 @@
 
 ## リモート
 
-今回追加したスキーマ・登録処理・検証記録を保存する。DBの保存領域・秘密設定・ローカル資料は送信しない。
+今回追加したスキーマ・登録処理・検証記録は、コミット`fe489ae5188079ce7e01db1eddbff2504b14d8ea`として`origin/main`へ保存し、GitHubのmain参照と一致を確認した。DBの保存領域・秘密設定・ローカル資料は送信していない。
+
+同コミットの[CI実行41980620017](https://github.com/misato729/world-heritage-practice/actions/runs/41980620017)は、`harness`・`verify`・`browser`・`netlify-static`の4ジョブすべて成功した。DB/API・フロント・本番用ビルド・PC/SP操作・静的出力をCIで検査した結果であり、本番サービスの配信は行っていない。
