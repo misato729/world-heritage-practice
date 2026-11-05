@@ -8,7 +8,7 @@ watch(sessionKey, () => { if (isLoggedIn.value) void load({ force: true }) })
   <div class="incorrect-review-panel" aria-live="polite">
     <template v-if="!isLoggedIn">
       <h3>ログインして復習する</h3><p>間違えた問題の記録は、ログイン後に利用できます。</p>
-      <NuxtLink class="primary-link" to="/login?redirect=/%23practice-launcher">ログインへ</NuxtLink>
+      <GradeLink class="primary-link" to="/login?redirect=/%23practice-launcher">ログインへ</GradeLink>
     </template>
     <template v-else-if="loading || starting"><p role="status">復習する問題を確認しています。</p></template>
     <template v-else-if="error"><h3>間違えた問題を読み込めません</h3><p role="alert">{{ error }}</p><button class="secondary-link" type="button" @click="load({ force: true })">再読み込み</button></template>

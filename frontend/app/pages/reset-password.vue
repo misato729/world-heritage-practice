@@ -39,18 +39,18 @@ const submit = async () => {
     <header class="page-intro"><h1>パスワードの再設定</h1><p>新しいパスワードを8〜128文字で入力してください。</p></header>
     <section v-if="completed" class="content-panel">
       <p role="status">パスワードを再設定しました。新しいパスワードでログインしてください。</p>
-      <NuxtLink class="primary-link" to="/login">ログインへ</NuxtLink>
+      <GradeLink class="primary-link" to="/login">ログインへ</GradeLink>
     </section>
     <section v-else-if="ready && !token" class="content-panel">
       <p role="alert">再設定リンクが無効です。メールのリンクからもう一度開くか、再設定メールを依頼してください。</p>
-      <NuxtLink class="primary-link" to="/forgot-password">再設定メールを依頼</NuxtLink>
+      <GradeLink class="primary-link" to="/forgot-password">再設定メールを依頼</GradeLink>
     </section>
     <UForm v-else-if="ready" :schema="newPasswordFormSchema" :state="state" class="content-panel auth-form" novalidate @error="focusFormError" @submit="submit">
       <FormTextField id="reset-new-password" v-model="state.password" name="password" label="新しいパスワード" type="password" autocomplete="new-password" />
       <FormTextField id="reset-confirmation" v-model="state.password_confirmation" name="password_confirmation" label="新しいパスワード（確認）" type="password" autocomplete="new-password" />
       <p v-if="errorMessage" class="form-error" role="alert">{{ errorMessage }}</p>
       <button class="primary-link" type="submit" :disabled="submitting">{{ submitting ? '設定しています' : 'パスワードを再設定' }}</button>
-      <p class="auth-note"><NuxtLink to="/forgot-password">再設定メールをもう一度依頼</NuxtLink></p>
+      <p class="auth-note"><GradeLink to="/forgot-password">再設定メールをもう一度依頼</GradeLink></p>
     </UForm>
   </div>
 </template>

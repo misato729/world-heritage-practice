@@ -11,6 +11,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     headers: import.meta.server ? useRequestHeaders(['cookie']) : undefined,
     onRequest({ options }) {
       requestVersions.set(options, sessionVersion.value)
+      options.headers = new Headers(options.headers)
+      options.headers.set('x-exam-grade', String(route.query?.grade ?? '2'))
       beginRequest()
     },
     onResponse({ response }) {

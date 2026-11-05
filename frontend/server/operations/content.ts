@@ -1,3 +1,4 @@
+import { currentGrade } from '../core/grade.ts'
 import { createHash } from 'node:crypto'
 import { lstat, readFile, mkdtemp, writeFile, link, rm } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
@@ -67,7 +68,7 @@ export async function importArchive(document: unknown, confirmation: string | un
   return transaction(async connection => {
     await query('SELECT pg_advisory_xact_lock($1)::text', [QUESTION_LOCK], connection)
     await query('LOCK TABLE questions, question_choices IN SHARE ROW EXCLUSIVE MODE', [], connection)
-    const total = await connection.question.count() + await connection.questionChoice.count()
+    const total = await connection.question.count({where:{grade:currentGrade()}}) + await connection.questionChoice.count({where:{question:{grade:currentGrade()}}})
     if (total !== 0) throw new OperationError('問題と選択肢が両方空のDBだけに取り込めます。既存データは上書きしません')
     for (const question of archive.questions) await saveQuestion(question, { db: connection, requireCompleteExam: false })
     const publishedSets = new Set(archive.questions.filter(question => question.publication_status === 'published').map(question => question.exam_number))
@@ -76,6 +77,7 @@ export async function importArchive(document: unknown, confirmation: string | un
   }, db)
 }
 export async function importContent(path = defaultContentPath, confirmation?: string, db?: Database) {
+  if (currentGrade() !== '2' && path === defaultContentPath) throw new OperationError('2級以外はその級のINPUTを明示してください')
   const result = contentDocumentSchema.safeParse(await readJson(path))
   if (!result.success) throw new OperationError('問題データはschema_version: 1とquestions配列で指定してください')
   return importArchive(createArchive(result.data.questions), confirmation, db)
@@ -84,11 +86,11 @@ export async function importArchiveFile(path: string, confirmation?: string, db?
   return importArchive(await readJson(path), confirmation, db)
 }
 export async function seedContent(options: { path?: string, db?: Database, mode?: string } = {}) {
-  if ((options.mode ?? environment()) !== 'development') return { status: 'skipped' as const }
+  if (currentGrade() !== '2' || (options.mode ?? environment()) !== 'development') return { status: 'skipped' as const }
   return transaction(async connection => {
     await query('SELECT pg_advisory_xact_lock($1)::text', [QUESTION_LOCK], connection)
     await query('LOCK TABLE questions, question_choices IN SHARE ROW EXCLUSIVE MODE', [], connection)
-    const total = await connection.question.count() + await connection.questionChoice.count()
+    const total = await connection.question.count({where:{grade:currentGrade()}}) + await connection.questionChoice.count({where:{question:{grade:currentGrade()}}})
     if (total !== 0) return { status: 'skipped' as const }
     const report = await importContent(options.path, IMPORT_CONFIRMATION, connection)
     if (report.question_count === 0) return { status: 'skipped' as const }
@@ -101,6 +103,7 @@ export async function exportArchive(path: string, db?: Database) {
   const archive = await transaction(async connection => {
     if (!db) await query('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY', [], connection)
     const questions = await connection.question.findMany({
+      where: { grade: currentGrade() },
       orderBy: [{ exam_number: 'asc' }, { question_number: 'asc' }],
       select: { id: true, exam_number: true, question_number: true, major_category_code: true, category_code: true,
         content_blocks: true, explanation_blocks: true, source_text: true, publication_status: true },

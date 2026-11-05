@@ -4,6 +4,9 @@ import { paymentSettings, type PaymentSettings } from './payment-settings.ts'
 // A small structural interface lets tests provide a fake without making network requests.
 export type StripeObject = Record<string, any>
 export type PaymentStripeClient = {
+  invoices?: { list(params: StripeObject): Promise<StripeObject> }
+  subscriptions?: { retrieve(id: string, params?: StripeObject): Promise<StripeObject>; cancel(id: string): Promise<StripeObject> }
+  billingPortal?: { sessions: { create(params: StripeObject): Promise<StripeObject> } }
   prices: { retrieve(id: string): Promise<StripeObject> }
   checkout: { sessions: {
     create(params: StripeObject, options: { idempotencyKey: string }): Promise<StripeObject>

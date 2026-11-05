@@ -8,6 +8,7 @@ const count = z.number().int().min(1).max(10000)
 /** The source of truth for runtime, CLI, TypeScript and generated editor hints. */
 export const examConfigurationSchema = z.object({
   schema_version: z.literal(1),
+  grades: z.array(z.object({code: z.enum(['2','pre1','1']), label: nonblank, questions_per_exam: count})).length(3).default([{code:'2',label:'2級',questions_per_exam:60},{code:'pre1',label:'準1級',questions_per_exam:60},{code:'1',label:'1級',questions_per_exam:90}]),
   site: z.object({
     id: z.string().regex(/^[a-z][a-z0-9-]{0,39}$/),
     name: nonblank,
@@ -31,6 +32,7 @@ export const examConfigurationSchema = z.object({
     minor: z.array(category.extend({ major_category_value: categoryCode })).min(1),
   }).passthrough(),
   payments: z.object({
+    billing_interval: z.literal('month').default('month'),
     enabled: z.boolean(),
     free_exam_count: z.number().int().min(0),
     amount: z.number().int().min(1),
@@ -40,6 +42,7 @@ export const examConfigurationSchema = z.object({
   const unique = (values: string[], path: (string | number)[]) => {
     if (new Set(values).size !== values.length) ctx.addIssue({ code: 'custom', path, message: 'values must be unique' })
   }
+  unique(config.grades.map(item => item.code), ['grades'])
   unique(config.exam.choice_labels, ['exam', 'choice_labels'])
   unique(config.categories.major.map(item => item.value), ['categories', 'major'])
   unique(config.categories.minor.map(item => item.value), ['categories', 'minor'])

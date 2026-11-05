@@ -1,5 +1,7 @@
 # API・DB・運用の概要
 
+1級・準1級・2級統合と全級共通の月額500円（税込）については[実装記録](multi-grade-subscription-implementation.md)を参照してください。以下の旧一回払い関連の記述は既存購入記録との互換動作です。新規購入はsubscription Checkoutを使用します。
+
 ## 構成
 
 | 層 | 構成・役割 |

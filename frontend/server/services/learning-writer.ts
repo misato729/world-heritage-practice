@@ -1,3 +1,5 @@
+import { gradeConfig } from '../../shared/grades.ts'
+import { currentGrade } from '../core/grade.ts'
 import { createHash } from 'node:crypto'
 import type { ExamConfiguration } from '../../app/utils/examConfig.ts'
 import { configuration } from '../core/config.ts'
@@ -37,14 +39,14 @@ export function materialDigest(question: QuestionInput | QuestionRecord): string
 export async function loadQuestion(id: number, db: Database, options: { published?: boolean, lock?: boolean } = {}): Promise<QuestionRecord> {
   // Prisma does not expose PostgreSQL row locks; keep the lock inside the same transaction.
   if (options.lock) await query(`SELECT id FROM questions WHERE id = $1${options.published ? " AND publication_status = 'published'" : ''} FOR UPDATE`, [id], db)
-  const row = await db.question.findFirst({ where: { id, ...(options.published ? { publication_status: 'published' } : {}) },
+  const row = await db.question.findFirst({ where: { id, grade: currentGrade(), ...(options.published ? { publication_status: 'published' } : {}) },
     include: { choices: { orderBy: { display_order: 'asc' } } } })
   if (!row) return notFound()
   return record(row) as unknown as QuestionRecord
 }
 
-export async function validateCompleteExam(examNumber: number, db: Database, config: ExamConfiguration = configuration, current?: { id?: number, question_number: number }): Promise<void> {
-  const existing = await db.question.findMany({ where: { exam_number: examNumber,
+export async function validateCompleteExam(examNumber: number, db: Database, config: ExamConfiguration = gradeConfig(currentGrade(), configuration), current?: { id?: number, question_number: number }): Promise<void> {
+  const existing = await db.question.findMany({ where: { grade: currentGrade(), exam_number: examNumber,
     ...(current?.id === undefined ? {} : { id: { not: current.id } }) }, select: { question_number: true } })
   const registered = new Set(existing.map(row => Number(row.question_number)))
   if (current) registered.add(current.question_number)
@@ -56,7 +58,7 @@ type SaveOptions = { id?: number, db?: Database, requireCompleteExam?: boolean, 
 
 /** Shared writer for the admin API and explicit empty-database content import. */
 export async function saveQuestion(raw: QuestionInput, options: SaveOptions = {}): Promise<QuestionRecord> {
-  const config = options.config ?? configuration
+  const config = options.config ?? gradeConfig(currentGrade(), configuration)
   const input = validateQuestionInput(raw, config)
   try {
     return await transaction(async db => {
@@ -70,7 +72,7 @@ export async function saveQuestion(raw: QuestionInput, options: SaveOptions = {}
       if (input.publication_status === 'published' && options.requireCompleteExam) {
         await validateCompleteExam(input.exam_number, db, config, { id: options.id, question_number: input.question_number })
       }
-      const data = { exam_number: input.exam_number, question_number: input.question_number,
+      const data = { grade: currentGrade(), exam_number: input.exam_number, question_number: input.question_number,
         major_category_code: input.major_category_code, category_code: input.category_code,
         content_blocks: json(input.content_blocks), explanation_blocks: json(input.explanation_blocks),
         source_text: input.source_text, publication_status: input.publication_status }

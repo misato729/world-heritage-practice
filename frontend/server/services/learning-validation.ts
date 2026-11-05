@@ -1,3 +1,5 @@
+import { gradeConfig } from '../../shared/grades.ts'
+import { currentGrade } from '../core/grade.ts'
 import type { ExamConfiguration } from '../../shared/schemas/exam.ts'
 import {
   ContentValidationError, isRecord, nonblank, normalizeQuestionForm, parseBlocks, parseQuestionInput,
@@ -21,12 +23,12 @@ export function validateBlocks(value: unknown, context: BlockContext, published 
   return asApiValidation(() => parseBlocks(value, context, published, preserveOptionalAttributes))
 }
 
-export function validateQuestionInput(value: unknown, config: ExamConfiguration = configuration, preserveOptionalAttributes = true): QuestionInput {
+export function validateQuestionInput(value: unknown, config: ExamConfiguration = gradeConfig(currentGrade(), configuration), preserveOptionalAttributes = true): QuestionInput {
   return asApiValidation(() => parseQuestionInput(value, config, { preserveOptionalAttributes }))
 }
 
 /** Only the transport error wrapper is server-specific; schemas and normalization are shared. */
-export function sanitizeQuestionInput(value: unknown, config: ExamConfiguration = configuration): QuestionInput {
+export function sanitizeQuestionInput(value: unknown, config: ExamConfiguration = gradeConfig(currentGrade(), configuration)): QuestionInput {
   if (!isRecord(value)) return fail(400, 'bad_request', 'questionを指定してください')
   return asApiValidation(() => normalizeQuestionForm(value, config))
 }

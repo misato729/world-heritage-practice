@@ -38,7 +38,7 @@ function harness(path: string, kind = 'anonymous', resolved = kind !== 'anonymou
   const scope = effectScope()
   const instance = scope.run(() => factory(sidebar, {
     computed, ref, watch, onMounted: (callback: () => void) => mounted.push(callback), useRoute: () => route,
-    useAuth: () => auth, useFavorites, EXAM_CATALOG, FREE_EXAM_MAX: paid ? freeMax : FREE_EXAM_MAX, hasFullExamAccess: fullAccess,
+    useAuth: () => auth, useFavorites, useGrade: () => ({ EXAM_CATALOG, FREE_EXAM_MAX: paid ? freeMax : FREE_EXAM_MAX }), hasFullExamAccess: fullAccess,
     useNuxtApp, useFetch: (url: string) => { requests.push(url); throw new Error('Unexpected question fetch') },
   }, '{ exams, isLoading, hasAccessError, resolveAccess, examTarget, accessStatus, openExam, toggleExam, isExamLocked }'))!
   mounted.forEach(callback => callback())

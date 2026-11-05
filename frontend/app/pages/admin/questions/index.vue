@@ -147,7 +147,7 @@ const deleteQuestion = async () => {
         <h1>問題一覧</h1>
         <p>登録済みの問題を検索し、公開状態や内容を管理します。</p>
       </div>
-      <NuxtLink class="admin-primary-button" to="/admin/questions/new"><UIcon name="i-lucide-plus" />問題を作成</NuxtLink>
+      <GradeLink class="admin-primary-button" to="/admin/questions/new"><UIcon name="i-lucide-plus" />問題を作成</GradeLink>
     </header>
 
     <section class="admin-panel filter-panel">
@@ -226,7 +226,7 @@ const deleteQuestion = async () => {
               </td>
               <td data-label="更新日"><time :datetime="question.updated_at">{{ formatDate(question.updated_at) }}</time></td>
               <td class="row-actions">
-                <NuxtLink :to="`/admin/questions/${question.id}/edit`" title="編集" aria-label="編集"><UIcon name="i-lucide-pencil" /></NuxtLink>
+                <GradeLink :to="`/admin/questions/${question.id}/edit`" title="編集" aria-label="編集"><UIcon name="i-lucide-pencil" /></GradeLink>
                 <button type="button" title="削除" aria-label="削除" :disabled="updatingId === question.id" @click="deletingQuestion = question"><UIcon name="i-lucide-trash-2" /></button>
               </td>
             </tr>

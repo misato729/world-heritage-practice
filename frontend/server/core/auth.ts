@@ -1,3 +1,4 @@
+import { currentGrade } from './grade.ts'
 import { fromNodeHeaders } from 'better-auth/node'
 import type { H3Event } from 'h3'
 import { getDatabase, record, type Database } from './db.ts'
@@ -36,28 +37,31 @@ export async function hasPaidAccess(user: User | null | undefined, db?: Database
   if (!user) return false
   if (user.role === 'admin') return true
   const connection = db ?? getDatabase()
-  const [membership, grant] = await Promise.all([
+  const [membership, grant, subscription] = await Promise.all([
     connection.membership.findFirst({ where: { user_id: user.id, status: 'active' }, select: { id: true } }),
     connection.verificationAccessGrant.findFirst({ where: { user_id: user.id, revoked_at: null, expires_at: { gt: new Date() } }, select: { id: true } }),
+    connection.subscription.findFirst({where:{user_id:user.id, paid_until:{gt:new Date()},status:{in:['active','past_due','unpaid']}}}),
   ])
-  return membership !== null || grant !== null
+  return (currentGrade() === '2' && membership !== null) || grant !== null || subscription !== null
 }
 
 export async function userPayload(user: User, db?: Database): Promise<AuthUser> {
   const connection = db ?? getDatabase()
-  const [membership, grant, access] = await Promise.all([
+  const [membership, grant, access, subscription] = await Promise.all([
     connection.membership.findUnique({ where: { user_id: user.id } }),
     connection.verificationAccessGrant.findFirst({ where: { user_id: user.id, revoked_at: null, expires_at: { gt: new Date() } } }),
     hasPaidAccess(user, connection),
+    connection.subscription.findUnique({where:{user_id:user.id}}),
   ])
-  const favorites = access ? record(await connection.favorite.findMany({ where: { user_id: user.id, question: { publication_status: 'published' } },
+  const favorites = access ? record(await connection.favorite.findMany({ where: { user_id: user.id, question: { grade: currentGrade(), publication_status: 'published' } },
     select: { question: { select: { id: true, exam_number: true, question_number: true } } },
     orderBy: [{ question: { exam_number: 'asc' } }, { question: { question_number: 'asc' } }] })).map(favorite => favorite.question) : []
-  const membershipStatus = membership?.status === 'active' || membership?.status === 'revoked' ? membership.status : 'free'
+  const membershipStatus = subscription?.paid_until && subscription.paid_until > new Date() ? 'active' : membership?.status === 'active' || membership?.status === 'revoked' ? membership.status : 'free'
   return {
     id: user.id, name: user.name, email: user.email, role: user.role,
     paid_content_access: access, favorite_questions: favorites,
-    membership: { status: membershipStatus, purchased_at: membership?.activated_at ? iso(membership.activated_at) : null, expires_at: null },
+    membership: { status: membershipStatus, purchased_at: membership?.activated_at ? iso(membership.activated_at) : null, expires_at: subscription?.paid_until ? iso(subscription.paid_until) : null },
+    subscription: subscription ? {status:subscription.status, cancel_at_period_end:subscription.cancel_at_period_end, paid_until:subscription.paid_until ? iso(subscription.paid_until) : null} : null,
     verification_access: grant ? { expires_at: iso(grant.expires_at) } : null,
     created_at: iso(user.created_at),
   }

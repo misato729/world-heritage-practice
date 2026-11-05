@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { filterReviewPositions } from '~/utils/reviewPositions'
-import { EXAM_CATALOG, QUESTIONS_PER_EXAM, FREE_EXAM_MAX } from '~/utils/examCatalog'
+const { EXAM_CATALOG, QUESTIONS_PER_EXAM, FREE_EXAM_MAX } = useGrade()
 import {
   createPracticeSequence,
   shufflePracticeSequence,
@@ -446,10 +446,10 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
 <template>
   <div class="page-wrap practice-wrap">
     <section v-if="isIncorrectReview && (!incorrectPractice.ready.value || !incorrectPractice.sequence.value.length)" class="state-panel" aria-live="polite">
-      <template v-if="incorrectPractice.error.value"><h1>復習する問題を表示できません</h1><p role="alert">{{ incorrectPractice.error.value }}</p><button class="secondary-link" type="button" @click="incorrectPractice.prepare">再読み込み</button><NuxtLink v-if="!isLoggedIn" class="primary-link" :to="{ path: '/login', query: { redirect: route.fullPath } }">ログインへ</NuxtLink></template>
+      <template v-if="incorrectPractice.error.value"><h1>復習する問題を表示できません</h1><p role="alert">{{ incorrectPractice.error.value }}</p><button class="secondary-link" type="button" @click="incorrectPractice.prepare">再読み込み</button><GradeLink v-if="!isLoggedIn" class="primary-link" :to="{ path: '/login', query: { redirect: route.fullPath } }">ログインへ</GradeLink></template>
       <template v-else-if="!incorrectPractice.ready.value"><p role="status">復習する問題を読み込んでいます。</p></template>
       <template v-else><h1>復習する問題はありません</h1><p>最新の解答で間違えた問題は、すべて正解済みです。</p></template>
-      <NuxtLink class="secondary-link" to="/#practice-launcher">トップへ戻る</NuxtLink>
+      <GradeLink class="secondary-link" to="/#practice-launcher">トップへ戻る</GradeLink>
     </section>
     <div v-else-if="status === 'idle' || status === 'pending'" class="state-panel" role="status" aria-live="polite" aria-busy="true">
       <UIcon class="spin" name="i-lucide-loader-circle" aria-hidden="true" />
@@ -460,10 +460,10 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
       <UIcon name="i-lucide-lock-keyhole" />
       <h1>模擬試験{{ examNumber }}はプレミアム会員向けです</h1>
       <p v-if="paywallNeedsLogin">模擬試験{{ FREE_EXAM_MAX + 1 }}以降を利用するには、ログインしてプレミアム会員資格を確認してください。</p>
-      <p v-else>{{ PRICE_LABEL }}の買い切りで、模擬試験{{ FREE_EXAM_MAX + 1 }}以降の公開問題を利用できます。</p>
+      <p v-else>{{ PRICE_LABEL }}（税込）／月で、模擬試験{{ FREE_EXAM_MAX + 1 }}以降の公開問題を利用できます。</p>
       <div class="state-actions">
-        <NuxtLink v-if="paywallNeedsLogin" class="secondary-link" :to="{ path: '/login', query: { redirect: route.fullPath } }">ログイン</NuxtLink>
-        <NuxtLink class="primary-link" to="/premium">プレミアム会員について確認する</NuxtLink>
+        <GradeLink v-if="paywallNeedsLogin" class="secondary-link" :to="{ path: '/login', query: { redirect: route.fullPath } }">ログイン</GradeLink>
+        <GradeLink class="primary-link" to="/premium">プレミアム会員について確認する</GradeLink>
       </div>
     </div>
 
@@ -471,7 +471,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
       <UIcon name="i-lucide-book-open" />
       <h1>この問題は準備中です</h1>
       <p>公開までしばらくお待ちください。学習範囲や試験形式は試験概要で確認できます。</p>
-      <div class="state-actions"><NuxtLink class="secondary-link" to="/">ホームへ戻る</NuxtLink><NuxtLink class="primary-link" to="/exam-overview">試験概要を見る</NuxtLink></div>
+      <div class="state-actions"><GradeLink class="secondary-link" to="/">ホームへ戻る</GradeLink><GradeLink class="primary-link" to="/exam-overview">試験概要を見る</GradeLink></div>
     </div>
 
     <div v-else-if="loadErrorMessage || !question" class="state-panel error-panel">
@@ -480,7 +480,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
       <p>{{ loadErrorMessage || '指定された公開問題が見つかりませんでした。' }}</p>
       <div class="state-actions">
         <button class="secondary-link" type="button" @click="() => refresh()">再読み込み</button>
-        <NuxtLink class="primary-link" to="/practice/1/1">問1から始める</NuxtLink>
+        <GradeLink class="primary-link" to="/practice/1/1">問1から始める</GradeLink>
       </div>
     </div>
 
@@ -596,7 +596,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
           <div v-else-if="completed" class="completed-message">
             <strong>{{ completionHeading }}</strong>
             <p>{{ completionMessage }}</p>
-            <NuxtLink class="secondary-link" to="/">トップへ戻る</NuxtLink>
+            <GradeLink class="secondary-link" to="/">トップへ戻る</GradeLink>
           </div>
           <button v-else class="primary-link next-button" type="button" :disabled="loadingNext" @click="goToNextQuestion">
             {{ loadingNext ? '読み込み中です' : isIncorrectReview ? (nextPracticePosition ? '次の復習問題' : '復習結果を確認') : '次の問題' }}
@@ -634,8 +634,8 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
             <h2 id="favorite-modal-title">お気に入り機能について</h2>
             <p>{{ PAYMENTS_ENABLED ? 'お気に入り登録は、プレミアム会員向けの機能です。' : 'お気に入り登録にはログインが必要です。' }}</p>
             <div class="favorite-modal-actions">
-              <NuxtLink v-if="PAYMENTS_ENABLED" class="primary-link" to="/premium" @click="closeFavoriteModal">プレミアム会員について</NuxtLink>
-              <NuxtLink v-if="!isLoggedIn" class="secondary-link" :to="{ path: '/login', query: { redirect: route.fullPath } }" @click="closeFavoriteModal">ログインへ</NuxtLink>
+              <GradeLink v-if="PAYMENTS_ENABLED" class="primary-link" to="/premium" @click="closeFavoriteModal">プレミアム会員について</GradeLink>
+              <GradeLink v-if="!isLoggedIn" class="secondary-link" :to="{ path: '/login', query: { redirect: route.fullPath } }" @click="closeFavoriteModal">ログインへ</GradeLink>
             </div>
           </section>
         </div>

@@ -1,3 +1,8 @@
+import { syncSubscription } from '../services/subscriptions.ts'
+import { paymentStripeClient } from '../services/payment-client.ts'
+import { getDatabase, transaction } from '../core/db.ts'
+import { gradeScope } from '../core/grade.ts'
+import { parseGrade } from '../../shared/grades.ts'
 import { pathToFileURL } from 'node:url'
 import { closeDatabase } from '../core/db.ts'
 import { closeRateLimitStore } from '../core/rate-limit.ts'
@@ -10,12 +15,21 @@ import { restoreDrill } from './restore-drill.ts'
 import { syncMajorCategories } from './categories.ts'
 import { environment } from '../core/config.ts'
 
-export const commands = ['db:migrate', 'db:baseline', 'db:seed', 'categories:sync', 'questions:import_content', 'questions:import', 'questions:export',
+export const commands = ['subscriptions:sync', 'db:migrate', 'db:baseline', 'db:seed', 'categories:sync', 'questions:import_content', 'questions:import', 'questions:export',
   'admin:create', 'verification_access:grant', 'verification_access:revoke', 'payments:expire_pending_checkouts', 'operations:audit', 'operations:restore_drill'] as const
 
 /** Inputs arrive through environment variables so passwords never enter command arguments. */
 export async function runCommand(command: string | undefined, env: NodeJS.ProcessEnv = process.env) {
+ return gradeScope.run(parseGrade(env.EXAM_GRADE), () => runScopedCommand(command, env))
+}
+async function runScopedCommand(command: string | undefined, env: NodeJS.ProcessEnv) {
   switch (command) {
+    case 'subscriptions:sync': {
+      const rows = await getDatabase().subscription.findMany({where:{stripe_subscription_id:{not:null}},select:{stripe_subscription_id:true}})
+      const client = paymentStripeClient()
+      for (const row of rows) await transaction(db => syncSubscription(row.stripe_subscription_id!,db,client))
+      return {status:'ok',checked:rows.length}
+    }
     case 'db:migrate': return { status: 'ok', ...await migrate() }
     case 'db:baseline': return { status: 'ok', ...await migrate({ baseline: true }) }
     case 'db:seed': {

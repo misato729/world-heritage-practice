@@ -23,7 +23,8 @@ test('incorrect review uses own latest answers, exact pairs, publication and cur
       UPDATE answer_histories SET question_version=2 WHERE question_id=7;
       INSERT INTO exam_sets VALUES(3,'published','group_practice'),(4,'draft','legacy_practice');
       INSERT INTO question_groups VALUES(1,3,'draft'); UPDATE questions SET group_id=1 WHERE id=9`)
-    const db = { query: client.query.bind(client), membership: { findFirst: async () => null }, verificationAccessGrant: { findFirst: async () => null } } as any
+    await client.query("ALTER TABLE questions ADD COLUMN grade text DEFAULT '2'")
+    const db = { query: client.query.bind(client), membership: { findFirst: async () => null }, verificationAccessGrant: { findFirst: async () => null }, subscription: { findFirst: async () => null } } as any
     const user = { id: 1, role: 'user' } as any
     const data = await listIncorrectReviewQuestions(user, db)
     assert.deepEqual(data.data.map(x => [x.exam_number,x.question_number]), [[1,3],[1,7],[2,9],[3,1],[4,1]])

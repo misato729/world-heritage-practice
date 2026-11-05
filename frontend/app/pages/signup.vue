@@ -46,7 +46,7 @@ const submit = async (event: { data: typeof state }) => {
       <FormTextField id="password-confirmation" v-model="state.password_confirmation" name="password_confirmation" label="確認用パスワード" autocomplete="new-password" type="password" />
       <p v-if="errorMessage" class="form-error" role="alert">{{ errorMessage }}</p>
       <button class="primary-link" type="submit" :disabled="submitting">{{ submitting ? '登録中です' : '登録する' }}</button>
-      <p class="auth-note">登録済みの方は <NuxtLink :to="{ path: '/login', query: { redirect: redirectPath } }">ログイン</NuxtLink></p>
+      <p class="auth-note">登録済みの方は <GradeLink :to="{ path: '/login', query: { redirect: redirectPath } }">ログイン</GradeLink></p>
     </UForm>
   </div>
 </template>

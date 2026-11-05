@@ -1,3 +1,4 @@
+import { monthlyCheckout } from './subscriptions.ts'
 import { getHeader, readRawBody, setResponseStatus, type H3Event } from 'h3'
 import type { User } from '../core/auth.ts'
 import { ApiError, fail } from '../core/errors.ts'
@@ -20,7 +21,7 @@ export async function checkoutPayment(event: H3Event, user: User | null) {
   if (!user) fail(401, 'unauthorized', 'ログインが必要です')
   await throttle(event, 'checkout_ip')
   await throttle(event, 'checkout_user', String(user.id))
-  const data = await createCheckoutSession(user)
+  const data = await monthlyCheckout(user)
   setResponseStatus(event, 201)
   return { data }
 }

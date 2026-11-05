@@ -1,4 +1,11 @@
 <script setup lang="ts">
+const portalError = ref('')
+const openPortal = async () => {
+ try { const {data} = await useNuxtApp().$api<{data:{url:string}}>('/api/v1/payments/portal',{method:'POST',body:{}}); window.location.assign(data.url) }
+ catch { portalError.value = '契約管理を開けませんでした。時間をおいて再度お試しください。' }
+}
+
+const { config: EXAM_CONFIG } = useGrade()
 import { deleteAccountFormSchema, changePasswordFormSchema } from '../../shared/schemas/auth.ts'
 import { apiFormErrors, focusFormError } from '~/utils/apiFormErrors'
 definePageMeta({ middleware: 'auth' })
@@ -74,7 +81,7 @@ const deleteAccount = async () => {
     <div v-if="!isLoggedIn" class="empty-state">
       <h2>ログインが必要です</h2>
       <p>マイページはログイン後に利用できます。</p>
-      <NuxtLink class="primary-link" to="/login">ログインへ</NuxtLink>
+      <GradeLink class="primary-link" to="/login">ログインへ</GradeLink>
     </div>
     <template v-else>
       <section class="content-panel account-info" aria-labelledby="registration-heading">
@@ -83,7 +90,8 @@ const deleteAccount = async () => {
         <div><span>メールアドレス</span><strong>{{ user?.email }}</strong></div>
         <div><span>会員区分</span><strong>{{ membershipLabel }}</strong></div>
         <div v-if="PAYMENTS_ENABLED && user?.membership.purchased_at"><span>購入確認日時</span><strong>{{ new Date(user.membership.purchased_at).toLocaleString('ja-JP') }}</strong></div>
-        <div v-if="PAYMENTS_ENABLED && user?.membership.status === 'active'"><span>有効期限</span><strong>なし（買い切り）</strong></div>
+        <button v-if="user?.subscription" type="button" @click="openPortal">契約・支払方法・解約の管理</button><p v-if="portalError" role="alert">{{ portalError }}</p>
+        <div v-if="PAYMENTS_ENABLED && user?.membership.status === 'active'"><span>有効期限</span><strong>{{ user?.membership.expires_at ? new Date(user.membership.expires_at).toLocaleDateString('ja-JP') : '既存の会員資格' }}</strong></div>
         <div v-if="PAYMENTS_ENABLED && user?.verification_access && user?.membership.status !== 'active'"><span>検証用資格の期限</span><strong>{{ new Date(user.verification_access.expires_at).toLocaleString('ja-JP') }}</strong></div>
       </section>
       <AchievementReport @settled.once="alignAccountSettings" />
@@ -91,8 +99,8 @@ const deleteAccount = async () => {
         <h2 id="account-settings-heading">アカウント設定</h2>
       <section v-if="PAYMENTS_ENABLED && !user?.paid_content_access" class="content-panel membership-action">
         <h3>プレミアム会員</h3>
-        <p>{{ PRICE_LABEL }}の買い切りで、模擬試験{{ EXAM_CONFIG.payments.free_exam_count + 1 }}以降を利用できます。</p>
-        <NuxtLink class="primary-link" to="/premium">プレミアム会員の詳細を見る</NuxtLink>
+        <p>{{ PRICE_LABEL }}（税込）／月で、模擬試験{{ EXAM_CONFIG.payments.free_exam_count + 1 }}以降を利用できます。</p>
+        <GradeLink class="primary-link" to="/premium">プレミアム会員の詳細を見る</GradeLink>
       </section>
       <section class="content-panel password-settings">
         <h3>パスワード変更</h3>

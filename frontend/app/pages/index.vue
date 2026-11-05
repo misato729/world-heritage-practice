@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM } from '~/utils/examCatalog'
+const { label: gradeLabel, EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM } = useGrade()
 import { MAX_REVIEW_POSITIONS } from '~/utils/reviewPositions'
 import {
   createPracticeSeed,
@@ -139,7 +139,8 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   <div class="home-main">
     <section class="overview-section">
       <div class="overview-copy">
-        <p class="heritage-eyebrow">世界遺産検定2級の学習サイト</p>
+        <p v-if="gradeLabel !== '2級'" role="status">{{ gradeLabel }}の教材は準備中です。現在は2級の模試1を収録しています。</p>
+        <p class="heritage-eyebrow">{{ gradeLabel }}｜世界遺産検定 1級・準1級・2級の学習サイト</p>
         <h1 class="section-heading">
           <span>{{ SITE.tagline }}</span>
         </h1>
@@ -147,7 +148,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
           {{ SITE.description }}
         </p>
         <div class="overview-actions">
-          <NuxtLink class="secondary-link" to="/exam-overview">試験概要を見る</NuxtLink>
+          <GradeLink class="secondary-link" to="/exam-overview">試験概要を見る</GradeLink>
         </div>
         <ul class="heritage-highlights" aria-label="学習のテーマ">
           <li><UIcon name="i-lucide-landmark" />歴史と文化</li>
@@ -209,13 +210,13 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
       >
         <div class="exam-grid-heading">
           <p><strong>全{{ EXAM_CATALOG.length }}回の構成</strong><span>各{{ QUESTIONS_PER_EXAM }}問</span></p>
-          <NuxtLink v-if="!hasFullAccess" class="premium-info-link" to="/premium">
+          <GradeLink v-if="!hasFullAccess" class="premium-info-link" to="/premium">
             <UIcon name="i-lucide-lock-keyhole" />
             模擬試験{{ FREE_EXAM_MAX + 1 }}以降はプレミアム会員向けです
-          </NuxtLink>
+          </GradeLink>
         </div>
         <div class="exam-grid">
-          <NuxtLink
+          <GradeLink
             v-for="exam in EXAM_CATALOG"
             :key="exam.exam_number"
             class="exam-card"
@@ -224,7 +225,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
           >
             <strong>{{ exam.exam_number }}</strong>
             <UIcon v-if="examIsLocked(exam.exam_number)" name="i-lucide-lock-keyhole" aria-hidden="true" />
-          </NuxtLink>
+          </GradeLink>
         </div>
       </div>
 
@@ -344,13 +345,13 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
           </dd>
         </div>
         <div v-if="PAYMENTS_ENABLED" class="usage-row">
-          <dt>{{ PRICE_LABEL }}の買い切り</dt>
+          <dt>{{ PRICE_LABEL }}（税込）／月</dt>
           <dd>
-            <p>プレミアム会員は模擬試験{{ FREE_EXAM_MAX + 1 }}以降も利用できます。月額料金や自動更新はありません。</p>
-            <NuxtLink class="usage-premium-link" to="/premium">
+            <p>プレミアム会員は模擬試験{{ FREE_EXAM_MAX + 1 }}以降も利用できます。毎月自動更新されます。契約管理から解約できます。</p>
+            <GradeLink class="usage-premium-link" to="/premium">
               <span>プレミアム会員について</span>
               <UIcon name="i-lucide-arrow-right" aria-hidden="true" />
-            </NuxtLink>
+            </GradeLink>
           </dd>
         </div>
         <div class="usage-row">

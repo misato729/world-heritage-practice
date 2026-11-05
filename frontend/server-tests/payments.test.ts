@@ -112,7 +112,7 @@ test('HTTP contracts expose public settings, require Checkout authentication and
   process.env.STRIPE_WEBHOOK_SECRET = env.STRIPE_WEBHOOK_SECRET
   try {
     const response = getPaymentConfiguration() as { data: { purchase_type: string } }
-    assert.equal(response.data.purchase_type, 'one_time')
+    assert.equal(response.data.purchase_type, 'subscription')
     await assert.rejects(checkoutPayment(paymentEvent('/payments/checkout_sessions', 'POST'), null), (error: unknown) => error instanceof ApiError && error.status === 401)
     await assert.rejects(receiveStripeWebhook(paymentEvent('/webhooks/stripe', 'POST', '{ "id": "evt_synthetic" }', 'invalid')), (error: unknown) => error instanceof ApiError && error.code === 'invalid_webhook' && error.status === 400)
   } finally {

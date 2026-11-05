@@ -48,11 +48,11 @@ const submit = async (event: { data: typeof state }) => {
 <template>
   <div class="admin-layout admin-login-shell">
     <header class="admin-login-header">
-      <NuxtLink class="admin-brand" to="/admin/login" aria-label="管理画面ログイン">
+      <GradeLink class="admin-brand" to="/admin/login" aria-label="管理画面ログイン">
         <span class="admin-brand-mark"><UIcon name="i-lucide-shield-check" /></span>
         <span><strong>{{ SITE.short_name }}</strong><small>管理画面</small></span>
-      </NuxtLink>
-      <NuxtLink class="admin-site-link" to="/"><UIcon name="i-lucide-arrow-left" />一般画面に戻る</NuxtLink>
+      </GradeLink>
+      <GradeLink class="admin-site-link" to="/"><UIcon name="i-lucide-arrow-left" />一般画面に戻る</GradeLink>
     </header>
 
     <main class="admin-login-main">

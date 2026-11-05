@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
+const { grades, grade } = useGrade()
+const changeGrade = (event: Event) => { window.location.assign('/?grade=' + (event.target as HTMLSelectElement).value) }
 const menuOpen = ref(false)
 const { isLoggedIn, user, ensureCurrentUser, logout } = useAuth()
 
@@ -46,7 +48,7 @@ const handleLogout = async () => {
 <template>
   <header class="site-header">
     <div class="header-inner">
-      <NuxtLink
+      <GradeLink
         class="brand"
         to="/"
         :aria-label="`${SITE.name}：ホームへ戻る`"
@@ -54,14 +56,15 @@ const handleLogout = async () => {
       >
         <SiteLogo />
         <small class="brand-tagline">{{ SITE.exam_name }}</small>
-      </NuxtLink>
+      </GradeLink>
 
       <div class="header-actions">
-        <NuxtLink v-if="!isLoggedIn" class="login-link" to="/login">ログイン</NuxtLink>
-        <NuxtLink v-else class="account-link" to="/account" title="マイページ">
+        <label>学習する級 <select aria-label="学習する級" :value="grade" @change="changeGrade"><option v-for="g in grades" :key="g.code" :value="g.code">{{ g.label }}</option></select></label>
+        <GradeLink v-if="!isLoggedIn" class="login-link" to="/login">ログイン</GradeLink>
+        <GradeLink v-else class="account-link" to="/account" title="マイページ">
           <UIcon name="i-lucide-circle-user-round" />
           <span class="account-label">マイページ</span>
-        </NuxtLink>
+        </GradeLink>
         <button
           class="menu-button"
           type="button"
@@ -98,7 +101,7 @@ const handleLogout = async () => {
         </button>
       </div>
       <nav>
-        <NuxtLink
+        <GradeLink
           v-for="item in menuItems"
           :key="item.to"
           :to="item.to"
@@ -108,7 +111,7 @@ const handleLogout = async () => {
           <UIcon :name="item.icon" />
           <span>{{ item.label }}</span>
           <UIcon class="chevron" name="i-lucide-chevron-right" />
-        </NuxtLink>
+        </GradeLink>
         <button v-if="isLoggedIn" class="logout-button" type="button" @click="handleLogout">
           <UIcon name="i-lucide-log-out" />
           <span>ログアウト</span>

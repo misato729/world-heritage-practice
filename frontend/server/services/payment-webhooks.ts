@@ -1,3 +1,4 @@
+import { syncSubscription } from './subscriptions.ts'
 import { query, transaction, type Database, type Prisma } from '../core/db.ts'
 import { paymentStripeClient, stripeId, type PaymentStripeClient, type StripeObject } from './payment-client.ts'
 import { paymentSettings, type PaymentSettings } from './payment-settings.ts'
@@ -150,7 +151,11 @@ export async function processStripeEvent(event: StripeObject, options: PaymentOp
     await query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))::text', [`stripe-event:${event.id}`], db)
     const existing = await db.stripeWebhookEvent.findUnique({ where: { stripe_event_id: event.id }, select: { id: true } })
     if (existing) return 'duplicate'
-    if (supported.has(event.type)) {
+    const object = event.data?.object
+    if (['customer.subscription.created','customer.subscription.updated','customer.subscription.deleted','invoice.paid','invoice.payment_failed'].includes(event.type) || (event.type === 'checkout.session.completed' && object?.mode === 'subscription')) {
+      const id = event.type.startsWith('customer.subscription.') ? object?.id : event.type.startsWith('invoice.') ? stripeId(object?.parent?.subscription_details?.subscription) || stripeId(object?.subscription) : stripeId(object?.subscription)
+      if (id) await syncSubscription(id, db, options.client ?? paymentStripeClient(settings), settings)
+    } else if (supported.has(event.type)) {
       if (!event.data?.object || typeof event.data.object !== 'object') mismatch()
       await new EventProcessor(db, settings, options.client).process(event.type, event.data.object, event.created)
     }

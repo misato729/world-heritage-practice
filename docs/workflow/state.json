@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 21,
-  "updated_at": "2026-11-05T14:32:24.132Z",
+  "revision": 30,
+  "updated_at": "2026-11-05T19:02:21.879Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T14-32-24-132Z-r21.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T19-02-21-879Z-r30.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -46,7 +46,16 @@
     "scripts/check-private-sources.test.mjs",
     ".gitignore",
     ".dockerignore",
-    ".githooks/pre-push"
+    ".githooks/pre-push",
+    "config/exam.json",
+    "frontend/shared/grades.ts",
+    "frontend/server/core/grade.ts",
+    "frontend/server/services/subscriptions.ts",
+    "frontend/server/services/payment-webhooks.ts",
+    "frontend/app/middleware/grade.global.ts",
+    "frontend/app/components/GradeLink.vue",
+    "frontend/prisma/migrations/20261106000000_grades_subscription/migration.sql",
+    "docs/multi-grade-subscription-implementation.md"
   ],
   "tasks": [
     {
@@ -351,6 +360,177 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "multi_grade_subscription_design_20261106",
+      "context": "product",
+      "title": "3級種統合・全級共通サブスクの設計文書化",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 1級/準1級/2級を一つのアプリで扱う方針を採用。全級共通で世界遺産ラボだけサブスク制。実装せずドキュメント化。",
+      "next_action": "料金等の未決事項の決定と、別途の実装依頼を待つ",
+      "evidence": [
+        "docs/multi-grade-subscription-design.md",
+        "local-only/multi-grade-subscription-design-20261106/checks.json",
+        "local-only/multi-grade-subscription-design-20261106/review.md"
+      ],
+      "last_verified_at": "2026-11-05T15:37:53.551Z",
+      "verification_scope": "文書6件とworkflow記録のみ。ローカル参照30件、依頼範囲の静的確認、docs限定差分、diff --check、資料保護検査、独立レビューPASS。実装テスト・DB・ブラウザ・Stripe照会/変更・コミット/push/公開は未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "3級種・級別学習・全級共通サブスク・本サービス限定・未実装/未決の明示、リンクとdocs限定差分を確認",
+          "verification": "文書参照/決定項目/未決一覧の静的確認、git diff --checkと変更パス検査、workflow検査",
+          "status": "passed",
+          "evidence": [
+            "local-only/multi-grade-subscription-design-20261106/checks.json"
+          ],
+          "checked_at": "2026-11-05T15:36:25.877Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が依頼整合・現行との差・料金等の未決・課金状態/移行と実装禁止範囲を確認",
+          "verification": "subscription_design_reviewの独立文書レビューと指摘反映",
+          "status": "passed",
+          "evidence": [
+            "local-only/multi-grade-subscription-design-20261106/review.md"
+          ],
+          "checked_at": "2026-11-05T15:37:53.550Z",
+          "reviewer": "subscription_design_review"
+        }
+      ],
+      "execution": {
+        "worker": "design_author",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回独立レビューで有効資格の期限の表現が検証用アクセスまで含むとの指摘。購入由来の会員資格だけが無期限と限定して修正し、再確認へ進めた。",
+            "at": "2026-11-05T15:37:42.522Z",
+            "failed_criteria": [
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "3級種統合と本サービスだけの全級共通サブスクを文書化。現行との差、級別UX、移行、更新/解約/期限、未決事項を記録。初回指摘修正後の独立レビューと文書静的検査が合格。",
+            "at": "2026-11-05T15:37:53.662Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "multi_grade_subscription_implementation_20261106",
+      "context": "development",
+      "title": "3級統合と月額500円・無料模試3回の実装",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 月額500円税込、各級模試3まで無料4以降有料で実装依頼",
+      "next_action": "実Stripe設定・販売開始・Git送信等の明示依頼を待つ",
+      "evidence": [
+        "docs/multi-grade-subscription-implementation.md",
+        "local-only/multi-grade-implementation-20261106/checks.json",
+        "local-only/multi-grade-implementation-20261106/review.md",
+        "local-only/multi-grade-implementation-20261106/development-migration.json"
+      ],
+      "last_verified_at": "2026-11-05T18:36:47.812Z",
+      "verification_scope": "単体152＋級追加2、API/DB132＋最終契約3、PC/SP E2E20、型/設定Schema/教材/資料保護/差分検査が合格。開発DBバックアップ・追加移行・再適用で60問240肢ID/本文保持、履歴/お気に入りは前後0件。独立レビューPASS。実Stripe・販売/本番・commit/push未実施、返金/紛争は記録した運用対応。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "級分離・無料境界・定期請求・既存保持",
+          "verification": "単体/API/型/マイグレーション/PCSP検証",
+          "status": "passed",
+          "evidence": [
+            "local-only/multi-grade-implementation-20261106/checks.json"
+          ],
+          "checked_at": "2026-11-05T18:36:47.812Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "独立実装レビュー",
+          "verification": "implementation_review",
+          "status": "passed",
+          "evidence": [
+            "local-only/multi-grade-implementation-20261106/review.md"
+          ],
+          "checked_at": "2026-11-05T18:36:47.812Z",
+          "reviewer": "implementation_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回確認の経緯：級リンクの新タブ/初期再読込、設定正本、退会停止確認、paid通知取りこぼし、既存2級href互換、退会時の不要なStripe初期化とテストfixture不足を発見。修正し検査を再実行した。",
+            "at": "2026-11-05T18:36:29.260Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "3級種統合・全級共通月額500円税込・各級模試3まで無料を実装。自動検査、PCSP、開発DB保持、最終独立レビューが合格。返金等の運用境界とStripe未接続を記録。",
+            "at": "2026-11-05T18:36:47.942Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "multi_grade_delivery_20261106",
+      "context": "development",
+      "title": "3級統合・月額プランのコミットとリモート保存",
+      "status": "doing",
+      "depends_on": [
+        "multi_grade_subscription_implementation_20261106"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 一旦ここでコミット・pushしてください",
+      "next_action": "対象のステージ差分を確認しコミット・pushする",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "Git送信のみ。先行実装の検証根拠を確認し継承。販売/本番/Stripe操作なし。",
+      "acceptance": [
+        {
+          "id": "delivery",
+          "kind": "automated",
+          "description": "資料保護/差分検査とリモートHEAD一致、CI成功",
+          "verification": "Git差分・追跡履歴保護・ls-remote・CI照合",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "承認範囲と送信対象の別担当確認",
+          "verification": "delivery_review",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]

@@ -69,7 +69,7 @@ const submit = async (input: AdminQuestionInput) => {
   <div class="admin-page">
     <header class="admin-page-head">
       <div><p class="admin-page-eyebrow">SC-103</p><h1>問題を編集</h1><p v-if="question">試験 {{ question.exam_number }} の問{{ question.question_number }}を編集しています。</p><p v-else>登録済みの問題を読み込んでいます。</p></div>
-      <NuxtLink class="admin-secondary-button" to="/admin/questions"><UIcon name="i-lucide-arrow-left" />一覧に戻る</NuxtLink>
+      <GradeLink class="admin-secondary-button" to="/admin/questions"><UIcon name="i-lucide-arrow-left" />一覧に戻る</GradeLink>
     </header>
 
     <p v-if="successMessage" class="success-message" role="status"><UIcon name="i-lucide-circle-check" />{{ successMessage }}</p>

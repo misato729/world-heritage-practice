@@ -21,7 +21,7 @@ export function applyApiHeaders(event: H3Event) {
     setHeader(event, 'Access-Control-Allow-Origin', origin)
     setHeader(event, 'Access-Control-Allow-Credentials', 'true')
     setHeader(event, 'Vary', 'Origin')
-    setHeader(event, 'Access-Control-Allow-Headers', 'Authorization, Content-Type')
+    setHeader(event, 'Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Exam-Grade')
     setHeader(event, 'Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD')
   }
   if (event.method === 'OPTIONS') {

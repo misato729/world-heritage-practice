@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { config: EXAM_CONFIG } = useGrade()
 import { PAYMENTS_ENABLED } from '~/utils/examConfig'
 
 definePageMeta({ middleware: PAYMENTS_ENABLED ? ['auth'] : [] })
@@ -36,13 +37,13 @@ onBeforeUnmount(() => { stopped = true })
   <div class="page-wrap complete-page">
     <div v-if="!PAYMENTS_ENABLED" class="completion-card">
       <h1>有料機能は無効です</h1><p>すべての公開問題を無料で利用できます。</p>
-      <NuxtLink class="primary-link" to="/#practice-launcher">問題演習へ</NuxtLink>
+      <GradeLink class="primary-link" to="/#practice-launcher">問題演習へ</GradeLink>
     </div>
     <div v-else-if="!isLoggedIn" class="completion-card">
       <UIcon class="state-icon" name="i-lucide-log-in" />
       <h1>ログインして決済結果を確認してください</h1>
       <p>購入時に使用したアカウントでログインすると、プレミアム会員資格の反映を確認できます。</p>
-      <NuxtLink class="primary-link" to="/login?redirect=/premium/complete">ログイン</NuxtLink>
+      <GradeLink class="primary-link" to="/login?redirect=/premium/complete">ログイン</GradeLink>
     </div>
 
     <div v-else-if="state === 'checking'" class="completion-card" aria-live="polite">
@@ -55,16 +56,16 @@ onBeforeUnmount(() => { stopped = true })
       <UIcon class="state-icon" name="i-lucide-circle-check-big" />
       <h1>プレミアム会員になりました</h1>
       <p>購入が確認できました。公開中の全問題を利用できます。</p>
-      <NuxtLink class="primary-link" :to="`/practice/${Math.min(EXAM_CONFIG.payments.free_exam_count + 1, EXAM_CONFIG.exam.set_count)}/1`">問題演習へ進む</NuxtLink>
+      <GradeLink class="primary-link" :to="`/practice/${Math.min(EXAM_CONFIG.payments.free_exam_count + 1, EXAM_CONFIG.exam.set_count)}/1`">問題演習へ進む</GradeLink>
     </div>
 
     <div v-else class="completion-card" aria-live="polite">
       <UIcon class="state-icon pending-icon" name="i-lucide-clock-3" />
       <h1>決済の反映を待っています</h1>
-      <p>決済完了通知に時間がかかっています。二重に購入せず、少し時間をおいて再確認してください。解決しない場合は、<NuxtLink to="/commercial-disclosure">問い合わせ先</NuxtLink>へご連絡ください。</p>
+      <p>決済完了通知に時間がかかっています。二重に購入せず、少し時間をおいて再確認してください。解決しない場合は、<GradeLink to="/commercial-disclosure">問い合わせ先</GradeLink>へご連絡ください。</p>
       <div class="completion-actions">
         <button class="secondary-link" type="button" @click="checkMembership">もう一度確認する</button>
-        <NuxtLink class="primary-link" to="/account">アカウントを確認する</NuxtLink>
+        <GradeLink class="primary-link" to="/account">アカウントを確認する</GradeLink>
       </div>
     </div>
   </div>

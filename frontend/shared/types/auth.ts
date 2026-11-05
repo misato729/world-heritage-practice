@@ -7,7 +7,8 @@ export type AuthUser = {
   role: 'user' | 'admin'
   paid_content_access: boolean
   favorite_questions: FavoriteQuestion[]
-  membership: { status: 'free' | 'active' | 'revoked', purchased_at: string | null, expires_at: null }
+  membership: { status: 'free' | 'active' | 'revoked', purchased_at: string | null, expires_at: string | null }
+  subscription?: { status: string, cancel_at_period_end: boolean, paid_until: string | null } | null
   verification_access?: { expires_at: string } | null
   created_at?: string
 }

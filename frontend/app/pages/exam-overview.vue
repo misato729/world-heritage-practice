@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { config: EXAM_CONFIG } = useGrade()
 useSeoMeta({ title: `試験概要｜${SITE.name}`, description: `${SITE.exam_name}の概要をご案内します。` })
 </script>
 
@@ -17,9 +18,9 @@ useSeoMeta({ title: `試験概要｜${SITE.name}`, description: `${SITE.exam_nam
         <h3>{{ major.label }}</h3>
         <ul><li v-for="category in getCategoriesByMajorCategory(major.value)" :key="category.value">{{ category.label }}</li></ul>
       </div>
-      <NuxtLink class="primary-link" to="/#practice-launcher">問題演習を始める</NuxtLink>
+      <GradeLink class="primary-link" to="/#practice-launcher">問題演習を始める</GradeLink>
     </section>
-    <section class="content-panel"><h2>公式情報</h2><p>試験の概要・学習範囲は世界遺産検定の公式案内で確認できます。本サイトは独自の学習サービスです。</p><a class="secondary-link" href="https://www.sekaken.jp/each_grade/ex_class2/" target="_blank" rel="noopener noreferrer">2級の公式案内を見る<UIcon name="i-lucide-external-link" /></a></section>
+    <section class="content-panel"><h2>公式情報</h2><p>試験の概要・学習範囲は世界遺産検定の公式案内で確認できます。本サイトは独自の学習サービスです。</p><a class="secondary-link" href="https://www.sekaken.jp/each_grade/criterion/" target="_blank" rel="noopener noreferrer">各級の公式案内を見る<UIcon name="i-lucide-external-link" /></a></section>
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { EXAM_CATALOG, FREE_EXAM_MAX, type ExamCatalogEntry } from '~/utils/examCatalog'
+import type { ExamCatalogEntry } from '~/utils/examCatalog'
+const { EXAM_CATALOG, FREE_EXAM_MAX } = useGrade()
 import { hasFullExamAccess } from '~/utils/examConfig'
 
 const route = useRoute()
@@ -128,10 +129,10 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
             class="exam-row"
             :class="{ current: route.path.startsWith(`/practice/${exam.exam_number}/`) }"
           >
-            <NuxtLink class="exam-link" :to="examTarget(exam)" @click="closeMobileList">
+            <GradeLink class="exam-link" :to="examTarget(exam)" @click="closeMobileList">
               模擬試験 {{ exam.exam_number }}
               <UIcon v-if="isExamLocked(exam)" name="i-lucide-lock-keyhole" aria-label="プレミアム会員向け" />
-            </NuxtLink>
+            </GradeLink>
             <button
               type="button"
               :aria-expanded="openExam === exam.exam_number"
@@ -155,7 +156,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
               class="question-list"
               :aria-label="`模擬試験${exam.exam_number}の問題一覧`"
             >
-              <NuxtLink
+              <GradeLink
                 v-for="question in exam.question_numbers"
                 :key="question"
                 :to="examTarget(exam, question)"
@@ -165,7 +166,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
                 @click="closeMobileList"
               >
                 問{{ question }}
-              </NuxtLink>
+              </GradeLink>
             </nav>
           </Transition>
         </section>

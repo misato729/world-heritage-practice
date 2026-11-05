@@ -22,13 +22,13 @@ const submit = async () => {
       <p role="status">登録されているメールアドレスの場合、再設定用のメールを送信します。メールが届くまで少しお待ちください。</p>
       <p>迷惑メールフォルダーもご確認ください。リンクの有効期限は30分です。</p>
       <button class="secondary-link" type="button" @click="accepted = false">もう一度依頼する</button>
-      <p class="auth-note"><NuxtLink to="/login">ログインへ戻る</NuxtLink></p>
+      <p class="auth-note"><GradeLink to="/login">ログインへ戻る</GradeLink></p>
     </section>
     <UForm v-else :disabled="submitting" :schema="requestPasswordResetSchema" :state="state" class="content-panel auth-form" novalidate @error="focusFormError" @submit="submit">
       <FormTextField id="reset-email" v-model="state.email" name="email" label="メールアドレス" type="email" autocomplete="email" />
       <p v-if="errorMessage" class="form-error" role="alert">{{ errorMessage }}</p>
       <button class="primary-link" type="submit" :disabled="submitting">{{ submitting ? '受け付けています' : '再設定メールを依頼' }}</button>
-      <p class="auth-note"><NuxtLink to="/login">ログインへ戻る</NuxtLink></p>
+      <p class="auth-note"><GradeLink to="/login">ログインへ戻る</GradeLink></p>
     </UForm>
   </div>
 </template>

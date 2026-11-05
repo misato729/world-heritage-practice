@@ -1,3 +1,4 @@
+import { stopSubscription } from './subscriptions.ts'
 import { APIError } from 'better-auth/api'
 import { fromNodeHeaders } from 'better-auth/node'
 import { appendResponseHeader, readBody, setResponseStatus, type H3Event } from 'h3'
@@ -31,6 +32,7 @@ export async function deleteAccount(event: H3Event, user: User | null) {
     const locked = record(await db.user.findUnique({ where: { id: user.id } })) as User | null
     if (!locked) fail(404, 'not_found', '対象が見つかりません')
     await expirePendingCheckouts(locked, db)
+    await stopSubscription(locked, db)
     // Foreign keys also remove the library's sessions and credential accounts.
     await db.user.delete({ where: { id: locked.id } })
   })

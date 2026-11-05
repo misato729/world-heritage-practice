@@ -39,8 +39,8 @@ const submit = async (event: { data: typeof state }) => {
       <FormTextField id="password" v-model="state.password" name="password" label="パスワード" autocomplete="current-password" type="password" />
       <p v-if="errorMessage" class="form-error" role="alert">{{ errorMessage }}</p>
       <button class="primary-link" type="submit" :disabled="submitting">{{ submitting ? 'ログイン中です' : 'ログイン' }}</button>
-      <p class="auth-note"><NuxtLink to="/forgot-password">パスワードを忘れた場合</NuxtLink></p>
-      <p class="auth-note">アカウントをお持ちでない方は <NuxtLink :to="{ path: '/signup', query: { redirect: redirectPath } }">会員登録</NuxtLink></p>
+      <p class="auth-note"><GradeLink to="/forgot-password">パスワードを忘れた場合</GradeLink></p>
+      <p class="auth-note">アカウントをお持ちでない方は <GradeLink :to="{ path: '/signup', query: { redirect: redirectPath } }">会員登録</GradeLink></p>
     </UForm>
   </div>
 </template>

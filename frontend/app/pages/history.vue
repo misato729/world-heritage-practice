@@ -105,7 +105,7 @@ const startIncorrectReviewFromHistory = async () => {
     <div v-if="!isLoggedIn" class="empty-state">
       <h2>ログインが必要です</h2>
       <p>解答履歴はログインユーザーのみ利用できます。</p>
-      <NuxtLink class="primary-link" to="/login?redirect=/history">ログインへ</NuxtLink>
+      <GradeLink class="primary-link" to="/login?redirect=/history">ログインへ</GradeLink>
     </div>
 
     <div v-else-if="loading" class="empty-state" aria-live="polite">
@@ -124,7 +124,7 @@ const startIncorrectReviewFromHistory = async () => {
       <UIcon class="empty-icon" name="i-lucide-history" />
       <h2>まだ解答履歴がありません</h2>
       <p>問題に回答すると、ここに記録されます。</p>
-      <NuxtLink class="primary-link" to="/practice/1/1">問題演習を始める</NuxtLink>
+      <GradeLink class="primary-link" to="/practice/1/1">問題演習を始める</GradeLink>
     </div>
 
     <template v-else>
@@ -135,7 +135,7 @@ const startIncorrectReviewFromHistory = async () => {
 
       <div class="history-list">
         <article v-for="history in histories" :key="history.id" class="history-card">
-          <NuxtLink v-if="!history.locked" :to="historyLink(history)">
+          <GradeLink v-if="!history.locked" :to="historyLink(history)">
             <div class="history-card-head">
               <span class="result-badge" :class="{ correct: history.is_correct }">
                 <UIcon :name="history.is_correct ? 'i-lucide-circle-check' : 'i-lucide-circle-x'" />
@@ -159,7 +159,7 @@ const startIncorrectReviewFromHistory = async () => {
             </div>
 
             <span class="review-link">問題と解説を確認する <UIcon name="i-lucide-arrow-right" /></span>
-          </NuxtLink>
+          </GradeLink>
           <div v-else class="locked-history">
             <div class="history-card-head">
               <span class="result-badge locked-badge"><UIcon name="i-lucide-lock-keyhole" />閲覧制限</span>
@@ -169,7 +169,7 @@ const startIncorrectReviewFromHistory = async () => {
               <span>模擬試験 {{ history.question.exam_number }}・問{{ history.question.question_number }}</span>
               <strong>この履歴の本文・正誤・解説はプレミアム会員向けです。</strong>
             </div>
-            <NuxtLink v-if="PAYMENTS_ENABLED" class="primary-link" to="/premium">プレミアム会員について確認する</NuxtLink>
+            <GradeLink v-if="PAYMENTS_ENABLED" class="primary-link" to="/premium">プレミアム会員について確認する</GradeLink>
           </div>
         </article>
       </div>

@@ -1,3 +1,4 @@
+import { currentGrade } from '../core/grade.ts'
 import { hasPaidAccess, type User } from '../core/auth.ts'
 import { configuration, freeExamMax, paymentsEnabled } from '../core/config.ts'
 import { getDatabase, Prisma, query, record, transaction, type Database } from '../core/db.ts'
@@ -63,7 +64,7 @@ export async function getQuestion(id: number, user: User | null, db: Database = 
 }
 
 export async function nextQuestion(params: Record<string, unknown>, user: User | null, db: Database = getDatabase()) {
-  const where: Prisma.QuestionWhereInput = { publication_status: 'published' }
+  const where: Prisma.QuestionWhereInput = { grade: currentGrade(), publication_status: 'published' }
   let orderBy: Prisma.QuestionOrderByWithRelationInput[] = [{ exam_number: 'asc' }, { question_number: 'asc' }]
   if (present(params.exam_number)) {
     const exam = integerParam(params.exam_number, 'exam_number')
@@ -110,7 +111,7 @@ export async function answerQuestion(id: number, selectedChoiceId: unknown, user
 }
 
 export async function listExams(user: User | null, db: Database = getDatabase()) {
-  const published = await db.question.findMany({ where: { publication_status: 'published' },
+  const published = await db.question.findMany({ where: { grade: currentGrade(), publication_status: 'published' },
     orderBy: [{ exam_number: 'asc' }, { question_number: 'asc' }], select: { exam_number: true, question_number: true } })
   const sets = new Map<number, number[]>()
   for (const question of published) {
@@ -138,7 +139,7 @@ function serializeHistory(row: HistoryRow, fullAccess: boolean) {
 export async function listHistory(user: User | null, params: Record<string, unknown>, db: Database = getDatabase()) {
   const current = requireUser(user)
   const { page, perPage } = pagination(params)
-  const where = { user_id: current.id }
+  const where = { user_id: current.id, question: { grade: currentGrade() } }
   const count = await db.answerHistory.count({ where })
   const rows = record(await db.answerHistory.findMany({ where, include: { question: true, selected_choice: true },
     orderBy: [{ created_at: 'desc' }, { id: 'desc' }], take: perPage, skip: (page - 1) * perPage }))
@@ -148,7 +149,7 @@ export async function listHistory(user: User | null, params: Record<string, unkn
 
 export async function getHistory(id: number, user: User | null, db: Database = getDatabase()) {
   const current = requireUser(user)
-  const found = await db.answerHistory.findFirst({ where: { user_id: current.id, id }, include: { question: true, selected_choice: true } })
+  const found = await db.answerHistory.findFirst({ where: { user_id: current.id, id, question: { grade: currentGrade() } }, include: { question: true, selected_choice: true } })
   if (!found) return notFound()
   const row = { ...record(found), answered_at: found.created_at } as unknown as HistoryRow
   await authorizeExam(Number(row.question.exam_number), current, db)
@@ -173,7 +174,7 @@ async function authorizeFavorites(user: User | null, db: Database): Promise<User
 export async function listFavorites(user: User | null, params: Record<string, unknown>, db: Database = getDatabase()) {
   const current = await authorizeFavorites(user, db)
   const { page, perPage } = pagination(params)
-  const where = { user_id: current.id, question: { publication_status: 'published' } }
+  const where = { user_id: current.id, question: { grade: currentGrade(), publication_status: 'published' } }
   const count = await db.favorite.count({ where })
   const rows = record(await db.favorite.findMany({ where, include: { question: true },
     orderBy: [{ created_at: 'desc' }, { id: 'desc' }], take: perPage, skip: (page - 1) * perPage }))
@@ -207,7 +208,7 @@ function serializeAdmin(question: QuestionRecord) {
 
 export async function listAdminQuestions(user: User | null, params: Record<string, unknown>, db: Database = getDatabase()) {
   checkAdmin(user)
-  const where: Prisma.QuestionWhereInput = {}
+  const where: Prisma.QuestionWhereInput = { grade: currentGrade() }
   for (const key of ['exam_number', 'major_category_code', 'category_code', 'publication_status'] as const) {
     if (!present(params[key])) continue
     if (typeof params[key] !== 'string' && typeof params[key] !== 'number') fail(400, 'bad_request', `${key}を正しく指定してください`)

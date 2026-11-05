@@ -47,7 +47,7 @@ const submit = async (question: AdminQuestionInput) => {
   <div class="admin-page">
     <header class="admin-page-head">
       <div><p class="admin-page-eyebrow">SC-102</p><h1>問題を作成</h1><p>問題文、選択肢、解答解説を入力し、新しい問題を登録します。</p></div>
-      <NuxtLink class="admin-secondary-button" to="/admin/questions"><UIcon name="i-lucide-arrow-left" />一覧に戻る</NuxtLink>
+      <GradeLink class="admin-secondary-button" to="/admin/questions"><UIcon name="i-lucide-arrow-left" />一覧に戻る</GradeLink>
     </header>
     <AdminQuestionForm :initial-value="initialValue" submit-label="問題を保存" :submitting="submitting" :error-message="errorMessage" :field-errors="fieldErrors" @submit="submit" />
   </div>

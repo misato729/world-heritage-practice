@@ -1,10 +1,11 @@
 <!-- Paid membership landing page. -->
 <script setup lang="ts">
+const { config: EXAM_CONFIG } = useGrade()
 type PaymentConfig = {
   enabled: boolean
   amount: number
   currency: 'jpy'
-  purchase_type: 'one_time'
+  purchase_type: 'subscription'
   free_exam_max: number
   seller: {
     name: string
@@ -19,7 +20,7 @@ type ApiResponse<T> = { data: T }
 
 useSeoMeta({
   title: `プレミアム会員｜${SITE.name}`,
-  description: '公開問題を利用できる買い切りのプレミアム会員についてご案内します。',
+  description: '全級共通の月額プレミアム会員についてご案内します。',
 })
 
 const route = useRoute()
@@ -87,13 +88,13 @@ const startCheckout = async () => {
 <template>
   <div v-if="!PAYMENTS_ENABLED" class="page-wrap premium-page">
     <header class="page-intro"><h1>無料で利用できます</h1><p>このサービスでは有料機能を提供していません。すべての公開問題を演習できます。</p></header>
-    <NuxtLink class="primary-link" to="/#practice-launcher">問題演習へ</NuxtLink>
+    <GradeLink class="primary-link" to="/#practice-launcher">問題演習へ</GradeLink>
   </div>
   <div v-else class="page-wrap premium-page">
     <header class="page-intro premium-intro">
-      <span class="premium-kicker">ONE-TIME PURCHASE</span>
+      <span class="premium-kicker">MONTHLY SUBSCRIPTION</span>
       <h1>プレミアム会員</h1>
-      <p>{{ PRICE_LABEL }}（税込）の買い切りで、公開中の全模擬試験を利用できます。月額料金や自動更新はありません。</p>
+      <p>{{ PRICE_LABEL }}（税込）／月で、1級・準1級・2級の模試4以降の公開問題を利用できます。毎月自動更新されます。契約管理から解約できます。</p>
     </header>
 
     <div v-if="canceled" class="notice-panel" role="status">
@@ -102,9 +103,9 @@ const startCheckout = async () => {
 
     <section class="premium-card">
       <div class="price-block">
-        <span>買い切り</span>
-        <strong><small>税込</small> {{ PRICE_LABEL }}</strong>
-        <p>有効期限なし</p>
+        <span>月額プラン</span>
+        <strong><small>月額・税込</small> {{ PRICE_LABEL }}</strong>
+        <p>1級・準1級・2級共通</p>
       </div>
       <div class="benefit-block">
         <h2>利用できる内容</h2>
@@ -126,7 +127,7 @@ const startCheckout = async () => {
             <p>公開中の全問題を利用できます。購入手続きは必要ありません。</p>
           </div>
         </div>
-        <NuxtLink class="primary-link" :to="`/practice/${Math.min(EXAM_CONFIG.payments.free_exam_count + 1, EXAM_CONFIG.exam.set_count)}/1`">問題演習へ</NuxtLink>
+        <GradeLink class="primary-link" :to="`/practice/${Math.min(EXAM_CONFIG.payments.free_exam_count + 1, EXAM_CONFIG.exam.set_count)}/1`">問題演習へ</GradeLink>
       </template>
 
       <template v-else-if="configStatus === 'pending' || configStatus === 'idle'">
@@ -136,15 +137,15 @@ const startCheckout = async () => {
       <template v-else-if="!paymentEnabled">
         <h2>現在は販売準備中です</h2>
         <p>決済設定と販売者情報の確認が完了するまで購入はできません。{{ EXAM_CONFIG.payments.free_exam_count > 0 ? '無料の公開問題は引き続き利用できます。' : '販売開始後に有料機能を利用できます。' }}</p>
-        <NuxtLink v-if="EXAM_CONFIG.payments.free_exam_count > 0" class="secondary-link" to="/practice/1/1">無料問題を利用する</NuxtLink>
+        <GradeLink v-if="EXAM_CONFIG.payments.free_exam_count > 0" class="secondary-link" to="/practice/1/1">無料問題を利用する</GradeLink>
       </template>
 
       <template v-else-if="!isLoggedIn">
         <h2>購入にはログインが必要です</h2>
         <p>決済をアカウントへ安全に紐づけるため、ログインまたは会員登録をしてください。</p>
         <div class="purchase-actions">
-          <NuxtLink class="primary-link" to="/login?redirect=/premium">ログイン</NuxtLink>
-          <NuxtLink class="secondary-link" to="/signup?redirect=/premium">会員登録</NuxtLink>
+          <GradeLink class="primary-link" to="/login?redirect=/premium">ログイン</GradeLink>
+          <GradeLink class="secondary-link" to="/signup?redirect=/premium">会員登録</GradeLink>
         </div>
       </template>
 
@@ -154,9 +155,9 @@ const startCheckout = async () => {
         <label class="agreement">
           <input v-model="agreed" type="checkbox">
           <span>
-            <NuxtLink to="/terms" target="_blank">利用規約</NuxtLink>、
-            <NuxtLink to="/privacy-policy" target="_blank">プライバシーポリシー</NuxtLink>、
-            <NuxtLink to="/commercial-disclosure" target="_blank">特定商取引法に基づく表記</NuxtLink>を確認し、{{ PRICE_LABEL }}の買い切り購入に同意します。
+            <GradeLink to="/terms" target="_blank">利用規約</GradeLink>、
+            <GradeLink to="/privacy-policy" target="_blank">プライバシーポリシー</GradeLink>、
+            <GradeLink to="/commercial-disclosure" target="_blank">特定商取引法に基づく表記</GradeLink>を確認し、{{ PRICE_LABEL }}（税込）／月の自動更新契約に同意します。
           </span>
         </label>
         <p v-if="errorMessage" class="form-error" role="alert">{{ errorMessage }}</p>

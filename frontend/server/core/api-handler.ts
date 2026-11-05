@@ -1,3 +1,6 @@
+import { gradeScope } from './grade.ts'
+import { parseGrade } from '../../shared/grades.ts'
+import { getHeader, getQuery } from 'h3'
 import { defineEventHandler, getRouterParam, setResponseStatus, type H3Event } from 'h3'
 import { authenticate, requireAdmin, type User } from './auth.ts'
 import { ApiError, fail } from './errors.ts'
@@ -18,7 +21,9 @@ export function defineApiHandler<T>(handler: (event: H3Event, user: User | null)
       const authentication = options.authentication ?? 'optional'
       const user = authentication === 'none' ? null : authentication === 'admin'
         ? await requireAdmin(event) : await authenticate(event, authentication === 'required')
-      return await handler(event, user)
+      let grade
+      try { grade = parseGrade(getQuery(event).grade ?? getHeader(event, 'x-exam-grade')) } catch { fail(400, 'bad_request', '級を正しく指定してください') }
+      return await gradeScope.run(grade!, () => handler(event, user))
     } catch (error) {
       const statusCode = (error as { statusCode?: number }).statusCode
       const apiError = error instanceof ApiError ? error : statusCode && statusCode >= 400 && statusCode < 500

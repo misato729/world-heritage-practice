@@ -54,5 +54,5 @@ export function paymentSettings(env: Environment = process.env, config: ExamConf
 
 export function publicPaymentConfiguration(settings = paymentSettings()) {
   return { enabled: settings.enabled, feature_enabled: settings.featureEnabled, amount: settings.amount, currency: settings.currency,
-    purchase_type: 'one_time', free_exam_max: settings.freeExamMax, seller: settings.seller }
+    purchase_type: 'subscription', billing_interval: 'month', free_exam_max: settings.freeExamMax, seller: settings.seller }
 }

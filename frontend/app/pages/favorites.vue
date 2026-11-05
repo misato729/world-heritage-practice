@@ -122,7 +122,7 @@ watch([() => user.value?.id, sessionVersion, canUseFavorites, page], loadFavorit
     <div v-if="!isLoggedIn" class="empty-state">
       <h2>ログインが必要です</h2>
       <p>お気に入りを表示するにはログインしてください。</p>
-      <NuxtLink class="primary-link" to="/login?redirect=/favorites">ログインへ</NuxtLink>
+      <GradeLink class="primary-link" to="/login?redirect=/favorites">ログインへ</GradeLink>
     </div>
 
     <div v-else-if="checkingAccess || (!user && !accessError)" class="empty-state" role="status">
@@ -139,7 +139,7 @@ watch([() => user.value?.id, sessionVersion, canUseFavorites, page], loadFavorit
       <UIcon class="empty-icon" name="i-lucide-lock-keyhole" />
       <h2>プレミアム会員向けの機能です</h2>
       <p>お気に入りに登録した問題をまとめて確認できます。</p>
-      <NuxtLink class="primary-link" to="/premium">プレミアム会員について</NuxtLink>
+      <GradeLink class="primary-link" to="/premium">プレミアム会員について</GradeLink>
     </div>
 
     <div v-else-if="loading" class="empty-state" aria-live="polite">
@@ -157,7 +157,7 @@ watch([() => user.value?.id, sessionVersion, canUseFavorites, page], loadFavorit
       <UIcon class="empty-icon" name="i-lucide-star" />
       <h2>お気に入りはまだありません</h2>
       <p>問題画面の星アイコンから、お気に入りへ追加できます。</p>
-      <NuxtLink class="primary-link" to="/practice/1/1">問題演習を始める</NuxtLink>
+      <GradeLink class="primary-link" to="/practice/1/1">問題演習を始める</GradeLink>
     </div>
 
     <template v-else>
@@ -192,16 +192,16 @@ watch([() => user.value?.id, sessionVersion, canUseFavorites, page], loadFavorit
               <UIcon name="i-lucide-lock-keyhole" />
               <div><strong>プレミアム会員向けの問題です</strong><p>問題文と分類は、資格が有効になった後に表示されます。</p></div>
             </div>
-            <NuxtLink v-if="PAYMENTS_ENABLED" class="primary-link premium-link" to="/premium">プレミアム会員について確認する</NuxtLink>
+            <GradeLink v-if="PAYMENTS_ENABLED" class="primary-link premium-link" to="/premium">プレミアム会員について確認する</GradeLink>
           </template>
 
-          <NuxtLink v-else class="favorite-card-link" :to="`/practice/${item.question.exam_number}/${item.question.question_number}`">
+          <GradeLink v-else class="favorite-card-link" :to="`/practice/${item.question.exam_number}/${item.question.question_number}`">
             <div class="favorite-question">
               <strong>{{ item.question.body_excerpt || '問題文を確認する' }}</strong>
               <small>{{ majorCategoryLabel(item.question.major_category_code) }} / {{ getCategoryLabel(item.question.category_code || '') }}</small>
             </div>
             <span class="review-link">問題を確認する <UIcon name="i-lucide-arrow-right" /></span>
-          </NuxtLink>
+          </GradeLink>
         </article>
       </div>
       <nav v-if="meta.total_pages > 1" class="pagination" aria-label="お気に入りのページ切り替え">

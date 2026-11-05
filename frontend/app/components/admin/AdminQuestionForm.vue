@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { config: EXAM_CONFIG } = useGrade()
 import type { AdminQuestionInput } from '~/types/adminQuestion'
 import type { Form, FormError, FormErrorWithId } from '@nuxt/ui'
 import { questionFormSchema } from '../../../shared/schemas/content.ts'
@@ -110,7 +111,7 @@ const submit = () => {
     <div class="form-action-bar">
       <div><span class="save-status"><UIcon name="i-lucide-info" />保存するまで公開内容は変更されません。</span></div>
       <div class="form-actions">
-        <NuxtLink class="admin-secondary-button" to="/admin/questions">キャンセル</NuxtLink>
+        <GradeLink class="admin-secondary-button" to="/admin/questions">キャンセル</GradeLink>
         <button class="admin-secondary-button" type="button" @click="previewOpen = !previewOpen"><UIcon name="i-lucide-eye" />{{ previewOpen ? 'プレビューを閉じる' : 'プレビュー' }}</button>
         <button class="admin-primary-button" type="submit" :disabled="submitting"><UIcon :name="submitting ? 'i-lucide-loader-circle' : 'i-lucide-save'" :class="{ spin: submitting }" />{{ submitting ? '保存中です' : submitLabel }}</button>
       </div>

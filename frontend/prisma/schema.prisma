@@ -32,12 +32,14 @@ model User {
   accounts AuthAccount[]
   histories AnswerHistory[]
   favorites Favorite[]
+  subscription Subscription?
   payments Payment[]
   membership Membership?
   verification_access VerificationAccessGrant?
   @@map("users")
 }
 model Question {
+  grade String @default("2") @db.VarChar(10)
   id BigInt @id @default(autoincrement())
   exam_number Int
   question_number Int
@@ -52,7 +54,8 @@ model Question {
   choices QuestionChoice[]
   histories AnswerHistory[]
   favorites Favorite[]
-  @@unique([exam_number, question_number], map: "index_questions_on_exam_number_and_question_number")
+  @@index([grade, publication_status, exam_number, question_number], map: "index_questions_grade_practice")
+  @@unique([grade, exam_number, question_number], map: "index_questions_on_grade_exam_question")
   @@index([exam_number, publication_status, question_number], map: "index_questions_for_practice")
   @@index([major_category_code], map: "index_questions_on_major_category_code")
   @@index([category_code], map: "index_questions_on_category_code")
@@ -228,4 +231,18 @@ model RateLimiterFlexible {
   expire BigInt?
   @@index([expire], map: "index_rate_limiter_flexible_on_expire")
   @@map("rate_limiter_flexible")
+}
+
+model Subscription {
+ id BigInt @id @default(autoincrement())
+ user_id BigInt @unique
+ stripe_subscription_id String? @unique @db.Text
+ stripe_customer_id String? @db.Text
+ checkout_session_id String? @unique @db.Text
+ status String @default("pending") @db.VarChar(30)
+ paid_until DateTime? @db.Timestamp(6)
+ cancel_at_period_end Boolean @default(false)
+ updated_at DateTime @updatedAt @db.Timestamp(6)
+ user User @relation(fields:[user_id], references:[id], onDelete: Restrict)
+ @@map("subscriptions")
 }

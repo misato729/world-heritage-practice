@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "revision": 30,
+  "state_hash": "2b90e7cd83e757356b3502447d1a9ac4ada04814f04acaca9336cb1bd033eaf5",
+  "recorded_at": "2026-11-05T19:02:21.879Z",
+  "timezone": "UTC",
+  "context": "development",
+  "task": "multi_grade_delivery_20261106",
+  "summary": "3級種設計・月額500円実装までのコミット/pushを依頼。先行のローカル検証根拠を照合して送信する。",
+  "next_action": "対象のステージ差分を確認しコミット・pushする",
+  "missing_local_files": [],
+  "git": {
+    "available": true,
+    "head": "a7588de0a2078829fe56be753b3c0f87611b36c5",
+    "changes": [
+      {
+        "status": " M",
+        "path": "AGENTS.md"
+      },
+      {
+        "status": " M",
+        "path": "README.md"
+      },
+      {
+        "status": " M",
+        "path": "config/exam.json"
+      },
+      {
+        "status": " M",
+        "path": "config/exam.schema.json"
+      },
+      {
+        "status": " M",
+        "path": "docs/architecture.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/customization.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/workflow/contexts/product.md"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/AchievementReport.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/ExamSidebar.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/IncorrectReviewCompletion.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/IncorrectReviewPanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/SiteFooter.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/SiteHeader.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/admin/AdminQuestionForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/layouts/admin.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/account.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/admin/login.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/admin/questions/[questionId]/edit.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/admin/questions/index.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/admin/questions/new.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/commercial-disclosure.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/exam-overview.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/favorites.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/forgot-password.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/history.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/index.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/login.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/practice/[examNumber]/[questionNumber].vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/premium/complete.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/premium/index.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/reset-password.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/signup.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/terms.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/plugins/api.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/prisma/schema.prisma"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/achievement.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/incorrect-review.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/payments.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/core/api-handler.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/core/auth.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/core/http.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/operations/cli.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/operations/content.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/accounts.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/achievement.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/incorrect-review.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/learning-validation.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/learning-writer.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/learning.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/payment-client.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/payment-settings.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/payment-webhooks.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/payments.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/shared/schemas/exam.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/shared/types/auth.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/tests/sidebarStaticAccess.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "docs/multi-grade-subscription-design.md"
+      },
+      {
+        "status": "??",
+        "path": "docs/multi-grade-subscription-implementation.md"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/components/GradeLink.vue"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/composables/useGrade.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/middleware/grade.global.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/e2e/grade-subscription.spec.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/prisma/migrations/20261106000000_grades_subscription/migration.sql"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server-tests/subscriptions.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/payments/portal.post.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/core/grade.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/services/subscriptions.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/shared/grades.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/tests/grades.test.ts"
+      }
+    ]
+  },
+  "file_hashes": {
+    "AGENTS.md": "cb78ecb330d30adebca94d0c4aeb9892fb662fc04cc5eddc86e3a4746e16f267",
+    "README.md": "c6319431fb295d2c496cd86c249d86b9c2caa3816cb88c141d958e4da7900b1d",
+    "docs/testing.md": "03c27d3320bafd75907f4779f9bbf8a4f58068d447439a12fd5230450a5759e4",
+    "docs/workflow/README.md": "ce35c134e34be8261e2478091460df30cd2a2546fba658ba38f25e8411a9f8f8",
+    "docs/workflow/policy.json": "e2d37588e90c23538d856bec83b94573df2bf3db9799fa183b8beb2a2685131c",
+    "docs/workflow/task.example.json": "4bf161efce99b7d0a26798e3445d1f142505e512eedd591ea11cfb194d67da9f",
+    "docs/workflow/contexts/product.md": "500be544073cf5bcfa50062a3edd718dc5b3cfd956696c795eb1f82bb78163e0",
+    "docs/workflow/contexts/development.md": "42fbb09ef8c41325fc1b753e5fefcd01bfec4500760397eb43b21be59952309f",
+    "docs/workflow/contexts/operations.md": "dc536ecce7d60069056c51733868fd4e2ba4270aa9bbc7348a182b051f44bc10",
+    "scripts/context.mjs": "3828c41d1cc5a6977b8444035e094e61e1c9895fcaa9451ecb1919e799ecaffc",
+    "scripts/context.test.mjs": "125f184ecd2d34b8a4dc93a8d1edd2b6c527c0de8a46f39c8c92de265ebccc66",
+    "scripts/workflow-policy.mjs": "60535f2c9bf42203c059ca39a0b254c168b7cfb2468904a3842725fe3797141e",
+    "scripts/workflow-policy.test.mjs": "394287e7d1e84756a3ac8833918f964ee66f0ef2c34934d121d055fb37af4782",
+    "scripts/workspace-policy.mjs": "cd575bdc0a83e37ed28f4004c311c2415d895ce9d63b8fe8552ad674269cd219",
+    "scripts/workspace-policy.test.mjs": "22c2dce0ba9006d3266c2628a61e19acae48eb851c34f5a2fdd1d600cfb7944f",
+    "scripts/check-private-sources.mjs": "1d28447b51b39591d42151f236b837b33d695662168ee5c71500205aa0de96af",
+    "scripts/check-private-sources.test.mjs": "db6afd47e6f6e6de3405437960721f037068da4181eb7a81d7ba11477c7d69fb",
+    ".gitignore": "4b3d891da4a656b112f29fe81b4064671d7c78c02cb6a4bce10c5e227ef6ea34",
+    ".dockerignore": "1b81f2fe96d04eefe1f7628df7e03861d3b886d3b13968bfeb3cfe9dd14f33bd",
+    ".githooks/pre-push": "3529b300f7a655102ad899ab31fa8b2c404ec37479d1195aa9bcd3efa97bf90c",
+    "config/exam.json": "25ce59980a56ed27c7656c6fc9d32287b6775b5f754052954627b9b472f06338",
+    "frontend/shared/grades.ts": "d24bc883a9a6ffbcc734a074da50d051c70f0f616e91535a6431fdfcfb7b830e",
+    "frontend/server/core/grade.ts": "a0b0d450eaa48b598f4c887d01974ef77d91e28d629272966e89aaa2db64806b",
+    "frontend/server/services/subscriptions.ts": "b08139892d3511e0a35d9b5f8f97a55a7484288531f44249650ea499a91eb752",
+    "frontend/server/services/payment-webhooks.ts": "6d9d2ed3ffe1e5833b16c33e693a81f063444bf19f5e5b061737fbb50c68630b",
+    "frontend/app/middleware/grade.global.ts": "e611475e09ab724e1bdd9f65e09f4abc0ec6e2833a794ce4957dcd669bb58805",
+    "frontend/app/components/GradeLink.vue": "33b0b57579144a0dd119660c5c9c293ec8fa0d5d1d16727af384582481088747",
+    "frontend/prisma/migrations/20261106000000_grades_subscription/migration.sql": "f13478e389a5a61cb2e91ca68b61c3d5cbfe3e475fed302b2b1d0bb8c216467f",
+    "docs/multi-grade-subscription-implementation.md": "afba7752e4d45f8e6e418ec30a81a5fdb1b5996315c5d69b73e3e231db5d32e3"
+  },
+  "verification_note": "ハッシュ・Git・記録済み完了条件の確認であり、テストや出典照合の自動再実行ではない。依頼・権限は最新のユーザー指示とAGENTS.mdに従う。"
+}

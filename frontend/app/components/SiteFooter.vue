@@ -7,16 +7,16 @@ const { apiStatus } = useApiStatus()
   <footer class="site-footer" :class="{ 'admin-footer': admin }">
     <div class="footer-inner">
       <div class="footer-main">
-        <NuxtLink class="footer-brand" to="/" :aria-label="`${SITE.name}：ホームへ戻る`">
+        <GradeLink class="footer-brand" to="/" :aria-label="`${SITE.name}：ホームへ戻る`">
           <SiteLogo />
-        </NuxtLink>
+        </GradeLink>
         <div class="footer-copy">
           <strong>{{ SITE.description }}</strong>
         </div>
         <nav class="footer-links" aria-label="サイトポリシー">
-          <NuxtLink to="/privacy-policy">プライバシーポリシー</NuxtLink>
-          <NuxtLink to="/terms">利用規約</NuxtLink>
-          <NuxtLink v-if="PAYMENTS_ENABLED" to="/commercial-disclosure">特定商取引法に基づく表記</NuxtLink>
+          <GradeLink to="/privacy-policy">プライバシーポリシー</GradeLink>
+          <GradeLink to="/terms">利用規約</GradeLink>
+          <GradeLink v-if="PAYMENTS_ENABLED" to="/commercial-disclosure">特定商取引法に基づく表記</GradeLink>
         </nav>
       </div>
       <div class="api-status" :class="apiStatus" role="status" aria-live="polite">

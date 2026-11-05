@@ -1,0 +1,16 @@
+import { test, expect } from '@playwright/test'
+test('grade switch preserves explicit links and monthly price/free boundary',async({page})=>{
+ await page.goto('/?grade=2')
+ await expect(page.getByLabel('学習する級')).toHaveValue('2')
+ await page.getByLabel('学習する級').selectOption('1')
+ await expect(page).toHaveURL(/grade=1/)
+ await expect(page.getByLabel('学習する級')).toHaveValue('1')
+ await expect(page.getByText('各90問',{exact:true})).toBeVisible()
+ const link=page.locator('.exam-sidebar a').filter({hasText:'模擬試験 1'}).first()
+ if(await link.isVisible()) await expect(link).toHaveAttribute('href',/grade=1/)
+ await page.goto('/premium?grade=pre1')
+ await expect(page.getByLabel('学習する級')).toHaveValue('pre1')
+ await expect(page.locator('.premium-page').last()).toContainText('500')
+ await expect(page.locator('body')).toContainText('模擬試験4以降')
+ await expect(page.locator('body')).not.toContainText('自動更新はありません')
+})
