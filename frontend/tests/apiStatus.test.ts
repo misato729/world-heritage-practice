@@ -21,12 +21,13 @@ const createClient = (fetch: typeof globalThis.fetch) => {
     return states.get(key)
   }
   const user = ref<{ id: number } | null>({ id: 1 })
+  const authResolved = ref(true)
   const sessionVersion = ref(0)
   let clearCalls = 0
-  globals.useAuth = () => ({ user, sessionVersion, clearCurrentUser: () => { user.value = null; sessionVersion.value += 1; clearCalls += 1 } })
+  globals.useAuth = () => ({ user, authResolved, sessionVersion, clearCurrentUser: () => { user.value = null; authResolved.value = true; sessionVersion.value += 1; clearCalls += 1 } })
   globals.$fetch = ofetch.create({}, { fetch })
   const result = (setupApi as any)({ runWithContext: (fn: () => unknown) => fn() })
-  return { api: result.provide.api, status: useApiStatus().apiStatus, user, sessionVersion, clearCalls: () => clearCalls }
+  return { api: result.provide.api, status: useApiStatus().apiStatus, user, authResolved, sessionVersion, clearCalls: () => clearCalls }
 }
 
 test('API state starts idle and counts simultaneous requests', async () => {
@@ -115,6 +116,58 @@ test('a stale application 401 cannot clear a replacement session', async () => {
   await assert.rejects(request)
   assert.deepEqual(client.user.value, { id: 2 })
   assert.equal(client.clearCalls(), 0)
+})
+
+test('anonymous paid-question denials settle without repeatedly invalidating the session', async () => {
+  let calls = 0
+  const client = createClient(async () => { calls += 1; return new Response('{}', { status: 401 }) })
+  client.user.value = null
+  for (let i = 0; i < 3; i += 1) {
+    await assert.rejects(client.api('/api/v1/questions/next?exam_number=4', { retry: 0 }))
+  }
+  assert.equal(calls, 3)
+  assert.equal(client.clearCalls(), 0)
+  assert.equal(client.sessionVersion.value, 0)
+  assert.equal(client.authResolved.value, true)
+  assert.equal(client.status.value, 'connected')
+})
+
+test('an unresolved anonymous session is resolved once before subsequent paid-question denials', async () => {
+  const client = createClient(async () => new Response('{}', { status: 401 }))
+  client.user.value = null
+  client.authResolved.value = false
+  await assert.rejects(client.api('/api/v1/me', { retry: 0 }))
+  assert.equal(client.clearCalls(), 1)
+  assert.equal(client.authResolved.value, true)
+  assert.equal(client.sessionVersion.value, 1)
+  await assert.rejects(client.api('/api/v1/questions/next?exam_number=5', { retry: 0 }))
+  assert.equal(client.clearCalls(), 1)
+  assert.equal(client.sessionVersion.value, 1)
+})
+
+test('concurrent expired-session denials clear identity once and later anonymous denials stay settled', async () => {
+  const resolvers: Array<(response: Response) => void> = []
+  const client = createClient(async () => new Promise<Response>(resolve => { resolvers.push(resolve) }))
+  const first = client.api('/api/v1/me', { retry: 0 })
+  const second = client.api('/api/v1/questions/next?exam_number=4', { retry: 0 })
+  const firstRejected = assert.rejects(first)
+  const secondRejected = assert.rejects(second)
+  await new Promise(resolve => setTimeout(resolve, 0))
+  resolvers[0]!(new Response('{}', { status: 401 }))
+  await firstRejected
+  resolvers[1]!(new Response('{}', { status: 401 }))
+  await secondRejected
+  assert.equal(client.user.value, null)
+  assert.equal(client.clearCalls(), 1)
+  assert.equal(client.sessionVersion.value, 1)
+  const anonymous = client.api('/api/v1/questions/next?exam_number=5', { retry: 0 })
+  const anonymousRejected = assert.rejects(anonymous)
+  await new Promise(resolve => setTimeout(resolve, 0))
+  resolvers[2]!(new Response('{}', { status: 401 }))
+  await anonymousRejected
+  assert.equal(client.clearCalls(), 1)
+  assert.equal(client.sessionVersion.value, 1)
+  assert.equal(client.status.value, 'connected')
 })
 
 test('application requests include cookies without a JavaScript authorization token', async () => {

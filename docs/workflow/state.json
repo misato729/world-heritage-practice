@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 49,
-  "updated_at": "2026-11-05T20:36:26.556Z",
+  "revision": 62,
+  "updated_at": "2026-11-05T22:38:58.958Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T20-36-26-556Z-r49.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T22-38-58-958Z-r62.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -854,6 +854,223 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "mocks_02_05_authoring_20261106",
+      "title": "2級模試2〜5の作成と出典・重複・独立品質確認",
+      "context": "product",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 同方針で2級模試2〜5を作成、模試1重複回避、その他分散、開発DB登録・画面確認まで",
+      "next_action": "登録と画面確認を完了する",
+      "evidence": [
+        "docs/mock-exams-02-05-20261106.md",
+        "local-only/mocks-02-05-20261106/final-quality-result.json"
+      ],
+      "last_verified_at": "2026-11-06",
+      "verification_scope": "最終正本86d1590c5dd0f37e46498ad0db4e845eb79c58d447fdd72e1e359e0b410dd6b4。240新問/960肢/12MD6517照合・mock1全属性保持。4回全肢原典peer合格、初稿キー非提示240一致と修正27一致（同解答者の再確認）。不要出典/内部説明整理・全4稿metadata対応を独立再確認。受験者正答率や等価難度未測定。DB/UIは後続。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "構造/配点/出典/Markdown/重複検査",
+          "verification": "独立した構造・表示保存比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/mocks-02-05-20261106/structure-result.json",
+            "local-only/mocks-02-05-20261106/export-comparison.json",
+            "local-only/mocks-02-05-20261106/final-quality-result.json",
+            "local-only/mocks-02-05-20261106/reviews/metadata-followup.json"
+          ],
+          "checked_at": "2026-11-06"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "原典全肢・一意性・盲解・誤答肢・最短解法・重複の独立確認",
+          "verification": "作者と異なる担当のレビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/mocks-02-05-20261106/reviews/mock02/review.md",
+            "local-only/mocks-02-05-20261106/reviews/mock03/review.md",
+            "local-only/mocks-02-05-20261106/reviews/mock04/content-review.md",
+            "local-only/mocks-02-05-20261106/reviews/mock05/content-review.md",
+            "local-only/mocks-02-05-20261106/blind/graded-initial-02.json",
+            "local-only/mocks-02-05-20261106/blind/graded-initial-03.json",
+            "local-only/mocks-02-05-20261106/blind/graded-initial-04.json",
+            "local-only/mocks-02-05-20261106/blind/graded-initial-05.json",
+            "local-only/mocks-02-05-20261106/blind/graded-revision.json",
+            "local-only/mocks-02-05-20261106/reviews/metadata-followup.json"
+          ],
+          "checked_at": "2026-11-06",
+          "reviewer": "fresh_blind_02_05 / author_mock03 / author_mock04"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初稿240問の独立解答は240一致。しかし別品質レビューで問間ヒント/出典細部不足/不自然な誤答/言語近道を検出。初期版と解答を保持して修正し差分再確認する",
+            "at": "2026-11-05T21:18:03.304Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "原典全肢4回peer合格、240初稿一致と修正27非提示再確認一致、12MD/JSON6518照合とmock1保持、最終正本ff3ccb94版を確定",
+            "at": "2026-11-05T21:43:02.702Z",
+            "failed_criteria": []
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "配送追補の解説/不要出典整理と全4稿管理対応を独立確認。設問・肢・キー不変で解答結果継承、6517照合の最終正本86d1590c版を確定",
+            "at": "2026-11-05T21:49:42.264Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mocks_02_05_integration_20261106",
+      "title": "2級模試2〜5の開発DB登録とPCSP確認",
+      "context": "development",
+      "status": "done",
+      "depends_on": [
+        "mocks_02_05_authoring_20261106"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 同方針で2級模試2〜5を作成、模試1重複回避、その他分散、開発DB登録・画面確認まで",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "docs/mock-exams-02-05-20261106.md",
+        "local-only/mocks-02-05-20261106/integration/final-integration-result.json",
+        "local-only/mocks-02-05-20261106/root-visual-check.json",
+        "local-only/mocks-02-05-20261106/reviews/final-delivery/acceptance-result.json"
+      ],
+      "last_verified_at": "2026-11-06",
+      "verification_scope": "最終正本86d1590c版。新240問/960肢を追加し全300/1200をDB再取得一致、旧60問/全choiceIDs/属性/時刻保持、反復no-op/再接続/UI後digest不変。隔離PC1280/SP390の全240×2表示採点480、開発無料120×2=240とpaid4/5ロック、代表目視。匿名paid401反復を最小修正し関連69件と追加後11件、型/build成功。利用者11モデル0・一時testDB0、3110新build継続。writer5検査は暫定版から適用範囲を確認して継承。commit/push/本番/Stripe変更なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "DB追加/反復/既存保持/API/PCSP/有料無料境界",
+          "verification": "独立した構造・表示保存比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/mocks-02-05-20261106/integration/final-integration-result.json",
+            "local-only/mocks-02-05-20261106/integration/writer-test-result.json",
+            "local-only/mocks-02-05-20261106/auth-loop-fix-result.json",
+            "local-only/mocks-02-05-20261106/integration/build-result-final.json",
+            "local-only/mocks-02-05-20261106/integration/typecheck-final-result.json",
+            "local-only/mocks-02-05-20261106/integration/browser-result.json",
+            "local-only/mocks-02-05-20261106/integration/browser-result-representative.json",
+            "local-only/mocks-02-05-20261106/integration/applied-result.json",
+            "local-only/mocks-02-05-20261106/integration/repeat-result.json",
+            "local-only/mocks-02-05-20261106/integration/live-result.json",
+            "local-only/mocks-02-05-20261106/integration/browser-result-development.json",
+            "local-only/mocks-02-05-20261106/integration/final-state-result.json",
+            "local-only/mocks-02-05-20261106/root-visual-check.json"
+          ],
+          "checked_at": "2026-11-06"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "最終保存値と実画面を独立確認",
+          "verification": "作者と異なる担当のレビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/mocks-02-05-20261106/reviews/final-delivery/acceptance-result.json",
+            "local-only/mocks-02-05-20261106/reviews/final-delivery/review.md",
+            "local-only/mocks-02-05-20261106/reviews/final-delivery/independent-development-result.json",
+            "local-only/mocks-02-05-20261106/reviews/auth-loop-review.md"
+          ],
+          "checked_at": "2026-11-06",
+          "reviewer": "author_mock03 / author_mock04"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "旧buildの初回UIは匿名有料案内の表示待ちで不合格。240 API拒否は401一致、本文未表示・dev未適用。安全な診断を追加して原因を調査",
+            "at": "2026-11-05T21:54:47.081Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "診断付UIでも同画面が読込継続。401が匿名状態を再無効化しsessionVersion経由で再取得を誘発する既存loopを特定。最小修正と関連69検査合格、新build・実画面は未完了",
+            "at": "2026-11-05T21:54:48.507Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "新buildの匿名paid反復修正・型/69と11件検査・隔離480と開発240の表示採点、DB300/1200・旧60全属性保持・反復/再接続/UI後不変・独立最終レビューを確認",
+            "at": "2026-11-05T22:33:38.570Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mocks_02_05_git_delivery_20261106",
+      "context": "development",
+      "title": "模試2〜5の変更をコミット・リモート保存",
+      "status": "doing",
+      "depends_on": [
+        "mocks_02_05_integration_20261106"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ここまでの変更をコミットして、リモートにpushしてください。",
+      "next_action": "stage独立レビュー後commit/push・remote/CI照合",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "教材240問と関連UI/文書/検査。原本・OCR・DB・秘密値除外。本番/Stripe変更なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "stage/資料保護/版適合/remote/CI",
+          "verification": "明示stage、diff/privateguard、remoteとCI",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "送信範囲の独立確認",
+          "verification": "author_mock03の読取レビュー",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": "author_mock03"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]

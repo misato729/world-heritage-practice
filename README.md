@@ -2,7 +2,7 @@
 
 世界遺産検定1級・準1級・2級の学習サービスです。日本と世界の遺産を、歴史・文化・自然のつながりから学べる演習基盤を用意しています。
 
-公式2級テキスト第5版第2刷と公式一次資料に基づく、分野混在順の模試1（60問・四肢択一）を収録しています。「その他」は委員会2問、無形文化遺産2問、世界の記憶1問、災害・保全ニュース1問です。模試2〜10は未作成です。[問題原稿](content/mock-exam-01.questions.md)、[解答解説](content/mock-exam-01.answers.md)、[解答用紙](content/mock-exam-01.answer-sheet.md)を参照してください。開発DBへの反映・画面確認は[その他の改訂・検証記録](docs/mock-exam-01-other-revision-20261106.md)、従前の分野混在化は[改訂履歴](docs/mock-exam-01-revision-20261105.md)に記録します。
+公式2級テキスト第5版第2刷と公式一次資料に基づく、分野混在順の模試1〜5（各60問・四肢択一）を収録しています。各回の「その他」は委員会等時事2問、無形文化遺産2問、世界の記憶1問、災害・保全ニュース1問です。模試6〜10は未作成です。[模試2〜5の問題・解説・解答用紙と検証記録](docs/mock-exams-02-05-20261106.md)、模試1の[問題原稿](content/mock-exam-01.questions.md)・[解答解説](content/mock-exam-01.answers.md)・[解答用紙](content/mock-exam-01.answer-sheet.md)を参照してください。模試1の履歴は[その他の改訂記録](docs/mock-exam-01-other-revision-20261106.md)と[分野混在化の改訂記録](docs/mock-exam-01-revision-20261105.md)に保持します。
 
 ## 構成と機能
 
@@ -25,14 +25,14 @@ docker compose up --build -d
 
 ホームは `http://localhost:3110` です。独立したComposeプロジェクト `world-heritage-practice` とDB `world_heritage_development` を使用します。既存サービスの環境変数・利用者・DBをコピーしないでください。
 
-初回起動でPrismaのマイグレーションを適用します。developmentでのseedは、設定から大分類をDBへ同期します。教材JSONは模試1の60問です。空の開発DBにだけ教材を投入し、既存の教材問題を上書きしません。
+初回起動でPrismaのマイグレーションを適用します。developmentでのseedは、設定から大分類をDBへ同期します。教材JSONは2級模試1〜5の300問です。空の開発DBにだけ教材を投入し、既存の教材問題を上書きしません。
 
 ## 設定と教材
 
 | 場所 | 役割 |
 | --- | --- |
 | `config/exam.json` | 名称、配色、試験構成、分類、公開状況の案内 |
-| `content/questions.json` | 教材の正本。模試1の60問 |
+| `content/questions.json` | 教材の正本。2級模試1〜5の300問 |
 | DBの `major_categories` | 設定から同期する5大分類のコード・表示名・表示順 |
 | `frontend/test-support/` | テスト内だけで使う合成データ生成 |
 | `past-exam/` / `textbook/` / `local-only/` | ローカル専用資料。GitとDockerから除外 |
