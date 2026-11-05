@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 2,
-  "updated_at": "2026-11-05T03:25:49.767Z",
+  "revision": 4,
+  "updated_at": "2026-11-05T03:34:08.596Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T03-25-49-767Z-r2.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T03-34-08-596Z-r4.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -53,39 +53,53 @@
       "id": "heritage_setup_20261105",
       "context": "development",
       "title": "世界遺産ラボの初期構築とリモート保存",
-      "status": "doing",
+      "status": "done",
       "depends_on": [],
       "authorization": "requested",
       "request_ref": "2026-11-05 テンプレートをクローンし世界遺産ラボへ最適化してリモートへ保存。問題は作成しない。",
-      "next_action": "独立最終レビュー後、資料保護を検査して新規リモートへ送信する",
-      "evidence": [],
-      "last_verified_at": null,
-      "verification_scope": "未実施。例示ファイルは自動でタスクに登録されない。",
+      "next_action": "問題作成・サイト本番配信等の追加依頼を待つ",
+      "evidence": [
+        "docs/setup-20261105.md"
+      ],
+      "last_verified_at": "2026-11-05T03:34:08.199Z",
+      "verification_scope": "教材0件、2級設定、空seed反復、frontend152/API125/workflow162、型/Schema/Prisma/通常build、空DBのPCSP8確認、隔離Playwright28件を今回実行。独立最終レビューPASS。実装c532199を新規非公開origin/mainへ送信しGitHub ref一致、同SHA CI4ジョブ成功。過去問/秘密値未送信、本番配信/Stripe操作なし。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "2級設定・教材0件・資料保護・テスト・型・ビルド・PC/SP確認・新規remote保存を確認する",
           "verification": "共有スキーマ、単体/API、隔離Playwright、空DBのPC/SP表示、Git送信範囲とremote照合",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/setup-20261105.md"
+          ],
+          "checked_at": "2026-11-05T03:34:08.199Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "設定・教材0件・資料保護・画面・検証根拠を独立して確認する",
           "verification": "実装担当と異なる担当のソース・検証結果レビュー",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/setup-20261105.md"
+          ],
+          "checked_at": "2026-11-05T03:34:08.199Z",
+          "reviewer": "heritage_final_review"
         }
       ],
       "execution": {
         "worker": "heritage_setup_implementer",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "実装と教材0件、全ローカル/PCSP検証、独立レビュー、新規remoteのSHA一致と同SHA CI4ジョブ成功。",
+            "at": "2026-11-05T03:34:08.393Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]
