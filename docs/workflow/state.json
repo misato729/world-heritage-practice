@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 64,
-  "updated_at": "2026-11-05T22:46:41.631Z",
+  "revision": 76,
+  "updated_at": "2026-11-12T00:06:37.698Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T22-46-41-631Z-r64.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-12T00-06-37-698Z-r76.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1086,6 +1086,221 @@
             "outcome": "passed",
             "summary": "37明示stage/独立レビュー、162検査・資料保護成功。a981e07をpushしremote一致、同SHA CI4ジョブ成功",
             "at": "2026-11-05T22:46:39.595Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_question_review_20261111",
+      "context": "product",
+      "title": "模試1〜5の過去問同等性とユーザー指定その他45問を基準にした再レビュー",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-11 更新AGENTSに基づく問題/選択肢の長さ・難度・その他の適切性レビュー",
+      "next_action": "レビュー結果の確認と追加依頼を待つ",
+      "evidence": [
+        "local-only/question-review-20261111/review.md",
+        "local-only/question-review-20261111/validation-result.json",
+        "local-only/question-review-20261111/all-300-review.csv"
+      ],
+      "last_verified_at": "2026-11-11",
+      "verification_scope": "分析完了・現模試同等性は見直し必要。現行300問と過去720問定量、文字四肢702、user45全原画像照合。その他以外270＋その他30の項目レビュー、一般60盲解59一致/暫定相違1は原典でkey確認、その他30盲解30一致。最短解法/粒度/配分を別評価、P1=15/P2=78/P3=207。文字数の配点ラベル7字混入を修正し全300独立一致、旧版保存。実受験者難度実測/全300全原典再監査なし。問題/DB/app変更・Git送信なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "件数・版・marker対応・抽出と比較定義/対象外不変を検証",
+          "verification": "metadata/構造/定量比較/対応表検査、原本代表照合",
+          "status": "passed",
+          "evidence": [
+            "local-only/question-review-20261111/validation-result.json",
+            "local-only/question-review-20261111/metrics/methodology.md",
+            "local-only/question-review-20261111/root-count-crosscheck-final.json"
+          ],
+          "checked_at": "2026-11-11"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "最短解法・誤答肢・その他の範囲と粒度を別担当で評価し指摘を報告",
+          "verification": "正答非提示の独立レビューと今回の指摘表、難度実測との区別",
+          "status": "passed",
+          "evidence": [
+            "local-only/question-review-20261111/common-review/review.md",
+            "local-only/question-review-20261111/other-review/review.md",
+            "local-only/question-review-20261111/other-review/marker45-verified.json"
+          ],
+          "checked_at": "2026-11-11",
+          "reviewer": "review_common_20261111 / review_other_20261111"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "レビュー完了。過去問同等性は要見直し、その他固定配分の根拠不足と個別候補15問を報告。定量720/300、marker45原画像照合、独立項目レビューと盲解、配点ラベル除外修正を確認",
+            "at": "2026-11-11T07:57:11.936Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_question_rework_20261112",
+      "context": "product",
+      "title": "模試1〜5の全指摘改稿と過去問構成への調整",
+      "status": "done",
+      "depends_on": [
+        "grade2_question_review_20261111"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-12 優先度順に全て改稿。開発DB反映・画面確認まで明示回答。",
+      "next_action": "依頼済みの開発DB反映・画面確認を実行する",
+      "evidence": [
+        "local-only/question-rework-20261112/automated-final.json",
+        "local-only/question-rework-20261112/review-acceptance.json"
+      ],
+      "last_verified_at": "2026-11-12",
+      "verification_scope": "正本3796b5b4…の全300構造・15Markdown整合、P1/P2全93対応、変更136（実質125）、最終版に適合する139提示の独立盲解・全肢出典確認、修正後12提示の別担当再盲解。実受験者難度は未実測。DB/UIは後続タスク。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "P1/P2全93指摘対応・300問構造/配点/差分/原稿整合・分布比較",
+          "verification": "独立カウント/差分/共有schemaと影響範囲の検査",
+          "status": "passed",
+          "evidence": [
+            "local-only/question-rework-20261112/automated-final.json",
+            "local-only/question-rework-20261112/schema-result.json"
+          ],
+          "checked_at": "2026-11-12"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "全変更問の正答非提示解答・最短解法/全肢/出典・配分の独立確認",
+          "verification": "作者と別担当のレビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/question-rework-20261112/review-acceptance.json"
+          ],
+          "checked_at": "2026-11-12",
+          "reviewer": "blind_rework_12 / blind_rework_34 / blind_rework_other5"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初稿の独立盲解・原典照合で分布の事実衝突、造営者と養蚕法の非排他性、誤った肢注、片軸で決まる配置を確認し改稿受入を不合格とした。初稿記録を保持し対象15問を最小修正、変更提示は別担当で再盲解中。",
+            "at": "2026-11-11T23:10:11.911Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "初稿の指摘を修正し、最終版の136変更・実質125問を原稿/保存値/15Markdownと照合。P1/P2全93対応、139提示の独立盲解と全肢出典確認、修正後12提示の別担当再盲解と16問の出典差分確認を通過。",
+            "at": "2026-11-11T23:23:07.917Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_rework_integration_20261112",
+      "context": "development",
+      "title": "改稿の開発DB反映とPCSP確認",
+      "status": "done",
+      "depends_on": [
+        "grade2_question_rework_20261112"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-12 優先度順に全て改稿。開発DB反映・画面確認まで明示回答。",
+      "next_action": "成果物と開発画面を報告。commit/push/本番公開は別の明示依頼を待つ。",
+      "evidence": [
+        "docs/grade2-rework-20261112.md",
+        "local-only/question-rework-20261112/integration/baseline-metadata.json",
+        "local-only/question-rework-20261112/integration/writer-test-result.json",
+        "local-only/question-rework-20261112/integration/isolated-result.json",
+        "local-only/question-rework-20261112/integration/cleanup-result.json",
+        "local-only/question-rework-20261112/integration/applied-result.json",
+        "local-only/question-rework-20261112/integration/repeat-result.json",
+        "local-only/question-rework-20261112/integration/live-result.json",
+        "local-only/question-rework-20261112/integration/browser-result-development.json",
+        "local-only/question-rework-20261112/integration/stable-development-result.json",
+        "local-only/question-rework-20261112/integration/independent-code-review-v2.json",
+        "local-only/question-rework-20261112/integration/independent-runtime-review.json",
+        "local-only/question-rework-20261112/integration/independent-development-review.json",
+        "local-only/question-rework-20261112/integration/independent-footer-addendum.json"
+      ],
+      "last_verified_at": "2026-11-12",
+      "verification_scope": "正本3796b5b4…の300問/1200肢。承認136問を開発DBへ反映、全ID/作成時刻と対象外164問を保持、再接続一致・再適用無変更・実履歴削除0。新規使い捨てtest DBで復元/transaction/rollback/関連保持等8検査、変更136問×PCSPの272表示・実解答と有料境界。実開発は無料代表4問×PCSPの8操作と匿名有料ロック、合成会員作成0。独立静的/実行/実開発レビュー合格。一時DB残存0、3110保持。追加2代表画面で接続完了表示を確認。本番/Stripe/commit/pushなし。実受験者の難度測定は未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "backup/改稿更新/ID保持/反復/影響範囲テスト/PCSP/有料境界",
+          "verification": "独立カウント/差分/共有schemaと影響範囲の検査",
+          "status": "passed",
+          "evidence": [
+            "local-only/question-rework-20261112/integration/baseline-metadata.json",
+            "local-only/question-rework-20261112/integration/writer-test-result.json",
+            "local-only/question-rework-20261112/integration/isolated-result.json",
+            "local-only/question-rework-20261112/integration/cleanup-result.json",
+            "local-only/question-rework-20261112/integration/applied-result.json",
+            "local-only/question-rework-20261112/integration/repeat-result.json",
+            "local-only/question-rework-20261112/integration/live-result.json",
+            "local-only/question-rework-20261112/integration/browser-result-development.json",
+            "local-only/question-rework-20261112/integration/stable-development-result.json"
+          ],
+          "checked_at": "2026-11-12"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "最終原稿/DB/画面/既存データ影響の独立確認",
+          "verification": "作者と別担当のレビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/question-rework-20261112/integration/independent-code-review-v2.json",
+            "local-only/question-rework-20261112/integration/independent-runtime-review.json",
+            "local-only/question-rework-20261112/integration/independent-development-review.json",
+            "local-only/question-rework-20261112/integration/independent-footer-addendum.json"
+          ],
+          "checked_at": "2026-11-12",
+          "reviewer": "blind_rework_34"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "使い捨てDBで復元後、一括更新前の実行検査が不合格。Prismaのcallback clientにもtransaction関数があり、形状によるガードが実transactionを拒否した。更新関数自身が共通transactionを所有する構造へ修正。実開発DB未更新、検証用DB残存0、初回コードと結果は保持。",
+            "at": "2026-11-11T23:27:36.328Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "初回のtransaction形状判定を修正後、復元/更新等8検査、136問×PCSPの272表示解答、開発136問反映と反復無変更、実開発8代表操作と有料ロックが合格。静的・使い捨て実行・実開発の独立確認を受入れ。一時DB残存0。",
+            "at": "2026-11-12T00:04:59.543Z",
             "failed_criteria": []
           }
         ]
