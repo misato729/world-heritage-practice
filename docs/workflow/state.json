@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 76,
-  "updated_at": "2026-11-12T00:06:37.698Z",
+  "revision": 87,
+  "updated_at": "2026-11-13T19:19:03.374Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-12T00-06-37-698Z-r76.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-13T19-19-03-374Z-r87.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -56,7 +56,7 @@
     "frontend/app/components/GradeLink.vue",
     "frontend/prisma/migrations/20261106000000_grades_subscription/migration.sql",
     "docs/multi-grade-subscription-implementation.md",
-    "content/questions.json",
+    "docs/grade2-mocks-06-10-20261114.md",
     "content/mock-exam-01.questions.md",
     "content/mock-exam-01.answers.md",
     "content/mock-exam-01.answer-sheet.md",
@@ -1301,6 +1301,193 @@
             "outcome": "passed",
             "summary": "初回のtransaction形状判定を修正後、復元/更新等8検査、136問×PCSPの272表示解答、開発136問反映と反復無変更、実開発8代表操作と有料ロックが合格。静的・使い捨て実行・実開発の独立確認を受入れ。一時DB残存0。",
             "at": "2026-11-12T00:04:59.543Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mocks_06_10_authoring_20261114",
+      "context": "product",
+      "title": "2級模試6〜10の作成・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "grade2_question_rework_20261112"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「2級の模試6〜10を作成」、開発DB登録・画面確認まで明示回答。",
+      "next_action": "隔離test DBでバックアップ復元・追記/反復/rollback・全300×PCSPを確認する",
+      "evidence": [
+        "local-only/mocks-06-10-20261114/input-manifest.json",
+        "local-only/mocks-06-10-20261114/pilot-review.json",
+        "local-only/mocks-06-10-20261114/round-01/normalized-canonical.json",
+        "local-only/mocks-06-10-20261114/structural-validation.json",
+        "local-only/mocks-06-10-20261114/integration/content-schema-result.json",
+        "local-only/mocks-06-10-20261114/form-metrics.json",
+        "local-only/mocks-06-10-20261114/blind/reviewer-a/source-review-v1.json",
+        "local-only/mocks-06-10-20261114/content-final-acceptance.json",
+        "local-only/mocks-06-10-20261114/review-coverage.json",
+        "local-only/mocks-06-10-20261114/blind/reviewer-c/global-review.json",
+        "local-only/mocks-06-10-20261114/distribution-result.json"
+      ],
+      "last_verified_at": "2026-11-13T18:30:52.118722+00:00",
+      "verification_scope": "最終正本9784baf8…の新300/1200、共有Zod600/2400、15MD、旧300/旧15MD不変を確認。独立盲解と全肢原典確認を最終300へ版照合し、内容不変96移動後の同回文脈/既存主目標重複もCが確認。必須未解決0。実受験者難度未測定、写真/地図/英文/長い共通リード未再現。DB反映は後続タスク。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "新300問/1200肢・15Markdown・配点/分類/固定混在順・旧300問不変・重複/出典/形式比較",
+          "verification": "共有schema・件数/参照/原稿/指紋の独立処理と影響に応じた検査",
+          "status": "passed",
+          "evidence": [
+            "local-only/mocks-06-10-20261114/structural-validation.json",
+            "local-only/mocks-06-10-20261114/integration/content-schema-result.json",
+            "local-only/mocks-06-10-20261114/form-metrics.json",
+            "local-only/mocks-06-10-20261114/review-coverage.json",
+            "local-only/mocks-06-10-20261114/distribution-result.json"
+          ],
+          "checked_at": "2026-11-14"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当による対象版の独立確認",
+          "verification": "正答非提示の解答・全肢原典・最短解法と過去問比較。開発反映はコード/保存/画面の独立確認。",
+          "status": "passed",
+          "evidence": [
+            "local-only/mocks-06-10-20261114/review-coverage.json",
+            "local-only/mocks-06-10-20261114/blind/reviewer-c/global-review.json",
+            "local-only/mocks-06-10-20261114/content-final-acceptance.json"
+          ],
+          "checked_at": "2026-11-14",
+          "reviewer": "/root/reviewer_a, /root/reviewer_b, /root/reviewer_c, /root/reviewer_d"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初稿300問の構造/共有Zod/15MD一致/旧300不変は確認。独立Aの120問で提示9問と解説1問、組合せ比率が要修正。8/9/10独立QAも未了のため不合格。初稿と根拠をround-01へ保持し、変更箇所だけ改稿する。",
+            "at": "2026-11-13T17:05:37.214Z",
+            "failed_criteria": [
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "最終300問の共有schema/15MD一致/旧300と旧15MD不変を確認。変更後の盲解と全肢原典確認を全300へ版照合し、96件の内容不変移動後の文脈・既存主目標重複も独立確認、必須未解決0。未再現形式と難度未測定は留保。",
+            "at": "2026-11-13T18:30:52.994Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mocks_06_10_integration_20261114",
+      "context": "development",
+      "title": "2級模試6〜10の開発DB登録・画面確認",
+      "status": "done",
+      "depends_on": [
+        "mocks_06_10_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「2級の模試6〜10を作成」、開発DB登録・画面確認まで明示回答。",
+      "next_action": "今回の依頼は完了。Git配信や模試11以降、本番公開は追加依頼を待つ",
+      "evidence": [
+        "local-only/mocks-06-10-20261114/input-manifest.json",
+        "local-only/mocks-06-10-20261114/integration/build-result-final.json",
+        "local-only/mocks-06-10-20261114/integration/build-integrity.json",
+        "local-only/mocks-06-10-20261114/integration/independent-code-review.json",
+        "local-only/mocks-06-10-20261114/integration/independent-code-review-final.json",
+        "local-only/mocks-06-10-20261114/integration/baseline-metadata.json",
+        "local-only/mocks-06-10-20261114/integration/attempt-01-environment/failure-summary.json",
+        "local-only/mocks-06-10-20261114/integration/attempt-02-signup/failure-summary.json",
+        "local-only/mocks-06-10-20261114/integration/isolated-result.json",
+        "local-only/mocks-06-10-20261114/integration/writer-test-result.json",
+        "local-only/mocks-06-10-20261114/integration/browser-result.json",
+        "local-only/mocks-06-10-20261114/integration/cleanup-result.json",
+        "local-only/mocks-06-10-20261114/integration/applied-result.json",
+        "local-only/mocks-06-10-20261114/integration/repeat-result.json",
+        "local-only/mocks-06-10-20261114/integration/browser-result-development.json",
+        "local-only/mocks-06-10-20261114/integration/development-final-result.json",
+        "local-only/mocks-06-10-20261114/integration/development-process-binding.json",
+        "local-only/mocks-06-10-20261114/integration/root-visual-review.json",
+        "local-only/mocks-06-10-20261114/integration/independent-runtime-review.json",
+        "local-only/mocks-06-10-20261114/integration/independent-runtime-review.md",
+        "local-only/mocks-06-10-20261114/completion.json"
+      ],
+      "last_verified_at": "2026-11-13T19:19:02.717809+00:00",
+      "verification_scope": "教材9784…/archive2dc9…/appsource6a6d…/output044c…の隔離writer8検査、新300×PCSP600表示/600回答/全解説出典一致、匿名無料40代表拒否、cleanup残存0。実開発に300追加→600/2400、反復追加0、旧全行ID時刻保持、非教材不変/利用者行0、再接続照合。実開発PCSP新5lock/匿名20代表拒否と無料1Q28各表示解答、起動PID/port/build結付。独立Dの9条件/34証跡/代表24画像レビュー合格、未解決必須0。難度未実測・画像英文長共通リード未再現。Git/本番/Stripe操作なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "backup復元・300追加/旧300保持・ID/関係保持・反復/rollback・PCSP表示解答/有料境界",
+          "verification": "共有schema・件数/参照/原稿/指紋の独立処理と影響に応じた検査",
+          "status": "passed",
+          "evidence": [
+            "local-only/mocks-06-10-20261114/integration/isolated-result.json",
+            "local-only/mocks-06-10-20261114/integration/writer-test-result.json",
+            "local-only/mocks-06-10-20261114/integration/browser-result.json",
+            "local-only/mocks-06-10-20261114/integration/cleanup-result.json",
+            "local-only/mocks-06-10-20261114/integration/applied-result.json",
+            "local-only/mocks-06-10-20261114/integration/repeat-result.json",
+            "local-only/mocks-06-10-20261114/integration/browser-result-development.json",
+            "local-only/mocks-06-10-20261114/integration/development-final-result.json",
+            "local-only/mocks-06-10-20261114/integration/development-process-binding.json",
+            "local-only/mocks-06-10-20261114/integration/root-visual-review.json",
+            "local-only/mocks-06-10-20261114/completion.json"
+          ],
+          "checked_at": "2026-11-14"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当による対象版の独立確認",
+          "verification": "正答非提示の解答・全肢原典・最短解法と過去問比較。開発反映はコード/保存/画面の独立確認。",
+          "status": "passed",
+          "evidence": [
+            "local-only/mocks-06-10-20261114/integration/independent-code-review-final.json",
+            "local-only/mocks-06-10-20261114/integration/independent-runtime-review.json",
+            "local-only/mocks-06-10-20261114/integration/independent-runtime-review.md"
+          ],
+          "checked_at": "2026-11-14",
+          "reviewer": "/root/reviewer_d"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "復元とwriterの8検査は通過。プロジェクト対応のPlaywrightブラウザrevision未配置のため画面検証を開始できず第1評価は不合格。作成DB残存0・server停止・実開発書込0を確認し成果物保持。",
+            "at": "2026-11-13T18:33:13.692Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "復元/writer8検査と匿名desktopのAPI10件401・新5回paywallを通過。合成会員登録のclickがtimeoutし画面全件確認へ進めず第2評価不合格。対応browserは起動済み。所有DB残存0・実開発書込0、版と成果物保持。",
+            "at": "2026-11-13T18:38:42.106Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "第3総評価は同じ教材/backup/buildでwriter8検査、新300×PCSP600表示回答・全解説出典一致、所有testDB残存0。実開発300追加→600/2400、反復0、旧行ID時刻/13対象保持、利用者0、PCSP新5lockと無料1Q28確認。D9条件/34証跡/代表24画像独立レビュー合格。前2環境失敗を保持。",
+            "at": "2026-11-13T19:19:02.930Z",
             "failed_criteria": []
           }
         ]
