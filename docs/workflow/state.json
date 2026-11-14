@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 95,
-  "updated_at": "2026-11-14T00:12:37.977Z",
+  "revision": 142,
+  "updated_at": "2026-11-14T05:28:35.318Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-14T00-12-37-977Z-r95.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-14T05-28-35-318Z-r142.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1617,6 +1617,1068 @@
             "outcome": "passed",
             "summary": "v5をbackup実復元とwriter8検査・PCSP242表示解答で確認し、dev98更新と反復無変更、開発46表示解答、最終600/2400・ID/非対象保持を確認。別担当の静的/実行結果/44画像レビュー合格。",
             "at": "2026-11-13T22:22:02.160Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_mock_01_authoring_20261114",
+      "context": "product",
+      "title": "準1級過去問分析と現行課程模試1セットの作成",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級過去問と新課程例題を分析し公式準1級テキスト出典で1セット作成。旧課程その他の現行分類を考慮。",
+      "next_action": "ユーザーの成果物確認を待つ。追加作問・DB反映・公開は別途依頼で実施する。",
+      "evidence": [
+        "local-only/pre1-mock-01-20261114/brief.md",
+        "local-only/pre1-mock-01-20261114/analysis.md",
+        "local-only/pre1-mock-01-20261114/authoring.json",
+        "local-only/pre1-mock-01-20261114/pre1-mock-01.questions.md",
+        "local-only/pre1-mock-01-20261114/pre1-mock-01.answers.md",
+        "local-only/pre1-mock-01-20261114/pre1-mock-01.answer-sheet.md",
+        "local-only/pre1-mock-01-20261114/quality-checks.json",
+        "local-only/pre1-mock-01-20261114/review-acceptance.md",
+        "local-only/pre1-mock-01-20261114/evaluation-round-01.md"
+      ],
+      "last_verified_at": "2026-11-13T22:53:06Z",
+      "verification_scope": "提供4実試験と新課程例題300問を分析。準1級60問240肢・100点、15/25/50/10点、混在順、全肢解説と印刷/PDF出典、全問独立盲解・原典裁定、変更15問の旧キー未見再盲解、42問継承と3問出典等差分、最終原稿一致・資料保護を確認。地図/写真形式と実受験者測定は未実施。DB・画面・公開は対象外。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "過去問分析、1セットの形式・問数・配点15/25/50/10%、四肢正答1件、全肢根拠、出典・原稿一致・資料保護を確認",
+          "verification": "対象版指紋と全件構造検査、PDF原画像・原典照合、課程分類比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mock-01-20261114/quality-checks.json"
+          ],
+          "checked_at": "2026-11-13T22:53:06Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が代表問と全問を盲解し一意性・最短解法・誤答肢・全肢根拠・課程整合を独立確認",
+          "verification": "正答未提示の盲解記録を先に固定し、その後に原典・解説・作者キーと比較裁定する",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mock-01-20261114/review-acceptance.md"
+          ],
+          "checked_at": "2026-11-13T22:53:06Z",
+          "reviewer": "pre1_analysis_review; pre1_blind_34_60; pre1_reblind_final"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回60問の構造検査・全問独立盲解・全肢原典裁定を実施。出典位置1件と近似性等を修正し、提示変更15問を旧正答未見の担当へ再評価依頼。",
+            "at": "2026-11-13T22:38:50.164Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "第2回総評価：最終60問240肢・100点と配点比率・混在順・原稿一致・資料保護に合格。変更15問は旧キー未見再盲解と原典裁定、出典等の3問修正と最終補足削除も別担当が受入。",
+            "at": "2026-11-13T22:53:27.081Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_mock_01_integration_20261114",
+      "context": "development",
+      "title": "準1級模試1の専用開発DB登録とPC・スマートフォン表示確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：作成した準1級模試1を開発DBに登録し、PC・スマートフォン両方で問題と解説を確認する。",
+      "next_action": "開発画面で準1級模試1を利用。追加作問・公開・commit/pushは別途依頼を待つ。",
+      "evidence": [
+        "docs/pre1-mock-01-integration-20261114.md",
+        "local-only/pre1-mock-01-20261114/integration/README.md",
+        "local-only/pre1-mock-01-20261114/integration/conversion-result.json",
+        "local-only/pre1-mock-01-20261114/integration/baseline-metadata.json",
+        "local-only/pre1-mock-01-20261114/integration/writer-test-result.json",
+        "local-only/pre1-mock-01-20261114/integration/isolated-result.json",
+        "local-only/pre1-mock-01-20261114/integration/cleanup-result.json",
+        "local-only/pre1-mock-01-20261114/integration/applied-result.json",
+        "local-only/pre1-mock-01-20261114/integration/development-process-binding.json",
+        "local-only/pre1-mock-01-20261114/integration/browser-result-development.json",
+        "local-only/pre1-mock-01-20261114/integration/development-postcheck.json",
+        "local-only/pre1-mock-01-20261114/integration/visual-review-root.json",
+        "local-only/pre1-mock-01-20261114/integration/automated-final-result.json",
+        "local-only/pre1-mock-01-20261114/integration/reviews/independent-code-review-final.json",
+        "local-only/pre1-mock-01-20261114/integration/reviews/independent-runtime-review-final.json"
+      ],
+      "last_verified_at": "2026-11-14T00:45:07.138Z",
+      "verification_scope": "確定原稿の準1級60問240肢・全解説70出典を既存CLIのpre1限定empty importで専用開発DBへ登録。backup新規test DB復元、59問書込後rollback、反復拒否無変更、再接続、非対象2級600問2400肢のID/本文/時刻と13metadata保持。レビュー済48ファイルとapp/buildを実行版へ照合。隔離・実開発の各PC1280/SP390で全60問を表示/回答（計240表示240回答）、全肢解説/出典/API非漏出/級導線/横はみ出し0/JSエラー0。別担当19画像目視と実行結果審査合格。実機SP・非空履歴保持・1/2点集計/60分セッション・公開は対象外。rate_limiter_flexibleは保持比較の対象外。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "原稿60問240肢の全表示項目一致、バックアップ復元、pre1限定登録、非対象600問とmetadata保持、反復拒否時無変更、部分書込rollback、再接続、PC/SP問題・解説・出典確認",
+          "verification": "共有schemaと既存CLI/common writer、復元した新規test DBでの保護検査、新規empty test DBと実開発のPlaywright PC/SP、原稿/API/DOM照合・表示画像目視",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mock-01-20261114/integration/automated-final-result.json",
+            "local-only/pre1-mock-01-20261114/integration/applied-result.json",
+            "local-only/pre1-mock-01-20261114/integration/development-postcheck.json"
+          ],
+          "checked_at": "2026-11-14T00:45:07.138Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者以外が変換・登録手順と実際の検査結果を確認し未解決の不具合がない",
+          "verification": "別担当による固定対象版のコード・変換対照・DB/画面結果の独立評価",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mock-01-20261114/integration/reviews/independent-code-review-final.json",
+            "local-only/pre1-mock-01-20261114/integration/reviews/independent-runtime-review-final.json"
+          ],
+          "checked_at": "2026-11-14T00:45:07.138Z",
+          "reviewer": "pre1_integration_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "第1回評価：変換と復元DB保護検査は合格。小分類と検査待合せを修正。独立レビューで照合入口のパス正規化・結果とレビュー対象版の結び付けを最終確認対象とした。",
+            "at": "2026-11-14T00:29:01.921Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "第2回評価合格：準1級60問240肢を専用開発DBへ登録。復元/rollback/反復/再接続と既存600問2400肢保持、隔離と実開発のPCSP全問・全解説出典、独立19画像/結果審査に合格。",
+            "at": "2026-11-14T00:45:35.209Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m02_authoring_20261114",
+      "context": "product",
+      "title": "準1級模試2の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10を同じ要領で作成し、開発DB登録・表示確認まで完了する。",
+      "next_action": "開発DB追加/PCSP検証taskへ渡す。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/mock-02/representative-blind-root.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-02/representative-review-root.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-02/authoring.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-02/quality-checks.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-02/evaluation-round-01.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-02/reviews/findings-c.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-02/evaluation-round-02.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/final-pair-02-039-06-039-d.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-02/evaluation-round-03.json",
+        "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+      ],
+      "last_verified_at": "2026-11-14T04:49:43.101Z",
+      "verification_scope": "現行60問240肢100点の全件構造・混在順・配点と原稿/全肢解説/出典を照合。540行台帳で不変材料の既存原典/盲解と変更提示の未見freshを結合、必須残件0。実受験者の性能未測定、DB画面は別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点、15/25/50/10点、分野混在、原稿/全肢解説/出典対応、過去問比較・重複と漏出・資料保護",
+          "verification": "対象版指紋と構造/配点/全件一致、原典本文と原画像照合、形式/最短解法比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-02/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-02/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:43.101Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が正答非表示で全問を盲解し、一意性・最短解法・誤答肢・全肢根拠を確認",
+          "verification": "盲解を先に固定し、その後に作者キー/解説/原典へ照合。提示変更は旧キー未見担当で再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-02/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-02/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:43.101Z",
+          "reviewer": "pre1_author_b, pre1_author_c, pre1_bulk_review_d, pre1_final_blind_e"
+        }
+      ],
+      "execution": {
+        "worker": "pre1_author_a",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回全問盲解と原典照合は完了。キー一致と内容品質を分離し、範囲/原典不整合の修飾・重複・近似性の限定改稿へ。",
+            "at": "2026-11-14T02:53:49.629Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "第2回v2横断評価で逆向きの同一個別対応を確認。1問を限定改稿し未見担当の最終評価へ。",
+            "at": "2026-11-14T04:19:25.427Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "対象版の全60問240肢、配点/混在順、全肢原典、盲解と限定freshを540行台帳で確認。必須0、助言と未知原記録を保持。",
+            "at": "2026-11-14T04:49:43.278Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m03_authoring_20261114",
+      "context": "product",
+      "title": "準1級模試3の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10を同じ要領で作成し、開発DB登録・表示確認まで完了する。",
+      "next_action": "開発DB追加/PCSP検証taskへ渡す。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/mock-03/representative-blind-root.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-03/representative-review-root.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-03/authoring.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-03/quality-checks.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-03/evaluation-round-01.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-03/reviews/findings-a.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-03/evaluation-round-02.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/cross-exam-new-pairs-d.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/repeated-answer-terms-findings-d.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-b-findings-c.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-03/evaluation-round-03.json",
+        "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+      ],
+      "last_verified_at": "2026-11-14T04:49:43.798Z",
+      "verification_scope": "現行60問240肢100点の全件構造・混在順・配点と原稿/全肢解説/出典を照合。540行台帳で不変材料の既存原典/盲解と変更提示の未見freshを結合、必須残件0。実受験者の性能未測定、DB画面は別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点、15/25/50/10点、分野混在、原稿/全肢解説/出典対応、過去問比較・重複と漏出・資料保護",
+          "verification": "対象版指紋と構造/配点/全件一致、原典本文と原画像照合、形式/最短解法比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-03/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-03/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:43.798Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が正答非表示で全問を盲解し、一意性・最短解法・誤答肢・全肢根拠を確認",
+          "verification": "盲解を先に固定し、その後に作者キー/解説/原典へ照合。提示変更は旧キー未見担当で再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-03/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-03/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:43.798Z",
+          "reviewer": "pre1_author_c, pre1_final_blind_e"
+        }
+      ],
+      "execution": {
+        "worker": "pre1_author_b",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回60問の独立盲解と全肢原典評価を実施。構造/配点は合格、必須指摘を限定改稿して旧キー未見のfresh評価へ回す。",
+            "at": "2026-11-14T02:47:35.376Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "第2回v2評価：最小知識が他回の同じ個別事実と重複。盲解一致と横断品質を分離して限定改稿する。",
+            "at": "2026-11-14T03:28:46.237Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "対象版の全60問240肢、配点/混在順、全肢原典、盲解と限定freshを540行台帳で確認。必須0、助言と未知原記録を保持。",
+            "at": "2026-11-14T04:49:43.967Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m04_authoring_20261114",
+      "context": "product",
+      "title": "準1級模試4の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10を同じ要領で作成し、開発DB登録・表示確認まで完了する。",
+      "next_action": "開発DB追加/PCSP検証taskへ渡す。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/mock-04/representative-blind-root.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-04/representative-review-root.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-04/authoring.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-04/quality-checks.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-04/evaluation-round-01.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-04/reviews/findings-b.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-04/evaluation-round-02.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/repeated-answer-terms-findings-d.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-04/evaluation-round-03.json",
+        "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+      ],
+      "last_verified_at": "2026-11-14T04:49:44.739Z",
+      "verification_scope": "現行60問240肢100点の全件構造・混在順・配点と原稿/全肢解説/出典を照合。540行台帳で不変材料の既存原典/盲解と変更提示の未見freshを結合、必須残件0。実受験者の性能未測定、DB画面は別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点、15/25/50/10点、分野混在、原稿/全肢解説/出典対応、過去問比較・重複と漏出・資料保護",
+          "verification": "対象版指紋と構造/配点/全件一致、原典本文と原画像照合、形式/最短解法比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-04/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-04/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:44.739Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が正答非表示で全問を盲解し、一意性・最短解法・誤答肢・全肢根拠を確認",
+          "verification": "盲解を先に固定し、その後に作者キー/解説/原典へ照合。提示変更は旧キー未見担当で再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-04/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-04/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:44.739Z",
+          "reviewer": "pre1_author_a, pre1_author_b, pre1_bulk_review_d, pre1_final_blind_e"
+        }
+      ],
+      "execution": {
+        "worker": "pre1_author_c",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回60問の独立盲解と全肢原典評価を実施。構造/配点は合格、必須指摘を限定改稿して旧キー未見のfresh評価へ回す。",
+            "at": "2026-11-14T02:47:36.272Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "第2回v2横断評価で個別事実の重複を確認。既存fresh合格を変更後の合格と扱わず、限定v3改稿へ。",
+            "at": "2026-11-14T03:54:52.028Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "対象版の全60問240肢、配点/混在順、全肢原典、盲解と限定freshを540行台帳で確認。必須0、助言と未知原記録を保持。",
+            "at": "2026-11-14T04:49:44.917Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m05_authoring_20261114",
+      "context": "product",
+      "title": "準1級模試5の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10を同じ要領で作成し、開発DB登録・表示確認まで完了する。",
+      "next_action": "開発DB追加/PCSP検証taskへ渡す。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/mock-05/authoring.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-05/quality-checks.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-05/evaluation-round-01.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-05/reviews/findings-c.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-05/evaluation-round-02.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/repeated-answer-terms-findings-d.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-05/evaluation-round-03.json",
+        "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+      ],
+      "last_verified_at": "2026-11-14T04:49:45.436Z",
+      "verification_scope": "現行60問240肢100点の全件構造・混在順・配点と原稿/全肢解説/出典を照合。540行台帳で不変材料の既存原典/盲解と変更提示の未見freshを結合、必須残件0。実受験者の性能未測定、DB画面は別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点、15/25/50/10点、分野混在、原稿/全肢解説/出典対応、過去問比較・重複と漏出・資料保護",
+          "verification": "対象版指紋と構造/配点/全件一致、原典本文と原画像照合、形式/最短解法比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-05/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-05/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:45.436Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が正答非表示で全問を盲解し、一意性・最短解法・誤答肢・全肢根拠を確認",
+          "verification": "盲解を先に固定し、その後に作者キー/解説/原典へ照合。提示変更は旧キー未見担当で再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-05/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-05/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:45.436Z",
+          "reviewer": "pre1_author_b, pre1_author_c, pre1_bulk_review_d, pre1_final_blind_e"
+        }
+      ],
+      "execution": {
+        "worker": "pre1_author_a",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回全問盲解と原典照合は完了。キー一致と内容品質を分離し、範囲/原典不整合の修飾・重複・近似性の限定改稿へ。",
+            "at": "2026-11-14T02:53:49.927Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "第2回v2横断評価で個別事実の重複を確認。既存fresh合格を変更後の合格と扱わず、限定v3改稿へ。",
+            "at": "2026-11-14T03:54:52.300Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "対象版の全60問240肢、配点/混在順、全肢原典、盲解と限定freshを540行台帳で確認。必須0、助言と未知原記録を保持。",
+            "at": "2026-11-14T04:49:45.615Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m06_authoring_20261114",
+      "context": "product",
+      "title": "準1級模試6の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10を同じ要領で作成し、開発DB登録・表示確認まで完了する。",
+      "next_action": "開発DB追加/PCSP検証taskへ渡す。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/mock-06/authoring.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-06/quality-checks.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-06/evaluation-round-01.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-06/reviews/findings-a.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-06/evaluation-round-02.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/cross-exam-new-pairs-d.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/repeated-answer-terms-findings-d.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-b-findings-c.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-06/evaluation-round-03.json",
+        "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+      ],
+      "last_verified_at": "2026-11-14T04:49:46.301Z",
+      "verification_scope": "現行60問240肢100点の全件構造・混在順・配点と原稿/全肢解説/出典を照合。540行台帳で不変材料の既存原典/盲解と変更提示の未見freshを結合、必須残件0。実受験者の性能未測定、DB画面は別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点、15/25/50/10点、分野混在、原稿/全肢解説/出典対応、過去問比較・重複と漏出・資料保護",
+          "verification": "対象版指紋と構造/配点/全件一致、原典本文と原画像照合、形式/最短解法比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-06/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-06/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:46.301Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が正答非表示で全問を盲解し、一意性・最短解法・誤答肢・全肢根拠を確認",
+          "verification": "盲解を先に固定し、その後に作者キー/解説/原典へ照合。提示変更は旧キー未見担当で再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-06/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-06/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:46.301Z",
+          "reviewer": "pre1_author_c, pre1_bulk_review_d, pre1_final_blind_e"
+        }
+      ],
+      "execution": {
+        "worker": "pre1_author_b",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回60問の独立盲解と全肢原典評価を実施。構造/配点は合格、必須指摘を限定改稿して旧キー未見のfresh評価へ回す。",
+            "at": "2026-11-14T02:47:35.691Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "第2回v2評価：最小知識が他回の同じ個別事実と重複。盲解一致と横断品質を分離して限定改稿する。",
+            "at": "2026-11-14T03:28:46.545Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "対象版の全60問240肢、配点/混在順、全肢原典、盲解と限定freshを540行台帳で確認。必須0、助言と未知原記録を保持。",
+            "at": "2026-11-14T04:49:46.475Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m07_authoring_20261114",
+      "context": "product",
+      "title": "準1級模試7の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10を同じ要領で作成し、開発DB登録・表示確認まで完了する。",
+      "next_action": "開発DB追加/PCSP検証taskへ渡す。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/mock-07/authoring.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-07/quality-checks.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-07/evaluation-round-01.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-07/reviews/findings-b.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-07/evaluation-round-02.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-c-findings-a.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-07/evaluation-round-03.json",
+        "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+      ],
+      "last_verified_at": "2026-11-14T04:49:47.263Z",
+      "verification_scope": "現行60問240肢100点の全件構造・混在順・配点と原稿/全肢解説/出典を照合。540行台帳で不変材料の既存原典/盲解と変更提示の未見freshを結合、必須残件0。実受験者の性能未測定、DB画面は別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点、15/25/50/10点、分野混在、原稿/全肢解説/出典対応、過去問比較・重複と漏出・資料保護",
+          "verification": "対象版指紋と構造/配点/全件一致、原典本文と原画像照合、形式/最短解法比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-07/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-07/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:47.263Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が正答非表示で全問を盲解し、一意性・最短解法・誤答肢・全肢根拠を確認",
+          "verification": "盲解を先に固定し、その後に作者キー/解説/原典へ照合。提示変更は旧キー未見担当で再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-07/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-07/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:47.263Z",
+          "reviewer": "pre1_author_a, pre1_author_b, pre1_bulk_review_d"
+        }
+      ],
+      "execution": {
+        "worker": "pre1_author_c",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回60問の独立盲解と全肢原典評価を実施。構造/配点は合格、必須指摘を限定改稿して旧キー未見のfresh評価へ回す。",
+            "at": "2026-11-14T02:47:36.689Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "第2回評価：freshで内容/番号を支持したが1問の誤答近似性を改善する。限定改稿を別未見Dで最終確認する。",
+            "at": "2026-11-14T02:53:50.830Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "対象版の全60問240肢、配点/混在順、全肢原典、盲解と限定freshを540行台帳で確認。必須0、助言と未知原記録を保持。",
+            "at": "2026-11-14T04:49:47.435Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m08_authoring_20261114",
+      "context": "product",
+      "title": "準1級模試8の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10を同じ要領で作成し、開発DB登録・表示確認まで完了する。",
+      "next_action": "開発DB追加/PCSP検証taskへ渡す。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/mock-08/authoring.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-08/quality-checks.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-08/evaluation-round-01.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-08/reviews/findings-c.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-08/evaluation-round-02.json",
+        "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+      ],
+      "last_verified_at": "2026-11-14T04:49:48.050Z",
+      "verification_scope": "現行60問240肢100点の全件構造・混在順・配点と原稿/全肢解説/出典を照合。540行台帳で不変材料の既存原典/盲解と変更提示の未見freshを結合、必須残件0。実受験者の性能未測定、DB画面は別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点、15/25/50/10点、分野混在、原稿/全肢解説/出典対応、過去問比較・重複と漏出・資料保護",
+          "verification": "対象版指紋と構造/配点/全件一致、原典本文と原画像照合、形式/最短解法比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-08/evaluation-round-02.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-08/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:48.050Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が正答非表示で全問を盲解し、一意性・最短解法・誤答肢・全肢根拠を確認",
+          "verification": "盲解を先に固定し、その後に作者キー/解説/原典へ照合。提示変更は旧キー未見担当で再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-08/evaluation-round-02.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-08/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:48.050Z",
+          "reviewer": "pre1_author_b, pre1_author_c"
+        }
+      ],
+      "execution": {
+        "worker": "pre1_author_a",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回全問盲解と原典照合は完了。キー一致と内容品質を分離し、範囲/原典不整合の修飾・重複・近似性の限定改稿へ。",
+            "at": "2026-11-14T02:53:50.288Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "対象版の全60問240肢、配点/混在順、全肢原典、盲解と限定freshを540行台帳で確認。必須0、助言と未知原記録を保持。",
+            "at": "2026-11-14T04:49:48.282Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m09_authoring_20261114",
+      "context": "product",
+      "title": "準1級模試9の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10を同じ要領で作成し、開発DB登録・表示確認まで完了する。",
+      "next_action": "開発DB追加/PCSP検証taskへ渡す。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/mock-09/authoring.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-09/quality-checks.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-09/evaluation-round-01.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-09/reviews/findings-a.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-09/evaluation-round-02.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/cross-exam-new-pairs-d.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/repeated-answer-terms-findings-d.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-b-findings-c.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-09/evaluation-round-03.json",
+        "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+      ],
+      "last_verified_at": "2026-11-14T04:49:48.823Z",
+      "verification_scope": "現行60問240肢100点の全件構造・混在順・配点と原稿/全肢解説/出典を照合。540行台帳で不変材料の既存原典/盲解と変更提示の未見freshを結合、必須残件0。実受験者の性能未測定、DB画面は別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点、15/25/50/10点、分野混在、原稿/全肢解説/出典対応、過去問比較・重複と漏出・資料保護",
+          "verification": "対象版指紋と構造/配点/全件一致、原典本文と原画像照合、形式/最短解法比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-09/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-09/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:48.823Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が正答非表示で全問を盲解し、一意性・最短解法・誤答肢・全肢根拠を確認",
+          "verification": "盲解を先に固定し、その後に作者キー/解説/原典へ照合。提示変更は旧キー未見担当で再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-09/evaluation-round-03.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-09/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:48.823Z",
+          "reviewer": "pre1_author_c, pre1_bulk_review_d, pre1_final_blind_e"
+        }
+      ],
+      "execution": {
+        "worker": "pre1_author_b",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回60問の独立盲解と全肢原典評価を実施。構造/配点は合格、必須指摘を限定改稿して旧キー未見のfresh評価へ回す。",
+            "at": "2026-11-14T02:47:35.977Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "第2回v2評価：最小知識が他回の同じ個別事実と重複。盲解一致と横断品質を分離して限定改稿する。",
+            "at": "2026-11-14T03:28:46.848Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "対象版の全60問240肢、配点/混在順、全肢原典、盲解と限定freshを540行台帳で確認。必須0、助言と未知原記録を保持。",
+            "at": "2026-11-14T04:49:49.011Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m10_authoring_20261114",
+      "context": "product",
+      "title": "準1級模試10の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_mock_01_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10を同じ要領で作成し、開発DB登録・表示確認まで完了する。",
+      "next_action": "開発DB追加/PCSP検証taskへ渡す。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/mock-10/authoring.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-10/quality-checks.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-10/evaluation-round-01.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-10/reviews/findings-b.json",
+        "local-only/pre1-mocks-02-10-20261114/mock-10/evaluation-round-02.json",
+        "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+      ],
+      "last_verified_at": "2026-11-14T04:49:49.700Z",
+      "verification_scope": "現行60問240肢100点の全件構造・混在順・配点と原稿/全肢解説/出典を照合。540行台帳で不変材料の既存原典/盲解と変更提示の未見freshを結合、必須残件0。実受験者の性能未測定、DB画面は別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点、15/25/50/10点、分野混在、原稿/全肢解説/出典対応、過去問比較・重複と漏出・資料保護",
+          "verification": "対象版指紋と構造/配点/全件一致、原典本文と原画像照合、形式/最短解法比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-10/evaluation-round-02.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-10/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:49.700Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が正答非表示で全問を盲解し、一意性・最短解法・誤答肢・全肢根拠を確認",
+          "verification": "盲解を先に固定し、その後に作者キー/解説/原典へ照合。提示変更は旧キー未見担当で再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-mocks-02-10-20261114/mock-10/evaluation-round-02.json",
+            "local-only/pre1-mocks-02-10-20261114/mock-10/quality-checks.json",
+            "local-only/pre1-mocks-02-10-20261114/final-review-coverage.json",
+            "local-only/pre1-mocks-02-10-20261114/reviews/fresh-final-findings-e.json"
+          ],
+          "checked_at": "2026-11-14T04:49:49.700Z",
+          "reviewer": "pre1_author_a, pre1_author_b, pre1_bulk_review_d"
+        }
+      ],
+      "execution": {
+        "worker": "pre1_author_c",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回60問の独立盲解と全肢原典評価を実施。構造/配点は合格、必須指摘を限定改稿して旧キー未見のfresh評価へ回す。",
+            "at": "2026-11-14T02:47:37.024Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "対象版の全60問240肢、配点/混在順、全肢原典、盲解と限定freshを540行台帳で確認。必須0、助言と未知原記録を保持。",
+            "at": "2026-11-14T04:49:49.880Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_m02_10_integration_20261114",
+      "context": "development",
+      "title": "準1級模試2〜10の開発DB登録・PCSP全540問表示確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_m02_authoring_20261114",
+        "pre1_m03_authoring_20261114",
+        "pre1_m04_authoring_20261114",
+        "pre1_m05_authoring_20261114",
+        "pre1_m06_authoring_20261114",
+        "pre1_m07_authoring_20261114",
+        "pre1_m08_authoring_20261114",
+        "pre1_m09_authoring_20261114",
+        "pre1_m10_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14ユーザー依頼：準1級模試2〜10の作成完了後に開発DBへ登録し表示確認する。",
+      "next_action": "追加作問・公開・販売・送信は依頼を待つ。",
+      "evidence": [
+        "local-only/pre1-mocks-02-10-20261114/brief.md",
+        "local-only/pre1-mocks-02-10-20261114/integration/conversion-result.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/baseline-metadata.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/reviews/final-code-draft-d.json",
+        "local-only/pre1-mocks-02-10-20261114/reviews/all13-blind-manifest-e.json",
+        "docs/pre1-mocks-02-10-integration-20261114.md",
+        "local-only/pre1-mocks-02-10-20261114/content-final-acceptance.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/writer-test-result.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/isolated-result.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/browser-result.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/cleanup-result.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/applied-result.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/development-process-binding.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/browser-result-development.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/development-postcheck.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/visual-review-root.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/final-protection-result.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/reviews/independent-code-review-final.json",
+        "local-only/pre1-mocks-02-10-20261114/integration/reviews/independent-runtime-review-final.json"
+      ],
+      "last_verified_at": "2026-11-14T05:28:34.346Z",
+      "verification_scope": "新540問2160肢の原稿/変換、backupのfresh test DB復元、取消/追加/反復/再接続と既存660問保持を確認。隔離PCSP各540＋匿名sampleで1088、実開発無料2/3各120で240表示回答、paid拒否/他級遮断、errors0/overflow0。1200問4800肢と13保護モデル保持、独立最終レビュー/58固有画像、private-source保護合格。SP実機・非空履歴未実測、flexcounter比較外。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "540問2160肢の全件変換、backup新規test DB復元、common writerによる新規のみの登録、非対象/ID/時刻/metadata保持、rollback/反復/再接続、PCSP全問/全解説出典",
+          "verification": "共有schema、隔離test DBと実開発Playwright、API/DOM/出典link/代表画像、指紋と件数で確認",
+          "status": "passed",
+          "evidence": [
+            "docs/pre1-mocks-02-10-integration-20261114.md",
+            "local-only/pre1-mocks-02-10-20261114/content-final-acceptance.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/baseline-metadata.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/conversion-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/writer-test-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/isolated-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/browser-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/cleanup-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/applied-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/development-process-binding.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/browser-result-development.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/development-postcheck.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/visual-review-root.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/final-protection-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/reviews/independent-code-review-final.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/reviews/independent-runtime-review-final.json"
+          ],
+          "checked_at": "2026-11-14T05:28:34.346Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が変換・DB手順・実行結果・代表画面を独立評価する",
+          "verification": "レビュー対象版を固定し自動検査結果とDB/画面の根拠を確認",
+          "status": "passed",
+          "evidence": [
+            "docs/pre1-mocks-02-10-integration-20261114.md",
+            "local-only/pre1-mocks-02-10-20261114/content-final-acceptance.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/baseline-metadata.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/conversion-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/writer-test-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/isolated-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/browser-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/cleanup-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/applied-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/development-process-binding.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/browser-result-development.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/development-postcheck.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/visual-review-root.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/final-protection-result.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/reviews/independent-code-review-final.json",
+            "local-only/pre1-mocks-02-10-20261114/integration/reviews/independent-runtime-review-final.json"
+          ],
+          "checked_at": "2026-11-14T05:28:34.346Z",
+          "reviewer": "pre1_bulk_review_d"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "540問追加と既存660保持、復元/取消/反復/再接続、隔離1088/実開発240のPCSP表示回答、出典/権限制御/後片付け、独立最終と保護検査が合格。",
+            "at": "2026-11-14T05:28:34.647Z",
             "failed_criteria": []
           }
         ]

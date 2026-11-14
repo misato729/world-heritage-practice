@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "revision": 101,
+  "state_hash": "63bdf23d637113a07c4e4e2d5133264401f980ac4f815f30567a9f550b429fd5",
+  "recorded_at": "2026-11-14T00:45:49.309Z",
+  "timezone": "UTC",
+  "context": "development",
+  "task": "pre1_mock_01_integration_20261114",
+  "summary": "準1級模試1の開発DB登録・PCSP全60問と全解説出典確認を完了。自動検査と独立最終レビューのゲートに合格し、localhost:3110で利用可能。",
+  "next_action": "開発画面で準1級模試1を利用。追加作問・公開・commit/pushは別途依頼を待つ。",
+  "missing_local_files": [],
+  "git": {
+    "available": true,
+    "head": "92478f648ddc3a8609244d9786fc83556dbe6e70",
+    "changes": [
+      {
+        "status": " M",
+        "path": "AGENTS.md"
+      },
+      {
+        "status": " M",
+        "path": "README.md"
+      },
+      {
+        "status": " M",
+        "path": "config/exam.json"
+      },
+      {
+        "status": " M",
+        "path": "docs/workflow/contexts/development.md"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/index.vue"
+      },
+      {
+        "status": "??",
+        "path": "docs/pre1-mock-01-integration-20261114.md"
+      }
+    ]
+  },
+  "file_hashes": {
+    "AGENTS.md": "93755359a0814853396390bcc6d66926a55c0786acb15a3e94d697ee9d0365eb",
+    "README.md": "5b25bf332028a2ab2d03957f5d11240e68476077eaa4f99405d2980ae485242a",
+    "docs/testing.md": "03c27d3320bafd75907f4779f9bbf8a4f58068d447439a12fd5230450a5759e4",
+    "docs/workflow/README.md": "ce35c134e34be8261e2478091460df30cd2a2546fba658ba38f25e8411a9f8f8",
+    "docs/workflow/policy.json": "e2d37588e90c23538d856bec83b94573df2bf3db9799fa183b8beb2a2685131c",
+    "docs/workflow/task.example.json": "4bf161efce99b7d0a26798e3445d1f142505e512eedd591ea11cfb194d67da9f",
+    "docs/workflow/contexts/product.md": "641449219e3bd72ace9765c354ff299de0edf610f3bf8c7c6c1d78c91ea87f35",
+    "docs/workflow/contexts/development.md": "82fb387c12ab347901e4fac1c93ae4be65d8a9e7c1e62f557f0a5b7545ca8ff6",
+    "docs/workflow/contexts/operations.md": "dc536ecce7d60069056c51733868fd4e2ba4270aa9bbc7348a182b051f44bc10",
+    "scripts/context.mjs": "3828c41d1cc5a6977b8444035e094e61e1c9895fcaa9451ecb1919e799ecaffc",
+    "scripts/context.test.mjs": "125f184ecd2d34b8a4dc93a8d1edd2b6c527c0de8a46f39c8c92de265ebccc66",
+    "scripts/workflow-policy.mjs": "60535f2c9bf42203c059ca39a0b254c168b7cfb2468904a3842725fe3797141e",
+    "scripts/workflow-policy.test.mjs": "394287e7d1e84756a3ac8833918f964ee66f0ef2c34934d121d055fb37af4782",
+    "scripts/workspace-policy.mjs": "cd575bdc0a83e37ed28f4004c311c2415d895ce9d63b8fe8552ad674269cd219",
+    "scripts/workspace-policy.test.mjs": "22c2dce0ba9006d3266c2628a61e19acae48eb851c34f5a2fdd1d600cfb7944f",
+    "scripts/check-private-sources.mjs": "1d28447b51b39591d42151f236b837b33d695662168ee5c71500205aa0de96af",
+    "scripts/check-private-sources.test.mjs": "db6afd47e6f6e6de3405437960721f037068da4181eb7a81d7ba11477c7d69fb",
+    ".gitignore": "4b3d891da4a656b112f29fe81b4064671d7c78c02cb6a4bce10c5e227ef6ea34",
+    ".dockerignore": "1b81f2fe96d04eefe1f7628df7e03861d3b886d3b13968bfeb3cfe9dd14f33bd",
+    ".githooks/pre-push": "3529b300f7a655102ad899ab31fa8b2c404ec37479d1195aa9bcd3efa97bf90c",
+    "config/exam.json": "057ce103d6a11d1a67e7be20786fac4a609a7ca240272af8e77437d183e25021",
+    "frontend/shared/grades.ts": "d24bc883a9a6ffbcc734a074da50d051c70f0f616e91535a6431fdfcfb7b830e",
+    "frontend/server/core/grade.ts": "a0b0d450eaa48b598f4c887d01974ef77d91e28d629272966e89aaa2db64806b",
+    "frontend/server/services/subscriptions.ts": "b08139892d3511e0a35d9b5f8f97a55a7484288531f44249650ea499a91eb752",
+    "frontend/server/services/payment-webhooks.ts": "6d9d2ed3ffe1e5833b16c33e693a81f063444bf19f5e5b061737fbb50c68630b",
+    "frontend/app/middleware/grade.global.ts": "e611475e09ab724e1bdd9f65e09f4abc0ec6e2833a794ce4957dcd669bb58805",
+    "frontend/app/components/GradeLink.vue": "33b0b57579144a0dd119660c5c9c293ec8fa0d5d1d16727af384582481088747",
+    "frontend/prisma/migrations/20261106000000_grades_subscription/migration.sql": "f13478e389a5a61cb2e91ca68b61c3d5cbfe3e475fed302b2b1d0bb8c216467f",
+    "docs/multi-grade-subscription-implementation.md": "afba7752e4d45f8e6e418ec30a81a5fdb1b5996315c5d69b73e3e231db5d32e3",
+    "docs/grade2-mocks-06-10-20261114.md": "afe0f7422614152b1fabaf79472f451793caa7b858afbe24de4cef69528c4511",
+    "content/mock-exam-01.questions.md": "7bb8eea75c65186a0720c3caf652951f1d05498eca84b970fdaddc3b52d82f7d",
+    "content/mock-exam-01.answers.md": "ae94ea1daadf63e2ce3812ad64c2efbaa6785839838f8287d4a8dce252c50765",
+    "content/mock-exam-01.answer-sheet.md": "67a352187dc916dc89da8d4a4d66204057627a60f7301b44cba1568c1e374870",
+    "frontend/app/components/SiteHeader.vue": "a98cc7732095ac3bf2f76d7dca774fac5bd90f289d1216f3b61fb78a51d3a2dd",
+    "docs/mock-exam-01-other-revision-20261106.md": "1cca35e97eb6221dec74a0391b6f260f887c246c2abc39ff2b441c7bfc1efc2e",
+    "docs/mock-exam-01-other-delivery-20261106.md": "6b3105716b41d28d86201d1034107af86ea18bc0681e12128d384fbcacc7c6a0",
+    "docs/self-contained-stems-20261114.md": "aa337b0d2b80a1548b7bd7ba831b00044b8cbea458bc0616117f2e62561ed65b"
+  },
+  "verification_note": "ハッシュ・Git・記録済み完了条件の確認であり、テストや出典照合の自動再実行ではない。依頼・権限は最新のユーザー指示とAGENTS.mdに従う。"
+}
