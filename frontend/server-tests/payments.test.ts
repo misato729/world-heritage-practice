@@ -14,6 +14,7 @@ import { verifyStripeWebhook, type PaymentStripeClient, type StripeObject } from
 import { paymentSettings, publicPaymentConfiguration, validFrontendOrigin } from '../server/services/payment-settings.ts'
 import { PaymentEventMismatchError, PaymentNotReadyError, processStripeEvent } from '../server/services/payment-webhooks.ts'
 import { checkoutPayment, getPaymentConfiguration, receiveStripeWebhook } from '../server/services/payments.ts'
+import { monthlyCheckout, subscriptionPortal } from '../server/services/subscriptions.ts'
 
 const config = structuredClone(EXAM_CONFIG)
 config.payments.enabled = true
@@ -50,6 +51,55 @@ test('on-request seller disclosure never exposes private contacts and requires e
   assert.equal(invalid.enabled, false)
   assert.equal(invalid.seller.contact_disclosure_mode, 'unconfigured')
   assert.equal(paymentSettings({ ...env, SELLER_CONTACT_DISCLOSURE_MODE: '' }, config, 'test').enabled, false)
+})
+
+test('Portal configuration is optional, private and scoped to each management session', async () => {
+  for (const configurationId of [undefined, '', '  ', 'bpc_heritage_synthetic']) {
+    const selected = paymentSettings({ ...env, STRIPE_PORTAL_CONFIGURATION_ID: configurationId }, config, 'test')
+    assert.equal(selected.enabled, true)
+    assert.equal(selected.portalConfigurationId, configurationId?.trim() || '')
+    assert.equal('portalConfigurationId' in publicPaymentConfiguration(selected), false)
+    assert.ok(!JSON.stringify(publicPaymentConfiguration(selected)).includes('bpc_heritage_synthetic'))
+    const db = { subscription: { findUnique: async ({ where }: StripeObject) => {
+      assert.deepEqual(where, { user_id: 42 })
+      return { stripe_customer_id: 'cus_heritage_synthetic' }
+    } } } as unknown as Database
+    const { client } = fakeStripe()
+    const requests: StripeObject[] = []
+    client.billingPortal = { sessions: { create: async params => {
+      requests.push(params)
+      return { url: 'https://billing.stripe.com/synthetic' }
+    } } }
+    assert.deepEqual(await subscriptionPortal({ id: 42 } as User, { db, settings: selected, client }), { data: { url: 'https://billing.stripe.com/synthetic' } })
+    assert.deepEqual(requests, [{ customer: 'cus_heritage_synthetic', return_url: 'https://example.invalid/account', ...(configurationId?.trim() ? { configuration: configurationId.trim() } : {}) }])
+  }
+})
+
+test('monthly Checkout keeps card eligibility, fixed inclusive pricing, current availability and service-specific terms', async () => {
+  const { state, client } = fakeStripe()
+  state.price = { ...state.price, type: 'recurring', tax_behavior: 'inclusive', recurring: { interval: 'month', interval_count: 1 } }
+  const writes: StripeObject[] = []
+  const db = {
+    query: async () => ({ rows: [{ id: 42 }] }),
+    subscription: { findUnique: async () => null, upsert: async (params: StripeObject) => { writes.push(params); return params.create } },
+  } as unknown as Database
+  await monthlyCheckout({ id: 42, email: 'subscriber@example.invalid' } as User, { db, settings, client })
+  const { params } = state.requests[0]!
+  assert.equal(params.mode, 'subscription')
+  assert.deepEqual(params.allowed_payment_method_types, ['card'])
+  assert.equal('payment_method_types' in params, false)
+  assert.deepEqual(params.line_items, [{ price: settings.priceId, quantity: 1 }])
+  assert.deepEqual(params.automatic_tax, { enabled: false })
+  assert.equal(params.allow_promotion_codes, false)
+  assert.equal(params.consent_collection.terms_of_service, 'required')
+  assert.equal(params.custom_text.terms_of_service_acceptance.message, '世界遺産ラボの[利用規約](https://example.invalid/terms)・[プライバシーポリシー](https://example.invalid/privacy-policy)・[特定商取引法に基づく表記](https://example.invalid/commercial-disclosure)を確認し、月額500円（税込）の自動更新契約に同意します。')
+  assert.match(params.custom_text.submit.message, /月額500円（税込）で自動更新/)
+  assert.match(params.custom_text.submit.message, /2級・準1級の模試1〜10を公開/)
+  assert.match(params.custom_text.submit.message, /1級は準備中/)
+  assert.match(params.integration_identifier, /^heritage_monthly_[a-z]{8}$/)
+  assert.equal(params.metadata.service, 'world-heritage-lab')
+  assert.deepEqual(params.subscription_data.metadata, params.metadata)
+  assert.equal(writes.length, 1)
 })
 
 test('Checkout origin accepts a root HTTPS origin and permits local HTTP only outside production', () => {
@@ -240,6 +290,46 @@ dbTest('verified completion activates only the correct purchase and duplicate no
   assert.equal(new Date(rows.payment.paid_at).getTime(), e.created * 1000)
 })
 
+dbTest('other services sharing the account do not activate or block a local purchase', async f => {
+  for (const metadata of [
+    { service: 'other-lab', user_id: String(f.user.id), purchase_type: 'paid_membership', stripe_price_id: settings.priceId },
+    { user_id: String(f.user.id), purchase_type: 'paid_membership', stripe_price_id: 'price_other_lab' },
+    {},
+  ]) {
+    const e = checkout(f, { id: `cs_other_${randomUUID()}`, metadata })
+    assert.equal(await processEvent(f, e), 'processed')
+    assert.equal(await processEvent(f, e), 'duplicate')
+    assert.equal((await query('SELECT 1 FROM stripe_webhook_events WHERE stripe_event_id=$1', [e.id], f.db)).length, 1)
+  }
+  assert.equal((await records(f)).payment.status, 'pending')
+  assert.equal((await records(f)).membership, undefined)
+})
+
+for (const serviceTag of [false, true]) {
+  dbTest(`unrecorded local Checkout remains retryable until its binding commits (service tag: ${serviceTag})`, async f => {
+    const e = checkout(f, { id: `cs_waiting_${randomUUID()}` })
+    if (serviceTag) e.data.object.metadata = { ...e.data.object.metadata, service: 'world-heritage-lab' }
+    await assert.rejects(processEvent(f, e), PaymentNotReadyError)
+    assert.equal((await query('SELECT 1 FROM stripe_webhook_events WHERE stripe_event_id=$1', [e.id], f.db)).length, 0)
+    assert.equal((await records(f)).membership, undefined)
+    await query('UPDATE payments SET stripe_checkout_session_id=$2 WHERE id=$1', [f.payment.id, e.data.object.id], f.db)
+    assert.equal(await processEvent(f, e), 'processed')
+    assert.equal((await records(f)).membership!.status, 'active')
+  })
+}
+
+dbTest('legacy completion and early notifications keep their binding after the active Price changes', async f => {
+  const monthlySettings = { ...settings, priceId: 'price_monthly_synthetic' }
+  const earlyLegacy = checkout(f, { id: `cs_legacy_waiting_${randomUUID()}` })
+  await assert.rejects(processStripeEvent(earlyLegacy, { db: f.db, settings: monthlySettings, client: f.stripe.client }), PaymentNotReadyError)
+  const tagged = checkout(f, { id: `cs_tagged_waiting_${randomUUID()}`, metadata: { service: 'world-heritage-lab', stripe_price_id: 'price_unknown_legacy' } })
+  await assert.rejects(processStripeEvent(tagged, { db: f.db, settings: monthlySettings, client: f.stripe.client }), PaymentNotReadyError)
+  for (const e of [earlyLegacy, tagged]) assert.equal((await query('SELECT 1 FROM stripe_webhook_events WHERE stripe_event_id=$1', [e.id], f.db)).length, 0)
+  assert.equal(await processStripeEvent(checkout(f), { db: f.db, settings: monthlySettings, client: f.stripe.client }), 'processed')
+  assert.equal((await records(f)).payment.status, 'paid')
+  assert.equal((await records(f)).membership!.status, 'active')
+})
+
 dbTest('amount, currency, owner, price, payment status and livemode mismatches do not grant entitlement or acknowledge receipt', async f => {
   for (const overrides of [{ amount_total: 499 }, { currency: 'usd' }, { client_reference_id: 'other' }, { payment_status: 'unpaid' }, { livemode: true }, { metadata: { user_id: String(f.user.id), purchase_type: 'paid_membership', stripe_price_id: 'other' } }]) {
     const e = checkout(f, overrides)
@@ -322,6 +412,41 @@ dbTest('early refunds remain retryable while events for another product are safe
   f.stripe.state.intent.metadata.purchase_type = 'other_product'
   assert.equal(await processEvent(f, e), 'processed')
   assert.equal((await records(f)).payment.status, 'pending')
+})
+
+dbTest('early refunds for another lab sharing paid_membership metadata are safely acknowledged', async f => {
+  for (const metadata of [
+    { ...f.stripe.state.intent.metadata, service: 'other-lab' },
+    { ...f.stripe.state.intent.metadata, stripe_price_id: 'price_other_lab' },
+  ]) {
+    f.stripe.state.intent.metadata = metadata
+    const e = event('refund.updated', { status: 'succeeded', payment_intent: 'pi_synthetic', charge: 'ch_synthetic' })
+    assert.equal(await processEvent(f, e), 'processed')
+    assert.equal((await query('SELECT 1 FROM stripe_webhook_events WHERE stripe_event_id=$1', [e.id], f.db)).length, 1)
+  }
+  assert.equal((await records(f)).payment.status, 'pending')
+  assert.equal((await records(f)).membership, undefined)
+})
+
+test('signed Checkout notifications belonging to another lab receive HTTP 200 without a provider lookup', { skip: !testUrl }, async () => {
+  const e = event('checkout.session.completed', { id: `cs_other_${randomUUID()}`, mode: 'payment', metadata: { service: 'other-lab' } })
+  const previous = { secret: process.env.STRIPE_WEBHOOK_SECRET, mode: process.env.STRIPE_LIVEMODE }
+  process.env.STRIPE_WEBHOOK_SECRET = env.STRIPE_WEBHOOK_SECRET
+  process.env.STRIPE_LIVEMODE = 'false'
+  try {
+    const raw = JSON.stringify(e)
+    const signature = Stripe.webhooks.generateTestHeaderString({ payload: raw, secret: env.STRIPE_WEBHOOK_SECRET })
+    const request = paymentEvent('/webhooks/stripe', 'POST', raw, signature)
+    assert.equal(await receiveStripeWebhook(request), '')
+    assert.equal(request.node.res.statusCode, 200)
+    assert.equal((await query('SELECT 1 FROM stripe_webhook_events WHERE stripe_event_id=$1', [e.id])).length, 1)
+  } finally {
+    for (const [key, value] of [['STRIPE_WEBHOOK_SECRET', previous.secret], ['STRIPE_LIVEMODE', previous.mode]]) {
+      if (value === undefined) delete process.env[key!]
+      else process.env[key!] = value
+    }
+    await query('DELETE FROM stripe_webhook_events WHERE stripe_event_id=$1', [e.id])
+  }
 })
 
 dbTest('refund verification mismatch or provider outage remains retryable with no membership changes', async f => {

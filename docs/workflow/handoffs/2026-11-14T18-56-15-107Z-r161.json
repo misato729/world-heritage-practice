@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "revision": 161,
+  "state_hash": "7495b423704e6a0957f658220c51fdf6db02bcda37c64e94bcabe0c0af0aba24",
+  "recorded_at": "2026-11-14T18:56:15.107Z",
+  "timezone": "UTC",
+  "context": "operations",
+  "task": "production_deploy_20261115",
+  "summary": "Netlify/Fly/Neonへ固定対象版を配信し、2級/準1級1200問と専用Stripe月額500円の受付を公開。最終配信/無課金LIVE/独立レビューPASSを記録し、一時認証情報・合成会員・申込みを片付けた。",
+  "next_action": "運用中のNeon使用量を管理画面で判断する。追加教材・Git配信・再設定メール/障害通知・実課金検証は追加依頼に従う。Docker検証コンテナ削除未確認等は配信記録を参照。",
+  "missing_local_files": [],
+  "git": {
+    "available": true,
+    "head": "537f9ee1ba1fbb51d0686ca64ff92bc9a5b6b2c5",
+    "changes": [
+      {
+        "status": " M",
+        "path": ".dockerignore"
+      },
+      {
+        "status": " M",
+        "path": ".env.example"
+      },
+      {
+        "status": " M",
+        "path": ".gitignore"
+      },
+      {
+        "status": " M",
+        "path": "AGENTS.md"
+      },
+      {
+        "status": " M",
+        "path": "README.md"
+      },
+      {
+        "status": " M",
+        "path": "config/exam.json"
+      },
+      {
+        "status": " M",
+        "path": "frontend/Dockerfile"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/composables/useAuth.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/commercial-disclosure.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/premium/index.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/privacy-policy.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/terms.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/package-lock.json"
+      },
+      {
+        "status": " M",
+        "path": "frontend/package.json"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/helpers/api-app.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/payments.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/subscriptions.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/core/rate-limit.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/plugins/readiness.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/payment-settings.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/payment-webhooks.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/subscriptions.ts"
+      },
+      {
+        "status": " M",
+        "path": "netlify.toml"
+      },
+      {
+        "status": "??",
+        "path": "docs/deployment-20261115.md"
+      },
+      {
+        "status": "??",
+        "path": "docs/deployment-readiness-review-20261115.md"
+      },
+      {
+        "status": "??",
+        "path": "fly.toml"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server-tests/netlify-proxy.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/core/netlify-proxy.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/middleware/netlify-proxy.ts"
+      }
+    ]
+  },
+  "file_hashes": {
+    "AGENTS.md": "2d350034e1fe55214163055d2b7b8ab592779eaf14fb9887190ddf0837125db6",
+    "README.md": "844bdfd3a95a37a963d10a325d7f96f0ea913c68f21ef426fe245ef30c4cba7d",
+    "docs/testing.md": "03c27d3320bafd75907f4779f9bbf8a4f58068d447439a12fd5230450a5759e4",
+    "docs/workflow/README.md": "ce35c134e34be8261e2478091460df30cd2a2546fba658ba38f25e8411a9f8f8",
+    "docs/workflow/policy.json": "e2d37588e90c23538d856bec83b94573df2bf3db9799fa183b8beb2a2685131c",
+    "docs/workflow/task.example.json": "4bf161efce99b7d0a26798e3445d1f142505e512eedd591ea11cfb194d67da9f",
+    "docs/workflow/contexts/product.md": "641449219e3bd72ace9765c354ff299de0edf610f3bf8c7c6c1d78c91ea87f35",
+    "docs/workflow/contexts/development.md": "a6f38dabfcb9132c9e6b1393001df8aff66dd54f7ce2da90d3141c661c894d16",
+    "docs/workflow/contexts/operations.md": "dc536ecce7d60069056c51733868fd4e2ba4270aa9bbc7348a182b051f44bc10",
+    "scripts/context.mjs": "3828c41d1cc5a6977b8444035e094e61e1c9895fcaa9451ecb1919e799ecaffc",
+    "scripts/context.test.mjs": "125f184ecd2d34b8a4dc93a8d1edd2b6c527c0de8a46f39c8c92de265ebccc66",
+    "scripts/workflow-policy.mjs": "60535f2c9bf42203c059ca39a0b254c168b7cfb2468904a3842725fe3797141e",
+    "scripts/workflow-policy.test.mjs": "394287e7d1e84756a3ac8833918f964ee66f0ef2c34934d121d055fb37af4782",
+    "scripts/workspace-policy.mjs": "cd575bdc0a83e37ed28f4004c311c2415d895ce9d63b8fe8552ad674269cd219",
+    "scripts/workspace-policy.test.mjs": "22c2dce0ba9006d3266c2628a61e19acae48eb851c34f5a2fdd1d600cfb7944f",
+    "scripts/check-private-sources.mjs": "1d28447b51b39591d42151f236b837b33d695662168ee5c71500205aa0de96af",
+    "scripts/check-private-sources.test.mjs": "db6afd47e6f6e6de3405437960721f037068da4181eb7a81d7ba11477c7d69fb",
+    ".gitignore": "1a240d183ddd6669cb6d5e771e541745974cbd681200c648263f2004e38e364a",
+    ".dockerignore": "7676e99b6922e295083ecbed1f54a6918b09f343bb7bfe5f0008509335064bda",
+    ".githooks/pre-push": "3529b300f7a655102ad899ab31fa8b2c404ec37479d1195aa9bcd3efa97bf90c",
+    "config/exam.json": "dae8be908a81b1bd1557aaa5f036104e270edd7309b41a9d9da87e9503e5a99f",
+    "frontend/shared/grades.ts": "d24bc883a9a6ffbcc734a074da50d051c70f0f616e91535a6431fdfcfb7b830e",
+    "frontend/server/core/grade.ts": "a0b0d450eaa48b598f4c887d01974ef77d91e28d629272966e89aaa2db64806b",
+    "frontend/server/services/subscriptions.ts": "a593e2231033269fbbc12a092dbf8d72a2fdd713c1057963bc3dbd7019f8037d",
+    "frontend/server/services/payment-webhooks.ts": "7ce036cf85d646cd766129d229a6917e15543632085f82c573aaa6dca69154b2",
+    "frontend/app/middleware/grade.global.ts": "e611475e09ab724e1bdd9f65e09f4abc0ec6e2833a794ce4957dcd669bb58805",
+    "frontend/app/components/GradeLink.vue": "33b0b57579144a0dd119660c5c9c293ec8fa0d5d1d16727af384582481088747",
+    "frontend/prisma/migrations/20261106000000_grades_subscription/migration.sql": "f13478e389a5a61cb2e91ca68b61c3d5cbfe3e475fed302b2b1d0bb8c216467f",
+    "docs/multi-grade-subscription-implementation.md": "afba7752e4d45f8e6e418ec30a81a5fdb1b5996315c5d69b73e3e231db5d32e3",
+    "docs/grade2-mocks-06-10-20261114.md": "afe0f7422614152b1fabaf79472f451793caa7b858afbe24de4cef69528c4511",
+    "content/mock-exam-01.questions.md": "7bb8eea75c65186a0720c3caf652951f1d05498eca84b970fdaddc3b52d82f7d",
+    "content/mock-exam-01.answers.md": "ae94ea1daadf63e2ce3812ad64c2efbaa6785839838f8287d4a8dce252c50765",
+    "content/mock-exam-01.answer-sheet.md": "67a352187dc916dc89da8d4a4d66204057627a60f7301b44cba1568c1e374870",
+    "frontend/app/components/SiteHeader.vue": "a98cc7732095ac3bf2f76d7dca774fac5bd90f289d1216f3b61fb78a51d3a2dd",
+    "docs/mock-exam-01-other-revision-20261106.md": "1cca35e97eb6221dec74a0391b6f260f887c246c2abc39ff2b441c7bfc1efc2e",
+    "docs/mock-exam-01-other-delivery-20261106.md": "6b3105716b41d28d86201d1034107af86ea18bc0681e12128d384fbcacc7c6a0",
+    "docs/self-contained-stems-20261114.md": "aa337b0d2b80a1548b7bd7ba831b00044b8cbea458bc0616117f2e62561ed65b"
+  },
+  "verification_note": "ハッシュ・Git・記録済み完了条件の確認であり、テストや出典照合の自動再実行ではない。依頼・権限は最新のユーザー指示とAGENTS.mdに従う。"
+}

@@ -76,6 +76,9 @@ export const useAuth = () => {
   }
 
   const loadCurrentUser = async (force = false): Promise<AuthUser | null> => {
+    // Static generation renders an anonymous shell without calling runtime auth.
+    // Leave authResolved false so hydration still checks the visitor's session.
+    if (import.meta.prerender) return null
     const version = sessionVersion.value
     const pending = currentUserRequests.get(nuxtApp)
     if (pending?.version === version) return pending.promise

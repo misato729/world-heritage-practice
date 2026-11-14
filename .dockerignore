@@ -16,6 +16,8 @@
 **/log/*
 **/tmp/*
 **/.DS_Store
+**/.projects
+**/.projects/**
 **/config/master.key
 **/config/credentials*.yml.enc
 **/config/credentials

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 142,
-  "updated_at": "2026-11-14T05:28:35.318Z",
+  "revision": 166,
+  "updated_at": "2026-11-14T20:40:48.911Z",
   "workspace_relative_to_repo": ".",
-  "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-14T05-28-35-318Z-r142.json",
+  "active_context": "operations",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-14T20-40-48-911Z-r166.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -2679,6 +2679,140 @@
             "outcome": "passed",
             "summary": "540問追加と既存660保持、復元/取消/反復/再接続、隔離1088/実開発240のPCSP表示回答、出典/権限制御/後片付け、独立最終と保護検査が合格。",
             "at": "2026-11-14T05:28:34.647Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "production_deploy_20261115",
+      "context": "operations",
+      "title": "Netlify・Fly.io・Neon本番配信とStripe月額500円申込開始",
+      "status": "done",
+      "depends_on": [
+        "multi_grade_subscription_implementation_20261106",
+        "pre1_m02_10_integration_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-15: Netlify/Fly.io/Neonへの配信とStripe設定依頼。接続済みmisatoの地歴ラボ本番アカウントと月額500円の申込受付開始を確認。",
+      "next_action": "運用中のNeon使用量を管理画面で判断する。追加教材・Git配信・再設定メール/障害通知・実課金検証は追加依頼に従う。Docker検証コンテナ削除未確認等は配信記録を参照。",
+      "evidence": [
+        "docs/deployment-20261115.md",
+        "docs/deployment-readiness-review-20261115.md"
+      ],
+      "last_verified_at": "2026-11-14T18:55:24.438Z",
+      "verification_scope": "最終配信対象250ファイル一致。DB/API/課金/署名55、PC/SP26、認証14、型検査、最終課金41成功。公開API・会員・無料有料境界・無課金LIVE Checkout・専用3リンク・失効/退会を確認。実課金/翌月更新/実契約解約/実Portalは未実施、復元は空の移行前スキーマの限定確認。",
+      "acceptance": [
+        {
+          "id": "deployment_checks",
+          "kind": "automated",
+          "description": "資料保護・対象版の検査と、専用DB/本番URL/認証・級別境界・Stripe月額条件/Webhook/解約導線の確認。",
+          "verification": "必要な既存検査、ローカルtest DBを起点とする使い捨てDB、Playwright PC/SP、本番の代表APIと設定照合。",
+          "status": "passed",
+          "evidence": [
+            "docs/deployment-20261115.md"
+          ],
+          "checked_at": "2026-11-14T18:55:24.438Z"
+        },
+        {
+          "id": "deployment_review",
+          "kind": "review",
+          "description": "別担当が設定・教材/個人情報境界・認証/課金・検証結果を独立確認する。",
+          "verification": "対象ファイル・配信設定・安全な結果記録をレビューし必須指摘を解消する。",
+          "status": "passed",
+          "evidence": [
+            "docs/deployment-readiness-review-20261115.md"
+          ],
+          "checked_at": "2026-11-14T18:55:24.438Z",
+          "reviewer": "production_readiness_review"
+        }
+      ],
+      "execution": {
+        "worker": "deployment-root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回の独立レビューでAPIプロキシ・認証IP・旧購入文言・他ラボWebhook・Portal指定・収録範囲の不足を検出。記録に沿って修正し、実設定と公開代表検証を継続する。",
+            "at": "2026-11-14T18:46:32.975Z",
+            "failed_criteria": [
+              "deployment_checks",
+              "deployment_review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "初回指摘と専用3リンクを修正し、55回帰・26E2E・認証14・型検査・最終課金41、教材1200問の往復一致、公開会員/有料境界/未払いLIVE/失効/退会を確認。独立最終レビューPASS、必須未解決0。実課金等と限定復元の未確認範囲は記録した。",
+            "at": "2026-11-14T18:55:46.763Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "mail_notifications_20261115",
+      "context": "operations",
+      "title": "再設定メールとSentry障害通知の専用本番設定",
+      "status": "done",
+      "depends_on": [
+        "production_deploy_20261115"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-15: パスワード再設定メールと障害通知も他のラボと同じように設定する明示依頼。",
+      "next_action": "選択差分と資料保護・workflow検査を確認してコミット・mainへpushし、CIと残存差分を確認する。",
+      "evidence": [
+        "docs/mail-notifications-20261115.md",
+        "docs/mail-notifications-review-20261115.md",
+        "local-only/mail-notifications-20261115/release.json",
+        "local-only/mail-notifications-20261115/cleanup.json"
+      ],
+      "last_verified_at": "2026-11-14T20:25:28.378Z",
+      "verification_scope": "専用GASの送信のみの承認・独立鍵・本番実配送と合成会員の再設定/旧2セッション/単回性/削除、専用SentryのSDK送信/ルールtrigger/本人通知受信、本番productionと6設定Deployed、18+8関連検査、32route生成、公開PC/SP8ケース、秘密保護、配信250指紋と並行premium除外、独立レビューPASSを確認。30分の本番経過試験・実障害発生・外形監視・Git配信は含まない。",
+      "acceptance": [
+        {
+          "id": "mail_notifications_checks",
+          "kind": "automated",
+          "description": "専用設定・秘密保護・再設定の実配送/単回/セッション境界・固定Sentry通知・PC/SP公開説明を確認する。",
+          "verification": "既存の関連検査、合成データ、本人管理の検証メール、公開画面/APIと専用管理画面で照合。",
+          "status": "passed",
+          "evidence": [
+            "local-only/mail-notifications-20261115/verification.json",
+            "local-only/mail-notifications-20261115/public-ui.json",
+            "local-only/mail-notifications-20261115/release.json",
+            "local-only/mail-notifications-20261115/source-manifest.json",
+            "local-only/mail-notifications-20261115/runtime-flags.json",
+            "local-only/mail-notifications-20261115/live-password-reset.json",
+            "local-only/mail-notifications-20261115/sentry-rule.json",
+            "local-only/mail-notifications-20261115/public-artifacts.json",
+            "local-only/mail-notifications-20261115/final-checks.json",
+            "local-only/mail-notifications-20261115/cleanup.json"
+          ],
+          "checked_at": "2026-11-14T20:25:28.378Z"
+        },
+        {
+          "id": "mail_notifications_review",
+          "kind": "review",
+          "description": "別担当が権限・送信データ・専用設定・対象版と実検証結果を独立照合する。",
+          "verification": "安全な設定集計・ソース・実行結果をレビューし、必須指摘を解消する。",
+          "status": "passed",
+          "evidence": [
+            "docs/mail-notifications-review-20261115.md"
+          ],
+          "checked_at": "2026-11-14T20:25:28.378Z",
+          "reviewer": "production_readiness_review"
+        }
+      ],
+      "execution": {
+        "worker": "mail-notifications-root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "専用GASと最小送信権限・本番6設定を有効化し、実受信/再設定/旧2セッション失効/単回性/合成会員削除と専用Sentryの本人通知受信を確認。18+8検査、公開PC/SP8ケース、32route生成、配信指紋と秘密保護が成功。独立レビューPASS・必須未解決0。",
+            "at": "2026-11-14T20:25:36.935Z",
             "failed_criteria": []
           }
         ]

@@ -42,6 +42,7 @@ export function paymentSettings(env: Environment = process.env, config: ExamConf
     issues, livemode, amount: config.payments.amount, currency: config.payments.currency,
     freeExamMax: config.payments.free_exam_count, siteName: config.site.name,
     secretKey: env.STRIPE_SECRET_KEY || '', webhookSecret: env.STRIPE_WEBHOOK_SECRET || '', priceId: env.STRIPE_PRICE_ID || '',
+    portalConfigurationId: env.STRIPE_PORTAL_CONFIGURATION_ID?.trim() || '',
     frontendUrl: (env.FRONTEND_URL || 'http://localhost:3100').replace(/\/$/, ''),
     seller: {
       name: env.NUXT_PUBLIC_SELLER_NAME || '', representative: env.NUXT_PUBLIC_SELLER_REPRESENTATIVE || '',

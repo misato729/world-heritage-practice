@@ -49,9 +49,11 @@ docker compose exec frontend npm run operations -- categories:sync
 
 分類登録の実施結果は[大分類のDB登録](docs/categories-db-20261105.md)に記録しています。
 
-各級の模試1〜3は無料、4以降は全級共通の月額500円（税込）の対象です。販売は無効です。Stripe・販売者情報・問い合わせ先・規約を整え、別途確認してから販売を開始します。
+各級の模試1〜3は無料、4以降は全級共通の月額500円（税込）の対象です。2026年11月15日に[本番サイト](https://world-heritage-practice.netlify.app)を公開し、月額プランの申込み受付を開始しました。現在は2級・準1級の模試1〜10を収録し、1級の教材は準備中です。配信先・Stripe設定・検証範囲・残る運用事項は[本番配信記録](docs/deployment-20261115.md)を参照してください。
 
-将来は1級・準1級・2級を一つのアプリで扱い、この世界遺産ラボだけを3級種共通のサブスクリプションにする方針です。[設計方針と未決事項](docs/multi-grade-subscription-design.md)に記録しています。実装の範囲と検証結果は[実装記録](docs/multi-grade-subscription-implementation.md)を参照してください。
+パスワード再設定メールと、既存APIの固定カテゴリに対するSentry障害通知も本番で有効にしています。設定先・実配送と通知の確認結果・運用範囲は[メール・障害通知の設定記録](docs/mail-notifications-20261115.md)を参照してください。
+
+1級・準1級・2級を一つのアプリで扱い、この世界遺産ラボを3級種共通のサブスクリプションにしています。[設計方針](docs/multi-grade-subscription-design.md)と[実装記録](docs/multi-grade-subscription-implementation.md)を参照してください。
 
 ## 検証と構成
 

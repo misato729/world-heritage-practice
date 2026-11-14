@@ -1,0 +1,40 @@
+app = "world-heritage-practice"
+primary_region = "sin"
+
+[build]
+dockerfile = "frontend/Dockerfile"
+build-target = "production"
+
+[env]
+APP_ENV = "production"
+NODE_ENV = "production"
+HOST = "0.0.0.0"
+PORT = "3000"
+FRONTEND_URL = "https://world-heritage-practice.netlify.app"
+BETTER_AUTH_URL = "https://world-heritage-practice.netlify.app"
+CORS_ORIGINS = "https://world-heritage-practice.netlify.app"
+NETLIFY_SITE_ID = "5ce0a431-2976-4636-a6ed-39052dfd21b4"
+STRIPE_LIVEMODE = "true"
+# Enabled only after the production settings and representative checks pass.
+PAID_MEMBERSHIP_ENABLED = "false"
+PASSWORD_RESET_ENABLED = "false"
+ERROR_NOTIFICATIONS_ENABLED = "false"
+
+[http_service]
+internal_port = 3000
+force_https = true
+auto_stop_machines = "stop"
+auto_start_machines = true
+min_machines_running = 0
+
+[[http_service.checks]]
+grace_period = "60s"
+interval = "30s"
+method = "GET"
+path = "/api/v1/health"
+timeout = "5s"
+
+[[vm]]
+cpu_kind = "shared"
+cpus = 1
+memory = "512mb"

@@ -6,6 +6,7 @@ import { RateLimiterPostgres, RateLimiterRes } from 'rate-limiter-flexible'
 import { authSecret } from './config.ts'
 import { databaseURL } from './database-url.ts'
 import { ApiError, fail } from './errors.ts'
+import { netlifyClientAddress } from './netlify-proxy.ts'
 
 export const rules = {
   signup: { limit: 10, period: 900 }, login: { limit: 30, period: 300 },
@@ -29,6 +30,8 @@ export class RateLimiterUnavailableError extends ApiError {
 }
 
 export function clientAddress(event: H3Event) {
+  const proxyAddress = netlifyClientAddress(event)
+  if (proxyAddress) return proxyAddress
   // Never trust arbitrary proxy headers from an unconfigured deployment.
   const address = (process.env.FLY_APP_NAME ? getHeader(event, 'fly-client-ip') : undefined) || event.node.req.socket.remoteAddress || 'unknown'
   return isIP(address) ? address.replace(/^::ffff:/, '') : 'unknown'

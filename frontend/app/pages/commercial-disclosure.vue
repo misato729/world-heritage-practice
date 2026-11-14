@@ -39,7 +39,6 @@ useSeoMeta({
     </div>
 
     <article v-if="PAYMENTS_ENABLED" class="legal-document disclosure-table">
-      <p class="draft-notice">テンプレートの草案です。販売者情報と販売条件を実際のサービスに合わせて確認し、販売開始前に完成させてください。</p>
       <dl>
         <div><dt>販売事業者</dt><dd>{{ seller.name || '販売開始前に掲載' }}</dd></div>
         <div><dt>運営責任者</dt><dd>{{ seller.representative || '販売開始前に掲載' }}</dd></div>
@@ -47,11 +46,11 @@ useSeoMeta({
         <div><dt>電話番号</dt><dd>{{ requestDisclosure ? '請求があった場合に遅滞なく開示します。' : (seller.phone || '販売開始前に掲載') }}</dd></div>
         <div><dt>問い合わせ先</dt><dd><a v-if="seller.email" :href="`mailto:${seller.email}`">{{ seller.email }}</a><span v-else>販売開始前に掲載</span></dd></div>
         <div v-if="requestDisclosure"><dt>開示の請求方法</dt><dd>上記の問い合わせ先へ、所在地・電話番号の開示を希望する旨をメールでご連絡ください。購入前の請求にも、申込みの意思決定に先立って十分な時間的余裕をもって、電子メールで遅滞なく開示します。開示に費用はかかりません。</dd></div>
-        <div><dt>販売価格</dt><dd>{{ PRICE_LABEL }}（税込）</dd></div>
+        <div><dt>販売価格</dt><dd>月額{{ PRICE_LABEL }}（税込）・毎月自動更新</dd></div>
         <div><dt>販売価格以外の負担</dt><dd>インターネット接続に必要な通信料は利用者の負担となります。</dd></div>
         <div><dt>支払方法</dt><dd>クレジットカード（対応端末ではApple Pay・Google Pay）（利用可能な方法はStripeの決済画面に表示されます）</dd></div>
         <div><dt>支払時期</dt><dd>初回申込時と、その後毎月の更新日に決済されます。</dd></div>
-        <div><dt>提供内容</dt><dd>公開中の全模擬試験の利用資格。月額500円（税込）で毎月自動更新されます。</dd></div>
+        <div><dt>提供内容</dt><dd>1級・準1級・2級共通で、各級模試4以降の公開問題とお気に入り機能を利用できます。現在は準1級・2級の模試1〜10を収録し、1級の教材は準備中です。各級模試1〜3は無料です。</dd></div>
         <div><dt>提供時期</dt><dd>決済完了をStripeの通知で確認後、直ちに利用できます。通知の遅延時は反映まで時間を要する場合があります。</dd></div>
         <div><dt>解約</dt><dd>アカウントの契約管理から解約できます。期間末解約の場合は支払済み期間の終了まで利用でき、次回の更新を停止します。</dd></div>
         <div><dt>返品・返金</dt><dd>デジタルコンテンツの性質上、提供開始後の利用者都合による返品・返金は原則として受け付けません。重複決済、提供不能その他契約内容に適合しない場合は、上記問い合わせ先へご連絡ください。法令上認められる権利を制限するものではありません。</dd></div>

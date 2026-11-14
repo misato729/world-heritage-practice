@@ -8,3 +8,17 @@ NODE_VERSION = "24"
 # Keep the same static output directory in Netlify and local generation.
 NITRO_PRESET = "static"
 NUXT_PUBLIC_API_BASE = ""
+
+# Keep authentication cookies and application requests on the public site origin.
+# Netlify injects the runtime secret into its standard signed proxy header.
+[[redirects]]
+from = "/api/*"
+to = "https://world-heritage-practice.fly.dev/api/:splat"
+status = 200
+force = true
+signed = "NETLIFY_PROXY_SECRET"
+
+[[redirects]]
+from = "/*"
+to = "/200.html"
+status = 200

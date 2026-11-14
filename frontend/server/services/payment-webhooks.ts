@@ -36,9 +36,21 @@ class EventProcessor {
     return locked ? this.db.payment.findUnique({ where: { id: BigInt(locked.id) } }) : null
   }
 
+  private async ownsUnrecordedPayment(metadata: StripeObject) {
+    if (metadata.service) return metadata.service === 'world-heritage-lab'
+    const priceId = metadata.stripe_price_id
+    if (typeof priceId !== 'string' || !priceId) return false
+    if (priceId === this.settings.priceId) return true
+    // Legacy one-time Checkouts have no service tag. Retain their ownership after a Price change.
+    return Boolean(await this.db.payment.findFirst({ where: { stripe_price_id: priceId }, select: { id: true } }))
+  }
+
   private async complete(session: StripeObject, completedAt: Date) {
     const payment = await this.lockedPayment('stripe_checkout_session_id', session.id)
-    if (!payment) throw new PaymentNotReadyError('Checkout payment record is unavailable')
+    if (!payment) {
+      if (await this.ownsUnrecordedPayment(session.metadata || {})) throw new PaymentNotReadyError('Checkout payment record is unavailable')
+      return // Shared Stripe accounts also deliver other services' Checkout notifications.
+    }
     if (payment.status !== 'pending') return
     const intent = stripeId(session.payment_intent)
     const metadata = session.metadata || {}
@@ -71,6 +83,7 @@ class EventProcessor {
     const intent = await this.client.paymentIntents.retrieve(intentId)
     const metadata = intent.metadata || {}
     if (metadata.purchase_type !== 'paid_membership') return null
+    if (!await this.ownsUnrecordedPayment(metadata)) return null
     if (!(intent.currency === this.settings.currency && intent.amount === this.settings.amount && metadata.user_id && metadata.stripe_price_id)) mismatch()
     // Do not acknowledge a refund/dispute that arrived before the completion event.
     throw new PaymentNotReadyError('Awaiting Checkout completion notification')

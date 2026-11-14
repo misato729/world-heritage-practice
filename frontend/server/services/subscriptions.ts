@@ -1,4 +1,5 @@
-import { randomUUID } from 'node:crypto'
+import { randomInt, randomUUID } from 'node:crypto'
+import type Stripe from 'stripe'
 import { query, transaction, getDatabase, type Database } from '../core/db.ts'
 import { fail } from '../core/errors.ts'
 import type { User } from '../core/auth.ts'
@@ -26,7 +27,18 @@ export async function monthlyCheckout(user: User, options: PaymentOptions = {}) 
   const price = await client.prices.retrieve(settings.priceId)
   if (!validMonthlyPrice(price) || price.livemode !== settings.livemode) fail(503,'payment_unavailable','税込500円の月額プラン設定を確認できません')
   const metadata = { user_id:String(user.id), service:'world-heritage-lab', stripe_price_id:settings.priceId }
-  const session = await client.checkout.sessions.create({mode:'subscription',payment_method_types:['card'],line_items:[{price:settings.priceId,quantity:1}], customer_email:user.email,client_reference_id:String(user.id), metadata,subscription_data:{metadata},allow_promotion_codes:false,automatic_tax:{enabled:false},consent_collection:{terms_of_service:'required'},custom_text:{submit:{message:'月額500円（税込）で自動更新します。1級・準1級・2級の模試4以降の公開問題が対象です。契約管理から解約できます。'}},success_url:settings.frontendUrl+'/premium/complete',cancel_url:settings.frontendUrl+'/premium?canceled=1'}, {idempotencyKey:'heritage-monthly-'+user.id+'-'+randomUUID()})
+  const params: Stripe.Checkout.SessionCreateParams = {
+   mode:'subscription', allowed_payment_method_types:['card'], line_items:[{price:settings.priceId,quantity:1}],
+   customer_email:user.email, client_reference_id:String(user.id), metadata, subscription_data:{metadata},
+   integration_identifier:'heritage_monthly_'+Array.from({length:8},()=>String.fromCharCode(97+randomInt(26))).join(''),
+   allow_promotion_codes:false, automatic_tax:{enabled:false}, consent_collection:{terms_of_service:'required'},
+   custom_text:{
+    submit:{message:'月額500円（税込）で自動更新します。全級共通で模試4以降の公開問題が対象です。現在は2級・準1級の模試1〜10を公開し、1級は準備中です。契約管理から解約できます。'},
+    terms_of_service_acceptance:{message:`世界遺産ラボの[利用規約](${settings.frontendUrl}/terms)・[プライバシーポリシー](${settings.frontendUrl}/privacy-policy)・[特定商取引法に基づく表記](${settings.frontendUrl}/commercial-disclosure)を確認し、月額500円（税込）の自動更新契約に同意します。`},
+   },
+   success_url:settings.frontendUrl+'/premium/complete', cancel_url:settings.frontendUrl+'/premium?canceled=1',
+  }
+  const session = await client.checkout.sessions.create(params, {idempotencyKey:'heritage-monthly-'+user.id+'-'+randomUUID()})
   if (session.status !== 'open' || !session.url || session.livemode !== settings.livemode) throw new Error('Invalid Checkout')
   try { await db.subscription.upsert({where:{user_id:user.id},create:{user_id:user.id,checkout_session_id:session.id},update:{checkout_session_id:session.id,stripe_subscription_id:null,stripe_customer_id:null,status:'pending',paid_until:null,cancel_at_period_end:false}}) }
   catch(error) { await client.checkout.sessions.expire(session.id); throw error }
@@ -68,13 +80,13 @@ export async function syncSubscription(id: string, db: Database, client: Payment
  if (sub.status === 'canceled' && until && until > new Date()) until = new Date()
  await db.subscription.update({where:{id:row.id},data:{stripe_subscription_id:id,stripe_customer_id:stripeId(sub.customer),status:sub.status,paid_until:until,cancel_at_period_end:sub.cancel_at_period_end === true}})
 }
-export async function subscriptionPortal(user: User) {
- const row = await getDatabase().subscription.findUnique({where:{user_id:user.id}})
- const settings=paymentSettings()
+export async function subscriptionPortal(user: User, options: PaymentOptions = {}) {
+ const row = await (options.db ?? getDatabase()).subscription.findUnique({where:{user_id:user.id}})
+ const settings=options.settings ?? paymentSettings()
  if (!row?.stripe_customer_id || !settings.secretKey) fail(409,'subscription_not_found','管理する契約がありません')
- const client=paymentStripeClient(settings)
+ const client=options.client ?? paymentStripeClient(settings)
  if (!client.billingPortal) throw new Error('Portal unavailable')
- const session=await client.billingPortal.sessions.create({customer:row!.stripe_customer_id,return_url:settings.frontendUrl+'/account'})
+ const session=await client.billingPortal.sessions.create({customer:row!.stripe_customer_id,return_url:settings.frontendUrl+'/account',...(settings.portalConfigurationId ? {configuration:settings.portalConfigurationId} : {})})
  return {data:{url:session.url}}
 }
 export async function stopSubscription(user: User, db: Database, injectedClient?: PaymentStripeClient) {

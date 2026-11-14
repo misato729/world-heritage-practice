@@ -114,7 +114,7 @@ const startCheckout = async () => {
           <li><UIcon name="i-lucide-circle-check" />模擬試験{{ EXAM_CONFIG.payments.free_exam_count + 1 }}以降の公開問題</li>
           <li><UIcon name="i-lucide-circle-check" />お気に入り登録とサイドバーでの目印表示</li>
         </ul>
-        <p class="scope-note">資格はアカウント削除、全額返金、支払取消し、異議申立てによる取消し、またはサービス終了まで有効です。</p>
+        <p class="scope-note">現在は準1級・2級の模試1〜10を収録しています。1級の教材は準備中です。有料機能は支払済みの利用期間中に利用できます。期間末解約では次回の更新を停止し、支払済み期間の終了まで利用できます。</p>
       </div>
     </section>
 
