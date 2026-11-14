@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 87,
-  "updated_at": "2026-11-13T19:19:03.374Z",
+  "revision": 95,
+  "updated_at": "2026-11-14T00:12:37.977Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-13T19-19-03-374Z-r87.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-14T00-12-37-977Z-r95.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -62,7 +62,8 @@
     "content/mock-exam-01.answer-sheet.md",
     "frontend/app/components/SiteHeader.vue",
     "docs/mock-exam-01-other-revision-20261106.md",
-    "docs/mock-exam-01-other-delivery-20261106.md"
+    "docs/mock-exam-01-other-delivery-20261106.md",
+    "docs/self-contained-stems-20261114.md"
   ],
   "tasks": [
     {
@@ -1488,6 +1489,134 @@
             "outcome": "passed",
             "summary": "第3総評価は同じ教材/backup/buildでwriter8検査、新300×PCSP600表示回答・全解説出典一致、所有testDB残存0。実開発300追加→600/2400、反復0、旧行ID時刻/13対象保持、利用者0、PCSP新5lockと無料1Q28確認。D9条件/34証跡/代表24画像独立レビュー合格。前2環境失敗を保持。",
             "at": "2026-11-13T19:19:02.930Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "self_contained_stems_20261114",
+      "context": "product",
+      "title": "全模試の外部テキスト依存表現の解消と作問ルール追記",
+      "status": "done",
+      "depends_on": [
+        "mocks_06_10_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「公式テキストの〜等を全体確認し、問題文のみで完結するよう修正。AGENTS.mdにも禁止を明記」。既存の開発DB反映・画面確認の範囲を継続。",
+      "next_action": "独立レビュー済み操作を新しいtestDBで実行し、開発DBと画面へ反映する",
+      "evidence": [
+        "docs/self-contained-stems-20261114.md",
+        "local-only/self-contained-stems-20261114/content-final-acceptance.json"
+      ],
+      "last_verified_at": "2026-11-14",
+      "verification_scope": "v5 SHA903fa434…:全600/2400提示確認、98差分・502不変、98有効盲解一致、別担当原典差分レビュー必須/軽微未解決0。原稿30とJSON同期。新規の全件原典監査・実受験者難度実測は対象外。DB/UIは別task。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "全600本文/2400肢の外部テキスト依存を解消し、98対象と原稿一致・600/2400・番号/分類/配点/キー維持・必要条件/時点を確認。選択肢/解説の必要な例外差分を明示して他項目/非対象502を保持。",
+          "verification": "対象版と全フィールド/原稿/件数/実保存・表示を既存共通処理と限定検査で照合。",
+          "status": "passed",
+          "evidence": [
+            "local-only/self-contained-stems-20261114/content-final-acceptance.json",
+            "local-only/self-contained-stems-20261114/integration/content-schema-v5.json",
+            "local-only/self-contained-stems-20261114/conversion-result-v5.json"
+          ],
+          "checked_at": "2026-11-14"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "未見の別担当が変更提示を盲解し一意性・必要知識・条件/年次を確認、キーと原典を照合",
+          "verification": "作者/実行担当と異なる担当が正答非提示又は実行境界を独立確認する。",
+          "status": "passed",
+          "evidence": [
+            "local-only/self-contained-stems-20261114/blind-coverage-v5.json",
+            "local-only/self-contained-stems-20261114/source-review/candidate-source-v5.json",
+            "local-only/self-contained-stems-20261114/review-everglades/adjudication-v5.json"
+          ],
+          "checked_at": "2026-11-14",
+          "reviewer": "stem_blind_review / stem_fresh_blind / stem_everglades_blind / stem_source_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "v1の形式差分は合格。独立原典レビューで推薦例外条件・避難地の一意性・因果の確度の3件を要修正と判定。記録を保持する。",
+            "at": "2026-11-13T22:01:58.441Z",
+            "failed_criteria": [
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "v5の全98差分を最終提示一致・有効盲解98一致・独立原典差分・共通schema・原稿同期で再評価。初稿不合格と留保を保持し未解決の要修正0。",
+            "at": "2026-11-13T22:04:04.206Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "self_contained_stems_integration_20261114",
+      "context": "development",
+      "title": "問題文自立化の専用開発DB反映とPCSP確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「公式テキストの〜等を全体確認し、問題文のみで完結するよう修正。AGENTS.mdにも禁止を明記」。既存の開発DB反映・画面確認の範囲を継続。",
+      "next_action": "今回範囲は完了。追加修正やコミット/pushは明示依頼に従う。",
+      "evidence": [
+        "docs/self-contained-stems-20261114.md",
+        "local-only/self-contained-stems-20261114/integration/automated-final-result.json",
+        "local-only/self-contained-stems-20261114/integration/independent-runtime-review-final.json"
+      ],
+      "last_verified_at": "2026-11-14",
+      "verification_scope": "v5 SHA903fa434…/archive a3a077d5…:専用dev600/2400の98更新・502不変・全ID/作成日時保持・95対象問の肢全保持・3問肢更新日時許容・反復無変更・再接続。新testDB復元writer8検査、隔離PCSP242表示解答/拒否56、開発無料PCSP46表示解答/拒否28。別担当が証拠27と実見44画像の版/結果を照合し合格。metadata列挙13保持、user0、稼働rate counter除外。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "実バックアップ復元、共通writerによる98対象更新・全ID/作成日時と非対象502保持・95問の肢更新日時保持・3問の肢updated_at更新許容・反復無変更・rollback・履歴整合・PCSP表示解答照合",
+          "verification": "対象版と全フィールド/原稿/件数/実保存・表示を既存共通処理と限定検査で照合。",
+          "status": "passed",
+          "evidence": [
+            "local-only/self-contained-stems-20261114/integration/automated-final-result.json",
+            "local-only/self-contained-stems-20261114/integration/development-final-result.json"
+          ],
+          "checked_at": "2026-11-14"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当の実行script/更新境界/実行結果/代表画面/最終読取の独立確認",
+          "verification": "作者/実行担当と異なる担当が正答非提示又は実行境界を独立確認する。",
+          "status": "passed",
+          "evidence": [
+            "local-only/self-contained-stems-20261114/integration/independent-code-review-final.json",
+            "local-only/self-contained-stems-20261114/integration/independent-runtime-review-final.json"
+          ],
+          "checked_at": "2026-11-14",
+          "reviewer": "stem_db_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "v5をbackup実復元とwriter8検査・PCSP242表示解答で確認し、dev98更新と反復無変更、開発46表示解答、最終600/2400・ID/非対象保持を確認。別担当の静的/実行結果/44画像レビュー合格。",
+            "at": "2026-11-13T22:22:02.160Z",
             "failed_criteria": []
           }
         ]
