@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 166,
-  "updated_at": "2026-11-14T20:40:48.911Z",
+  "revision": 170,
+  "updated_at": "2026-11-15T05:13:30.458Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-14T20-40-48-911Z-r166.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-15T05-13-30-458Z-r170.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -2685,6 +2685,861 @@
       }
     },
     {
+      "id": "grade2_m11_authoring_20261114",
+      "context": "product",
+      "title": "2級模試11の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試11の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "模試11の書籍55問の独立盲解・原典裁定で、事実条件、手掛かり又は旧新の主目標重複を検出。books-a v1全220中45件を対象差分として改稿中。その他5問は別裁定を保持し、全60問の受入は未成立。",
+            "at": "2026-11-14T17:14:17.436Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "模試11の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m12_authoring_20261114",
+      "context": "product",
+      "title": "2級模試12の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試12の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "模試12の書籍55問の独立盲解・原典裁定で、事実条件、手掛かり又は旧新の主目標重複を検出。books-a v1全220中45件を対象差分として改稿中。その他5問は別裁定を保持し、全60問の受入は未成立。",
+            "at": "2026-11-14T17:14:20.956Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "模試12の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m13_authoring_20261114",
+      "context": "product",
+      "title": "2級模試13の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試13の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "模試13の書籍55問の独立盲解・原典裁定で、事実条件、手掛かり又は旧新の主目標重複を検出。books-a v1全220中45件を対象差分として改稿中。その他5問は別裁定を保持し、全60問の受入は未成立。",
+            "at": "2026-11-14T17:14:24.396Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "模試13の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m14_authoring_20261114",
+      "context": "product",
+      "title": "2級模試14の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試14の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "模試14の書籍55問の独立盲解・原典裁定で、事実条件、手掛かり又は旧新の主目標重複を検出。books-a v1全220中45件を対象差分として改稿中。その他5問は別裁定を保持し、全60問の受入は未成立。",
+            "at": "2026-11-14T17:14:28.834Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "模試14の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m15_authoring_20261114",
+      "context": "product",
+      "title": "2級模試15の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試15の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "模試15の書籍55問の初回独立裁定で、事実条件・誤答肢・主目標の重複又は出典補足を要修正と確認。B全165の凍結v2記録を根拠とし、その他5問の確認とは分けて保持。",
+            "at": "2026-11-14T18:09:21.808Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "模試15の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m16_authoring_20261114",
+      "context": "product",
+      "title": "2級模試16の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試16の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "模試16の書籍55問の初回独立裁定で、事実条件・誤答肢・主目標の重複又は出典補足を要修正と確認。B全165の凍結v2記録を根拠とし、その他5問の確認とは分けて保持。",
+            "at": "2026-11-14T18:09:22.424Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "模試16の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m17_authoring_20261114",
+      "context": "product",
+      "title": "2級模試17の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試17の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "模試17の書籍55問の初回独立裁定で、事実条件・誤答肢・主目標の重複又は出典補足を要修正と確認。B全165の凍結v2記録を根拠とし、その他5問の確認とは分けて保持。",
+            "at": "2026-11-14T18:09:23.081Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "模試17の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m18_authoring_20261114",
+      "context": "product",
+      "title": "2級模試18の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試18の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "書籍55問の独立盲解・原典裁定でM18Q06の肢間漏出ほか4問が要修正。その他5問は別担当で確認中。全60問のgateは未成立。",
+            "at": "2026-11-14T16:20:04.350Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "模試18の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m19_authoring_20261114",
+      "context": "product",
+      "title": "2級模試19の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試19の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "書籍55問の独立裁定でM19Q18の肢間漏出ほか3問が要修正。その他5問は別担当で確認中。",
+            "at": "2026-11-14T16:20:15.990Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "模試19の初回指摘を改稿したv2を旧キー未見で再盲解・原典裁定したが、提示の近似性と最短解法に未解消箇所が残った。C v2凍結を保持し、対象だけv3を作成中。",
+            "at": "2026-11-14T18:09:23.889Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "模試19の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m20_authoring_20261114",
+      "context": "product",
+      "title": "2級模試20の作成・全肢出典・独立品質確認",
+      "status": "done",
+      "depends_on": [
+        "self_contained_stems_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「模試11〜20を作成」への回答：2級、開発DBへの登録・画面確認まで。",
+      "next_action": "作問受入完了。依頼済みの開発DB登録・画面確認へ進む。Git送信・本番公開は別の明示依頼。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/input-manifest.json",
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md"
+      ],
+      "last_verified_at": "2026-11-14T20:21:30.253Z",
+      "verification_scope": "模試20の60問240肢100点、全肢/全解説/出典の凍結版一致、旧600と新600の主目標/最短解法/同回漏出、対応MD3点を確認。未実測難度と未再現形式の留保を保持。DB/実画面は後続統合。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "60問240肢100点と分野20/25/10/35/10点、出典/原稿/保存一致、旧600および新規他回の主目標非重複、本文自立・版/年次・全肢根拠・過去問形式文量比較を確認。",
+          "verification": "固定形式の全件検査・原典画像/公式一次資料・最短解法と全肢・同じ方法の過去問分布比較。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者とは別の旧キー未見担当が提示だけで盲解し、凍結後に最短解法/一意性/全肢/出典/範囲/重複を独立裁定。改稿提示は旧キー未見担当で確認。",
+          "verification": "正答非提示記録→原典裁定→対象版指紋と差分のみ再評価。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/review-coverage.json",
+            "local-only/grade2-mocks-11-20-20261114/reviews/global-overlap/global-review-v4.md",
+            "local-only/grade2-mocks-11-20-20261114/saved-presentation-check.json"
+          ],
+          "checked_at": "2026-11-14T20:21:30.253Z",
+          "reviewer": "/root/grade2_blind_a and per-item independent source reviewers"
+        }
+      ],
+      "execution": {
+        "worker": "root and scoped authors",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "書籍55問の独立裁定でM20Q41の既存問重複、Q45の語義漏出、Q55の未確認真肢、条件2件が要修正。その他5問は別担当で確認中。",
+            "at": "2026-11-14T16:20:16.426Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "模試20の初回指摘を改稿したv2を旧キー未見で再盲解・原典裁定したが、提示の近似性と最短解法に未解消箇所が残った。C v2凍結を保持し、対象だけv3を作成中。",
+            "at": "2026-11-14T18:09:24.504Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "模試20の最終60問を全件検査し、変更後の未見盲解と個別原典裁定を継承して独立横断比較を完了。途中の不合格・留保は保持、未解消の必須指摘0。",
+            "at": "2026-11-14T20:21:30.253Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m11_20_integration_20261114",
+      "context": "development",
+      "title": "2級模試11〜20の開発DB登録・PCSP確認",
+      "status": "done",
+      "depends_on": [
+        "grade2_m11_authoring_20261114",
+        "grade2_m12_authoring_20261114",
+        "grade2_m13_authoring_20261114",
+        "grade2_m14_authoring_20261114",
+        "grade2_m15_authoring_20261114",
+        "grade2_m16_authoring_20261114",
+        "grade2_m17_authoring_20261114",
+        "grade2_m18_authoring_20261114",
+        "grade2_m19_authoring_20261114",
+        "grade2_m20_authoring_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-14「2級模試11〜20」＋「開発DBへの登録・画面確認まで（前回と同じ）」",
+      "next_action": "今回の依頼は完了。Git送信・本番公開・追加作問は明示依頼を待つ。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-20261114/brief.md",
+        "local-only/grade2-mocks-11-20-20261114/integration/docker-recovery.json",
+        "local-only/grade2-mocks-11-20-20261114/integration/writer-test-result.json",
+        "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+        "local-only/grade2-mocks-11-20-20261114/integration/isolated-result.json",
+        "local-only/grade2-mocks-11-20-20261114/integration/browser-result.json",
+        "local-only/grade2-mocks-11-20-20261114/integration/applied-result.json",
+        "local-only/grade2-mocks-11-20-20261114/integration/development-result.json",
+        "local-only/grade2-mocks-11-20-20261114/integration/task-maintenance-cleanup-result.json",
+        "local-only/grade2-mocks-11-20-20261114/final-verification.json",
+        "docs/grade2-mocks-11-20-20261114.md",
+        "local-only/grade2-mocks-11-20-20261114/integration/independent-development-review-final.json"
+      ],
+      "last_verified_at": "2026-11-14T21:42:01.925Z",
+      "verification_scope": "2級新600問/2400肢を専用開発へ追加し、合計1800問/7200肢。旧2級600/準1級600の全内容・ID・選択肢・時刻と13metadataを保持。実backupを新testDBへ復元しwriter8項目、別の新testDBで新600問をPC/SP各全表示・解答、正誤/全解説/出典/有料境界を確認。native3110は同じbuild/正本で新有料ロック20・拒否40・旧両級4画面、合成会員作成0。別担当は全実行証拠と代表隔離43画像/開発8画像を確認。今回所有の使い捨てDBと空test起点は残存0。Git送信・本番変更は未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "shared schemaの20枠設定、600新問・旧2級600/準1級600等保持、バックアップ実復元・rollback/反復/再接続・旧ID/時刻/履歴保持、新testDBでPCSP600問表示/解答・有料境界・開発DB最終一致を検証。",
+          "verification": "既存共通CLI/writerと限定検査、testDBを起点に新しい使い捨てDB、合成会員だけでPlaywright。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/content-final-acceptance.json",
+            "local-only/grade2-mocks-11-20-20261114/integration/isolated-result.json",
+            "local-only/grade2-mocks-11-20-20261114/integration/writer-test-result.json",
+            "local-only/grade2-mocks-11-20-20261114/integration/browser-result.json",
+            "local-only/grade2-mocks-11-20-20261114/integration/applied-result.json",
+            "local-only/grade2-mocks-11-20-20261114/integration/development-result.json",
+            "local-only/grade2-mocks-11-20-20261114/integration/task-maintenance-cleanup-result.json",
+            "local-only/grade2-mocks-11-20-20261114/final-verification.json",
+            "docs/grade2-mocks-11-20-20261114.md"
+          ],
+          "checked_at": "2026-11-14T21:42:01.925Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が変更コード/DB境界/全実行結果/代表PCSP画像/対象版指紋を独立確認。",
+          "verification": "コードseal→隔離実行→開発反映→最終read/代表画面の独立照合。",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-20261114/integration/independent-code-review-final.json",
+            "local-only/grade2-mocks-11-20-20261114/integration/independent-isolated-review-final.json",
+            "local-only/grade2-mocks-11-20-20261114/integration/independent-development-review-final.json"
+          ],
+          "checked_at": "2026-11-14T21:42:01.925Z",
+          "reviewer": "/root/stem_db_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回の隔離実行は空test起点への接続前に停止。Docker Engine/専用DB双方が応答せず、testDB作成0・開発DB変更なし。内容受入600問/30原稿は維持し、停止結果を保存。ユーザーがDocker Desktop再起動を明示承認。",
+            "at": "2026-11-14T20:38:43.016Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "Docker復旧後の隔離全件検証と独立照合を完了して専用開発DBへ600問だけ追加。旧両級・履歴関係・metadata保持、反復/再接続、PC/SP全600問とnative有料境界、所有testDB後片付け、資料保護と差分を確認。初回停止履歴を保持した上限内2回目の合格。",
+            "at": "2026-11-14T21:42:01.925Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
       "id": "production_deploy_20261115",
       "context": "operations",
       "title": "Netlify・Fly.io・Neon本番配信とStripe月額500円申込開始",
@@ -2761,7 +3616,7 @@
       ],
       "authorization": "requested",
       "request_ref": "2026-11-15: パスワード再設定メールと障害通知も他のラボと同じように設定する明示依頼。",
-      "next_action": "選択差分と資料保護・workflow検査を確認してコミット・mainへpushし、CIと残存差分を確認する。",
+      "next_action": "通常運用し、追加依頼を待つ。",
       "evidence": [
         "docs/mail-notifications-20261115.md",
         "docs/mail-notifications-review-20261115.md",
@@ -2814,6 +3669,63 @@
             "summary": "専用GASと最小送信権限・本番6設定を有効化し、実受信/再設定/旧2セッション失効/単回性/合成会員削除と専用Sentryの本人通知受信を確認。18+8検査、公開PC/SP8ケース、32route生成、配信指紋と秘密保護が成功。独立レビューPASS・必須未解決0。",
             "at": "2026-11-14T20:25:36.935Z",
             "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_m11_20_production_release_20261115",
+      "context": "operations",
+      "title": "2級模試11〜20のコミット・push・本番追加配信",
+      "status": "doing",
+      "depends_on": [
+        "grade2_m11_20_integration_20261114"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-15「コミット・push・本番反映してください。」",
+      "next_action": "新しい版の検証・独立確認を終え、現在の本番設定を保って追加・配信する。",
+      "evidence": [
+        "local-only/grade2-mocks-11-20-release-20261115/brief.md",
+        "local-only/grade2-mocks-11-20-release-20261115/reviews/independent-production-code-review-initial-findings.json"
+      ],
+      "last_verified_at": null,
+      "verification_scope": "確認済み600問のGit配信と既存専用本番DB/API/UIへの追加。既存個人行はexportせず、購読/販売設定を保持。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "教材指紋・明示stage・資料保護・CI・remote一致、backup/600追加/旧1200と個人テーブル保持/反復/再接続、本番HTTPとPCSP代表表示を確認。",
+          "verification": "確認済みローカル検証の適用範囲を継承し、対象版と実際の本番状態を対応付ける。",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が本番追加のcode/backup境界と最終実行証拠/代表画面を独立確認。",
+          "verification": "実行前static reviewと実行後version-bound evidence review。",
+          "status": "failed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-release-20261115/reviews/independent-production-code-review-initial-findings.json"
+          ],
+          "checked_at": "2026-11-15T05:13:29.882Z",
+          "reviewer": "/root/stem_db_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回独立コード確認で、他級件数の条件がcommit後である点と並行更新testの同期が時間待ちだけである点を指摘。旧17 tests/5検査は実行成功として保持し、新しい本番wrapperの受入は未達とした。",
+            "at": "2026-11-15T05:13:29.882Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
           }
         ]
       }

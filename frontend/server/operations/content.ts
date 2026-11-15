@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto'
 import { lstat, readFile, mkdtemp, writeFile, link, rm } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { query, transaction, type Database } from '../core/db.ts'
+import { query, transaction, getDatabase, record, type Database } from '../core/db.ts'
 import { environment, configuration } from '../core/config.ts'
 import { ContentValidationError, contentDocumentSchema, parseQuestionArchiveEntries, type QuestionInput } from '../../shared/schemas/content.ts'
 import { saveQuestion, validateCompleteExam } from '../services/learning-writer.ts'
@@ -11,6 +11,7 @@ import { saveQuestion, validateCompleteExam } from '../services/learning-writer.
 export class OperationError extends Error {}
 export const ARCHIVE_FORMAT = 'exam-practice-question-archive'
 export const IMPORT_CONFIRMATION = 'IMPORT_INTO_EMPTY_DATABASE'
+export const APPEND_CONFIRMATION = 'APPEND_NEW_COMPLETE_EXAMS'
 export const MAX_CONTENT_BYTES = 64 * 1024 * 1024
 export const QUESTION_LOCK = 71514345
 export const defaultContentPath = fileURLToPath(new URL('../../../content/questions.json', import.meta.url))
@@ -84,6 +85,105 @@ export async function importContent(path = defaultContentPath, confirmation?: st
 }
 export async function importArchiveFile(path: string, confirmation?: string, db?: Database) {
   return importArchive(await readJson(path), confirmation, db)
+}
+
+const storedQuestions = (db: Database) => db.question.findMany({
+  orderBy: [{ grade: 'asc' }, { exam_number: 'asc' }, { question_number: 'asc' }],
+  include: { choices: { orderBy: { display_order: 'asc' } } },
+}).then(record)
+type StoredQuestion = Awaited<ReturnType<typeof storedQuestions>>[number]
+function archiveQuestion(question: StoredQuestion): QuestionInput {
+  return {
+    exam_number: question.exam_number, question_number: question.question_number,
+    major_category_code: question.major_category_code, category_code: question.category_code,
+    content_blocks: question.content_blocks as QuestionInput['content_blocks'],
+    explanation_blocks: question.explanation_blocks as QuestionInput['explanation_blocks'],
+    source_text: question.source_text, publication_status: question.publication_status as QuestionInput['publication_status'],
+    choices: question.choices.map(choice => ({ choice_label: choice.choice_label,
+      content_blocks: choice.content_blocks as QuestionInput['choices'][number]['content_blocks'],
+      is_correct: choice.is_correct, display_order: choice.display_order })),
+  }
+}
+// Preserve dates and safe numeric IDs when fingerprinting stored rows. Values
+// remain in the CLI process; results contain only counts and equality flags.
+const storedDigest = (value: unknown) => digest(JSON.parse(JSON.stringify(value)))
+async function protectedState(db: Database) {
+  const rows = await Promise.all([
+    db.majorCategory.findMany({ orderBy: { code: 'asc' } }),
+    db.user.findMany({ orderBy: { id: 'asc' } }),
+    db.answerHistory.findMany({ orderBy: { id: 'asc' } }),
+    db.favorite.findMany({ orderBy: { id: 'asc' } }),
+    db.payment.findMany({ orderBy: { id: 'asc' } }),
+    db.membership.findMany({ orderBy: { id: 'asc' } }),
+    db.stripeWebhookEvent.findMany({ orderBy: { id: 'asc' } }),
+    db.verificationAccessGrant.findMany({ orderBy: { id: 'asc' } }),
+    db.authSession.findMany({ orderBy: { id: 'asc' } }),
+    db.authAccount.findMany({ orderBy: { id: 'asc' } }),
+    db.authVerification.findMany({ orderBy: { id: 'asc' } }),
+    db.subscription.findMany({ orderBy: { id: 'asc' } }),
+    db.apiRateLimitBucket.findMany({ orderBy: { key: 'asc' } }),
+  ])
+  return storedDigest(record(rows))
+}
+type AppendOptions = { confirmation?: string, beforeSha256?: string, afterSha256?: string, addedSha256?: string,
+  totalQuestionsBefore?: number, otherGradeQuestionCounts?: Record<string, number> }
+/** Add only wholly new, complete published sets; never update existing rows. */
+export async function appendArchive(document: unknown, options: AppendOptions, existing?: Database) {
+  if (options.confirmation !== APPEND_CONFIRMATION) throw new OperationError('新規の模試だけを追加する明示的な確認が必要です')
+  for (const hash of [options.beforeSha256, options.afterSha256, options.addedSha256]) {
+    if (!hash || !/^[0-9a-f]{64}$/.test(hash)) throw new OperationError('追加前・追加後・追加教材の照合値を指定してください')
+  }
+  const otherGrades = configuration.grades.map(g => g.code).filter(grade => grade !== currentGrade()).sort()
+  if (!Number.isSafeInteger(options.totalQuestionsBefore) || options.totalQuestionsBefore! < 0 ||
+      !object(options.otherGradeQuestionCounts) || Object.keys(options.otherGradeQuestionCounts).sort().join(',') !== otherGrades.join(',') ||
+      Object.values(options.otherGradeQuestionCounts).some(count => !Number.isSafeInteger(count) || count < 0)) {
+    throw new OperationError('追加前の全体件数と他級の件数を指定してください')
+  }
+  const archive = validateArchive(document)
+  if (archive.sha256 !== options.addedSha256 || archive.question_count === 0 || archive.questions.some(q => q.publication_status !== 'published')) {
+    throw new OperationError('追加教材の照合値又は公開状態が一致しません')
+  }
+  const exams = [...new Set(archive.questions.map(q => q.exam_number))].sort((a, b) => a - b)
+  const run = async (db: Database) => {
+    await query('SELECT pg_advisory_xact_lock($1)::text', [QUESTION_LOCK], db)
+    await query('LOCK TABLE questions, question_choices IN SHARE ROW EXCLUSIVE MODE', [], db)
+    const before = await storedQuestions(db), protectedBefore = await protectedState(db)
+    const scoped = before.filter(q => q.grade === currentGrade())
+    const current = createArchive(scoped.map(archiveQuestion))
+    const repeated = current.sha256 === options.afterSha256
+    if (before.length !== options.totalQuestionsBefore! + (repeated ? archive.question_count : 0) ||
+        otherGrades.some(grade => before.filter(q => q.grade === grade).length !== options.otherGradeQuestionCounts![grade])) {
+      throw new OperationError('追加前の全体件数又は他級の件数が一致しません')
+    }
+    const prior = scoped.filter(q => !exams.includes(q.exam_number))
+    if (createArchive(prior.map(archiveQuestion)).sha256 !== options.beforeSha256 ||
+        (!repeated && (current.sha256 !== options.beforeSha256 || prior.length !== scoped.length))) {
+      throw new OperationError('追加前の教材が一致しないか、対象模試が既に存在します')
+    }
+    if (repeated && createArchive(scoped.filter(q => exams.includes(q.exam_number)).map(archiveQuestion)).sha256 !== archive.sha256) {
+      throw new OperationError('追加済み教材が一致しません')
+    }
+    if (!repeated) for (const question of archive.questions) await saveQuestion(question, { db, requireCompleteExam: false })
+    for (const exam of exams) await validateCompleteExam(exam, db)
+    const after = await storedQuestions(db), byId = new Map(after.map(q => [q.id, q]))
+    if (createArchive(after.filter(q => q.grade === currentGrade()).map(archiveQuestion)).sha256 !== options.afterSha256 ||
+        after.length !== before.length + (repeated ? 0 : archive.question_count) ||
+        before.some(q => storedDigest(byId.get(q.id)) !== storedDigest(q)) ||
+        await protectedState(db) !== protectedBefore) {
+      throw new OperationError('追加後の教材又は既存データの保持確認に失敗しました')
+    }
+    return { status: repeated ? 'unchanged' as const : 'appended' as const,
+      addedQuestions: repeated ? 0 : archive.question_count, addedChoices: repeated ? 0 : archive.choice_count,
+      totalQuestions: after.length, totalChoices: after.reduce((sum, q) => sum + q.choices.length, 0),
+      existingQuestionAndChoiceIdsContentAndTimesUnchanged: true, protected13ModelsUnchangedWithinTransaction: true,
+      grade: currentGrade(), exams, beforeSha256: options.beforeSha256!, afterSha256: options.afterSha256!, addedSha256: archive.sha256 }
+  }
+  // A stable snapshot allows legitimate concurrent member activity without
+  // mistaking it for this operation's writes. No private rows leave the process.
+  return existing ? run(existing) : getDatabase().$transaction(run, { isolationLevel: 'RepeatableRead', timeout: 180_000, maxWait: 10_000 })
+}
+export async function appendArchiveFile(path: string, options: AppendOptions) {
+  return appendArchive(await readJson(path), options)
 }
 export async function seedContent(options: { path?: string, db?: Database, mode?: string } = {}) {
   if (currentGrade() !== '2' || (options.mode ?? environment()) !== 'development') return { status: 'skipped' as const }

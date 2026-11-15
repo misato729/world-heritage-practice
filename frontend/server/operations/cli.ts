@@ -8,14 +8,14 @@ import { closeDatabase } from '../core/db.ts'
 import { closeRateLimitStore } from '../core/rate-limit.ts'
 import { ApiError } from '../core/errors.ts'
 import { migrate } from '../database/migrate.ts'
-import { OperationError, importContent, importArchiveFile, exportArchive, seedContent } from './content.ts'
+import { OperationError, importContent, importArchiveFile, appendArchiveFile, exportArchive, seedContent } from './content.ts'
 import { createAdmin, grantVerification, revokeVerification } from './accounts.ts'
 import { auditOperations, expirePendingForUser } from './audit.ts'
 import { restoreDrill } from './restore-drill.ts'
 import { syncMajorCategories } from './categories.ts'
 import { environment } from '../core/config.ts'
 
-export const commands = ['subscriptions:sync', 'db:migrate', 'db:baseline', 'db:seed', 'categories:sync', 'questions:import_content', 'questions:import', 'questions:export',
+export const commands = ['subscriptions:sync', 'db:migrate', 'db:baseline', 'db:seed', 'categories:sync', 'questions:import_content', 'questions:import', 'questions:append', 'questions:export',
   'admin:create', 'verification_access:grant', 'verification_access:revoke', 'payments:expire_pending_checkouts', 'operations:audit', 'operations:restore_drill'] as const
 
 /** Inputs arrive through environment variables so passwords never enter command arguments. */
@@ -42,6 +42,16 @@ async function runScopedCommand(command: string | undefined, env: NodeJS.Process
     case 'questions:import':
       if (!env.INPUT) throw new OperationError('INPUTにアーカイブのパスを指定してください')
       return importArchiveFile(env.INPUT, env.CONFIRM)
+    case 'questions:append': {
+      if (!env.INPUT) throw new OperationError('INPUTにアーカイブのパスを指定してください')
+      let counts: Record<string, number>
+      try { counts = JSON.parse(env.EXPECTED_OTHER_GRADE_COUNTS || '') }
+      catch { throw new OperationError('他級の件数をJSONで指定してください') }
+      return appendArchiveFile(env.INPUT, { confirmation: env.CONFIRM, beforeSha256: env.EXPECTED_BEFORE_SHA256,
+        afterSha256: env.EXPECTED_AFTER_SHA256, addedSha256: env.EXPECTED_ADDED_SHA256,
+        totalQuestionsBefore: env.EXPECTED_TOTAL_BEFORE ? Number(env.EXPECTED_TOTAL_BEFORE) : undefined,
+        otherGradeQuestionCounts: counts })
+    }
     case 'questions:export': return exportArchive(env.OUTPUT || '')
     case 'admin:create': return createAdmin({ email: env.ADMIN_EMAIL, password: env.ADMIN_PASSWORD, name: env.ADMIN_NAME })
     case 'verification_access:grant': return grantVerification({ email: env.USER_EMAIL, expiresAt: env.EXPIRES_AT, reason: env.REASON, grantedBy: env.GRANTED_BY })

@@ -33,7 +33,7 @@ export async function monthlyCheckout(user: User, options: PaymentOptions = {}) 
    integration_identifier:'heritage_monthly_'+Array.from({length:8},()=>String.fromCharCode(97+randomInt(26))).join(''),
    allow_promotion_codes:false, automatic_tax:{enabled:false}, consent_collection:{terms_of_service:'required'},
    custom_text:{
-    submit:{message:'月額500円（税込）で自動更新します。全級共通で模試4以降の公開問題が対象です。現在は2級・準1級の模試1〜10を公開し、1級は準備中です。契約管理から解約できます。'},
+    submit:{message:'月額500円（税込）で自動更新します。全級共通で模試4以降の公開問題が対象です。現在は2級の模試1〜20と準1級の模試1〜10を公開し、1級は準備中です。契約管理から解約できます。'},
     terms_of_service_acceptance:{message:`世界遺産ラボの[利用規約](${settings.frontendUrl}/terms)・[プライバシーポリシー](${settings.frontendUrl}/privacy-policy)・[特定商取引法に基づく表記](${settings.frontendUrl}/commercial-disclosure)を確認し、月額500円（税込）の自動更新契約に同意します。`},
    },
    success_url:settings.frontendUrl+'/premium/complete', cancel_url:settings.frontendUrl+'/premium?canceled=1',
