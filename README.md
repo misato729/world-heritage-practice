@@ -49,7 +49,7 @@ docker compose exec frontend npm run operations -- categories:sync
 
 分類登録の実施結果は[大分類のDB登録](docs/categories-db-20261105.md)に記録しています。
 
-各級の模試1〜3は無料、4以降は全級共通の月額500円（税込）の対象です。2026年11月15日に[本番サイト](https://world-heritage-practice.netlify.app)を公開し、月額プランの申込み受付を開始しました。初回配信で公開した教材は2級・準1級の模試1〜10で、1級の教材は準備中です。2級模試11〜20は追加依頼に基づき[本番反映を進めています](docs/grade2-mocks-11-20-release-20261115.md)。配信先・Stripe設定・検証範囲・残る運用事項は[初回の本番配信記録](docs/deployment-20261115.md)を参照してください。
+各級の模試1〜3は無料、4以降は全級共通の月額500円（税込）の対象です。2026年11月15日に[本番サイト](https://world-heritage-practice.netlify.app)を公開し、月額プランの申込み受付を開始しました。現在は2級の模試1〜20と準1級の模試1〜10を収録し、1級の教材は準備中です。2級模試11〜20の追加は[本番反映記録](docs/grade2-mocks-11-20-release-20261115.md)、配信先・Stripe設定・検証範囲・残る運用事項は[初回の本番配信記録](docs/deployment-20261115.md)を参照してください。
 
 パスワード再設定メールと、既存APIの固定カテゴリに対するSentry障害通知も本番で有効にしています。設定先・実配送と通知の確認結果・運用範囲は[メール・障害通知の設定記録](docs/mail-notifications-20261115.md)を参照してください。
 

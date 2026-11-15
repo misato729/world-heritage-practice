@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 170,
-  "updated_at": "2026-11-15T05:13:30.458Z",
+  "revision": 171,
+  "updated_at": "2026-11-15T06:34:54.243Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-15T05-13-30-458Z-r170.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-15T06-34-54-243Z-r171.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -3677,39 +3677,56 @@
       "id": "grade2_m11_20_production_release_20261115",
       "context": "operations",
       "title": "2級模試11〜20のコミット・push・本番追加配信",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "grade2_m11_20_integration_20261114"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-15「コミット・push・本番反映してください。」",
-      "next_action": "新しい版の検証・独立確認を終え、現在の本番設定を保って追加・配信する。",
+      "next_action": "完了記録だけを追加コミット・pushし、必須CIとremote一致を確認して依頼を終了する。",
       "evidence": [
         "local-only/grade2-mocks-11-20-release-20261115/brief.md",
-        "local-only/grade2-mocks-11-20-release-20261115/reviews/independent-production-code-review-initial-findings.json"
+        "local-only/grade2-mocks-11-20-release-20261115/reviews/independent-production-code-review-initial-findings.json",
+        "local-only/grade2-mocks-11-20-release-20261115/final-verification.json",
+        "local-only/grade2-mocks-11-20-release-20261115/production-append-result.json",
+        "local-only/grade2-mocks-11-20-release-20261115/hosting-verification.json",
+        "local-only/grade2-mocks-11-20-release-20261115/production-smoke-result.json",
+        "local-only/grade2-mocks-11-20-release-20261115/ci-feature-result.json",
+        "local-only/grade2-mocks-11-20-release-20261115/git-feature-delivery.json",
+        "docs/grade2-mocks-11-20-release-20261115.md",
+        "local-only/grade2-mocks-11-20-release-20261115/reviews/independent-production-release-final.json"
       ],
-      "last_verified_at": null,
-      "verification_scope": "確認済み600問のGit配信と既存専用本番DB/API/UIへの追加。既存個人行はexportせず、購読/販売設定を保持。",
+      "last_verified_at": "2026-11-15T06:34:53.501Z",
+      "verification_scope": "承認済み600問と関連変更64ファイルをmainへpushし、source251全件をcommit fc34a9dへ結合、必須CI4成功。専用Neon full-data復旧点と親/endpoint結合を確認。本番内の共通CLIで新600/2400だけ追加し1800/7200、旧1200全行/ID/時刻と13モデルwithin-TX保持、再接続/repeat0、認証/販売/メール/通知flag維持。Fly/Netlify実公開IDとsource一致、公開PC/SP実収録20/10/0・新有料境界・旧本文全肢・案内/開閉API0・16代表画像と全幅nav/問60到達を確認。公開検査の業務書込/会員作成/課金0、owned local test resources残存0。クラウド復元演習と本番有料600全件演習は未実施として区別。最終記録のGit送信は同じ依頼の後処理として続ける。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "教材指紋・明示stage・資料保護・CI・remote一致、backup/600追加/旧1200と個人テーブル保持/反復/再接続、本番HTTPとPCSP代表表示を確認。",
           "verification": "確認済みローカル検証の適用範囲を継承し、対象版と実際の本番状態を対応付ける。",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-mocks-11-20-release-20261115/final-verification.json",
+            "local-only/grade2-mocks-11-20-release-20261115/production-append-result.json",
+            "local-only/grade2-mocks-11-20-release-20261115/hosting-verification.json",
+            "local-only/grade2-mocks-11-20-release-20261115/production-smoke-result.json",
+            "local-only/grade2-mocks-11-20-release-20261115/ci-feature-result.json",
+            "local-only/grade2-mocks-11-20-release-20261115/git-feature-delivery.json",
+            "docs/grade2-mocks-11-20-release-20261115.md"
+          ],
+          "checked_at": "2026-11-15T06:34:53.501Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "別担当が本番追加のcode/backup境界と最終実行証拠/代表画面を独立確認。",
           "verification": "実行前static reviewと実行後version-bound evidence review。",
-          "status": "failed",
+          "status": "passed",
           "evidence": [
-            "local-only/grade2-mocks-11-20-release-20261115/reviews/independent-production-code-review-initial-findings.json"
+            "local-only/grade2-mocks-11-20-release-20261115/reviews/independent-production-code-review-final.json",
+            "local-only/grade2-mocks-11-20-release-20261115/reviews/independent-production-release-final.json"
           ],
-          "checked_at": "2026-11-15T05:13:29.882Z",
+          "checked_at": "2026-11-15T06:34:53.501Z",
           "reviewer": "/root/stem_db_review"
         }
       ],
@@ -3726,6 +3743,13 @@
               "checks",
               "review"
             ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "初回2指摘を履歴付きで修正し、55検査+実scale5、コード独立確認、main送信/CI、復旧点結合、本番600追加と既存保持、API/UI反映と公開PC/SP・代表画像の独立確認を完了。CLI配信オプションの失敗と先行sidebar公開を区別し、最終の実公開版を確認した。",
+            "at": "2026-11-15T06:34:53.501Z",
+            "failed_criteria": []
           }
         ]
       }
