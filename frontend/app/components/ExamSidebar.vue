@@ -10,9 +10,9 @@ const mobileOpen = ref(false)
 const mobileToggle = ref<HTMLButtonElement | null>(null)
 const { user, authResolved, ensureCurrentUser } = useAuth()
 const { isFavoriteAt } = useFavorites()
-const accessStatus = ref<'ready' | 'pending' | 'error'>(
-  authResolved.value ? 'ready' : 'pending',
-)
+// Prerendered HTML has unresolved access. Start with the same branch during
+// hydration; onMounted resolves even an already-known visitor before showing links.
+const accessStatus = ref<'ready' | 'pending' | 'error'>('pending')
 let resolvingAccess = false
 
 const exams = computed(() => EXAM_CATALOG)
