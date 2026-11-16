@@ -24,16 +24,18 @@ const sessionFor = (id: number | null, sessionId = 'session-one') => ({
   data: id === null ? null : { user: { id: String(id) }, session: { id: sessionId } },
   isPending: false, isRefetching: false, error: null as null | { status: number },
 })
-function harness(initial: AuthUser | null, fetchUser: (path: string) => Promise<unknown>, nativeIdentity = initial?.id ?? null) {
+function harness(initial: AuthUser | null, fetchUser: (path: string) => Promise<unknown>, nativeIdentity = initial?.id ?? null, hydrating = false) {
   const native = ref(sessionFor(nativeIdentity))
   const states = new Map()
-  const app = { $api: fetchUser, $authClient: {
+  const app = { isHydrating: hydrating, $api: fetchUser, $authClient: {
     useSession: () => native,
     signIn: { email: async () => ({ data: {} }) },
     signUp: { email: async () => ({ data: {} }) },
     signOut: async () => ({ data: {} }),
   } }
   globals.useNuxtApp = () => app
+  const ready: (() => void)[] = []
+  globals.onNuxtReady = (callback: () => void) => ready.push(callback)
   globals.useState = (key: string, init: () => unknown) => {
     if (!states.has(key)) states.set(key, ref(init()))
     return states.get(key)
@@ -42,8 +44,22 @@ function harness(initial: AuthUser | null, fetchUser: (path: string) => Promise<
   auth.user.value = initial
   auth.authResolved.value = initial !== null
   ;(observeSession as any)(app)
-  return { auth, native }
+  return { auth, native, ready: () => { app.isHydrating = false; ready.forEach(callback => callback()) } }
 }
+
+test('a fast native response keeps the static SSR identity until hydration finishes', async () => {
+  let reads = 0
+  const h = harness(null, async () => { reads++; return { data: member(1) } }, 1, true)
+  assert.equal(reads, 0)
+  assert.equal(h.auth.user.value, null)
+  h.native.value = sessionFor(1, 'latest-before-mount')
+  assert.equal(reads, 0)
+  h.ready(); await flush()
+  assert.equal(reads, 1)
+  assert.equal(h.auth.user.value?.id, 1)
+  h.ready(); await flush()
+  assert.equal(reads, 1)
+})
 
 test('the initial native session reuses matching SSR application identity', () => {
   let reads = 0
@@ -51,6 +67,24 @@ test('the initial native session reuses matching SSR application identity', () =
   assert.equal(auth.user.value?.id, 1)
   assert.equal(reads, 0)
 })
+
+for (const identity of [null, 2]) {
+  test(`a native ${identity === null ? 'logout' : 'account switch'} during hydration hides the stale SSR member before me resolves`, async () => {
+    let resolve!: (value: unknown) => void
+    let reads = 0
+    const h = harness(member(1), async () => { reads++; return new Promise(done => { resolve = done }) }, 1, true)
+    h.native.value = sessionFor(identity, 'changed-before-ready')
+    assert.equal(h.auth.user.value?.id, 1)
+    assert.equal(reads, 0)
+    h.ready()
+    assert.equal(h.auth.user.value, null)
+    assert.deepEqual(useFavorites().favoriteIds.value, [])
+    assert.equal(reads, 1)
+    resolve(identity === null ? { data: null } : { data: member(identity) })
+    await flush()
+    assert.equal(h.auth.user.value?.id ?? null, identity)
+  })
+}
 
 test('a library cross-tab identity change hides old favorites before loading the replacement member', async () => {
   let resolve!: (value: unknown) => void

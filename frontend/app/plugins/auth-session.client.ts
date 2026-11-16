@@ -8,8 +8,11 @@ export default defineNuxtPlugin({
     let observed = false
     let previousKey: string | null = null
 
-    watch([session, authMutationPending], ([current, mutations]) => {
-      if (mutations || current.isPending || current.isRefetching || (current.error && current.error.status !== 401)) return
+    const syncSession = () => {
+      const current = session.value
+      const mutations = authMutationPending.value
+      // Keep the SSR identity stable until the first document is hydrated.
+      if (nuxtApp.isHydrating || mutations || current.isPending || current.isRefetching || (current.error && current.error.status !== 401)) return
       const identity = current.data?.user?.id
       const nextKey = identity == null ? null : JSON.stringify([identity, current.data?.session?.id])
       if (observed && nextKey === previousKey) return
@@ -19,9 +22,13 @@ export default defineNuxtPlugin({
 
       const sameUser = identity != null && user.value != null && String(identity) === String(user.value.id)
       if (initial) {
-        // The first native snapshot must not invalidate the application's
-        // initial /me lookup that route guards may already be awaiting.
-        if (!sameUser) void ensureCurrentUser(true)
+        // Clear a stale SSR identity before checking a session that changed
+        // during hydration. An anonymous shell must still join its first /me
+        // lookup instead of invalidating the request awaited by route guards.
+        if (!sameUser) {
+          if (user.value) clearCurrentUser()
+          void ensureCurrentUser(true)
+        }
         return
       }
       // Hide another account's data before the asynchronous application fetch.
@@ -30,6 +37,8 @@ export default defineNuxtPlugin({
         if (sameUser) sessionVersion.value += 1
         void ensureCurrentUser(true)
       }
-    }, { immediate: true, flush: 'sync' })
+    }
+    watch([session, authMutationPending], syncSession, { immediate: true, flush: 'sync' })
+    onNuxtReady(syncSession)
   },
 })

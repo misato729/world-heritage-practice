@@ -26,90 +26,56 @@ const member = (kind: string): AuthUser | null => kind === 'anonymous' ? null : 
 const flush = async () => { await nextTick(); await new Promise<void>(done => setImmediate(done)); await nextTick() }
 function harness(path: string, kind = 'anonymous', resolved = kind !== 'anonymous', paid = false, freeMax = 1) {
   const config = { ...EXAM_CONFIG, payments: { ...EXAM_CONFIG.payments, enabled: paid, free_exam_count: paid ? freeMax : EXAM_CONFIG.payments.free_exam_count } }
-  const fullAccess = (user: Parameters<typeof hasFullExamAccess>[0]) => hasFullExamAccess(user, config)
   const route = reactive({ path, fullPath: path })
   const user = ref(member(kind)), authResolved = ref(resolved)
   let checks = 0
-  const pending: ((value: AuthUser | null) => void)[] = [], requests: string[] = [], mounted: (() => void)[] = []
+  const requests: string[] = []
   const auth = { user, authResolved, isLoggedIn: computed(() => user.value !== null), sessionVersion: ref(0), authHeaders: computed(() => ({})),
-    ensureCurrentUser: () => { checks++; return new Promise<AuthUser | null>(done => pending.push(done)) } }
+    ensureCurrentUser: async () => { checks++; return null } }
   const useNuxtApp = () => ({ $api: (url: string) => { requests.push(url); throw new Error('Sidebar must not fetch question data') } })
   const useFavorites = factory(read('composables/useFavorites.ts'), { computed, useAuth: () => auth, useNuxtApp, canUseFavoriteFeature: (logged: boolean, user: Parameters<typeof hasFullExamAccess>[0]) => canUseFavoriteFeature(logged, user, config), PAYMENTS_ENABLED: paid }, 'useFavorites')
   const scope = effectScope()
   const instance = scope.run(() => factory(sidebar, {
-    computed, ref, watch, onMounted: (callback: () => void) => mounted.push(callback), useRoute: () => route,
-    useAuth: () => auth, useFavorites, useGrade: () => ({ EXAM_CATALOG, FREE_EXAM_MAX: paid ? freeMax : FREE_EXAM_MAX }), hasFullExamAccess: fullAccess,
-    useNuxtApp, useFetch: (url: string) => { requests.push(url); throw new Error('Unexpected question fetch') },
-  }, '{ exams, isLoading, hasAccessError, resolveAccess, examTarget, accessStatus, openExam, toggleExam, isExamLocked }'))!
-  mounted.forEach(callback => callback())
-  return { instance, user, authResolved, requests, pending, checks: () => checks,
+    computed, ref, watch, defineProps: () => ({ collapsed: false }), defineEmits: () => () => {}, useRoute: () => route,
+    useAuth: () => auth, useFavorites, useGrade: () => ({ EXAM_CATALOG, FREE_EXAM_MAX: paid ? freeMax : FREE_EXAM_MAX }),
+    hasFullExamAccess: (user: Parameters<typeof hasFullExamAccess>[0]) => hasFullExamAccess(user, config),
+  }, '{ exams, examTarget, openExam, toggleExam, isExamLocked }'))!
+  return { instance, user, authResolved, requests, checks: () => checks,
     go: (path: string) => { route.path = path; route.fullPath = path }, dispose: () => scope.stop() }
 }
 function assertStatic(h: ReturnType<typeof harness>) {
-  assert.equal(h.instance.isLoading.value, false)
-  assert.equal(h.instance.hasAccessError.value, false)
   assert.equal(h.instance.exams.value, EXAM_CATALOG)
   assert.deepEqual(h.requests, [])
+  assert.equal(h.checks(), 0)
 }
 
 for (const kind of ['anonymous', 'free', 'premium', 'admin', 'verification']) {
-  test(`all static pages avoid sidebar question/qualification requests for ${kind}`, async () => {
+  test(`all routes keep the configured sidebar without qualification requests for ${kind}`, async () => {
     assert.ok(staticRoutes.includes('/privacy-policy') && staticRoutes.includes('/premium/complete'))
-    for (const path of [...staticRoutes, '/future-static-page', '/practice-guide']) {
+    for (const path of ['/', '/practice/1/1', '/practice', ...staticRoutes, '/future-static-page', '/practice-guide']) {
       const h = harness(path, kind)
       try {
-        await flush(); assertStatic(h); assert.equal(h.checks(), 0, path)
-        await h.instance.resolveAccess(); assert.equal(h.checks(), 0, path)
+        await flush(); assertStatic(h)
         const exam = h.instance.exams.value[0]
         assert.equal(h.instance.examTarget(exam), `/practice/${exam.exam_number}/${exam.question_numbers[0]}`)
+        h.instance.toggleExam(exam.exam_number)
+        assert.equal(h.instance.openExam.value, exam.exam_number)
+        assertStatic(h)
       } finally { h.dispose() }
     }
   })
 }
 
-test('unresolved and failed qualification cannot show a loading/error panel on static pages', async () => {
-  const h = harness('/privacy-policy')
-  try {
-    assertStatic(h)
-    h.instance.accessStatus.value = 'error'; await flush(); assertStatic(h)
-    h.authResolved.value = true; await flush(); assertStatic(h); assert.equal(h.checks(), 0)
-  } finally { h.dispose() }
-})
-
-test('home and practice still resolve access after leaving a static page', async () => {
-  for (const path of ['/', '/practice/1/1', '/practice/1/1/']) {
-    const h = harness('/terms')
-    try {
-      h.go(path); await flush(); assert.equal(h.checks(), 1, path); assert.equal(h.instance.isLoading.value, true)
-      h.authResolved.value = true; h.pending[0]!(null); await flush()
-      assert.equal(h.instance.isLoading.value, false); assert.deepEqual(h.requests, [])
-    } finally { h.dispose() }
-  }
-})
-
-test('late qualification failure stays hidden on every static page; practice retains its retry', async () => {
-  for (const path of staticRoutes) {
-    const h = harness('/practice/1/1')
-    try {
-      assert.equal(h.checks(), 1); h.go(path); await flush(); assertStatic(h)
-      h.pending[0]!(null); await flush(); assertStatic(h)
-      h.go('/practice/1/1'); await flush(); assert.equal(h.checks(), 2)
-      h.pending[1]!(null); await flush(); assert.equal(h.instance.hasAccessError.value, true)
-      const retry = h.instance.resolveAccess(); assert.equal(h.checks(), 3)
-      h.authResolved.value = true; h.pending[2]!(null); await retry; assert.equal(h.instance.hasAccessError.value, false)
-    } finally { h.dispose() }
-  }
-})
-
-test('late successful qualification and known login/logout preserve static links without fetching', async () => {
+test('pending or failed global authentication never removes navigation on home, practice or static routes', async () => {
   const h = harness('/')
   try {
-    h.go('/terms'); await flush(); h.user.value = member('premium'); h.pending[0]!(h.user.value); await flush(); assertStatic(h)
-    h.user.value = null; h.authResolved.value = true; await flush(); assertStatic(h)
-    h.user.value = member('admin'); await flush(); assertStatic(h); assert.equal(h.checks(), 1)
+    for (const path of ['/', '/practice/1/1', '/privacy-policy', '/']) {
+      h.go(path); h.authResolved.value = false; await flush(); assertStatic(h)
+      h.authResolved.value = true; await flush(); assertStatic(h)
+    }
+    assert.doesNotMatch(sidebar, /ensureCurrentUser|sidebar-loading|resolveAccess/)
   } finally { h.dispose() }
 })
-
 
 test('enabled payments keep locked static slots and child links without question API calls', async () => {
   const h = harness('/privacy-policy', 'free', true, true)

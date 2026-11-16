@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 171,
-  "updated_at": "2026-11-15T06:34:54.243Z",
+  "revision": 174,
+  "updated_at": "2026-11-16T03:32:16.366Z",
   "workspace_relative_to_repo": ".",
-  "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-15T06-34-54-243Z-r171.json",
+  "active_context": "development",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-16T03-32-16-366Z-r174.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -3749,6 +3749,62 @@
             "outcome": "passed",
             "summary": "初回2指摘を履歴付きで修正し、55検査+実scale5、コード独立確認、main送信/CI、復旧点結合、本番600追加と既存保持、API/UI反映と公開PC/SP・代表画像の独立確認を完了。CLI配信オプションの失敗と先行sidebar公開を区別し、最終の実公開版を確認した。",
             "at": "2026-11-15T06:34:53.501Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "sidebar_static_desktop_20261116",
+      "context": "development",
+      "title": "PCサイドバー全体開閉と認証非待機の静的一覧",
+      "status": "done",
+      "depends_on": [
+        "grade2_m11_20_production_release_20261115"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-16: PC全体開閉・認証待ちなし一覧・全級PC/SP確認・commit/push/本番反映の明示依頼。 同日の後続指示によりローカルコミットまでに変更。push・本番反映は行わない。",
+      "next_action": "ローカルコミット後、ユーザーの追加依頼である条件指定の分野チェックボックスへ進む。push・本番反映は行わない。",
+      "evidence": [
+        "docs/sidebar-static-desktop-20261116.md",
+        "docs/sidebar-static-desktop-review-20261116.md"
+      ],
+      "last_verified_at": "2026-11-16T03:30:59.762Z",
+      "verification_scope": "関連unit41/41・型・使い捨てtest DBのPlaywright36/36・静的HTML/認証保留503/即応premium8ケース・独立レビューPASS・資料保護/差分。ローカルコミットまで。push・本番変更なし。",
+      "acceptance": [
+        {
+          "id": "sidebar_static_checks",
+          "kind": "automated",
+          "description": "全級PC/SPの全体/模試開閉、即時HTML、遅延/失敗認証、保守的ロックと資格更新、通信/アクセス境界を確認。",
+          "verification": "関連unit/guard、使い捨てtest DBのPlaywright、静的生成物の合成応答検査、型/資料保護/差分検査。",
+          "status": "passed",
+          "evidence": [
+            "docs/sidebar-static-desktop-20261116.md"
+          ],
+          "checked_at": "2026-11-16T03:30:59.762Z"
+        },
+        {
+          "id": "sidebar_static_review",
+          "kind": "review",
+          "description": "認証タイミング変更とUI境界・検査根拠を別担当が独立照合。",
+          "verification": "SSR cache・個別guard・native authとAPI認可を保持し、資格不明と失効で有料導線を保守的に扱うことを確認。",
+          "status": "passed",
+          "evidence": [
+            "docs/sidebar-static-desktop-review-20261116.md"
+          ],
+          "checked_at": "2026-11-16T03:30:59.762Z",
+          "reviewer": "sidebar-auth-reviewer"
+        }
+      ],
+      "execution": {
+        "worker": "sidebar-static-root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "unit41・型・隔離DB Playwright36・静的認証保留/失敗/即応8・独立レビューPASSを確認。指摘2件は修正し独立再検証済み。",
+            "at": "2026-11-16T03:32:04.996Z",
             "failed_criteria": []
           }
         ]

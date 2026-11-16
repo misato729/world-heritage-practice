@@ -3,61 +3,17 @@ import type { ExamCatalogEntry } from '~/utils/examCatalog'
 const { EXAM_CATALOG, FREE_EXAM_MAX } = useGrade()
 import { hasFullExamAccess } from '~/utils/examConfig'
 
+defineProps<{ collapsed: boolean }>()
+const emit = defineEmits<{ toggle: [] }>()
 const route = useRoute()
-const needsAccessCheck = computed(() => route.path === '/' || /^\/practice(?:\/|$)/.test(route.path))
 const openExam = ref<number | null>(null)
 const mobileOpen = ref(false)
 const mobileToggle = ref<HTMLButtonElement | null>(null)
-const { user, authResolved, ensureCurrentUser } = useAuth()
+const { user } = useAuth()
 const { isFavoriteAt } = useFavorites()
-// Prerendered HTML has unresolved access. Start with the same branch during
-// hydration; onMounted resolves even an already-known visitor before showing links.
-const accessStatus = ref<'ready' | 'pending' | 'error'>('pending')
-let resolvingAccess = false
 
 const exams = computed(() => EXAM_CATALOG)
 const isExamLocked = (exam: ExamCatalogEntry) => exam.exam_number > FREE_EXAM_MAX && !hasFullExamAccess(user.value)
-const isLoading = computed(() => needsAccessCheck.value && accessStatus.value === 'pending')
-const hasAccessError = computed(() => needsAccessCheck.value && accessStatus.value === 'error')
-
-const resolveAccess = async () => {
-  if (!needsAccessCheck.value || resolvingAccess) return
-
-  if (authResolved.value && !user.value) {
-    accessStatus.value = 'ready'
-    return
-  }
-
-  if (user.value) {
-    accessStatus.value = 'ready'
-    return
-  }
-
-  resolvingAccess = true
-  accessStatus.value = 'pending'
-
-  const currentUser = await ensureCurrentUser()
-  resolvingAccess = false
-
-  if (currentUser) {
-    accessStatus.value = 'ready'
-  }
-  else if (!authResolved.value) {
-    accessStatus.value = 'error'
-  }
-  else {
-    accessStatus.value = 'ready'
-  }
-}
-
-onMounted(() => { void resolveAccess() })
-watch(needsAccessCheck, () => { void resolveAccess() })
-
-watch(authResolved, () => { void resolveAccess() })
-watch(user, (currentUser) => {
-  if (!currentUser) return
-  accessStatus.value = 'ready'
-})
 
 const toggleExam = (exam: number) => {
   openExam.value = openExam.value === exam ? null : exam
@@ -84,13 +40,24 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
 <template>
   <aside
     class="exam-sidebar"
-    :class="{ 'mobile-open': mobileOpen }"
+    :class="{ 'mobile-open': mobileOpen, 'desktop-collapsed': collapsed }"
     aria-label="模擬試験一覧"
     @keydown.esc="closeMobileOnEscape"
   >
     <div class="sidebar-heading">
-      <UIcon name="i-lucide-files" />
-      <span>試験セット</span>
+      <UIcon v-if="!collapsed" name="i-lucide-files" />
+      <span v-if="!collapsed">試験セット</span>
+      <button
+        class="desktop-sidebar-toggle"
+        type="button"
+        :aria-expanded="!collapsed"
+        aria-controls="exam-sidebar-content"
+        :aria-label="collapsed ? 'サイドバーを開く' : 'サイドバーを閉じる'"
+        :title="collapsed ? 'サイドバーを開く' : 'サイドバーを閉じる'"
+        @click="emit('toggle')"
+      >
+        <UIcon :name="collapsed ? 'i-lucide-panel-left-open' : 'i-lucide-panel-left-close'" />
+      </button>
     </div>
 
     <button
@@ -108,18 +75,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
     </button>
 
     <div id="exam-sidebar-content" class="sidebar-content">
-      <div v-if="isLoading" class="sidebar-loading" role="status" aria-live="polite">
-        <UIcon class="loading-spinner" name="i-lucide-loader-circle" />
-        <span>試験セットを読み込んでいます</span>
-      </div>
-
-      <div v-else-if="hasAccessError" class="sidebar-loading sidebar-error" role="alert">
-        <UIcon name="i-lucide-circle-alert" />
-        <span>利用資格を確認できません</span>
-        <button type="button" @click="resolveAccess">再確認</button>
-      </div>
-
-      <div v-else class="exam-groups">
+      <div class="exam-groups">
         <section
           v-for="exam in exams"
           :key="exam.exam_number"
@@ -177,7 +133,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
 
 <style scoped>
 .exam-sidebar {
-  width: 260px;
+  width: var(--sidebar-width, 260px);
   min-height: calc(100vh - var(--header-height));
   padding: 22px 16px;
   border-right: 1px solid #cdd9dc;
@@ -195,43 +151,24 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
   font-weight: 800;
 }
 
-.mobile-exam-toggle { display: none; }
-
-.sidebar-loading {
-  min-height: 120px;
+.sidebar-heading > span { flex: 1; }
+.desktop-sidebar-toggle {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
   display: grid;
   place-items: center;
-  align-content: center;
-  gap: 10px;
-  color: #53676e;
-  font-size: 13px;
-  font-weight: 700;
-  text-align: center;
-}
-
-.loading-spinner {
-  width: 28px;
-  height: 28px;
-  color: var(--teal-dark);
-  animation: sidebar-spin 1s linear infinite;
-}
-
-.sidebar-error :deep(svg) { width: 25px; height: 25px; color: #b54a3b; }
-.sidebar-error button {
-  min-height: 34px;
-  padding: 0 12px;
-  border: 1px solid #aebfc3;
+  padding: 0;
+  border: 0;
   border-radius: 5px;
-  background: #fff;
+  background: #d5e7e7;
   color: var(--teal-dark);
-  font-weight: 800;
+  font-size: 20px;
   cursor: pointer;
 }
-.sidebar-error button:hover { background: #f2f7f7; }
-
-@keyframes sidebar-spin {
-  to { transform: rotate(360deg); }
-}
+.desktop-sidebar-toggle:hover { background: #c4dddd; }
+.desktop-sidebar-toggle:focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
+.mobile-exam-toggle { display: none; }
 
 .exam-group + .exam-group {
   margin-top: 10px;
@@ -348,6 +285,9 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
     height: calc(100vh - var(--header-height));
     overflow-y: auto;
   }
+  .exam-sidebar.desktop-collapsed { padding: 22px 8px; }
+  .desktop-collapsed .sidebar-heading { justify-content: center; padding: 0 0 10px; }
+  .desktop-collapsed .sidebar-content { display: none; }
 }
 
 @media (max-width: 760px) {
@@ -413,10 +353,6 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
 
   .exam-group + .exam-group { margin-top: 0; }
   .exam-group { min-width: 0; }
-
-  .sidebar-loading {
-    min-height: 76px;
-  }
 
   .exam-row {
     height: var(--exam-row-height);

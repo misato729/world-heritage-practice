@@ -38,6 +38,33 @@ test('initial public navigation hydrates the server session without requiring lo
   assert.equal(checks, 1)
 })
 
+test('initial client hydration renders first and starts the same session check when Nuxt is ready', async () => {
+  const source = readFileSync(new URL('../app/middleware/session.global.ts', import.meta.url), 'utf8')
+    .replaceAll('import.meta.client', 'true').replaceAll('import.meta.server', 'false')
+  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ESNext } }).outputText
+  const { default: clientGuard } = await import('data:text/javascript;base64,' + Buffer.from(compiled).toString('base64'))
+  const ready: (() => void)[] = []
+  let checks = 0, resolve!: (value: unknown) => void
+  globals.useNuxtApp = () => ({ isHydrating: true })
+  globals.onNuxtReady = (callback: () => void) => ready.push(callback)
+  globals.useAuth = () => ({ ensureCurrentUser: () => { checks++; return new Promise(done => { resolve = done }) } })
+  assert.equal(await clientGuard(), undefined)
+  assert.equal(checks, 0)
+  assert.equal(ready.length, 1)
+  ready[0]!()
+  assert.equal(checks, 1)
+  resolve(null)
+
+  globals.useNuxtApp = () => ({ isHydrating: false })
+  let finished = false
+  const pending = clientGuard().then(() => { finished = true })
+  await Promise.resolve()
+  assert.equal(finished, false)
+  resolve({ id: 1 })
+  await pending
+  assert.equal(checks, 2)
+})
+
 test('admin guard resolves identity before checking role', async () => {
   globals.useAuth = () => ({ ensureCurrentUser: async () => ({ id: 1, role: 'admin' }) })
   assert.equal(await (adminGuard as any)({ fullPath: '/admin/questions' }), undefined)

@@ -8,8 +8,8 @@ const header = source('components/SiteHeader.vue')
 const sidebar = source('components/ExamSidebar.vue')
 
 test('one shared exam sidebar is rendered inside the sticky site header', () => {
-  assert.equal(layout.match(/<ExamSidebar\s*\/>/g)?.length, 1)
-  assert.match(layout, /<SiteHeader>\s*<ExamSidebar\s*\/>\s*<\/SiteHeader>/)
+  assert.equal(layout.match(/<ExamSidebar\b/g)?.length, 1)
+  assert.match(layout, /<SiteHeader>\s*<ExamSidebar\b[^>]*\/>\s*<\/SiteHeader>/)
   assert.match(header, /<slot\s*\/>\s*<\/header>/)
   assert.match(header, /\.site-header\s*\{[^}]*position:\s*sticky;[^}]*top:\s*0;/)
 })
@@ -40,7 +40,7 @@ test('home anchor leaves room for both mobile header rows', () => {
 test('mobile exam grid shows two columns and reserves three compact rows', () => {
   const mobileStyles = sidebar.split('@media (max-width: 760px)')[1]
   assert.ok(mobileStyles)
-  assert.match(sidebar, /v-else class="exam-groups"/)
+  assert.match(sidebar, /<div class="exam-groups">/)
   assert.match(mobileStyles, /\.exam-groups\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/)
   assert.match(mobileStyles, /--exam-row-height: 56px/)
   assert.match(mobileStyles, /var\(--exam-row-height\) \* 3 \+ var\(--exam-grid-gap\) \* 2 \+ 25px/)
