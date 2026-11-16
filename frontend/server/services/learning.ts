@@ -1,4 +1,5 @@
 import { currentGrade } from '../core/grade.ts'
+import { createExamCatalogQuerySchema } from '../../shared/schemas/practice.ts'
 import { hasPaidAccess, type User } from '../core/auth.ts'
 import { configuration, freeExamMax, paymentsEnabled } from '../core/config.ts'
 import { getDatabase, Prisma, query, record, transaction, type Database } from '../core/db.ts'
@@ -110,8 +111,12 @@ export async function answerQuestion(id: number, selectedChoiceId: unknown, user
   }, db)
 }
 
-export async function listExams(user: User | null, db: Database = getDatabase()) {
-  const published = await db.question.findMany({ where: { grade: currentGrade(), publication_status: 'published' },
+export async function listExams(user: User | null, params: Record<string, unknown> = {}, db: Database = getDatabase()) {
+  const parsed = createExamCatalogQuerySchema(configuration).safeParse(params)
+  if (!parsed.success) return fail(400, 'bad_request', '出題範囲を正しく指定してください。', parsed.error.flatten().fieldErrors)
+  const categories = parsed.data.major_categories
+  const published = await db.question.findMany({ where: { grade: currentGrade(), publication_status: 'published',
+    ...(categories ? { major_category_code: { in: categories } } : {}) },
     orderBy: [{ exam_number: 'asc' }, { question_number: 'asc' }], select: { exam_number: true, question_number: true } })
   const sets = new Map<number, number[]>()
   for (const question of published) {

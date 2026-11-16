@@ -1,9 +1,10 @@
 <script setup lang="ts">
-const { label: gradeLabel, EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM } = useGrade()
+const { label: gradeLabel, config, EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM } = useGrade()
 import { MAX_REVIEW_POSITIONS } from '~/utils/reviewPositions'
+import { createPracticeSelectionSchema } from '../../shared/schemas/practice.ts'
+import { apiFormErrors, focusFormError } from '~/utils/apiFormErrors'
 import {
   createPracticeSeed,
-  createPracticeSequence,
   shufflePracticeSequence,
   type PracticeOrder,
 } from '~/utils/practiceSequence'
@@ -20,7 +21,12 @@ useSeoMeta({
   ogDescription: description,
 })
 
-const questionNumbers = Object.freeze(Array.from({ length: QUESTIONS_PER_EXAM }, (_, index) => index + 1))
+const categoryOrder = ['fundamentals', 'japan', 'world_culture', 'world_nature', 'other']
+const majorCategories = [...config.categories.major]
+  .sort((left, right) => categoryOrder.indexOf(left.value) - categoryOrder.indexOf(right.value))
+const categoryValues = majorCategories.map(category => category.value)
+const selectionSchema = createPracticeSelectionSchema(config)
+const conditionForm = useTemplateRef('conditionForm')
 
 const { user, sessionVersion } = useAuth()
 const { $api: api } = useNuxtApp()
@@ -38,8 +44,8 @@ const availableExams = computed(() => (
   hasFullAccess.value ? EXAM_CATALOG : freeExams.value
 ))
 const availableExamNumbers = computed(() => availableExams.value.map(exam => exam.exam_number))
-const selectedExamNumbers = ref<number[]>([...availableExamNumbers.value])
-const selectedQuestionNumbers = ref<number[]>([...questionNumbers])
+const conditions = reactive({ exam_numbers: [...availableExamNumbers.value], major_categories: [...categoryValues] })
+const { exam_numbers: selectedExamNumbers, major_categories: selectedMajorCategories } = toRefs(conditions)
 
 const allExamsSelected = computed({
   get: () => (
@@ -54,32 +60,25 @@ const allExamsSelected = computed({
 const someExamsSelected = computed(() => (
   selectedExamNumbers.value.length > 0 && !allExamsSelected.value
 ))
-const allQuestionsSelected = computed({
+const allCategoriesSelected = computed({
   get: () => (
-    selectedQuestionNumbers.value.length === questionNumbers.length
-    && questionNumbers.every(questionNumber => selectedQuestionNumbers.value.includes(questionNumber))
+    selectedMajorCategories.value.length === categoryValues.length
+    && categoryValues.every(value => selectedMajorCategories.value.includes(value))
   ),
   set: (selected: boolean) => {
-    selectedQuestionNumbers.value = selected ? [...questionNumbers] : []
+    selectedMajorCategories.value = selected ? [...categoryValues] : []
   },
 })
-const someQuestionsSelected = computed(() => (
-  selectedQuestionNumbers.value.length > 0 && !allQuestionsSelected.value
+const someCategoriesSelected = computed(() => (
+  selectedMajorCategories.value.length > 0 && !allCategoriesSelected.value
 ))
 const sortedSelectedExamNumbers = computed(() => (
   [...selectedExamNumbers.value].sort((left, right) => left - right)
 ))
-const sortedSelectedQuestionNumbers = computed(() => (
-  [...selectedQuestionNumbers.value].sort((left, right) => left - right)
-))
-const selectedQuestionCount = computed(() => (
-  sortedSelectedExamNumbers.value.length * sortedSelectedQuestionNumbers.value.length
-))
-const conditionSequence = computed(() => createPracticeSequence(
-  sortedSelectedExamNumbers.value,
-  sortedSelectedQuestionNumbers.value,
-))
-const hasConditionSelection = computed(() => conditionSequence.value.length > 0)
+const sortedSelectedCategories = computed(() => categoryValues.filter(value => selectedMajorCategories.value.includes(value)))
+const selectionKey = computed(() => JSON.stringify([sortedSelectedExamNumbers.value, sortedSelectedCategories.value]))
+const hasConditionSelection = computed(() => selectionSchema.safeParse(conditions).success)
+watch(selectionKey, () => { startError.value = ''; conditionForm.value?.setErrors([]) })
 
 const examIsLocked = (examNumber: number) => examNumber > FREE_EXAM_MAX && !hasFullAccess.value
 const examTarget = (examNumber: number) => (
@@ -92,22 +91,22 @@ const startConditionalPractice = async (order: PracticeOrder) => {
   startError.value = ''
   const owner = user.value
   const version = sessionVersion.value
-  const selection = JSON.stringify([sortedSelectedExamNumbers.value, sortedSelectedQuestionNumbers.value])
-  const positions = conditionSequence.value
+  const selection = selectionKey.value
   const isCurrentStart = () => active && owner === user.value && version === sessionVersion.value
     && launcherMode.value === 'conditions'
-    && selection === JSON.stringify([sortedSelectedExamNumbers.value, sortedSelectedQuestionNumbers.value])
+    && selection === selectionKey.value
   try {
-    const response = await api<{ data: { exam_number: number, question_numbers: number[], access?: string }[] }>('/api/v1/exams')
+    const response = await api<{ data: { exam_number: number, question_numbers: number[], access?: string }[] }>('/api/v1/exams', {
+      query: { major_categories: sortedSelectedCategories.value.join(',') },
+    })
     if (!isCurrentStart()) return
-    const published = new Set(response.data.filter(exam => exam.access !== 'paid_membership_required')
-      .flatMap(exam => exam.question_numbers.map(number => `${exam.exam_number}.${number}`)))
-    let sequence = positions.filter(position => published.has(`${position.examNumber}.${position.questionNumber}`))
+    let sequence = response.data.filter(exam => exam.access !== 'paid_membership_required' && selectedExamNumbers.value.includes(exam.exam_number))
+      .flatMap(exam => exam.question_numbers.map(questionNumber => ({ examNumber: exam.exam_number, questionNumber })))
+      .sort((left, right) => left.examNumber - right.examNumber || left.questionNumber - right.questionNumber)
     if (!sequence.length) { startError.value = '選択した条件に公開中の問題はありません。'; return }
     if (sequence.length > MAX_REVIEW_POSITIONS) { startError.value = `対象が${MAX_REVIEW_POSITIONS}問を超えています。条件を絞ってください。`; return }
     const query: Record<string, string> = {
       exams: sortedSelectedExamNumbers.value.join(','),
-      questions: sortedSelectedQuestionNumbers.value.join(','),
       review: sequence.map(position => `${position.examNumber}.${position.questionNumber}`).join(','),
     }
     if (order === 'random') {
@@ -118,8 +117,11 @@ const startConditionalPractice = async (order: PracticeOrder) => {
     }
     const firstPosition = sequence[0]!
     await navigateTo({ path: `/practice/${firstPosition.examNumber}/${firstPosition.questionNumber}`, query })
-  } catch {
-    if (isCurrentStart()) startError.value = '公開中の問題を確認できませんでした。もう一度お試しください。'
+  } catch (error) {
+    if (isCurrentStart()) {
+      conditionForm.value?.setErrors(apiFormErrors(error, { major_categories: '出題範囲' }))
+      startError.value = '公開中の問題を確認できませんでした。もう一度お試しください。'
+    }
   } finally { startingPractice.value = false }
 }
 
@@ -170,7 +172,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
             <span>問題演習を始める</span>
           </h2>
         </div>
-        <p>模試を1回分解くか、取り組みたい模試と問題番号を自由に組み合わせて始められます。</p>
+        <p>模試を1回分解くか、取り組みたい分野と模試を自由に組み合わせて始められます。</p>
       </div>
 
       <div class="launcher-tabs" role="tablist" aria-label="問題演習の開始方法">
@@ -236,97 +238,70 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         role="tabpanel"
         aria-labelledby="conditions-mode-tab"
       >
-        <form class="condition-form" @submit.prevent="startConditionalPractice('sequential')">
+        <UForm ref="conditionForm" :schema="selectionSchema" :state="conditions" class="condition-form" novalidate @error="focusFormError" @submit="startConditionalPractice('sequential')">
           <div class="condition-fields">
             <fieldset class="condition-fieldset">
-              <legend>対象模試</legend>
-              <div class="condition-field-heading">
-                <p>複数選択できます</p>
-                <label class="all-selector">
-                  <input
-                    v-model="allExamsSelected"
-                    type="checkbox"
-                    :indeterminate="someExamsSelected"
-                  >
-                  <span>全選択</span>
-                </label>
-              </div>
-              <div class="number-checkbox-grid exam-number-grid">
-                <label
-                  v-for="exam in availableExams"
-                  :key="exam.exam_number"
-                  :class="{ selected: selectedExamNumbers.includes(exam.exam_number) }"
-                >
-                  <input
-                    v-model="selectedExamNumbers"
-                    type="checkbox"
-                    name="exam-numbers"
-                    :value="exam.exam_number"
-                  >
-                  <span>{{ exam.exam_number }}</span>
-                </label>
-              </div>
+              <legend>出題範囲</legend>
+              <UFormField name="major_categories">
+                <div class="condition-field-heading">
+                  <p>分野を複数選択できます</p>
+                  <label class="all-selector">
+                    <input v-model="allCategoriesSelected" type="checkbox" :indeterminate="someCategoriesSelected">
+                    <span>全選択</span>
+                  </label>
+                </div>
+                <div class="number-checkbox-grid category-checkbox-grid">
+                  <label v-for="category in majorCategories" :key="category.value" :class="{ selected: selectedMajorCategories.includes(category.value) }">
+                    <input v-model="selectedMajorCategories" type="checkbox" name="major-categories" :value="category.value">
+                    <span>{{ category.label }}</span>
+                  </label>
+                </div>
+              </UFormField>
             </fieldset>
 
             <fieldset class="condition-fieldset">
-              <legend>出題範囲</legend>
-              <div class="condition-field-heading">
-                <p>問題番号を選択してください</p>
-                <label class="all-selector">
-                  <input
-                    v-model="allQuestionsSelected"
-                    type="checkbox"
-                    :indeterminate="someQuestionsSelected"
-                  >
-                  <span>全選択</span>
-                </label>
-              </div>
-              <div class="number-checkbox-grid question-number-grid">
-                <label
-                  v-for="questionNumber in questionNumbers"
-                  :key="questionNumber"
-                  :class="{ selected: selectedQuestionNumbers.includes(questionNumber) }"
-                >
-                  <input
-                    v-model="selectedQuestionNumbers"
-                    type="checkbox"
-                    name="question-numbers"
-                    :value="questionNumber"
-                  >
-                  <span>問{{ questionNumber }}</span>
-                </label>
-              </div>
+              <legend>対象模試</legend>
+              <UFormField name="exam_numbers">
+                <div class="condition-field-heading">
+                  <p>複数選択できます</p>
+                  <label class="all-selector">
+                    <input v-model="allExamsSelected" type="checkbox" :indeterminate="someExamsSelected">
+                    <span>全選択</span>
+                  </label>
+                </div>
+                <div class="number-checkbox-grid exam-number-grid">
+                  <label v-for="exam in availableExams" :key="exam.exam_number" :class="{ selected: selectedExamNumbers.includes(exam.exam_number) }">
+                    <input v-model="selectedExamNumbers" type="checkbox" name="exam-numbers" :value="exam.exam_number">
+                    <span>{{ exam.exam_number }}</span>
+                  </label>
+                </div>
+              </UFormField>
             </fieldset>
           </div>
 
           <div class="condition-submit">
             <p v-if="hasConditionSelection">
               <span>選択中</span>
-              {{ sortedSelectedExamNumbers.length }}模試・各{{ sortedSelectedQuestionNumbers.length }}問
-              <strong>最大{{ selectedQuestionCount }}問</strong>
+              {{ sortedSelectedExamNumbers.length }}模試・{{ sortedSelectedCategories.length }}分野
+              <small>開始時に公開中の対象問題を確認します</small>
             </p>
             <p v-else class="selection-required">
               <span>選択内容を確認してください</span>
-              対象模試と問題番号を1つ以上選択してください
+              出題範囲と対象模試を1つ以上選択してください
             </p>
             <div class="condition-actions">
               <button class="primary-link" type="submit" :disabled="!hasConditionSelection || startingPractice">
                 <UIcon name="i-lucide-list-ordered" />
                 問題番号順に始める
               </button>
-              <button
-                class="secondary-link"
-                type="button"
-                :disabled="!hasConditionSelection || startingPractice"
-                @click="startConditionalPractice('random')"
-              >
+              <button class="secondary-link" type="button" :disabled="!hasConditionSelection || startingPractice" @click="startConditionalPractice('random')">
                 <UIcon name="i-lucide-shuffle" />
                 ランダムに始める
               </button>
             </div>
           </div>
           <p v-if="startError" class="condition-error" role="alert">{{ startError }}</p>
-        </form>
+        </UForm>
       </div>
       <div v-if="launcherMode === 'incorrect'" id="incorrect-mode-panel" class="launcher-panel" role="tabpanel" aria-labelledby="incorrect-mode-tab"><IncorrectReviewPanel /></div>
     </section>
@@ -489,8 +464,8 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 .number-checkbox-grid label:hover { border-color: var(--teal); }
 .number-checkbox-grid label.selected { border-color: var(--teal); background: #eaf6f5; color: var(--teal-dark); }
 .number-checkbox-grid input { width: 16px; height: 16px; flex: 0 0 16px; margin: 0; accent-color: var(--teal); }
-.question-number-grid label { gap: 4px; padding-inline: 4px; }
-.question-number-grid label span { white-space: nowrap; }
+.number-checkbox-grid.category-checkbox-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); }
+.category-checkbox-grid label span { white-space: nowrap; }
 .condition-submit {
   min-height: 82px;
   display: flex;
@@ -503,7 +478,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 }
 .condition-submit p { margin: 0; color: #40545b; font-weight: 800; }
 .condition-submit p span { display: block; margin-bottom: 3px; color: var(--muted); font-size: 11px; }
-.condition-submit p strong { margin-left: 8px; color: var(--teal-dark); }
+.condition-submit p small { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 400; }
 .condition-submit .selection-required { color: #a23b2a; }
 .condition-actions { display: flex; flex: 0 0 auto; gap: 10px; }
 .condition-actions button { white-space: nowrap; }
@@ -587,6 +562,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   .number-checkbox-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }
   .number-checkbox-grid label { min-height: 46px; flex-direction: column; gap: 3px; padding: 5px 2px; }
   .number-checkbox-grid input { width: 15px; height: 15px; flex-basis: 15px; }
+  .category-checkbox-grid label { flex-direction: row; gap: 8px; padding: 10px 8px; }
   .condition-submit { align-items: stretch; flex-direction: column; padding: 18px 20px 20px; }
   .condition-actions { width: 100%; flex-direction: column; }
   .condition-actions button { width: 100%; }

@@ -4,6 +4,7 @@ import { after, test } from 'node:test'
 import type { ExamConfiguration } from '../app/utils/examConfig.ts'
 import { configuration, setConfigurationForTesting } from '../server/core/config.ts'
 import { ApiError } from '../server/core/errors.ts'
+import { gradeScope } from '../server/core/grade.ts'
 import { closeDatabase, isolatedTransaction, query, type Database } from '../server/core/db.ts'
 import type { User } from '../server/core/auth.ts'
 import { excerptFrom, sanitizeQuestionInput, validateQuestionInput, type QuestionInput } from '../server/services/learning-validation.ts'
@@ -133,8 +134,32 @@ test('next-question selection is ordered and validates parameters without return
   await assert.rejects(nextQuestion({ after_question_number: 0 }, null, db), apiError(400))
   await assert.rejects(nextQuestion({ exam_number: 'invalid' }, null, db), apiError(400))
   await assert.rejects(nextQuestion({ exam_number: exam, after_question_number: 3 }, null, db), apiError(404))
-  const exams = await listExams(null, db)
+  const exams = await listExams(null, {}, db)
   assert.deepEqual(exams.data.find(item => item.exam_number === exam)?.question_numbers, [1, 3])
+}))
+
+test('category catalogs retain exact published positions and isolate all three grades', integration, async () => isolated(async (db, exam) => {
+  for (const grade of ['2', 'pre1', '1'] as const) await gradeScope.run(grade, async () => {
+    const save = async (set: number, number: number, major: string, published = true) => {
+      const category = configuration.categories.minor.find(item => item.major_category_value === major)!
+      await saveQuestion(input({ exam_number: set, question_number: number, major_category_code: major,
+        category_code: category.value, publication_status: published ? 'published' : 'private' }), { db })
+    }
+    await save(exam, 1, 'fundamentals')
+    await save(exam, 2, 'japan')
+    await save(exam, 3, 'other', false)
+    await save(exam + 1, 1, 'world_nature')
+    await save(exam + 1, 2, 'japan')
+    await save(exam + 1, 3, 'fundamentals')
+    const filtered = await listExams(null, { major_categories: 'fundamentals,japan' }, db)
+    assert.deepEqual(filtered.data.filter(item => [exam, exam + 1].includes(item.exam_number)).map(item => [item.exam_number, item.question_numbers]), [
+      [exam, [1, 2]], [exam + 1, [2, 3]],
+    ])
+    assert.equal(JSON.stringify(filtered).includes('content_blocks'), false)
+    assert.equal((await listExams(null, { major_categories: 'other' }, db)).data.some(item => item.exam_number === exam), false)
+    assert.deepEqual((await listExams(null, {}, db)).data.find(item => item.exam_number === exam + 1)?.question_numbers, [1, 2, 3])
+    await assert.rejects(listExams(null, { major_categories: 'unknown' }, db), apiError(400))
+  })
 }))
 
 test('signed-in answers, history ownership, favorite idempotency and pagination retain the API contract', integration, async () => isolated(async (db, exam) => {

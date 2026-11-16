@@ -29,7 +29,7 @@ test('grade contexts are concurrent and isolate question IDs, catalogs and the f
   await authorizeExam(3,null,db)
   await assert.rejects(()=>authorizeExam(4,user,db))
   if(grade!=='1') await assert.rejects(()=>getQuestion(q!.id,null,db))
-  const result=await listExams(null,db)
+  const result=await listExams(null,{},db)
   assert.equal(result.data.some(e=>e.exam_number===1),grade==='1')
  })))
 }))

@@ -68,7 +68,7 @@ for (const kind of ['anonymous', 'free', 'premium'] as const) {
 for (const order of ['sequential', 'random'] as const) {
   test(`condition start uses only published exact positions in ${order} order`, async ({ page }) => {
     let catalogs = 0
-    await page.route('**/api/v1/exams', route => {
+    await page.route('**/api/v1/exams*', route => {
       catalogs++
       return route.fulfill({ json: { data: [
         { exam_number: 1, question_numbers: [1], access: 'available' },
@@ -79,7 +79,7 @@ for (const order of ['sequential', 'random'] as const) {
     await page.goto('/')
     await page.getByRole('tab', { name: '条件を指定', exact: true }).click()
     const availableSets = config.payments.enabled ? config.payments.free_exam_count : config.exam.set_count
-    await expect(page.locator('.condition-submit')).toContainText(`最大${availableSets * config.exam.questions_per_exam}問`)
+    await expect(page.locator('.condition-submit')).toContainText(`${availableSets}模試・5分野`)
     expect(catalogs).toBe(0)
     await page.getByRole('button', { name: order === 'random' ? 'ランダムに始める' : '問題番号順に始める', exact: true }).click()
     await expect(page).toHaveURL(/\/practice\/[12]\/[14]\?/)
@@ -91,7 +91,7 @@ for (const order of ['sequential', 'random'] as const) {
 }
 
 test('unpublished conditions stay on the launcher with a clear message', async ({ page }) => {
-  await page.route('**/api/v1/exams', route => route.fulfill({ json: { data: [] } }))
+  await page.route('**/api/v1/exams*', route => route.fulfill({ json: { data: [] } }))
   await page.goto('/')
   await page.getByRole('tab', { name: '条件を指定', exact: true }).click()
   await page.getByRole('button', { name: '問題番号順に始める', exact: true }).click()
@@ -104,7 +104,7 @@ test('a delayed condition start cannot navigate after leaving the home page', as
   let deliver!: () => Promise<void>
   let arrived!: () => void
   const requestArrived = new Promise<void>(resolve => { arrived = resolve })
-  await page.route('**/api/v1/exams', route => {
+  await page.route('**/api/v1/exams*', route => {
     deliver = () => route.fulfill({ json: { data: [{ exam_number: 1, question_numbers: [1], access: 'available' }] } })
     arrived()
   })
@@ -114,7 +114,7 @@ test('a delayed condition start cannot navigate after leaving the home page', as
   await requestArrived
   await page.locator('footer').getByRole('link', { name: 'プライバシーポリシー', exact: true }).click()
   await expect(page).toHaveURL('/privacy-policy')
-  const response = page.waitForResponse('**/api/v1/exams')
+  const response = page.waitForResponse('**/api/v1/exams*')
   await deliver()
   await response
   await page.waitForLoadState('networkidle')
