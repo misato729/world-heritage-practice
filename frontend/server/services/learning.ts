@@ -237,7 +237,8 @@ export async function listAdminQuestions(user: User | null, params: Record<strin
   const rows = record(await db.question.findMany({ where, orderBy: [{ exam_number: 'asc' }, { question_number: 'asc' }, { id: 'asc' }],
     take: perPage, skip: (page - 1) * perPage })) as unknown as Omit<QuestionRecord, 'choices'>[]
   return { data: rows.map(question => ({ id: Number(question.id), exam_number: Number(question.exam_number), question_number: Number(question.question_number),
-    summary: question.content_blocks.filter(block => ['text', 'quote', 'fill_in_text', 'fill_in_quote'].includes(block.type)).map(block => block.text ?? '').join(' ').replace(/\s+/g, ' ').trim() || '表・プログラムを含む問題',
+    summary: question.content_blocks.filter(block => block.type !== 'rich_text' || block.variant !== 'passage').map(block => block.type === 'rich_text' ? (block.runs ?? []).map(run => run.text).join('')
+      : ['text', 'quote', 'fill_in_text', 'fill_in_quote'].includes(block.type) ? block.text ?? '' : '').join(' ').replace(/\s+/g, ' ').trim() || '画像・表・プログラムを含む問題',
     major_category_code: question.major_category_code, category_code: question.category_code, publication_status: question.publication_status, updated_at: iso(question.updated_at) })),
   meta: meta(page, perPage, total, true) }
 }

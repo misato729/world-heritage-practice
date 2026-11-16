@@ -5,6 +5,8 @@ export type AdminContentBlockContext = 'question' | 'explanation' | 'choice'
 const blockOptions = {
   question: [
     { value: 'text', label: '通常文' },
+    { value: 'rich_text', label: '下線・空欄付きの文章' },
+    { value: 'image', label: '写真・地図' },
     { value: 'quote', label: '枠付き引用文' },
     { value: 'fill_in_text', label: '穴埋め問題文' },
     { value: 'fill_in_quote', label: '穴埋め引用文' },
@@ -14,12 +16,15 @@ const blockOptions = {
   ],
   explanation: [
     { value: 'text', label: '通常文' },
+    { value: 'rich_text', label: '下線・空欄付きの文章' },
+    { value: 'image', label: '写真・地図' },
     { value: 'quote', label: '枠付き引用文' },
     { value: 'table', label: '表' },
     { value: 'code', label: 'プログラム' },
   ],
   choice: [
     { value: 'text', label: '通常文' },
+    { value: 'rich_text', label: '下線・空欄付きの文章' },
     { value: 'table', label: '表' },
     { value: 'fill_in_choice', label: '穴埋め選択肢' },
   ],
@@ -28,6 +33,8 @@ const blockOptions = {
 export const getAdminContentBlockOptions = (context: AdminContentBlockContext) => blockOptions[context]
 
 export const createAdminContentBlock = (type: ContentBlockType): ContentBlock => {
+  if (type === 'rich_text') return { type, runs: [{ type: 'text', text: '' }], variant: 'paragraph', title: '' }
+  if (type === 'image') return { type, src: '', alt: '', caption: '', credit: '', source_url: '', license_label: '', license_url: '' }
   if (type === 'table') return { type, headers: ['見出し1', '見出し2'], rows: [['', '']] }
   if (type === 'code') return { type, title: '', code: '' }
   if (type === 'code_group') return { type, items: [{ title: 'プログラムA', code: '' }, { title: 'プログラムB', code: '' }] }

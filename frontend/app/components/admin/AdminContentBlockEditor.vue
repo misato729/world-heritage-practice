@@ -22,6 +22,8 @@ watch(typeOptions, (options) => {
 
 const blockLabel = (type: ContentBlockType) => ({
   text: '通常文',
+  rich_text: '下線・空欄付きの文章',
+  image: '写真・地図',
   quote: '枠付き引用文',
   table: '表',
   code: 'プログラム',
@@ -86,6 +88,25 @@ const removeCodeItem = (block: ContentBlock, index: number) => {
   if ((block.items?.length ?? 0) <= 2) return
   block.items = block.items?.filter((_, itemIndex) => itemIndex !== index)
 }
+
+const addTextRun = (block: ContentBlock) => {
+  block.runs = [...(block.runs ?? []), { type: 'text', text: '' }]
+}
+
+const removeTextRun = (block: ContentBlock, index: number) => {
+  if ((block.runs?.length ?? 0) <= 1) return
+  block.runs = block.runs?.filter((_, runIndex) => runIndex !== index)
+}
+
+const moveTextRun = (block: ContentBlock, index: number, direction: -1 | 1) => {
+  const next = [...(block.runs ?? [])]
+  const destination = index + direction
+  if (destination < 0 || destination >= next.length) return
+  const [run] = next.splice(index, 1)
+  if (!run) return
+  next.splice(destination, 0, run)
+  block.runs = next
+}
 </script>
 
 <template>
@@ -105,6 +126,40 @@ const removeCodeItem = (block: ContentBlock, index: number) => {
             <label :for="fieldId('block-text', index)">文章</label>
             <textarea :id="fieldId('block-text', index)" v-model="block.text" required :placeholder="block.type.startsWith('fill_in_') ? '空欄は {{①}} の形式で入力します' : '表示する文章を入力します'" />
           </div>
+        </template>
+
+        <template v-else-if="block.type === 'rich_text'">
+          <div class="admin-field compact-field"><label :for="fieldId('rich-title', index)">見出し（任意）</label><input :id="fieldId('rich-title', index)" v-model="block.title" type="text"></div>
+          <div class="admin-field compact-field">
+            <label :for="fieldId('rich-variant', index)">表示形式</label>
+            <select :id="fieldId('rich-variant', index)" :value="block.variant ?? 'paragraph'" @change="block.variant = ($event.target as HTMLSelectElement).value as 'paragraph' | 'passage'"><option value="paragraph">通常の段落</option><option value="passage">共通リード文</option></select>
+          </div>
+          <div class="text-run-list">
+            <section v-for="(run, runIndex) in block.runs" :key="runIndex" class="text-run">
+              <div class="text-run-head">
+                <strong>部分 {{ runIndex + 1 }}</strong>
+                <div class="block-actions">
+                  <button type="button" title="部分を上へ移動" :disabled="runIndex === 0" @click="moveTextRun(block, runIndex, -1)"><UIcon name="i-lucide-arrow-up" /></button>
+                  <button type="button" title="部分を下へ移動" :disabled="runIndex === (block.runs?.length ?? 0) - 1" @click="moveTextRun(block, runIndex, 1)"><UIcon name="i-lucide-arrow-down" /></button>
+                  <button type="button" title="部分を削除" :disabled="(block.runs?.length ?? 0) <= 1" @click="removeTextRun(block, runIndex)"><UIcon name="i-lucide-trash-2" /></button>
+                </div>
+              </div>
+              <div class="admin-field compact-field"><label :for="fieldId('rich-run-type', index, runIndex)">種類</label><select :id="fieldId('rich-run-type', index, runIndex)" v-model="run.type"><option value="text">通常文</option><option value="underline">下線</option><option value="blank">空欄ラベル</option></select></div>
+              <div class="admin-field"><label :for="fieldId('rich-run-text', index, runIndex)">{{ run.type === 'blank' ? '空欄ラベル' : '文章' }}</label><textarea :id="fieldId('rich-run-text', index, runIndex)" v-model="run.text" /></div>
+            </section>
+          </div>
+          <small>各部分を順に続けて表示します。文章内の改行・空白も保持されます。</small>
+          <button class="add-code-button" type="button" @click="addTextRun(block)"><UIcon name="i-lucide-plus" />文章の部分を追加</button>
+        </template>
+
+        <template v-else-if="block.type === 'image'">
+          <div class="admin-field"><label :for="fieldId('image-src', index)">登録済み画像のパス</label><input :id="fieldId('image-src', index)" v-model="block.src" type="text" placeholder="/question-media/画像の識別子.jpg" required><small>登録済みの写真・地図を指定します。</small></div>
+          <div class="admin-field"><label :for="fieldId('image-alt', index)">画像の代替テキスト</label><textarea :id="fieldId('image-alt', index)" v-model="block.alt" /></div>
+          <div class="admin-field"><label :for="fieldId('image-caption', index)">キャプション（任意）</label><textarea :id="fieldId('image-caption', index)" v-model="block.caption" /></div>
+          <div class="admin-field"><label :for="fieldId('image-credit', index)">著作権・提供者の表示</label><textarea :id="fieldId('image-credit', index)" v-model="block.credit" /><small>必要な著作権表示を省略せず入力します。HTMLは使えません。</small></div>
+          <div class="admin-field"><label :for="fieldId('image-source-url', index)">画像の出典URL</label><input :id="fieldId('image-source-url', index)" v-model="block.source_url" type="url" placeholder="https://" required></div>
+          <div class="admin-field"><label :for="fieldId('image-license-label', index)">ライセンス名</label><input :id="fieldId('image-license-label', index)" v-model="block.license_label" type="text"></div>
+          <div class="admin-field"><label :for="fieldId('image-license-url', index)">ライセンスURL</label><input :id="fieldId('image-license-url', index)" v-model="block.license_url" type="url" placeholder="https://" required></div>
         </template>
 
         <template v-else-if="block.type === 'quote'">
@@ -180,6 +235,10 @@ const removeCodeItem = (block: ContentBlock, index: number) => {
 .fill-choice-fields .admin-field { min-width: 0; }
 .code-input { min-height: 150px !important; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important; font-size: 13px !important; tab-size: 2; }
 .code-item-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.text-run-list { display: grid; gap: 12px; }
+.text-run { min-width: 0; display: grid; gap: 10px; padding: 12px; border: 1px solid var(--admin-line); border-radius: 5px; }
+.text-run-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.text-run-head strong { font-size: 12px; }
 .code-item { display: grid; gap: 12px; padding: 13px; border: 1px solid var(--admin-line); border-radius: 5px; }
 .code-item-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .code-item-head strong { font-size: 12px; }

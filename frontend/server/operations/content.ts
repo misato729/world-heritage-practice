@@ -1,4 +1,5 @@
 import { currentGrade } from '../core/grade.ts'
+import { gradeConfig } from '../../shared/grades.ts'
 import { createHash } from 'node:crypto'
 import { lstat, readFile, mkdtemp, writeFile, link, rm } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
@@ -25,7 +26,7 @@ const object = (value: unknown): value is Record<string, any> => Boolean(value) 
 const exactKeys = (value: unknown, keys: string[]): value is Record<string, any> => object(value) && Object.keys(value).sort().join('\0') === [...keys].sort().join('\0')
 
 export function validateQuestions(value: unknown): QuestionInput[] {
-  try { return parseQuestionArchiveEntries(value, configuration) }
+  try { return parseQuestionArchiveEntries(value, gradeConfig(currentGrade(), configuration)) }
   catch (error) {
     if (error instanceof ContentValidationError) throw new OperationError(error.message)
     throw error

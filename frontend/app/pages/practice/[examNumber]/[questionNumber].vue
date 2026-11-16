@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Block as ContentBlock } from '../../../../shared/schemas/content.ts'
 import { filterReviewPositions } from '~/utils/reviewPositions'
 const { EXAM_CATALOG, QUESTIONS_PER_EXAM, FREE_EXAM_MAX } = useGrade()
 import {
@@ -7,18 +8,6 @@ import {
   type PracticeOrder,
   type PracticePosition,
 } from '~/utils/practiceSequence'
-
-type ContentBlock = {
-  type: 'text' | 'quote' | 'fill_in_text' | 'fill_in_quote' | 'fill_in_choice' | 'table' | 'code' | 'code_group'
-  text?: string
-  source?: string
-  title?: string
-  code?: string
-  headers?: string[]
-  rows?: string[][]
-  items?: { title: string, code: string }[]
-  cells?: string[]
-}
 
 type Choice = {
   id: number
@@ -513,7 +502,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
 
       <section class="question-panel">
         <div class="question-text">
-          <QuestionContentBlocks :blocks="question.content_blocks" />
+          <QuestionContentBlocks :key="question.id" :blocks="question.content_blocks" />
         </div>
 
         <div class="choices" role="radiogroup" aria-label="選択肢">

@@ -1,20 +1,5 @@
 <script setup lang="ts">
-type CodeItem = {
-  title: string
-  code: string
-}
-
-type ContentBlock = {
-  type: 'text' | 'quote' | 'fill_in_text' | 'fill_in_quote' | 'fill_in_choice' | 'table' | 'code' | 'code_group'
-  text?: string
-  source?: string
-  title?: string
-  code?: string
-  headers?: string[]
-  rows?: string[][]
-  items?: CodeItem[]
-  cells?: string[]
-}
+import { isHttpsAttributionUrl, isQuestionMediaPath, type Block as ContentBlock } from '../../shared/schemas/content.ts'
 
 defineProps<{
   blocks: ContentBlock[]
@@ -25,8 +10,8 @@ type FillInPart = {
   text: string
 }
 
-const fillInParts = (text = ''): FillInPart[] => (
-  text
+const fillInParts = (text: string | null = ''): FillInPart[] => (
+  (text ?? '')
     .split(/(\{\{[^{}]+\}\})/g)
     .filter(Boolean)
     .map((part) => {
@@ -44,6 +29,25 @@ const blankLabels = ['①', '②', '③', '④', '⑤', '⑥']
   <div class="content-blocks">
     <template v-for="(block, index) in blocks" :key="`${block.type}-${index}`">
       <p v-if="block.type === 'text'" class="content-text">{{ block.text }}</p>
+
+      <component :is="block.variant === 'passage' ? 'details' : 'section'" v-else-if="block.type === 'rich_text'" class="content-rich-text" :class="{ 'content-passage': block.variant === 'passage' }">
+        <summary v-if="block.variant === 'passage'" class="content-passage-instruction">{{ block.title || '以下の文章を読んで、以下の問いに答えなさい。' }}</summary>
+        <h3 v-else-if="block.title" class="content-rich-title">{{ block.title }}</h3>
+        <p class="content-rich-body"><template v-for="(run, runIndex) in block.runs" :key="runIndex"><u v-if="run.type === 'underline'" class="content-underline">{{ run.text }}</u><span v-else-if="run.type === 'blank'" class="fill-in-blank" :aria-label="`空欄 ${run.text}`">{{ run.text }}</span><template v-else>{{ run.text }}</template></template></p>
+      </component>
+
+      <figure v-else-if="block.type === 'image' && isQuestionMediaPath(block.src)" class="content-image">
+        <img :src="block.src" :alt="block.alt" decoding="async">
+        <figcaption>
+          <p v-if="block.caption" class="content-image-caption">{{ block.caption }}</p>
+          <p class="content-image-credit">{{ block.credit }}</p>
+          <p class="content-image-links">
+            <a :href="block.src" target="_blank" rel="noopener noreferrer">画像を拡大（別タブ）</a>
+            <a v-if="isHttpsAttributionUrl(block.source_url)" :href="block.source_url" target="_blank" rel="noopener noreferrer">画像の出典</a>
+            <a v-if="isHttpsAttributionUrl(block.license_url)" :href="block.license_url" target="_blank" rel="noopener noreferrer">{{ block.license_label }}</a>
+          </p>
+        </figcaption>
+      </figure>
 
       <blockquote v-else-if="block.type === 'quote'" class="content-quote">
         <p>{{ block.text }}</p>
@@ -94,7 +98,7 @@ const blankLabels = ['①', '②', '③', '④', '⑤', '⑥']
       </figure>
 
       <div v-else-if="block.type === 'code_group'" class="code-group">
-        <figure v-for="item in block.items" :key="item.title" class="code-panel">
+        <figure v-for="(item, itemIndex) in block.items" :key="itemIndex" class="code-panel">
           <figcaption>{{ item.title }}</figcaption>
           <pre><code>{{ item.code }}</code></pre>
         </figure>
@@ -106,6 +110,21 @@ const blankLabels = ['①', '②', '③', '④', '⑤', '⑥']
 <style scoped>
 .content-blocks { display: grid; gap: 20px; min-width: 0; }
 .content-text { margin: 0; white-space: pre-wrap; }
+.content-rich-text { min-width: 0; }
+.content-rich-title { margin: 0 0 10px; font-size: .85em; font-weight: 700; }
+.content-rich-body { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 2.1; }
+.content-underline { text-decoration-thickness: 1.5px; text-underline-offset: .22em; text-decoration-skip-ink: none; }
+.content-passage { padding: 20px 22px; border: 1px solid var(--line); background: #f7faf9; font-weight: 500; }
+.content-passage-instruction { cursor: pointer; font-size: .9em; font-weight: 700; overflow-wrap: anywhere; }
+.content-passage-instruction:focus-visible { outline: 2px solid var(--teal); outline-offset: 5px; }
+.content-passage[open] > .content-passage-instruction { margin-bottom: 16px; }
+.content-image { min-width: 0; margin: 0; }
+.content-image img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+.content-image figcaption { margin-top: 10px; color: var(--muted); font-size: 13px; font-weight: 400; line-height: 1.7; overflow-wrap: anywhere; }
+.content-image figcaption p { margin: 0; white-space: pre-wrap; }
+.content-image-caption { color: var(--ink); }
+.content-image .content-image-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 6px; }
+.content-image-links a { color: var(--teal-dark, var(--teal)); text-decoration: underline; text-underline-offset: .2em; }
 .content-quote { margin: 0; padding: 18px 20px; border: 1px solid var(--line); border-left: 4px solid var(--teal); background: #f7faf9; }
 .content-quote p { margin: 0; font-size: 18px; font-weight: 500; white-space: pre-wrap; }
 .content-quote cite { display: block; margin-top: 10px; color: var(--muted); font-size: 13px; font-style: normal; }
@@ -155,6 +174,7 @@ const blankLabels = ['①', '②', '③', '④', '⑤', '⑥']
 .code-panel pre { margin: 0; padding: 16px; overflow-x: auto; font-size: 14px; line-height: 1.75; white-space: pre; }
 .code-panel code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
 @media (max-width: 720px) {
+  .content-passage { padding: 16px; }
   .code-group { grid-template-columns: 1fr; }
   .content-quote { padding: 16px; }
   .exam-fill-in-quote { padding: 17px 16px; line-height: 2.15; }

@@ -171,7 +171,6 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   <div class="home-main">
     <section class="overview-section">
       <div class="overview-copy">
-        <p v-if="gradeLabel === '1級'" role="status">1級の教材は準備中です。現在は準1級・2級の模試1〜10を収録しています。</p>
         <p class="heritage-eyebrow">{{ gradeLabel }}｜世界遺産検定 1級・準1級・2級の学習サイト</p>
         <h1 class="section-heading">
           <span>{{ SITE.tagline }}</span>

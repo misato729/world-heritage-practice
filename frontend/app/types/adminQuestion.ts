@@ -1,27 +1,8 @@
 import { EXAM_CONFIG, type ExamConfiguration } from '../utils/examConfig.ts'
-import type { QuestionInput } from '../../shared/schemas/content.ts'
+import type { Block, QuestionInput } from '../../shared/schemas/content.ts'
 
-export type ContentBlockType =
-  | 'text'
-  | 'quote'
-  | 'table'
-  | 'code'
-  | 'code_group'
-  | 'fill_in_text'
-  | 'fill_in_quote'
-  | 'fill_in_choice'
-
-export type ContentBlock = {
-  type: ContentBlockType
-  text?: string
-  source?: string
-  title?: string
-  code?: string
-  headers?: string[]
-  rows?: string[][]
-  items?: { title: string, code: string }[]
-  cells?: string[]
-}
+export type ContentBlock = Block
+export type ContentBlockType = Block['type']
 
 export type AdminChoice = {
   id?: number

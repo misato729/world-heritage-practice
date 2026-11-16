@@ -19,6 +19,18 @@ const text = (message = blockMessage) => z.string({ error: message })
 const optionalText = text().nullable().optional()
 const strings = z.array(text(), { error: blockMessage })
 
+/** Media references are fixed local filenames, without URL parameters or fragments. */
+export const isQuestionMediaPath = (value: unknown): value is string => typeof value === 'string'
+  && value === value.trim() && /^\/question-media\/[a-f0-9]{64}\.(?:jpg|png|webp)$/.test(value)
+
+export function isHttpsAttributionUrl(value: unknown): value is string {
+  if (typeof value !== 'string' || !value.startsWith('https://') || /[\s\u0000-\u001f\u007f\\]/.test(value)) return false
+  try {
+    const url = new URL(value)
+    return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password
+  } catch { return false }
+}
+
 /** Explicit conversion keeps the API's integer-string support without accepting booleans/floats. */
 export function integer(value: unknown): number | undefined {
   if (typeof value !== 'number' && (typeof value !== 'string' || !/^[+-]?\d+$/.test(value.trim()))) return undefined
@@ -48,10 +60,26 @@ function createRawBlockSchema(context: BlockContext, strict: boolean) {
   })
   const group = object({ type: z.literal('code_group'), items: z.array(object({ code: text(), title: optionalText }), { error: blockMessage }) })
   const fillChoice = object({ type: z.literal('fill_in_choice'), cells: strings })
+  const richText = object({
+    type: z.literal('rich_text'),
+    runs: z.array(object({ type: z.enum(['text', 'underline', 'blank']), text: text() }), { error: blockMessage }).min(1, blockMessage),
+    title: optionalText,
+    variant: z.enum(['paragraph', 'passage']).optional(),
+  })
+  const image = object({
+    type: z.literal('image'),
+    src: text().refine(isQuestionMediaPath, '画像は登録済みの問題画像パスを指定してください'),
+    alt: text(),
+    caption: optionalText,
+    credit: text(),
+    source_url: text().refine(isHttpsAttributionUrl, '画像の出典URLは認証情報を含まないHTTPS URLを指定してください'),
+    license_label: text(),
+    license_url: text().refine(isHttpsAttributionUrl, '画像のライセンスURLは認証情報を含まないHTTPS URLを指定してください'),
+  })
   const options = {
-    question: [plain, quote, table, code, group, fillText, fillQuote],
-    explanation: [plain, quote, table, code],
-    choice: [plain, table, fillChoice],
+    question: [plain, quote, table, code, group, fillText, fillQuote, richText, image],
+    explanation: [plain, quote, table, code, richText, image],
+    choice: [plain, table, fillChoice, richText],
   } as const
   return z.discriminatedUnion('type', options[context], { error: blockKindMessage })
 }
@@ -76,7 +104,7 @@ function blockSchema(context: BlockContext, preserveOptionalAttributes: boolean,
   return rawBlockSchema(context, strict).transform((block): Block => {
     const result = { ...block } as Block
     if (result.type !== 'quote' || result.source === undefined || (!preserveOptionalAttributes && !nonblank(result.source))) delete result.source
-    if (result.type !== 'code' || result.title === undefined || (!preserveOptionalAttributes && !nonblank(result.title))) delete result.title
+    if (!['code', 'rich_text'].includes(result.type) || result.title === undefined || (!preserveOptionalAttributes && !nonblank(result.title))) delete result.title
     if (result.type === 'code_group') result.items = result.items!.map(item => ({
       ...(item.title !== undefined && (preserveOptionalAttributes || nonblank(item.title)) ? { title: item.title } : {}), code: item.code,
     }))
@@ -87,6 +115,8 @@ function blockSchema(context: BlockContext, preserveOptionalAttributes: boolean,
 function completeBlock(block: Block): boolean {
   switch (block.type) {
     case 'text': case 'quote': case 'fill_in_text': case 'fill_in_quote': return nonblank(block.text)
+    case 'rich_text': return Boolean(block.runs?.length && block.runs.some(run => nonblank(run.text)) && block.runs.every(run => run.type === 'text' || nonblank(run.text)))
+    case 'image': return nonblank(block.alt) && nonblank(block.credit) && nonblank(block.license_label)
     case 'code': return nonblank(block.code)
     case 'fill_in_choice': return Boolean(block.cells?.length && block.cells.every(nonblank))
     case 'code_group': return Boolean(block.items && block.items.length >= 2 && block.items.every(item => nonblank(item.code)))

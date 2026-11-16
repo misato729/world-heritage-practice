@@ -3,9 +3,9 @@ import test from 'node:test'
 import { createAdminContentBlock, FILL_IN_CHOICE_COLUMN_COUNTS, FILL_IN_CHOICE_LABELS, getAdminContentBlockOptions, resizeFillInChoiceCells } from '../app/utils/adminContentBlocks.ts'
 
 test('each editor offers exactly the block types allowed by its API context', () => {
-  assert.deepEqual(getAdminContentBlockOptions('question').map(option => option.value), ['text', 'quote', 'fill_in_text', 'fill_in_quote', 'table', 'code', 'code_group'])
-  assert.deepEqual(getAdminContentBlockOptions('choice').map(option => option.value), ['text', 'table', 'fill_in_choice'])
-  assert.deepEqual(getAdminContentBlockOptions('explanation').map(option => option.value), ['text', 'quote', 'table', 'code'])
+  assert.deepEqual(getAdminContentBlockOptions('question').map(option => option.value), ['text', 'rich_text', 'image', 'quote', 'fill_in_text', 'fill_in_quote', 'table', 'code', 'code_group'])
+  assert.deepEqual(getAdminContentBlockOptions('choice').map(option => option.value), ['text', 'rich_text', 'table', 'fill_in_choice'])
+  assert.deepEqual(getAdminContentBlockOptions('explanation').map(option => option.value), ['text', 'rich_text', 'image', 'quote', 'table', 'code'])
 })
 
 test('new fill-in blocks use the existing text and cells API shapes', () => {
@@ -22,6 +22,9 @@ test('block creation does not share editable nested arrays across choices', () =
   const table = createAdminContentBlock('table')
   table.rows![0]![0] = '変更'
   assert.deepEqual(createAdminContentBlock('table').rows, [['', '']])
+  const passage = createAdminContentBlock('rich_text')
+  passage.runs![0]!.text = '変更'
+  assert.deepEqual(createAdminContentBlock('rich_text').runs, [{ type: 'text', text: '' }])
 })
 
 test('the column selector and labels cover one to six blanks', () => {

@@ -121,6 +121,7 @@ const submit = () => {
 
 <style scoped>
 .admin-question-form { display: grid; gap: 18px; padding-bottom: 86px; }
+.admin-form-grid .admin-field { grid-template-columns: minmax(0, 1fr); }
 .publication-form-field { grid-column: 1 / -1; }
 .publication-field { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 2px 0 0; padding: 0; border: 0; }
 .publication-field legend { margin-bottom: 8px; color: #dbe5e7; font-size: 13px; font-weight: 800; }
