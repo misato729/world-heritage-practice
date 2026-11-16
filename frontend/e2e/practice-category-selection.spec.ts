@@ -5,6 +5,7 @@ for (const grade of ['2', 'pre1', '1']) {
   test(`grade ${grade} selects multiple fields before exams and retains exact positions`, async ({ page }, info) => {
     let catalogs = 0
     await page.route('**/api/v1/exams*', route => {
+      if (new URL(route.request().url()).searchParams.has('count')) return route.fulfill({ json: { data: [] } })
       catalogs++
       expect(new URL(route.request().url()).searchParams.get('major_categories')).toBe('fundamentals,japan')
       return route.fulfill({ json: { data: [
@@ -75,6 +76,7 @@ test('changing fields during a pending start discards the previous selection', a
   let arrive!: () => void
   const arrived = new Promise<void>(done => { arrive = done })
   await page.route('**/api/v1/exams*', route => {
+      if (new URL(route.request().url()).searchParams.has('count')) return route.fulfill({ json: { data: [] } })
     deliver = () => route.fulfill({ json: { data: [{ exam_number: 1, question_numbers: [1], access: 'available' }] } })
     arrive()
   })
@@ -87,4 +89,20 @@ test('changing fields during a pending start discards the previous selection', a
   await deliver(); await response
   await expect(page.getByRole('button', { name: '問題番号順に始める', exact: true })).toBeEnabled()
   await expect(page).toHaveURL('/')
+})
+
+test('selected condition count follows published fields and exams', async ({ page }) => {
+  const { questions } = loadE2EFixture()
+  await page.goto('/')
+  await page.getByRole('tab', { name: '条件を指定', exact: true }).click()
+  const count = page.locator('.condition-submit strong')
+  await expect(count).toHaveText(`${questions.length}問`)
+  const fields = page.getByRole('group', { name: '出題範囲', exact: true })
+  const exams = page.getByRole('group', { name: '対象模試', exact: true })
+  await fields.getByRole('checkbox', { name: '全選択', exact: true }).uncheck()
+  await fields.getByRole('checkbox', { name: '日本の遺産', exact: true }).check()
+  await expect(count).toHaveText(`${questions.filter(q => q.major_category_code === 'japan').length}問`)
+  await exams.getByRole('checkbox', { name: '全選択', exact: true }).uncheck()
+  await exams.getByRole('checkbox', { name: '1', exact: true }).check()
+  await expect(count).toHaveText(`${questions.filter(q => q.exam_number === 1 && q.major_category_code === 'japan').length}問`)
 })

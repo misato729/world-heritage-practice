@@ -45,8 +45,8 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
     @keydown.esc="closeMobileOnEscape"
   >
     <div class="sidebar-heading">
-      <UIcon v-if="!collapsed" name="i-lucide-files" />
-      <span v-if="!collapsed">試験セット</span>
+      <UIcon v-if="!collapsed" class="sidebar-heading-icon" name="i-lucide-files" />
+      <span v-if="!collapsed" class="sidebar-heading-label">試験セット</span>
       <button
         class="desktop-sidebar-toggle"
         type="button"
@@ -56,7 +56,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
         :title="collapsed ? 'サイドバーを開く' : 'サイドバーを閉じる'"
         @click="emit('toggle')"
       >
-        <UIcon :name="collapsed ? 'i-lucide-panel-left-open' : 'i-lucide-panel-left-close'" />
+        <UIcon :name="collapsed ? 'i-lucide-chevron-right' : 'i-lucide-chevron-left'" />
       </button>
     </div>
 
@@ -145,23 +145,24 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 0 10px 10px;
+  padding: 0 0 10px;
   color: #53676e;
   font-size: 13px;
   font-weight: 800;
 }
 
-.sidebar-heading > span { flex: 1; }
+.sidebar-heading-label { flex: 1; white-space: nowrap; }
+.sidebar-heading-icon { flex: 0 0 20px; width: 20px; height: 20px; }
 .desktop-sidebar-toggle {
-  width: 32px;
-  height: 32px;
-  flex: 0 0 32px;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
   display: grid;
   place-items: center;
   padding: 0;
-  border: 0;
+  border: 1px solid #c2ced1;
   border-radius: 5px;
-  background: #d5e7e7;
+  background: #fff;
   color: var(--teal-dark);
   font-size: 20px;
   cursor: pointer;
@@ -285,7 +286,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
     height: calc(100vh - var(--header-height));
     overflow-y: auto;
   }
-  .exam-sidebar.desktop-collapsed { padding: 22px 8px; }
+  .exam-sidebar.desktop-collapsed { padding: 22px 9px; }
   .desktop-collapsed .sidebar-heading { justify-content: center; padding: 0 0 10px; }
   .desktop-collapsed .sidebar-content { display: none; }
 }

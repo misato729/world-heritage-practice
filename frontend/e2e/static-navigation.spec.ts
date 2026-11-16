@@ -69,6 +69,7 @@ for (const order of ['sequential', 'random'] as const) {
   test(`condition start uses only published exact positions in ${order} order`, async ({ page }) => {
     let catalogs = 0
     await page.route('**/api/v1/exams*', route => {
+      if (new URL(route.request().url()).searchParams.has('count')) return route.fulfill({ json: { data: [] } })
       catalogs++
       return route.fulfill({ json: { data: [
         { exam_number: 1, question_numbers: [1], access: 'available' },
@@ -105,6 +106,7 @@ test('a delayed condition start cannot navigate after leaving the home page', as
   let arrived!: () => void
   const requestArrived = new Promise<void>(resolve => { arrived = resolve })
   await page.route('**/api/v1/exams*', route => {
+      if (new URL(route.request().url()).searchParams.has('count')) return route.fulfill({ json: { data: [] } })
     deliver = () => route.fulfill({ json: { data: [{ exam_number: 1, question_numbers: [1], access: 'available' }] } })
     arrived()
   })

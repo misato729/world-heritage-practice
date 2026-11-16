@@ -80,11 +80,41 @@ const selectionKey = computed(() => JSON.stringify([sortedSelectedExamNumbers.va
 const hasConditionSelection = computed(() => selectionSchema.safeParse(conditions).success)
 watch(selectionKey, () => { startError.value = ''; conditionForm.value?.setErrors([]) })
 
+// Count only on the conditions panel; navigation remains independent of this request.
+const countCatalog = ref<{ exam_number: number, question_numbers: number[], access?: string }[] | null>(null)
+const countLoading = ref(false)
+const countError = ref(false)
+const selectedQuestionCount = computed(() => !hasConditionSelection.value ? 0 : countCatalog.value === null ? null
+  : countCatalog.value.filter(exam => selectedExamNumbers.value.includes(exam.exam_number) && exam.access !== 'paid_membership_required')
+    .reduce((sum, exam) => sum + exam.question_numbers.length, 0))
+let countGeneration = 0
+watch([launcherMode, sortedSelectedCategories, sessionVersion, user], (_value, _old, onCleanup) => {
+  const generation = ++countGeneration
+  const controller = new AbortController()
+  countCatalog.value = null
+  countError.value = false
+  countLoading.value = launcherMode.value === 'conditions' && sortedSelectedCategories.value.length > 0
+  const timer = setTimeout(async () => {
+    if (!countLoading.value) return
+    try {
+      const response = await api<{ data: { exam_number: number, question_numbers: number[], access?: string }[] }>('/api/v1/exams', {
+        query: { major_categories: sortedSelectedCategories.value.join(','), count: '1' }, signal: controller.signal,
+      })
+      if (active && generation === countGeneration) countCatalog.value = response.data
+    } catch {
+      if (active && generation === countGeneration) countError.value = true
+    } finally {
+      if (active && generation === countGeneration) countLoading.value = false
+    }
+  }, 200)
+  onCleanup(() => { clearTimeout(timer); controller.abort() })
+}, { immediate: true })
+
 const examIsLocked = (examNumber: number) => examNumber > FREE_EXAM_MAX && !hasFullAccess.value
 const examTarget = (examNumber: number) => (
   examIsLocked(examNumber) ? '/premium' : `/practice/${examNumber}/1`
 )
-// Fetch publication metadata only after an explicit start, never for rendering navigation.
+// Recheck publication metadata on start; displayed counts never authorize access.
 const startConditionalPractice = async (order: PracticeOrder) => {
   if (!hasConditionSelection.value || startingPractice.value) return
   startingPractice.value = true
@@ -283,7 +313,9 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
             <p v-if="hasConditionSelection">
               <span>選択中</span>
               {{ sortedSelectedExamNumbers.length }}模試・{{ sortedSelectedCategories.length }}分野
-              <small>開始時に公開中の対象問題を確認します</small>
+              <strong v-if="selectedQuestionCount !== null">{{ selectedQuestionCount }}問</strong>
+              <small v-else-if="countLoading" role="status">問題数を確認中…</small>
+              <small v-else-if="countError" role="status">問題数を取得できませんでした。開始時に再確認します。</small>
             </p>
             <p v-else class="selection-required">
               <span>選択内容を確認してください</span>
@@ -478,6 +510,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 }
 .condition-submit p { margin: 0; color: #40545b; font-weight: 800; }
 .condition-submit p span { display: block; margin-bottom: 3px; color: var(--muted); font-size: 11px; }
+.condition-submit p strong { margin-left: 8px; color: var(--teal-dark); }
 .condition-submit p small { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 400; }
 .condition-submit .selection-required { color: #a23b2a; }
 .condition-actions { display: flex; flex: 0 0 auto; gap: 10px; }
