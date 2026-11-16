@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 174,
-  "updated_at": "2026-11-16T03:32:16.366Z",
+  "revision": 208,
+  "updated_at": "2026-11-16T12:46:52.452Z",
   "workspace_relative_to_repo": ".",
-  "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-16T03-32-16-366Z-r174.json",
+  "active_context": "operations",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-16T12-46-52-452Z-r208.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -3805,6 +3805,677 @@
             "outcome": "passed",
             "summary": "unit41・型・隔離DB Playwright36・静的認証保留/失敗/即応8・独立レビューPASSを確認。指摘2件は修正し独立再検証済み。",
             "at": "2026-11-16T03:32:04.996Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_m01_authoring_20261116",
+      "context": "product",
+      "title": "改訂後1級過去問とその他分析に基づく模試1セット作成",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: 「その他」はその分析を踏まえ、模試1セット作成してください。改訂前の過去問は参考から除外。",
+      "next_action": "作問原稿を利用者へ提示する。DB登録・公開・追加作問は新たな依頼を待つ。",
+      "evidence": [
+        "local-only/grade1-mock-01-20261116/authoring-contract.md",
+        "local-only/grade1-mock-01-20261116/final-checks.json",
+        "local-only/grade1-mock-01-20261116/review-summary.json",
+        "local-only/grade1-mock-01-20261116/mock-exam-01.authoring-review.md"
+      ],
+      "last_verified_at": "2026-11-16T04:14:24.415Z",
+      "verification_scope": "1級模試90問200点のローカル原稿。全90問の独立盲解・原典照合と修正後提示の一致、配点、Markdown一致、原資料保護を確認。写真・地図形式は未再現。DB登録・公開・Git送信は未依頼。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "90問200点、分野配点50/40/90/20、4肢正答1件、全肢根拠・資料参照・重複・漏出・私的資料保護を確認",
+          "verification": "構造/配点/参照/出力一致検査と原典照合、改訂後過去問比較",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/validation.json",
+            "local-only/grade1-mock-01-20261116/review-coverage.json",
+            "local-only/grade1-mock-01-20261116/final-checks.json"
+          ],
+          "checked_at": "2026-11-16T04:14:24.415Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者と異なる担当が解答を隠して全90問を解き、一意性・最短解法・全肢・その他の書籍外知識要件を確認",
+          "verification": "blind JSONに対する独立解答、原典裁定、変更問は旧解答未見の担当による再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/review-summary.json",
+            "local-only/grade1-mock-01-20261116/mock-exam-01.authoring-review.md"
+          ],
+          "checked_at": "2026-11-16T04:14:24.415Z",
+          "reviewer": "author_world / author_other / author_basic_japan / fresh_reblind / final_two_blind (per-question independence)"
+        }
+      ],
+      "execution": {
+        "worker": "grade1_m01_authoring_team",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回独立評価で共通リードの漏出、区域の曖昧さ、原典と公的説明の差異を検出。指摘と初回答案はローカル確認記録に保存。",
+            "at": "2026-11-16T03:54:55.850Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "90問200点と指定配点を確認。独立盲解・原典照合の指摘を修正し、最終90問の提示一致、全体漏出確認、Markdown出力と資料保護の検査に合格。",
+            "at": "2026-11-16T04:15:04.991Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_m01_form_revision_20261116",
+      "context": "product",
+      "title": "1級模試1のリード参照・出題形式と内容の過去問準拠改訂",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: 文化・自然配分維持。リード文の下線参照・空欄補充を過去問に合わせ、その他の形式・内容のずれも修正。",
+      "next_action": "改訂版を提示。追加作問・DB登録・公開は別途依頼を待つ。",
+      "evidence": [
+        "local-only/grade1-mock-01-20261116/form-revision-20261116/report.md",
+        "local-only/grade1-mock-01-20261116/form-revision-20261116/final-checks.json"
+      ],
+      "last_verified_at": "2026-11-16T05:53:49.870Z",
+      "verification_scope": "90問200点のローカル改稿。変更51問の独立盲解と最終提示一致、未変更39問の既存検証継承。過去問原画像比較、変更原典照合、下線空欄の表示・構造・配点維持・資料保護を確認。地図・写真は未再現。DB登録・公開・送信なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "リード参照・空欄の対応、90問200点と全分野配点、MD一致・資料保護、変更根拠を確認",
+          "verification": "過去問原画像比較、原稿構造と改訂差分検査、変更した主張の原典照合",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/form-revision-20261116/validation.json",
+            "local-only/grade1-mock-01-20261116/form-revision-20261116/final-checks.json"
+          ],
+          "checked_at": "2026-11-16T05:53:49.870Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が全体形式内容を監査し、変更後の提示を正答非表示で解き一意性・漏出を確認",
+          "verification": "独立形式監査・内容監査、変更問と共通リード全問の盲解。未変更問は同一指紋の前回結果を継承",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/form-revision-20261116/review-coverage.json",
+            "local-only/grade1-mock-01-20261116/form-revision-20261116/negative-source-review.json",
+            "local-only/grade1-mock-01-20261116/form-revision-20261116/final-format-review.json"
+          ],
+          "checked_at": "2026-11-16T05:53:49.870Z",
+          "reviewer": "past_form_audit / form_blind / fresh_final_two; content_form_audit"
+        }
+      ],
+      "execution": {
+        "worker": "root_form_revision",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "独立形式監査で共通リード構造・三説明文型・肯否定比率の欠落を確認。改稿初回盲解で手紙の答えを示す手掛かりと海氷問題の時点の曖昧さを検出し、修正と未露出担当による再盲解を進める。",
+            "at": "2026-11-16T05:41:13.916Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "過去問原画像と全90問を比較し51問を改稿。変更51問の最終提示を独立盲解、未変更39問の同一性を確認。原典指摘・参照・漏出を修正し、配点維持とMarkdown表示・資料保護を確認。",
+            "at": "2026-11-16T05:54:04.626Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_m01_visual_revision_20261116",
+      "context": "product",
+      "title": "1級模試1への地図・写真問題の組込みと権利確認",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: 地図・写真を過去問に準拠して組込み、90問200点と分野配点維持。著作権に注意。",
+      "next_action": "完成原稿を案内。追加の作問・DB反映・公開は依頼を待つ",
+      "evidence": [
+        "local-only/grade1-mock-01-20261116/final-checks.json",
+        "local-only/grade1-mock-01-20261116/visual-revision-20261116/report.md"
+      ],
+      "last_verified_at": "2026-11-16T06:28:26.487Z",
+      "verification_scope": "写真4問・地図1問。90問200点と各問の分野配点を維持、変更外85問一致。最終提示版の独立盲解・原典全肢根拠・権利・PC/SP表示確認済み。DB・公開・送信は対象外。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "件数・各分野配点・変更外一致、画像参照と表示、地図位置、出典・ライセンス・原資料保護を確認",
+          "verification": "図版と原稿照合、権利台帳、表示検査、原本指紋・配点検査",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/final-checks.json",
+            "local-only/grade1-mock-01-20261116/visual-revision-20261116/validation.json",
+            "local-only/grade1-mock-01-20261116/visual-revision-20261116/render-check.json"
+          ],
+          "checked_at": "2026-11-16T06:28:26.487Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が図版と原稿を解答非表示で解き、最短解法・一意性・権利条件と過去問の形式比較を確認",
+          "verification": "変更問と影響先の独立盲解、画像・地図を含む提示版指紋の一致、独立権利レビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/visual-revision-20261116/independent-visual-review.json",
+            "local-only/grade1-mock-01-20261116/visual-revision-20261116/blind-review.json",
+            "local-only/grade1-mock-01-20261116/visual-revision-20261116/map-blind-v2.json"
+          ],
+          "checked_at": "2026-11-16T06:28:26.487Z",
+          "reviewer": "visual_past_audit + visual_blind_v1 + map_blind_v2"
+        }
+      ],
+      "execution": {
+        "worker": "root_visual_revision",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回版は配点・画像・権利確認に合格。独立レビューで地図の最短解法と比較記録の不足を確認し、南西岸の候補を加える差分改稿へ進む。",
+            "at": "2026-11-16T06:23:51.815Z",
+            "failed_criteria": [
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "地図の候補配置を修正し未露出担当で再盲解。写真4問・地図1問、90問200点と各分野配点維持、出典・権利・表示・変更外85問一致を確認した。",
+            "at": "2026-11-16T06:28:26.980Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_m01_integration_20261116",
+      "context": "development",
+      "title": "1級模試1の開発DB登録と画像・リード書式の実画面確認",
+      "status": "needs_review",
+      "depends_on": [
+        "grade1_m01_visual_revision_20261116"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: この模試を開発DBへ登録し、地図・写真・リード下線・空欄の実画面確認まで依頼。",
+      "next_action": "旧5回失敗を保持。ユーザーの続行承認後の登録・表示確認は grade1_m01_integration_resume_20261116 と完了報告書に記録。当タスクの上限変更や追加評価は行わない。",
+      "evidence": [
+        "local-only/grade1-mock-01-20261116/integration-20261116/evaluation-reassessment.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/reviews/evaluation-reassessment-review.json",
+        "docs/grade1-mock-01-integration-20261116.md",
+        "local-only/grade1-mock-01-20261116/integration-20261116/development-stop-status.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/stop-file-checks.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/check-browser-proposed-next.mjs"
+      ],
+      "last_verified_at": "2026-11-16T08:39:34.277426+00:00",
+      "verification_scope": "部分確認。90問360肢・200点の変換、隔離DB writer、先行build PC90問は確認済み。最終build受入・SP学習者90問・開発DB登録は未完了。停止時の開発DBは1800問7200肢・1級0問で全対象不変。未実行の検査候補と失敗5回を保持。公開・Git送信なし。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "原稿とarchive一致、表示schema安全性、バックアップ復元・実writer取消/反復・非対象保持、隔離/実開発のPCSP表示と回答",
+          "verification": "shared schema tests, typecheck/build, archive comparison, disposable test DB restore/writer, Playwright, actual development read/answer checks",
+          "status": "failed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/integration-20261116/attempt-5/browser-failure.json",
+            "local-only/grade1-mock-01-20261116/integration-20261116/attempt-5/writer-test-result.json",
+            "local-only/grade1-mock-01-20261116/integration-20261116/attempt-5/cleanup-result.json"
+          ],
+          "checked_at": "2026-11-16T08:27:51.896Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "独立した変換・登録手順・表示実装・最終版/画面証拠のレビュー",
+          "verification": "作成と登録をしない担当が根拠と代表PCSP画像を確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root_grade1_integration",
+        "max_attempts": 5,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "隔離writer5検査は成功。PC問40で選択肢数の即時判定が不一致となり全画面受入未達。検証DBは全削除。失敗時記録と描画待ちを修正して再評価する。",
+            "at": "2026-11-16T07:06:49.090Z",
+            "failed_criteria": [
+              "automated",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "2回目の隔離画面検査はPC問64の読込状態で停止。直後の画像は正常描画、原因未確定。既存writer検証と検証DB片付けは成功。再試行せず読込処理を診断する。",
+            "at": "2026-11-16T07:16:58.097Z",
+            "failed_criteria": [
+              "automated",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "failed",
+            "summary": "PC90問の表示・回答は完走。スマートフォン管理mockのプレビュー表示待ちで停止し、learner SP/実開発未確認。総評価3回上限へ到達したため全体再試行を停止し原因・計画を再検討する。",
+            "at": "2026-11-16T07:40:06.308Z",
+            "failed_criteria": [
+              "automated",
+              "review"
+            ]
+          },
+          {
+            "number": 4,
+            "outcome": "failed",
+            "summary": "PC90問は完走。SP管理プレビューは開いたが画面全体の横はみ出し検査が不合格。原因要素を限定診断し修正後の最後1評価に備える。",
+            "at": "2026-11-16T08:06:15.481Z",
+            "failed_criteria": [
+              "automated",
+              "review"
+            ]
+          },
+          {
+            "number": 5,
+            "outcome": "failed",
+            "summary": "最後の評価5はPC管理mock後の初回級切替待機でTimeout。検査証拠を保持しneeds_reviewへ停止。開発DB登録・開発サーバー更新は未実施、使い捨てDBは全削除済み。",
+            "at": "2026-11-16T08:27:52.616Z",
+            "failed_criteria": [
+              "automated",
+              "review"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_m01_integration_resume_20261116",
+      "context": "development",
+      "title": "再計画した1級模試1の開発DB登録とPCSP表示確認",
+      "status": "done",
+      "depends_on": [
+        "grade1_m01_visual_revision_20261116"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザーが未完了報告と検査手順見直し・登録・画面確認の続行提案に「はい」と明示承認。旧5回失敗はgrade1_m01_integration_20261116へ保持。",
+      "next_action": "ユーザーへ開発画面と確認記録を案内。追加変更・本番公開・Git送信は別途依頼を待つ。",
+      "evidence": [
+        "docs/grade1-mock-01-integration-20261116.md",
+        "local-only/grade1-mock-01-20261116/integration-20261116/development-stop-status.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/diagnostic-navigation-run-result.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/isolated-result.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/browser-result.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/cleanup-result.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/applied-result.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/browser-result-development.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/development-postcheck.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/resume-20261116/reviews/final-development-review.json",
+        "local-only/grade1-mock-01-20261116/integration-20261116/resume-20261116/final-file-preservation.json"
+      ],
+      "last_verified_at": "2026-11-16T09:08:42.512Z",
+      "verification_scope": "90問360肢200点・分野配点を維持して専用開発DBへ登録。既存1800問7200肢と関連データ保持、計1890問7560肢。隔離と実開発それぞれPC/SP全90問の表示回答・全肢/全解説/出典・媒体5点・共通lead26問・下線/空欄・導線/末尾・匿名境界を確認。独立最終レビュー必須指摘0。物理実機/本番反映/Git送信なし。管理画面の留保は報告書に明記。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "基準とbuild保持、修正検査による隔離PCSP90問、バックアップ復元とwriter、実開発90問追加・既存保持・PCSP表示",
+          "verification": "指紋照合、限定診断、Playwright、既存共通writer、登録前後の全行/保護メタデータ照合",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/integration-20261116/isolated-result.json",
+            "local-only/grade1-mock-01-20261116/integration-20261116/browser-result.json",
+            "local-only/grade1-mock-01-20261116/integration-20261116/cleanup-result.json",
+            "local-only/grade1-mock-01-20261116/integration-20261116/applied-result.json",
+            "local-only/grade1-mock-01-20261116/integration-20261116/browser-result-development.json",
+            "local-only/grade1-mock-01-20261116/integration-20261116/development-postcheck.json",
+            "local-only/grade1-mock-01-20261116/integration-20261116/resume-20261116/final-file-preservation.json"
+          ],
+          "checked_at": "2026-11-16T09:08:42.512Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が検査版・DB適用条件・原稿対応・最終PCSP画像・保持証拠を独立確認",
+          "verification": "resume_review担当による実証拠レビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/integration-20261116/resume-20261116/reviews/isolated-acceptance-review.json",
+            "local-only/grade1-mock-01-20261116/integration-20261116/resume-20261116/reviews/final-development-review.json"
+          ],
+          "checked_at": "2026-11-16T09:08:42.512Z",
+          "reviewer": "resume_review"
+        }
+      ],
+      "execution": {
+        "worker": "root_grade1_integration_resume",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "固定版90問を開発DBへ追加。隔離/実開発のPCSP各90問・画像/lead書式・全原稿一致と既存1800問保持、独立レビューに合格。",
+            "at": "2026-11-16T09:10:30.872Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_passage_disclosure_20261116",
+      "context": "development",
+      "title": "1級共通リード指示文の過去問調整と初期閉じ開閉表示",
+      "status": "done",
+      "depends_on": [
+        "grade1_m01_integration_resume_20261116"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: 共通リード見出しを文章/会話等の指示文にし、指示文だけを初期表示する開閉形式へ変更。",
+      "next_action": "追加依頼: 模試2〜10を同じ要領で作成。内容は全810問点検、ブラウザは9セット全体で無作為約30問。",
+      "evidence": [
+        "docs/grade1-mock-01-integration-20261116.md",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/data-diff-result.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/reviews/data-diff-review.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/code-validation-result.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/writer-test-result.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/isolated-result.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/browser-result-isolated.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/cleanup-result.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/applied-result.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/browser-result-development.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/development-postcheck.json",
+        "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/reviews/final-development-review.json"
+      ],
+      "last_verified_at": "2026-11-16T09:44:15.783Z",
+      "verification_scope": "3指示文・26問titleのみ改稿。初期閉じnative details、指示文のみ表示、keyboard/クリック開閉、SPA遷移reset/回答後open保持。隔離/実開発のPCSP各26問で確認。本文/答え/肢/解説/配点/媒体不変、全1890問・7560肢のID維持、非対象1864問/全肢日時/meta保持。独立レビュー必須指摘0、本番/送信なし。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "title-only全件差分、backup復元/共通writerの履歴0条件/取消/反復/対象外保持、schema描画test/build、隔離/実開発PCSP開閉/下線空欄/遷移と非lead表示",
+          "verification": "固定版比較、専用test DB復元とpatch、focused tests/typecheck/build、Playwright",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/data-diff-result.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/code-validation-result.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/writer-test-result.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/isolated-result.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/browser-result-isolated.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/cleanup-result.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/applied-result.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/browser-result-development.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/development-postcheck.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/app-source-diff.json"
+          ],
+          "checked_at": "2026-11-16T09:44:15.783Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が3指示文/差分/UI/DB処理/実画面証拠を確認",
+          "verification": "passage_reviewによる独立レビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/reviews/isolated-acceptance-review.json",
+            "local-only/grade1-mock-01-20261116/passage-disclosure-20261116/reviews/final-development-review.json"
+          ],
+          "checked_at": "2026-11-16T09:44:15.783Z",
+          "reviewer": "passage_review"
+        }
+      ],
+      "execution": {
+        "worker": "root_passage_disclosure",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "3指示文26問と初期閉じ開閉表示を開発へ反映。PCSP操作・DB保持・全差分と独立レビューに合格。",
+            "at": "2026-11-16T09:45:59.317Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_m02_04_authoring_20261116",
+      "context": "product",
+      "title": "1級模試2〜4の新規作成と全問独立内容確認",
+      "status": "doing",
+      "depends_on": [
+        "grade1_passage_disclosure_20261116"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: 同じ要領で模試2〜10を作成。全810問の内容点検を行い、ブラウザのみ9セット全体から無作為約30問。",
+      "next_action": "利用枠2%の指示で作問中断。docs/grade1-mocks-02-10-progress-20261116.mdと担当引継ぎから未完作成・全問独立点検を再開する。DB未登録。",
+      "evidence": [
+        "local-only/grade1-mocks-02-10-20261116/authoring-contract.md",
+        "local-only/grade1-mocks-02-10-20261116/blueprint.json",
+        "docs/grade1-mocks-02-10-progress-20261116.md"
+      ],
+      "last_verified_at": null,
+      "verification_scope": "作成と確認は未完。90問の初稿固定と受入合格を区別する。内容全810問点検、ブラウザ9セット合計30問の方針を保持。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "各90問200点/指定分類配点/4肢1正答/3共通リード/写真4と地図1/参照・原稿・解答MD一致を検査する",
+          "verification": "構造・参照・出典欄・文字数と形式分布・重複・固定版指紋を検査",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者と別担当が全270問を正答非表示で解き、全肢・出典・解説・最短解法・漏出を独立確認する",
+          "verification": "全問盲解記録、全肢原典照合と過去問形式比較、写真地図の権利と対応を裁定",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "grade1_author_02_04",
+        "max_attempts": 3,
+        "attempts": []
+      }
+    },
+    {
+      "id": "grade1_m05_07_authoring_20261116",
+      "context": "product",
+      "title": "1級模試5〜7の新規作成と全問独立内容確認",
+      "status": "doing",
+      "depends_on": [
+        "grade1_passage_disclosure_20261116"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: 同じ要領で模試2〜10を作成。全810問の内容点検を行い、ブラウザのみ9セット全体から無作為約30問。",
+      "next_action": "利用枠2%の指示で作問中断。docs/grade1-mocks-02-10-progress-20261116.mdと担当引継ぎから未完作成・全問独立点検を再開する。DB未登録。",
+      "evidence": [
+        "local-only/grade1-mocks-02-10-20261116/authoring-contract.md",
+        "local-only/grade1-mocks-02-10-20261116/blueprint.json",
+        "docs/grade1-mocks-02-10-progress-20261116.md"
+      ],
+      "last_verified_at": null,
+      "verification_scope": "作成と確認は未完。90問の初稿固定と受入合格を区別する。内容全810問点検、ブラウザ9セット合計30問の方針を保持。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "各90問200点/指定分類配点/4肢1正答/3共通リード/写真4と地図1/参照・原稿・解答MD一致を検査する",
+          "verification": "構造・参照・出典欄・文字数と形式分布・重複・固定版指紋を検査",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者と別担当が全270問を正答非表示で解き、全肢・出典・解説・最短解法・漏出を独立確認する",
+          "verification": "全問盲解記録、全肢原典照合と過去問形式比較、写真地図の権利と対応を裁定",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "grade1_author_05_07",
+        "max_attempts": 3,
+        "attempts": []
+      }
+    },
+    {
+      "id": "grade1_m08_10_authoring_20261116",
+      "context": "product",
+      "title": "1級模試8〜10の新規作成と全問独立内容確認",
+      "status": "doing",
+      "depends_on": [
+        "grade1_passage_disclosure_20261116"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: 同じ要領で模試2〜10を作成。全810問の内容点検を行い、ブラウザのみ9セット全体から無作為約30問。",
+      "next_action": "利用枠2%の指示で作問中断。docs/grade1-mocks-02-10-progress-20261116.mdと担当引継ぎから未完作成・全問独立点検を再開する。DB未登録。",
+      "evidence": [
+        "local-only/grade1-mocks-02-10-20261116/authoring-contract.md",
+        "local-only/grade1-mocks-02-10-20261116/blueprint.json",
+        "docs/grade1-mocks-02-10-progress-20261116.md"
+      ],
+      "last_verified_at": null,
+      "verification_scope": "作成と確認は未完。90問の初稿固定と受入合格を区別する。内容全810問点検、ブラウザ9セット合計30問の方針を保持。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "各90問200点/指定分類配点/4肢1正答/3共通リード/写真4と地図1/参照・原稿・解答MD一致を検査する",
+          "verification": "構造・参照・出典欄・文字数と形式分布・重複・固定版指紋を検査",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者と別担当が全270問を正答非表示で解き、全肢・出典・解説・最短解法・漏出を独立確認する",
+          "verification": "全問盲解記録、全肢原典照合と過去問形式比較、写真地図の権利と対応を裁定",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "grade1_author_08_10",
+        "max_attempts": 3,
+        "attempts": []
+      }
+    },
+    {
+      "id": "grade1_m01_production_release_20261116",
+      "context": "operations",
+      "title": "利用枠2%到達時の確認済み1級模試1と表示機能のコミット・push・本番反映",
+      "status": "done",
+      "depends_on": [
+        "grade1_m01_integration_resume_20261116",
+        "grade1_passage_disclosure_20261116"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 user: 利用枠残り2%になったら一旦コミット・push・本番反映してください。実測usedPercent98で条件成立。未検証の模試2〜10は対象外。",
+      "next_action": "最終記録だけを送信し、再開時はM02〜10の中断記録から全問内容点検を継続する",
+      "evidence": [
+        "docs/grade1-mock-01-release-20261116.md",
+        "docs/grade1-mocks-02-10-progress-20261116.md"
+      ],
+      "last_verified_at": "2026-11-16T12:46:28.440Z",
+      "verification_scope": "M01最新版90問/360肢/200点を本番追加。旧1800問と関連13モデル保持、再接続repeat0、一時payload削除。写真地図5点とPC/SP代表18画面・旧両級4画面確認、CI4jobs成功。M02-10は未完・未登録として保存。",
+      "acceptance": [
+        {
+          "id": "release_checks",
+          "kind": "automated",
+          "description": "対象版固定・資料保護・復旧点・本番90問追加と既存1800問等保持・CI・公開PC/SPの代表確認が成功",
+          "verification": "既存append CLIの隔離検査、最新archive/schema照合、Neon復旧点、Fly/Netlify配信、固定代表問題のブラウザ確認",
+          "status": "passed",
+          "evidence": [
+            "docs/grade1-mock-01-release-20261116.md",
+            "local-only/grade1-mock-01-release-20261116/production-smoke-run-receipt.json",
+            "local-only/grade1-mock-01-release-20261116/production-append-result.json",
+            "local-only/grade1-mock-01-release-20261116/hosting-final.json",
+            "local-only/grade1-mock-01-release-20261116/ci-feature-result.json"
+          ],
+          "checked_at": "2026-11-16T12:46:28.440Z"
+        },
+        {
+          "id": "independent_review",
+          "kind": "review",
+          "description": "別担当が継承範囲・権利・配信境界と実行結果を照合して必須未解決0",
+          "verification": "コード/媒体/実行前後の独立確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mock-01-release-20261116/reviews/final-release-data-review.json",
+            "local-only/grade1-mock-01-release-20261116/reviews/final-browser-review.json"
+          ],
+          "checked_at": "2026-11-16T12:46:28.440Z",
+          "reviewer": "grade1_author_05_07 and grade1_author_02_04"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回公開前の一時ファイル削除・結果記録に関する指摘を修正。Fly初回切替はmanifest取得404で停止し、旧版・DB不変を確認して履歴を保存した。",
+            "at": "2026-11-16T12:30:36.330Z",
+            "failed_criteria": [
+              "release_checks",
+              "independent_review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "本番90問追加とデータ保持・配信版照合は成功。初回PC代表表示は本文・操作確認後、検査器が公開アイコン取得を遮断して停止した。旧検査版と失敗記録を保持し、最小診断で原因を確認。",
+            "at": "2026-11-16T12:34:47.025Z",
+            "failed_criteria": [
+              "release_checks",
+              "independent_review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "確認済みM01の90問・360肢を本番追加。既存1800問と13モデルを保持、repeat0・一時入力削除。CI4件、公開PCSP代表18+旧4画面、独立データ22項目とUI6画像の照合に成功。",
+            "at": "2026-11-16T12:46:50.077Z",
             "failed_criteria": []
           }
         ]
