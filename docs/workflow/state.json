@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 232,
-  "updated_at": "2026-11-17T09:26:53.668Z",
+  "revision": 235,
+  "updated_at": "2026-11-17T10:07:02.246Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-17T09-26-53-668Z-r232.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-17T10-07-02-246Z-r235.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -4868,6 +4868,75 @@
             "outcome": "failed",
             "summary": "第3回Fly proxy自動停止とSSH結果欠落。更新前指紋一致。上限到達で追加適用停止。",
             "at": "2026-11-17T09:26:53.668Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_revision_production_resume_20261117",
+      "context": "operations",
+      "title": "自動停止を一時抑制する準1級本番反映の再計画実行",
+      "status": "needs_review",
+      "depends_on": [
+        "pre1_audit_revision_integration_20261117"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-17 自動停止抑制と元設定復帰の新計画にユーザー「はい」",
+      "next_action": "稼働状態を事前確定する実行計画へ再検討",
+      "evidence": [
+        "local-only/pre1-revision-20261117/production/resume-20261117/result.json",
+        "docs/pre1-revision-release-20261117.md"
+      ],
+      "last_verified_at": null,
+      "verification_scope": "2評価ともDB開始前。CLI設定受渡しを修正したが停止machineのstarted条件未達。元config完全復帰。DB反映とUI未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "本番600問一致、許可履歴1件reset・他履歴保持、元Fly設定復帰、代表4表示とGitCI",
+          "verification": "旧core/testSHA継承、新wrapper現在条件確認、適用結果と設定指紋、PCSP代表2問",
+          "status": "failed",
+          "evidence": [
+            "local-only/pre1-revision-20261117/production/resume-20261117/result.json"
+          ],
+          "checked_at": "2026-11-17T10:07:01.442Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "新実行計画と実結果を別担当が独立確認",
+          "verification": "元設定復帰finally、現在baseline/backup/許可履歴hash、結果の独立結合",
+          "status": "failed",
+          "evidence": [
+            "local-only/pre1-revision-20261117/production/resume-20261117/result.json"
+          ],
+          "checked_at": "2026-11-17T10:07:01.442Z",
+          "reviewer": "audit_pre1_01_04"
+        }
+      ],
+      "execution": {
+        "worker": "root / audit_pre1_05_07; independent audit_pre1_01_04",
+        "max_attempts": 2,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "新計画1：CLIがstdin設定指定を受理せずDB前停止、実config元値一致。",
+            "at": "2026-11-17T10:07:01.763Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "新計画2：停止machineがstarted条件に達せずDB前停止、元config完全復帰。上限で追加実行停止。",
+            "at": "2026-11-17T10:07:02.246Z",
             "failed_criteria": [
               "checks",
               "review"
