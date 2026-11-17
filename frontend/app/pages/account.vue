@@ -30,6 +30,10 @@ watch(() => route.hash, alignAccountSettings, { flush: 'post' })
 
 const { isLoggedIn, user, logout, deleteAccount: removeAccount, changePassword, ensureCurrentUser } = useAuth()
 await ensureCurrentUser()
+// pending is an unfinished Checkout with no Stripe customer to manage.
+const hasManageableSubscription = computed(() => !!user.value?.subscription && user.value.subscription.status !== 'pending')
+const subscriptionEnded = computed(() => ['canceled', 'incomplete_expired'].includes(user.value?.subscription?.status ?? ''))
+const showPremiumRegistration = computed(() => PAYMENTS_ENABLED && !user.value?.paid_content_access && (!hasManageableSubscription.value || subscriptionEnded.value))
 const passwordState = reactive({ current_password: '', password: '', password_confirmation: '' })
 const passwordForm = useTemplateRef('passwordForm')
 const changingPassword = ref(false)
@@ -108,23 +112,24 @@ const deleteAccount = async () => {
         <div v-if="PAYMENTS_ENABLED && user?.membership.status === 'active' && !user?.subscription"><span>有効期限</span><strong>{{ user?.membership.expires_at ? new Date(user.membership.expires_at).toLocaleDateString('ja-JP') : '既存の会員資格' }}</strong></div>
         <div v-if="PAYMENTS_ENABLED && user?.verification_access && user?.membership.status !== 'active'"><span>検証用資格の期限</span><strong>{{ new Date(user.verification_access.expires_at).toLocaleString('ja-JP') }}</strong></div>
       </section>
-      <section v-if="user?.subscription" id="subscription-management" ref="subscriptionSection" class="content-panel subscription-management" aria-labelledby="subscription-heading">
-        <h2 id="subscription-heading">契約・解約の管理</h2>
+      <section v-if="hasManageableSubscription || showPremiumRegistration" id="subscription-management" ref="subscriptionSection" class="content-panel subscription-management" aria-labelledby="subscription-heading">
+        <h2 id="subscription-heading">{{ hasManageableSubscription ? '契約・解約の管理' : 'プレミアム会員' }}</h2>
+        <template v-if="showPremiumRegistration">
+          <p>{{ PRICE_LABEL }}（税込）／月で、模擬試験{{ EXAM_CONFIG.payments.free_exam_count + 1 }}以降の公開問題とお気に入り機能を利用できます。</p>
+          <GradeLink class="primary-link" to="/premium">{{ subscriptionEnded ? 'プレミアム会員に再登録する' : 'プレミアム会員に登録する' }}</GradeLink>
+        </template>
+        <template v-if="hasManageableSubscription && user?.subscription">
         <p v-if="user.subscription.cancel_at_period_end" role="status">解約予約済みです。次回の自動更新はありません。</p>
         <p v-if="user.subscription.paid_until">支払済み利用期間の終了：{{ new Date(user.subscription.paid_until).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }) }}（日本時間）</p>
-        <button class="primary-link" type="button" :disabled="openingPortal" @click="openPortal">{{ openingPortal ? '契約管理を開いています' : '契約・支払方法・解約の管理' }}</button>
+        <button class="primary-link" type="button" :disabled="openingPortal" @click="openPortal">{{ openingPortal ? '契約管理を開いています' : subscriptionEnded ? '過去の請求・支払情報を確認する' : '契約・支払方法・解約の管理' }}</button>
         <p v-if="portalError" class="form-error" role="alert">{{ portalError }}</p>
-        <p>最新の更新日・解約完了状況はStripe管理画面で確認してください。</p>
-        <SubscriptionCancellationGuide />
+        <p>{{ subscriptionEnded ? '過去の請求・支払情報はStripe管理画面で確認できます。' : '最新の更新日・解約完了状況はStripe管理画面で確認してください。' }}</p>
+        <SubscriptionCancellationGuide v-if="!subscriptionEnded" :show-management-link="false" from-account-page />
+        </template>
       </section>
       <AchievementReport @settled.once="alignAccountSettings" />
       <section id="account-settings" ref="settingsSection" class="account-settings" aria-labelledby="account-settings-heading">
         <h2 id="account-settings-heading">アカウント設定</h2>
-      <section v-if="PAYMENTS_ENABLED && !user?.paid_content_access" class="content-panel membership-action">
-        <h3>プレミアム会員</h3>
-        <p>{{ PRICE_LABEL }}（税込）／月で、模擬試験{{ EXAM_CONFIG.payments.free_exam_count + 1 }}以降を利用できます。</p>
-        <GradeLink class="primary-link" to="/premium">プレミアム会員の詳細を見る</GradeLink>
-      </section>
       <section class="content-panel password-settings">
         <h3>パスワード変更</h3>
         <p>現在のパスワードと、8〜128文字の新しいパスワードを入力してください。</p>
@@ -168,7 +173,7 @@ const deleteAccount = async () => {
 <style scoped>
 .subscription-management { scroll-margin-top: calc(var(--site-navigation-height, var(--header-height)) + 20px); }
 .subscription-management button { margin-bottom: 12px; }
-.account-info h2 { margin:0; font-size:1.25rem; }
+.account-info h2, .subscription-management h2 { margin:0; font-size:1.25rem; }
 .account-info strong { overflow-wrap:anywhere; }
 .account-settings { margin-top:28px; scroll-margin-top:calc(var(--site-navigation-height, var(--header-height)) + 20px); }
 .account-settings > h2 { margin:0 0 18px; font-size:1.5rem; }

@@ -24,7 +24,7 @@ for (const grade of ['2','pre1','1']) test(`grade ${grade} displays cancellation
  }
 })
 
-test('subscriber can reach management directly, see end date, and retry a failed portal handoff',async({page})=>{
+test('subscriber can reach management directly, see end date, and retry a failed portal handoff',async({page},info)=>{
  const user={id:900001,name:'合成確認会員',email:'synthetic@example.invalid',role:'user',paid_content_access:true,favorite_questions:[],membership:{status:'active',purchased_at:'2026-01-01T00:00:00Z',expires_at:'2030-01-01T00:00:00Z'},subscription:{status:'active',cancel_at_period_end:true,paid_until:'2030-01-01T00:00:00Z'},verification_access:null,created_at:'2026-01-01T00:00:00Z'}
  await page.route('**/api/auth/get-session*',r=>r.fulfill({json:{session:{id:'synthetic',userId:String(user.id),expiresAt:'2030-01-01T00:00:00Z'},user:{id:String(user.id),name:user.name,email:user.email,emailVerified:true,createdAt:user.created_at,updatedAt:user.created_at}}}))
  await page.route('**/api/v1/me',r=>r.fulfill({json:{data:user}}))
@@ -37,9 +37,19 @@ test('subscriber can reach management directly, see end date, and retry a failed
  await expect(panel).toContainText('解約予約済み')
  await expect(panel).toContainText('日本時間')
  await expect(panel).toContainText('アカウント削除は不要')
+ await expect(panel.locator('ol li')).toHaveCount(2)
+ await expect(panel.locator('ol li').first()).toContainText('このページの「契約・支払方法・解約の管理」を押し')
+ await expect(panel).not.toContainText('右上のメニューから')
+ const headingSizes=await page.locator('#registration-heading, #subscription-heading, #achievement-title').evaluateAll(nodes=>nodes.map(n=>getComputedStyle(n).fontSize))
+ expect(headingSizes).toHaveLength(3)
+ expect(new Set(headingSizes).size).toBe(1)
+ await expect(panel.getByRole('link',{name:'マイページの契約・解約の管理へ'})).toHaveCount(0)
  await page.getByRole('button',{name:'メニューを開く',exact:true}).click()
  await page.getByRole('link',{name:'契約・解約の管理',exact:true}).click()
  await expect(panel).toBeInViewport()
+ await panel.scrollIntoViewIfNeeded()
+ await page.screenshot({path:info.outputPath('account-guide.png'),fullPage:true})
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)
  const open=panel.getByRole('button',{name:'契約・支払方法・解約の管理',exact:true})
  await open.click()
  await expect(panel.getByRole('alert')).toContainText('契約管理を開けませんでした')
@@ -47,4 +57,28 @@ test('subscriber can reach management directly, see end date, and retry a failed
  await open.click()
  await expect(page).toHaveURL('/premium?portal-return=1&grade=pre1')
  expect(portalCalls).toBe(2)
+})
+
+for (const status of ['none','pending','canceled','past_due']) test(`membership state ${status} offers the appropriate registration or management action`,async({page},info)=>{
+ const user={id:900002,name:'合成無料会員',email:'free@example.invalid',role:'user',paid_content_access:false,favorite_questions:[],membership:{status:'free',purchased_at:null,expires_at:null},subscription:status==='none'?null:{status,cancel_at_period_end:false,paid_until:null},verification_access:null,created_at:'2026-01-01T00:00:00Z'}
+ await page.route('**/api/auth/get-session*',r=>r.fulfill({json:{session:{id:'synthetic',userId:String(user.id),expiresAt:'2030-01-01T00:00:00Z'},user:{id:String(user.id),name:user.name,email:user.email,emailVerified:true,createdAt:user.created_at,updatedAt:user.created_at}}}))
+ await page.route('**/api/v1/me',r=>r.fulfill({json:{data:user}}))
+ await page.route('**/api/v1/me/achievement*',r=>r.fulfill({json:{data:{exams:[],total_count:0,answered_count:0,full_access:false}}}))
+ let calls=0;await page.route('**/api/v1/payments/portal',r=>{calls++;return r.fulfill({status:409,json:{error:{message:'No contract'}}})})
+ await page.goto('/account?grade=pre1#subscription-management')
+ const panel=page.locator('#subscription-management');await expect(panel).toBeVisible()
+ if(status==='past_due'){
+  await expect(panel.getByRole('button',{name:'契約・支払方法・解約の管理',exact:true})).toBeVisible()
+  await expect(panel.getByRole('link',{name:/プレミアム会員に.*登録する/})).toHaveCount(0)
+  await expect(panel.getByRole('link',{name:'マイページの契約・解約の管理へ'})).toHaveCount(0)
+  return
+ }
+ const register=panel.getByRole('link',{name:status==='canceled'?'プレミアム会員に再登録する':'プレミアム会員に登録する',exact:true})
+ await expect(register).toHaveAttribute('href','/premium?grade=pre1')
+ await expect(panel.getByRole('button',{name:'契約・支払方法・解約の管理',exact:true})).toHaveCount(0)
+ await expect(panel.getByRole('button',{name:'過去の請求・支払情報を確認する',exact:true})).toHaveCount(status==='canceled'?1:0)
+ await expect(panel.getByRole('link',{name:'マイページの契約・解約の管理へ'})).toHaveCount(0)
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)
+ await page.screenshot({path:info.outputPath(`free-${status}.png`),fullPage:true})
+ await register.click();await expect(page).toHaveURL('/premium?grade=pre1');expect(calls).toBe(0)
 })

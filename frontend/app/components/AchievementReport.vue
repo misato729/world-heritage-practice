@@ -74,7 +74,7 @@ const startReview = async () => {
 .achievement-report { min-width: 0; }
 .report-heading { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 18px; }
 .map-brand { display: flex; gap: 12px; align-items: start; min-width: 0; }.map-symbol { width: 42px; height: 42px; flex-shrink: 0; color: var(--ink); background: #edf4ed; border-radius: 10px; padding: 4px; }
-.report-heading h2 { font-size: 1.35rem; margin-bottom: 8px; }
+.report-heading h2 { font-size: 1.25rem; margin-bottom: 8px; }
 .report-heading p, .report-note { color: var(--muted); font-size: .88rem; line-height: 1.8; }
 .report-heading button { flex-shrink: 0; }
 .report-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; margin: 12px 0; }

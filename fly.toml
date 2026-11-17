@@ -1,5 +1,5 @@
 app = "world-heritage-practice"
-primary_region = "sin"
+primary_region = "nrt"
 
 [build]
 dockerfile = "frontend/Dockerfile"
