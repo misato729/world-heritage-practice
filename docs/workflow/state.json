@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 235,
-  "updated_at": "2026-11-17T10:07:02.246Z",
+  "revision": 238,
+  "updated_at": "2026-11-17T10:48:07.513Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-17T10-07-02-246Z-r235.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-17T10-48-07-513Z-r238.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -4941,6 +4941,67 @@
               "checks",
               "review"
             ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_revision_production_start_first_20261117",
+      "context": "operations",
+      "title": "明示起動と稼働確認を先行する準1級本番反映",
+      "status": "done",
+      "depends_on": [
+        "pre1_audit_revision_integration_20261117"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-17: 再発防止策説明後「では改めて本番反映してください」",
+      "next_action": "本番完了記録を送信し報告する",
+      "evidence": [
+        "docs/pre1-revision-release-20261117.md",
+        "local-only/pre1-revision-20261117/production/start-first-20261117/independent-runtime-review.json"
+      ],
+      "last_verified_at": "2026-11-17",
+      "verification_scope": "600問/2400肢一致、1履歴reset・9保持、他級1290/IDs不変、再接続/no-op、元設定復帰。PC1280/SP390各2問。不正解匿名4回答、全問UI/実機未実施。Git配信は別確認。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "本番600問一致、許可履歴1件reset・他履歴保持、元Fly設定復帰、代表4表示",
+          "verification": "旧core/testSHA継承、新wrapper現在条件確認、適用結果と設定指紋、PCSP代表2問",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-revision-20261117/production/start-first-20261117/applied.json",
+            "local-only/pre1-revision-20261117/production/start-first-20261117/restoration.json",
+            "local-only/pre1-revision-20261117/production/start-first-20261117/final-readonly.json",
+            "local-only/pre1-revision-20261117/production/start-first-20261117/ui/browser-result-production.json",
+            "local-only/pre1-revision-20261117/production/start-first-20261117/ui/visual-review.json"
+          ],
+          "checked_at": "2026-11-17"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "新実行計画と実結果を別担当が独立確認",
+          "verification": "元設定復帰finally、現在baseline/backup/許可履歴hash、結果の独立結合",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-revision-20261117/production/start-first-20261117/independent-review.json",
+            "local-only/pre1-revision-20261117/production/start-first-20261117/independent-runtime-review.json"
+          ],
+          "checked_at": "2026-11-17",
+          "reviewer": "release_recovery_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 2,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "起動先行計画の初回評価成功。本番600問一致、1履歴のみreset・9保持、元設定復帰、PCSP代表4確認と独立レビューpassed",
+            "at": "2026-11-17T10:48:06.432Z",
+            "failed_criteria": []
           }
         ]
       }
