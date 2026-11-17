@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 215,
-  "updated_at": "2026-11-17T03:52:39.015Z",
+  "revision": 232,
+  "updated_at": "2026-11-17T09:26:53.668Z",
   "workspace_relative_to_repo": ".",
-  "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-17T03-52-39-015Z-r215.json",
+  "active_context": "operations",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-17T09-26-53-668Z-r232.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -4603,6 +4603,275 @@
             "summary": "3指摘と関連強化を修正。固定版の自動検査/独立review/本番配信と公開API・PCSP確認に合格。",
             "at": "2026-11-17T03:52:38.099Z",
             "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_full_audit_20261117",
+      "context": "product",
+      "title": "準1級模試1〜10全問の過去問適合と内部情報表示の検証",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-17 ユーザーの全問検証依頼",
+      "next_action": "訂正・再評価事項を報告し、追加依頼の範囲で改稿する",
+      "evidence": [
+        "docs/pre1-full-audit-20261117.md",
+        "local-only/pre1-audit-20261117/README.md",
+        "local-only/pre1-audit-20261117/audit-verification.json",
+        "local-only/pre1-audit-20261117/final-report-review.json"
+      ],
+      "last_verified_at": "2026-11-17T05:58:09.462Z",
+      "verification_scope": "全600問2400肢の提示・解答解説・出典欄の検証と登録archive一致。監査報告受入、教材は訂正・再評価必要。既存原典照合を指紋確認して継承し疑義を追加照合。全原典新規再確認・現行DB/実画面・実受験者難度は未検証。原稿/DB/公開変更なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "全600問の対象指紋・構成・表示用内部情報の全件検査を記録する",
+          "verification": "原稿と登録archive全件を走査し各回集計・対象ID・一致差分を確認する",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-audit-20261117/audit-verification.json",
+            "local-only/pre1-audit-20261117/structural-display-scan.json",
+            "local-only/pre1-audit-20261117/authoring-archive-comparison.json"
+          ],
+          "checked_at": "2026-11-17T05:58:09.462Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が全600問の内容と過去問適合を評価し全件所見を記録する",
+          "verification": "01〜04/05〜07/08〜10を分担し解法・全肢解説・出典・過去問比較を確認する。問題発見は隠さず報告し監査完了と教材合格を区別する",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-audit-20261117/review-01-04.json",
+            "local-only/pre1-audit-20261117/review-05-07.json",
+            "local-only/pre1-audit-20261117/review-08-10.json",
+            "local-only/pre1-audit-20261117/final-report-review.json"
+          ],
+          "checked_at": "2026-11-17T05:58:09.462Z",
+          "reviewer": "audit_pre1_01_04 / audit_pre1_05_07 / audit_pre1_08_10; report aggregation audit_pre1_05_07"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 2,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "全600問の監査と独立集約確認が完了。教材は解説誤り・内部情報・設問品質の訂正再評価が必要であり合格としない。",
+            "at": "2026-11-17T05:58:11.095Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_audit_revision_20261117",
+      "context": "product",
+      "title": "準1級全問監査指摘の改稿と表示情報整理",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-17 ユーザー「では、修正を行ってください」",
+      "next_action": "Dockerと専用DBの復旧後、反映タスクから再開する",
+      "evidence": [
+        "docs/pre1-audit-revision-20261117.md",
+        "local-only/pre1-revision-20261117/README.md",
+        "local-only/pre1-revision-20261117/content-final-acceptance.json"
+      ],
+      "last_verified_at": "2026-11-17T06:38:20.088Z",
+      "verification_scope": "ローカル改稿600問、提示変更102問の旧キー未見独立裁定、解説差分・変換全件一致と内部注記排除。原典の同一根拠は既存確認継承。DB反映とPCSP実画面はDocker起動不可により未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "全600問の番号配点出典参照、不要内部情報の排除、原稿変換一致と変更範囲を検査する",
+          "verification": "固定原稿とarchive/Markdown全件検査",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-revision-20261117/conversion-review.json",
+            "local-only/pre1-revision-20261117/content-final-acceptance.json"
+          ],
+          "checked_at": "2026-11-17T06:38:20.088Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "監査所見の採否と変更問の旧キー未見再盲解・全肢原典支持を別担当が確認",
+          "verification": "提示のみ固定→解答後原典裁定、解説変更は差分確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-revision-20261117/content-final-acceptance.json",
+            "local-only/pre1-revision-20261117/fresh-c-findings.json",
+            "local-only/pre1-revision-20261117/followup-final-d.json",
+            "local-only/pre1-revision-20261117/explanation-only-05-07-review.json"
+          ],
+          "checked_at": "2026-11-17T06:38:20.088Z",
+          "reviewer": "revision_fresh_a / revision_fresh_b / revision_fresh_c / revision_fresh_d"
+        }
+      ],
+      "execution": {
+        "worker": "root with audit authors and fresh reviewers",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回独立レビューで極端な誤答4問・曖昧な語1問・原典表記1語を指摘。履歴保持で限定再修正し未見担当の再裁定中。",
+            "at": "2026-11-17T06:27:29.798Z",
+            "failed_criteria": [
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "102問の変更提示と解説差分の独立裁定、600問変換照合完了。DB反映は環境復旧待ちの別タスクへ。",
+            "at": "2026-11-17T06:38:20.445Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_audit_revision_integration_20261117",
+      "context": "development",
+      "title": "準1級監査修正版の開発DB反映とPCSP表示確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_audit_revision_20261117"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-17修正依頼と既存の開発DB登録・画面確認依頼。2026-11-17再開依頼、実画面は全問でなく必要最低限と明示。",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "docs/pre1-audit-revision-20261117.md",
+        "local-only/pre1-revision-20261117/integration/independent-runtime-review.json"
+      ],
+      "last_verified_at": "2026-11-17T08:48:18.220Z",
+      "verification_scope": "専用開発DB準1級600問適用。backup復元、履歴非0拒否、rollback、全件一致、既存ID/他級1290保持、再接続とno-op検査。実画面は4問PCSP計8表示8回答のみ。実機/全問UI/本番未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "バックアップ復元、更新反復、対象外保持とPCSP表示を検査する",
+          "verification": "専用test使い捨てDBで検証後、開発DB適用と実画面確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-revision-20261117/integration/test-result.json",
+            "local-only/pre1-revision-20261117/integration/applied-result.json",
+            "local-only/pre1-revision-20261117/integration/ui/ui-result.json"
+          ],
+          "checked_at": "2026-11-17T08:48:18.220Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "DB更新と確認結果を別担当が独立レビューする",
+          "verification": "固定版原稿/バックアップ/処理/結果の独立確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-revision-20261117/integration/independent-code-review.json",
+            "local-only/pre1-revision-20261117/integration/independent-runtime-review.json"
+          ],
+          "checked_at": "2026-11-17T08:48:18.220Z",
+          "reviewer": "audit_pre1_01_04"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "準1級600問更新、他級1290とID保持。代表4問PCSP計8表示8回答と独立最終レビュー合格。",
+            "at": "2026-11-17T08:48:18.625Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_revision_production_20261117",
+      "context": "operations",
+      "title": "準1級修正版600問の本番反映とGit送信",
+      "status": "needs_review",
+      "depends_on": [
+        "pre1_audit_revision_integration_20261117"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-17 ユーザー「本番反映・コミット・pushをしてください」",
+      "next_action": "自動停止を抑制する実行計画を再検討し別途再開指示を待つ",
+      "evidence": [
+        "docs/pre1-revision-release-20261117.md",
+        "local-only/pre1-revision-20261117/production/after-attempt3-guard.json"
+      ],
+      "last_verified_at": null,
+      "verification_scope": "本番3回適用未完了、更新前教材・履歴維持を読取確認。Git送信は別に完了させる。4回目なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "本番600問一致、対象外ID保持、復旧手段、代表PCSP、Git/CIを確認",
+          "verification": "固定版と本番データ比較・更新検証・代表4表示・送信先確認",
+          "status": "failed",
+          "evidence": [
+            "docs/pre1-revision-release-20261117.md",
+            "local-only/pre1-revision-20261117/production/after-attempt3-guard.json"
+          ],
+          "checked_at": "2026-11-17T09:26:51.068Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "本番更新コードと適用結果を独立レビュー",
+          "verification": "DB担当以外が本番影響・履歴保護・バックアップと結果を検証",
+          "status": "failed",
+          "evidence": [
+            "docs/pre1-revision-release-20261117.md",
+            "local-only/pre1-revision-20261117/production/after-attempt3-guard.json"
+          ],
+          "checked_at": "2026-11-17T09:26:51.068Z",
+          "reviewer": "audit_pre1_01_04"
+        }
+      ],
+      "execution": {
+        "worker": "root and independent DB reviewer",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "第1回失敗、全教材と履歴baseline一致で未commit確認。",
+            "at": "2026-11-17T09:26:51.487Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "第2回writing P2028、180秒timeout、rollback読取確認。",
+            "at": "2026-11-17T09:26:52.173Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "failed",
+            "summary": "第3回Fly proxy自動停止とSSH結果欠落。更新前指紋一致。上限到達で追加適用停止。",
+            "at": "2026-11-17T09:26:53.668Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
           }
         ]
       }
