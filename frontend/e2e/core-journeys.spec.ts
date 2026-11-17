@@ -33,10 +33,11 @@ async function answerCorrectly(page: Page) {
 async function logout(page: Page) {
   await page.getByRole('button', { name: 'メニューを開く', exact: true }).click()
   await page.getByRole('button', { name: 'ログアウト', exact: true }).click()
-  await expect(page).toHaveURL('/')
+  // Successful practice remembers grade 2 across logout and home navigation.
+  await expect(page).toHaveURL('/?grade=2')
   await expect(page.locator('.site-header .account-link')).toHaveCount(0)
   // The narrow layout offers login in its drawer rather than this header link.
-  await expect(page.locator('.site-header .login-link')).toHaveAttribute('href', '/login')
+  await expect(page.locator('.site-header .login-link')).toHaveAttribute('href', '/login?grade=2')
 }
 
 test('anonymous practice hides answers until submitting and fits the screen', async ({ page }) => {
