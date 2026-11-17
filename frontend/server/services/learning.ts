@@ -40,7 +40,7 @@ const serializeChoice = (choice: ChoiceRecord) => ({ id: Number(choice.id), choi
   content_blocks: choice.content_blocks, display_order: Number(choice.display_order) })
 
 export async function authorizeExam(examNumber: number, user: User | null, db?: Database): Promise<void> {
-  if (!paymentsEnabled || examNumber <= freeExamMax || await hasPaidAccess(user, db)) return
+  if (!paymentsEnabled || examNumber <= freeExamMax() || await hasPaidAccess(user, db)) return
   if (user) fail(403, 'paid_membership_required', 'この模擬試験の利用にはプレミアム会員資格が必要です')
   fail(401, 'unauthorized', 'この模擬試験を利用するにはログインが必要です')
 }
@@ -78,7 +78,7 @@ export async function nextQuestion(params: Record<string, unknown>, user: User |
   } else {
     if (present(params.after_question_number)) fail(400, 'bad_request', 'exam_numberを指定してください')
     if (!await hasPaidAccess(user, db)) {
-      where.exam_number = { lte: freeExamMax }
+      where.exam_number = { lte: freeExamMax() }
     }
   }
   let question: { id: bigint } | null = null
@@ -127,7 +127,7 @@ export async function listExams(user: User | null, params: Record<string, unknow
   const fullAccess = await hasPaidAccess(user, db)
   return { data: [...sets].map(([exam_number, question_numbers]) => ({ exam_number, question_numbers,
     published_question_count: question_numbers.length,
-    access: !paymentsEnabled || exam_number <= freeExamMax || fullAccess ? 'available' : 'paid_membership_required' })) }
+    access: !paymentsEnabled || exam_number <= freeExamMax() || fullAccess ? 'available' : 'paid_membership_required' })) }
 }
 
 type HistoryRow = { id: number, is_correct: boolean, answered_at: Date | string,
@@ -135,7 +135,7 @@ type HistoryRow = { id: number, is_correct: boolean, answered_at: Date | string,
 function serializeHistory(row: HistoryRow, fullAccess: boolean) {
   const question = row.question
   const base = { id: Number(row.id), question: { id: Number(question.id), exam_number: Number(question.exam_number), question_number: Number(question.question_number) }, answered_at: iso(row.answered_at) }
-  if (question.exam_number > freeExamMax && !fullAccess) return { ...base, locked: true }
+  if (question.exam_number > freeExamMax() && !fullAccess) return { ...base, locked: true }
   return { ...base, locked: false, question: { ...base.question, body_excerpt: excerptFrom(question.content_blocks),
     major_category_code: question.major_category_code, category_code: question.category_code },
   selected_choice: { id: Number(row.selected_choice.id), choice_label: row.selected_choice.choice_label, body_excerpt: excerptFrom(row.selected_choice.content_blocks) }, is_correct: row.is_correct }
@@ -167,7 +167,7 @@ export async function getHistory(id: number, user: User | null, db: Database = g
 type FavoriteRow = { id: number, created_at: Date | string, question: Omit<QuestionRecord, 'choices'> }
 function serializeFavorite(row: FavoriteRow, fullAccess: boolean) {
   const base = { id: Number(row.id), question: { id: Number(row.question.id), exam_number: Number(row.question.exam_number), question_number: Number(row.question.question_number) }, created_at: iso(row.created_at) }
-  if (row.question.exam_number > freeExamMax && !fullAccess) return { ...base, locked: true }
+  if (row.question.exam_number > freeExamMax() && !fullAccess) return { ...base, locked: true }
   return { ...base, locked: false, question: { ...base.question, body_excerpt: excerptFrom(row.question.content_blocks), major_category_code: row.question.major_category_code, category_code: row.question.category_code } }
 }
 async function authorizeFavorites(user: User | null, db: Database): Promise<User> {

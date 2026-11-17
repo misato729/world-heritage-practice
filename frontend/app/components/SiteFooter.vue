@@ -31,7 +31,7 @@ const { apiStatus } = useApiStatus()
 </template>
 
 <style scoped>
-.site-footer { margin-top: 72px; border-top: 1px solid #d8e1e4; background: #e8eeee; }
+.site-footer { margin-top: 72px; border-top: 1px solid var(--line); background: var(--theme-soft); }
 .footer-inner {
   width: min(1080px, calc(100% - 40px));
   min-height: 88px;
@@ -41,15 +41,15 @@ const { apiStatus } = useApiStatus()
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  color: #52636c;
+  color: var(--muted);
   font-size: 13px;
 }
 .footer-main, .footer-copy { min-width: 0; display: grid; gap: 6px; }
 .footer-main { gap: 10px; }
 .footer-brand { justify-self: start; display: inline-flex; text-decoration: none; }
-.footer-copy strong { color: #31454c; }
+.footer-copy strong { color: var(--ink); }
 .footer-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
-.footer-links a { color: #40545b; font-weight: 700; text-underline-offset: 3px; }
+.footer-links a { color: var(--ink); font-weight: 700; text-underline-offset: 3px; }
 .footer-links a:hover { color: var(--teal-dark); }
 .api-status {
   min-height: 36px;
@@ -58,10 +58,10 @@ const { apiStatus } = useApiStatus()
   align-items: center;
   gap: 8px;
   padding: 0 11px;
-  border: 1px solid #c4d0d2;
+  border: 1px solid var(--line);
   border-radius: 6px;
-  background: #f7fafa;
-  color: #52636c;
+  background: var(--theme-soft);
+  color: var(--muted);
   font-weight: 700;
 }
 .status-dot { width: 9px; height: 9px; flex: 0 0 9px; border-radius: 50%; background: #d29b21; }

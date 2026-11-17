@@ -345,7 +345,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
       </div>
       <dl class="usage-details">
         <div class="usage-row">
-          <dt>{{ PAYMENTS_ENABLED ? (FREE_EXAM_MAX > 0 ? `模擬試験1〜${FREE_EXAM_MAX}は無料` : '会員資格に応じて演習') : 'すべての公開問題を無料で演習' }}</dt>
+          <dt>{{ PAYMENTS_ENABLED ? (FREE_EXAM_MAX > 0 ? (FREE_EXAM_MAX === 1 ? '模擬試験1は無料' : `模擬試験1〜${FREE_EXAM_MAX}は無料`) : '会員資格に応じて演習') : 'すべての公開問題を無料で演習' }}</dt>
           <dd>
             <p>{{ PAYMENTS_ENABLED && FREE_EXAM_MAX === 0 ? '問題の演習にはプレミアム会員資格が必要です。' : '無料の公開問題はログインなしで利用できます。' }}解答履歴の保存にはログインが必要です。</p>
           </dd>
@@ -375,16 +375,16 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 .heritage-eyebrow { margin: 0 0 14px; color: var(--teal-dark); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
 .heritage-highlights { display: flex; flex-wrap: wrap; gap: 12px 22px; padding: 0; margin: 26px 0 0; list-style: none; color: var(--teal-dark); font-size: 13px; font-weight: 700; }
 .heritage-highlights li { display: inline-flex; align-items: center; gap: 7px; }
-.preparation-notice { display: flex; align-items: flex-start; gap: 14px; margin: 0 clamp(18px, 6vw, 86px) 34px; padding: 22px; border: 1px solid #d4dfcf; border-radius: 8px; background: #f2f5e9; }
+.preparation-notice { display: flex; align-items: flex-start; gap: 14px; margin: 0 clamp(18px, 6vw, 86px) 34px; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: var(--theme-soft); }
 .preparation-notice > :deep(svg) { flex-shrink: 0; width: 24px; height: 24px; color: var(--teal-dark); }
 .preparation-notice h2 { margin: 0 0 7px; font-size: 17px; }
 .preparation-notice p { margin: 0; color: var(--muted); line-height: 1.8; }
-.home-main { min-width: 0; background: #f8faf9; }
+.home-main { min-width: 0; background: var(--theme-soft); }
 .practice-launcher {
   scroll-margin-top: calc(var(--site-navigation-height, var(--header-height)) + 20px);
   padding: 52px clamp(28px, 6vw, 86px) 58px;
-  border-top: 1px solid #d4dfde;
-  background: #eef4f3;
+  border-top: 1px solid var(--line);
+  background: var(--theme-soft);
 }
 .launcher-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; }
 .launcher-heading h2 { margin: 0; font-size: 30px; line-height: 1.3; }
@@ -397,7 +397,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 30px;
-  border-bottom: 1px solid #bfcfd0;
+  border-bottom: 1px solid var(--line);
 }
 .launcher-tabs button {
   white-space: normal;
@@ -410,7 +410,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   border: 0;
   border-bottom: 3px solid transparent;
   background: transparent;
-  color: #52656c;
+  color: var(--muted);
   font-weight: 800;
   cursor: pointer;
 }
@@ -435,23 +435,23 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   display: grid;
   place-items: center;
   padding: 8px;
-  border: 1px solid #bdccce;
+  border: 1px solid var(--line);
   border-radius: 6px;
   background: #fff;
   color: var(--ink);
   text-decoration: none;
   transition: border-color .15s, background .15s, transform .15s;
 }
-.exam-card:hover { border-color: var(--teal); background: #f9ffff; transform: translateY(-1px); }
+.exam-card:hover { border-color: var(--teal); background: var(--theme-soft); transform: translateY(-1px); }
 .exam-card strong { color: var(--teal-dark); font-size: 20px; line-height: 1; transform: translateY(-1px); }
-.exam-card :deep(.iconify) { position: absolute; top: 7px; right: 7px; width: 13px; height: 13px; color: #677b81; }
+.exam-card :deep(.iconify) { position: absolute; top: 7px; right: 7px; width: 13px; height: 13px; color: var(--muted); }
 .premium-info-link { display: inline-flex; align-items: center; gap: 5px; color: var(--teal-dark); font-size: 13px; font-weight: 800; }
 .condition-error { margin: 0; padding: 16px 26px; color: #a23b2a; }
-.condition-form { border: 1px solid #c7d4d5; border-radius: 8px; background: #fff; }
+.condition-form { border: 1px solid var(--line); border-radius: 8px; background: #fff; }
 .condition-fields { display: grid; gap: 28px; padding: 28px; }
 .condition-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
-.condition-fieldset + .condition-fieldset { padding-top: 26px; border-top: 1px solid #dce4e4; }
-.condition-fieldset legend { padding: 0; color: #253d45; font-size: 17px; font-weight: 900; }
+.condition-fieldset + .condition-fieldset { padding-top: 26px; border-top: 1px solid var(--line); }
+.condition-fieldset legend { padding: 0; color: var(--ink); font-size: 17px; font-weight: 900; }
 .condition-field-heading {
   display: flex;
   align-items: center;
@@ -466,10 +466,10 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   align-items: center;
   gap: 8px;
   padding: 6px 10px;
-  border: 1px solid #bdcbcd;
+  border: 1px solid var(--line);
   border-radius: 5px;
-  background: #f8faf9;
-  color: #344951;
+  background: var(--theme-soft);
+  color: var(--ink);
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
@@ -484,16 +484,16 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   justify-content: center;
   gap: 8px;
   padding: 8px 6px;
-  border: 1px solid #c5d1d3;
+  border: 1px solid var(--line);
   border-radius: 5px;
   background: #fff;
-  color: #3a5057;
+  color: var(--ink);
   font-weight: 900;
   cursor: pointer;
   transition: border-color .15s, background .15s;
 }
 .number-checkbox-grid label:hover { border-color: var(--teal); }
-.number-checkbox-grid label.selected { border-color: var(--teal); background: #eaf6f5; color: var(--teal-dark); }
+.number-checkbox-grid label.selected { border-color: var(--teal); background: var(--theme-soft); color: var(--teal-dark); }
 .number-checkbox-grid input { width: 16px; height: 16px; flex: 0 0 16px; margin: 0; accent-color: var(--teal); }
 .number-checkbox-grid.category-checkbox-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); }
 .category-checkbox-grid label span { white-space: nowrap; }
@@ -504,10 +504,10 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   justify-content: space-between;
   gap: 20px;
   padding: 16px 26px;
-  border-top: 1px solid #d8e1e2;
-  background: #f4f7f6;
+  border-top: 1px solid var(--line);
+  background: var(--theme-soft);
 }
-.condition-submit p { margin: 0; color: #40545b; font-weight: 800; }
+.condition-submit p { margin: 0; color: var(--ink); font-weight: 800; }
 .condition-submit p span { display: block; margin-bottom: 3px; color: var(--muted); font-size: 11px; }
 .condition-submit p strong { margin-left: 8px; color: var(--teal-dark); }
 .condition-submit p small { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 400; }
@@ -530,25 +530,25 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 .home-section { padding: 62px clamp(28px, 6vw, 86px); }
 .section-title { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; }
 .section-title h2 { margin: 0; font-size: 30px; }
-.updates-section { background: #f1f5f4; }
-.update-list { border-top: 1px solid #cbd7d9; }
-.update-list article { min-height: 68px; display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 18px; border-bottom: 1px solid #cbd7d9; }
+.updates-section { background: var(--theme-soft); }
+.update-list { border-top: 1px solid var(--line); }
+.update-list article { min-height: 68px; display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 18px; border-bottom: 1px solid var(--line); }
 .update-list time { color: var(--teal-dark); font-weight: 800; }
-.update-list p { margin: 0; color: #4f6169; }
+.update-list p { margin: 0; color: var(--muted); }
 .policy-section {
   scroll-margin-top: calc(var(--site-navigation-height, var(--header-height)) + 20px);
   background: #fff;
 }
-.usage-details { margin: 0; border-top: 1px solid #dce4e4; }
+.usage-details { margin: 0; border-top: 1px solid var(--line); }
 .usage-row {
   display: grid;
   grid-template-columns: minmax(180px, .3fr) minmax(0, 1fr);
   gap: 32px;
   padding: 26px 0;
-  border-bottom: 1px solid #dce4e4;
+  border-bottom: 1px solid var(--line);
 }
 .usage-row dt { color: var(--ink); font-size: 16px; font-weight: 700; line-height: 1.9; }
-.usage-row dd { min-width: 0; margin: 0; color: #51636c; font-size: 15px; line-height: 1.9; }
+.usage-row dd { min-width: 0; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.9; }
 .usage-row p { margin: 0; }
 .usage-premium-link {
   min-height: 44px;
@@ -560,7 +560,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   font-size: 14px;
   font-weight: 700;
   text-decoration: underline;
-  text-decoration-color: #a3c3c4;
+  text-decoration-color: var(--line);
   text-underline-offset: 4px;
 }
 .usage-premium-link:hover { text-decoration-color: currentColor; }

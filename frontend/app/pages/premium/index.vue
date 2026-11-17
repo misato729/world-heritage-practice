@@ -94,7 +94,7 @@ const startCheckout = async () => {
     <header class="page-intro premium-intro">
       <span class="premium-kicker">MONTHLY SUBSCRIPTION</span>
       <h1>プレミアム会員</h1>
-      <p>{{ PRICE_LABEL }}（税込）／月で、1級・準1級・2級の模試4以降の公開問題を利用できます。毎月自動更新されます。契約管理から解約できます。</p>
+      <p>{{ PRICE_LABEL }}（税込）／月で、2級の模試4以降・準1級の模試3以降・1級の模試2以降の公開問題を利用できます。無料会員は2級3セット・準1級2セット・1級1セットを利用できます。毎月自動更新されます。契約管理から解約できます。</p>
     </header>
 
     <div v-if="canceled" class="notice-panel" role="status">
@@ -185,22 +185,22 @@ const startCheckout = async () => {
 .premium-intro p { margin-right: auto; margin-left: auto; }
 .premium-kicker { display: inline-block; margin-bottom: 12px; color: var(--teal-dark); font-size: 12px; font-weight: 900; letter-spacing: .14em; }
 .notice-panel { margin-bottom: 18px; padding: 14px 18px; border: 1px solid #dfc278; border-radius: 7px; background: #fff9e8; color: #6c5519; font-weight: 700; }
-.premium-card { display: grid; grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr); overflow: hidden; border: 1px solid #aad0d1; border-radius: 10px; background: #fff; box-shadow: 0 18px 50px rgba(18, 59, 63, .08); }
+.premium-card { display: grid; grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr); overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: 0 18px 50px rgba(18, 59, 63, .08); }
 .price-block { display: grid; align-content: center; justify-items: center; min-height: 270px; padding: 32px; background: var(--teal-dark); color: #fff; text-align: center; }
 .price-block > span { font-size: 14px; font-weight: 800; }
 .price-block strong { margin-top: 10px; font-size: clamp(38px, 6vw, 58px); line-height: 1.2; }
 .price-block strong small { font-size: 13px; }
-.price-block p { margin: 12px 0 0; color: #d8f3f3; }
+.price-block p { margin: 12px 0 0; color: var(--aqua); }
 .benefit-block { padding: clamp(28px, 5vw, 48px); }
 .benefit-block h2 { margin: 0; font-size: 24px; }
 .benefit-block ul { display: grid; gap: 15px; margin: 24px 0 0; padding: 0; list-style: none; }
-.benefit-block li { display: grid; grid-template-columns: 22px 1fr; gap: 9px; color: #334950; line-height: 1.65; }
+.benefit-block li { display: grid; grid-template-columns: 22px 1fr; gap: 9px; color: var(--ink); line-height: 1.65; }
 .benefit-block li :deep(svg) { color: var(--teal); }
 .scope-note { margin: 24px 0 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
 .purchase-panel { margin-top: 22px; }
 .purchase-panel h2 { margin-bottom: 10px; }
 .purchase-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-.agreement { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; margin-top: 22px; color: #40545b; line-height: 1.75; }
+.agreement { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; margin-top: 22px; color: var(--ink); line-height: 1.75; }
 .agreement input { width: 18px; height: 18px; margin-top: 4px; accent-color: var(--teal); }
 .agreement a { color: var(--teal-dark); font-weight: 700; }
 .checkout-button { width: 100%; margin-top: 22px; }
@@ -214,7 +214,7 @@ const startCheckout = async () => {
 .premium-notes dl { display: grid; gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--line); }
 .premium-notes dl div { display: grid; grid-template-columns: 140px 1fr; background: #fff; }
 .premium-notes dt, .premium-notes dd { margin: 0; padding: 15px 18px; line-height: 1.7; }
-.premium-notes dt { background: #edf4f4; font-weight: 800; }
+.premium-notes dt { background: var(--theme-soft); font-weight: 800; }
 .premium-notes dd { color: var(--muted); }
 @media (max-width: 700px) {
   .premium-card { grid-template-columns: 1fr; }

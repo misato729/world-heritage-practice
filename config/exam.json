@@ -8,7 +8,7 @@
     "description": "1級・準1級・2級の演習を切り替えて学べる世界遺産検定の学習サービスです。",
     "tagline": "世界遺産の価値を、一つずつ学ぶ。",
     "logo_path": "/images/logo.svg",
-    "primary_color": "#28614f",
+    "primary_color": "#087ca6",
     "contact_email": "misato0729.official@gmail.com",
     "overview": [
       {
@@ -157,17 +157,23 @@
     {
       "code": "2",
       "label": "2級",
-      "questions_per_exam": 60
+      "questions_per_exam": 60,
+      "free_exam_count": 3,
+      "primary_color": "#087ca6"
     },
     {
       "code": "pre1",
       "label": "準1級",
-      "questions_per_exam": 60
+      "questions_per_exam": 60,
+      "free_exam_count": 2,
+      "primary_color": "#86438f"
     },
     {
       "code": "1",
       "label": "1級",
-      "questions_per_exam": 90
+      "questions_per_exam": 90,
+      "free_exam_count": 1,
+      "primary_color": "#34363a"
     }
   ]
 }

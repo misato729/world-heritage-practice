@@ -8,7 +8,7 @@ const count = z.number().int().min(1).max(10000)
 /** The source of truth for runtime, CLI, TypeScript and generated editor hints. */
 export const examConfigurationSchema = z.object({
   schema_version: z.literal(1),
-  grades: z.array(z.object({code: z.enum(['2','pre1','1']), label: nonblank, questions_per_exam: count})).length(3).default([{code:'2',label:'2級',questions_per_exam:60},{code:'pre1',label:'準1級',questions_per_exam:60},{code:'1',label:'1級',questions_per_exam:90}]),
+  grades: z.array(z.object({code: z.enum(['2','pre1','1']), label: nonblank, questions_per_exam: count, free_exam_count: z.number().int().min(0).optional(), primary_color: z.string().regex(/^#[0-9a-fA-F]{6}$/).optional()})).length(3).default([{code:'2',label:'2級',questions_per_exam:60},{code:'pre1',label:'準1級',questions_per_exam:60},{code:'1',label:'1級',questions_per_exam:90}]),
   site: z.object({
     id: z.string().regex(/^[a-z][a-z0-9-]{0,39}$/),
     name: nonblank,
@@ -50,6 +50,9 @@ export const examConfigurationSchema = z.object({
     if (!config.categories.major.some(major => major.value === item.major_category_value)) {
       ctx.addIssue({ code: 'custom', path: ['categories', 'minor', index, 'major_category_value'], message: 'must reference an existing major category' })
     }
+  }
+  for (const [index, grade] of config.grades.entries()) {
+    if (grade.free_exam_count !== undefined && grade.free_exam_count > config.exam.set_count) ctx.addIssue({ code: 'custom', path: ['grades', index, 'free_exam_count'], message: 'must not exceed set_count' })
   }
   if (config.payments.free_exam_count > config.exam.set_count) {
     ctx.addIssue({ code: 'custom', path: ['payments', 'free_exam_count'], message: 'must not exceed set_count' })

@@ -26,8 +26,9 @@ test('grade contexts are concurrent and isolate question IDs, catalogs and the f
  await Promise.all(['1','pre1','2'].map(grade=>gradeScope.run(grade as any,async()=>{
   await new Promise(r=>setTimeout(r,2))
   assert.equal(gradeConfig(grade as any,configuration).exam.questions_per_exam,grade==='1'?90:60)
-  await authorizeExam(3,null,db)
-  await assert.rejects(()=>authorizeExam(4,user,db))
+  const free = gradeConfig(grade as any,configuration).payments.free_exam_count
+  await authorizeExam(free,null,db)
+  await assert.rejects(()=>authorizeExam(free+1,user,db))
   if(grade!=='1') await assert.rejects(()=>getQuestion(q!.id,null,db))
   const result=await listExams(null,{},db)
   assert.equal(result.data.some(e=>e.exam_number===1),grade==='1')

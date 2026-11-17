@@ -10,7 +10,7 @@ test('incorrect review uses own latest answers, exact pairs, publication and cur
   await client.connect()
   const original = structuredClone(configuration)
   try {
-    setConfigurationForTesting({ ...original, exam: { ...original.exam, set_count: 10 }, payments: { ...original.payments, enabled: true, free_exam_count: 5 } })
+    setConfigurationForTesting({ ...original, grades: original.grades.map(({ free_exam_count, ...grade }) => grade), exam: { ...original.exam, set_count: 10 }, payments: { ...original.payments, enabled: true, free_exam_count: 5 } })
     await client.query('BEGIN')
     await client.query(`CREATE TEMP TABLE questions(id bigint,exam_number int,question_number int,publication_status text,content_version int DEFAULT 1,answer_type text DEFAULT 'single_choice',group_id bigint);
       CREATE TEMP TABLE answer_histories(id bigint,user_id bigint,question_id bigint,is_correct boolean,created_at timestamp,question_version int DEFAULT 1,answer_type text DEFAULT 'single_choice');

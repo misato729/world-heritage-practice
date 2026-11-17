@@ -7,5 +7,6 @@ export function parseGrade(value: unknown): Grade {
  return value as Grade
 }
 export function gradeConfig(grade: Grade, base: ExamConfiguration = EXAM_CONFIG): ExamConfiguration {
- return { ...base, exam: { ...base.exam, questions_per_exam: grade === '2' ? base.exam.questions_per_exam : GRADES.find(g => g.code === grade)!.questions } }
+ const selected = base.grades.find(g => g.code === grade)!
+ return { ...base, site: { ...base.site, primary_color: selected.primary_color ?? base.site.primary_color }, payments: { ...base.payments, free_exam_count: selected.free_exam_count ?? base.payments.free_exam_count }, exam: { ...base.exam, questions_per_exam: grade === '2' ? base.exam.questions_per_exam : selected.questions_per_exam } }
 }

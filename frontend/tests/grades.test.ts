@@ -16,3 +16,11 @@ test('other grades never automatically seed or import the bundled grade 2 materi
   await assert.rejects(()=>importContent(),/INPUT/)
  })
 })
+
+test('grade palettes and free boundaries share one configuration and validate bounds', () => {
+ for (const [grade, free, color] of [['2',3,'#087ca6'],['pre1',2,'#86438f'],['1',1,'#34363a']] as const) {
+  const config = gradeConfig(grade)
+  assert.equal(config.payments.free_exam_count, free)
+  assert.equal(config.site.primary_color, color)
+ }
+})

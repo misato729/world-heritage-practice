@@ -9,7 +9,7 @@ test('map SQL scopes owner, publication and entitlement and orders the latest tw
  const client=new pg.Client({connectionString:process.env.TEST_DATABASE_URL});await client.connect()
  const original=structuredClone(configuration)
  try{
- setConfigurationForTesting({...original,exam:{...original.exam,set_count:10},payments:{...original.payments,enabled:true,free_exam_count:5}})
+ setConfigurationForTesting({ ...original, grades: original.grades.map(({ free_exam_count, ...grade }) => grade),exam:{...original.exam,set_count:10},payments:{...original.payments,enabled:true,free_exam_count:5}})
  await client.query('BEGIN')
  await client.query(`CREATE TEMP TABLE questions(grade text DEFAULT '2',id bigint,exam_number int,question_number int,publication_status text); CREATE TEMP TABLE answer_histories(id bigint,user_id bigint,question_id bigint,is_correct boolean,created_at timestamp); INSERT INTO questions(id,exam_number,question_number,publication_status) VALUES(1,1,1,'published'),(2,1,2,'published'),(3,6,1,'published'),(4,1,3,'draft'); INSERT INTO answer_histories VALUES(1,1,1,false,'2026-01-01'),(2,1,1,true,'2026-01-01'),(3,1,1,true,'2026-01-01'),(4,2,2,true,'2026-01-01')`)
  const db={query:client.query.bind(client),membership:{findFirst:async()=>null},verificationAccessGrant:{findFirst:async()=>null},subscription:{findFirst:async()=>null}} as any

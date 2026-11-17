@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { parseGrade } from '../shared/grades'
 const route = useRoute()
+const displayGrade = useGradeState()
+onMounted(() => { displayGrade.value = parseGrade(route.query.grade) })
 const siteName = SITE.name
 const defaultDescription = SITE.description
 const noIndexPatterns = [
@@ -34,7 +37,7 @@ useSeoMeta({
 
 <template>
   <UApp>
-    <NuxtLayout>
+    <NuxtLayout :key="displayGrade">
       <NuxtPage />
     </NuxtLayout>
   </UApp>

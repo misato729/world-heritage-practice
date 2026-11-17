@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { Block as ContentBlock } from '../../../../shared/schemas/content.ts'
 import { filterReviewPositions } from '~/utils/reviewPositions'
-const { EXAM_CATALOG, QUESTIONS_PER_EXAM, FREE_EXAM_MAX } = useGrade()
+const { grade, EXAM_CATALOG, QUESTIONS_PER_EXAM, FREE_EXAM_MAX } = useGrade()
+const lastAnsweredGrade = useCookie<string | null>('heritage-last-answered-grade', { sameSite: 'lax', maxAge: 31536000 })
 import {
   createPracticeSequence,
   shufflePracticeSequence,
@@ -308,6 +309,7 @@ const submitAnswer = async () => {
       },
     )
     if (!isCurrent()) return
+    lastAnsweredGrade.value = grade
     incorrectReview.invalidate()
     answerResult.value = response.data
   }

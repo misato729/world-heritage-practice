@@ -15,7 +15,7 @@ process.env.APP_ENV = 'test'
 if (process.env.TEST_DATABASE_URL) process.env.DATABASE_URL = process.env.TEST_DATABASE_URL
 const hasDatabase = Boolean(process.env.DATABASE_URL || process.env.PGHOST)
 const originalConfiguration = structuredClone(configuration)
-const configFor = (changes: Partial<ExamConfiguration> = {}): ExamConfiguration => ({ ...structuredClone(originalConfiguration), ...changes })
+const configFor = (changes: Partial<ExamConfiguration> = {}): ExamConfiguration => ({ ...structuredClone(originalConfiguration), grades: originalConfiguration.grades.map(({ free_exam_count, ...grade }) => grade), ...changes })
 const apiError = (status: number) => (error: unknown) => error instanceof ApiError && error.status === status
 
 function input(overrides: Partial<QuestionInput> = {}, config = configuration): QuestionInput {
@@ -288,3 +288,53 @@ test('question deletion cascades only its own learning records and admin filteri
   assert.equal((await listHistory(owner, {}, db)).data.length, 1)
   await assert.rejects(getQuestion(first.id, owner, db), apiError(404))
 }))
+
+test('grade-specific free boundaries cover questions, answers, catalogs, history, review and achievement', integration, async () => {
+ const { listIncorrectReviewQuestions } = await import('../server/services/incorrect-review.ts')
+ const { getAchievementReport } = await import('../server/services/achievement.ts')
+ const { paymentSettings, publicPaymentConfiguration } = await import('../server/services/payment-settings.ts')
+ setConfigurationForTesting({ ...originalConfiguration, payments: { ...originalConfiguration.payments, enabled: true } })
+ try {
+  await isolatedTransaction(async db => {
+   const owner = await user(db)
+   const admin = await user(db, 'admin')
+   for (const [grade, free] of [['2',3],['pre1',2],['1',1]] as const) await gradeScope.run(grade, async () => {
+    const allowed = await saveQuestion(input({exam_number:free, question_number:59}), {db})
+    const locked = await saveQuestion(input({exam_number:free+1, question_number:59}), {db})
+    for (const visitor of [null, owner]) {
+     assert.equal((await getQuestion(allowed.id,visitor,db)).data.id,allowed.id)
+     await assert.rejects(getQuestion(locked.id,visitor,db),apiError(visitor ? 403 : 401))
+     await assert.rejects(answerQuestion(locked.id,locked.choices[0]!.id,visitor,db),apiError(visitor ? 403 : 401))
+    }
+    assert.equal((await getQuestion(locked.id,admin,db)).data.id,locked.id)
+    await answerQuestion(allowed.id,allowed.choices[0]!.id,owner,db)
+    // A previously paid answer must become locked without leaking excerpts.
+    await db.subscription.upsert({where:{user_id:owner.id},create:{user_id:owner.id,status:'active',paid_until:new Date(Date.now()+86400000)},update:{status:'active',paid_until:new Date(Date.now()+86400000)}})
+    assert.equal((await getQuestion(locked.id,owner,db)).data.id,locked.id)
+    const paidAnswer = await answerQuestion(locked.id,locked.choices[0]!.id,owner,db)
+    assert.equal((await listIncorrectReviewQuestions(owner,db)).data.some(row=>row.question_id===locked.id),true)
+    await db.subscription.update({where:{user_id:owner.id},data:{status:'canceled',paid_until:new Date(Date.now()-1000)}})
+    const history = (await listHistory(owner,{},db)).data
+    assert.equal(history.find(row => row.question.id === locked.id)?.locked,true)
+    assert.equal('body_excerpt' in history.find(row => row.question.id === locked.id)!.question,false)
+    await assert.rejects(getHistory(paidAnswer.data.answer_history_id!,owner,db),apiError(403))
+    const catalog = (await listExams(owner,{},db)).data
+    assert.equal(catalog.find(row=>row.exam_number===free)?.access,'available')
+    assert.equal(catalog.find(row=>row.exam_number===free+1)?.access,'paid_membership_required')
+    const review = await listIncorrectReviewQuestions(owner,db)
+    assert.equal(review.data.some(row=>row.question_id===allowed.id),true)
+    assert.equal(review.data.some(row=>row.question_id===locked.id),false)
+    const report = await getAchievementReport(owner,db)
+    assert.equal(report.data.exams.some(row=>row.exam_number===free+1),false)
+    await assert.rejects(putFavorite(allowed.id,owner,db),apiError(403))
+    assert.equal(publicPaymentConfiguration(paymentSettings()).free_exam_max,free)
+    const next = await nextQuestion({},owner,db)
+    assert.ok(Number(next.data.exam_number)<=free)
+    setConfigurationForTesting({...originalConfiguration,payments:{...originalConfiguration.payments,enabled:false}})
+    assert.equal((await getQuestion(locked.id,null,db)).data.id,locked.id)
+    assert.equal((await listIncorrectReviewQuestions(owner,db)).data.some(row=>row.question_id===locked.id),true)
+    setConfigurationForTesting({...originalConfiguration,payments:{...originalConfiguration.payments,enabled:true}})
+   })
+  })
+ } finally { setConfigurationForTesting(originalConfiguration) }
+})

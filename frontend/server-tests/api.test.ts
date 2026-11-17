@@ -21,6 +21,7 @@ const integration = { skip: !databaseAvailable }
 const defaultConfiguration = structuredClone(configuration)
 const original = structuredClone(configuration)
 original.payments.enabled = false
+original.grades = original.grades.map(({ free_exam_count, ...grade }) => grade)
 original.payments.free_exam_count = 2
 const password = 'Synthetic-password-123'
 let server: Server

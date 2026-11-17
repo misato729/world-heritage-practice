@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { themeVariables } from '../../shared/examConfig'
+const { grade, config } = useGrade()
+useHead({ htmlAttrs: { 'data-grade': grade }, style: [{ key: 'grade-theme', textContent: themeVariables(config, `html[data-grade="${grade}"]`) }] })
 const sidebarCollapsed = ref(false)
 </script>
 

@@ -19,9 +19,10 @@ export const canUseFavoriteFeature = (loggedIn: boolean, user: AccessUser, confi
   loggedIn && Boolean(user) && hasFullExamAccess(user, config)
 )
 
-export const themeVariables = (config = EXAM_CONFIG) => {
+export const themeVariables = (config = EXAM_CONFIG, selector = ':root') => {
   const primary = config.site.primary_color
   const dark = '#' + [1, 3, 5].map(index => Math.round(parseInt(primary.slice(index, index + 2), 16) * 0.72).toString(16).padStart(2, '0')).join('')
   const pale = '#' + [1, 3, 5].map(index => Math.round(parseInt(primary.slice(index, index + 2), 16) * 0.15 + 255 * 0.85).toString(16).padStart(2, '0')).join('')
-  return `:root{--brand-primary:${primary};--brand-primary-dark:${dark};--brand-header:${pale}}`
+  const tint = (weight: number) => '#' + [1, 3, 5].map(index => Math.round(parseInt(primary.slice(index, index + 2), 16) * weight + 255 * (1 - weight)).toString(16).padStart(2, '0')).join('')
+  return `${selector}{--brand-primary:${primary};--brand-primary-dark:${dark};--brand-header:${pale};--ink:#30343b;--muted:#59616b;--line:${tint(0.22)};--surface-soft:${tint(0.025)};--theme-sidebar:${tint(0.12)};--theme-hover:${tint(0.18)};--theme-soft:${tint(0.07)}}`
 }

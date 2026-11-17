@@ -136,8 +136,8 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
   width: var(--sidebar-width, 260px);
   min-height: calc(100vh - var(--header-height));
   padding: 22px 16px;
-  border-right: 1px solid #cdd9dc;
-  background: #e3e9e9;
+  border-right: 1px solid var(--line);
+  background: var(--theme-sidebar);
 }
 
 .sidebar-heading {
@@ -146,7 +146,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
   align-items: center;
   gap: 9px;
   padding: 0 0 10px;
-  color: #53676e;
+  color: var(--muted);
   font-size: 13px;
   font-weight: 800;
 }
@@ -160,14 +160,14 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
   display: grid;
   place-items: center;
   padding: 0;
-  border: 1px solid #c2ced1;
+  border: 1px solid var(--line);
   border-radius: 5px;
   background: #fff;
   color: var(--teal-dark);
   font-size: 20px;
   cursor: pointer;
 }
-.desktop-sidebar-toggle:hover { background: #c4dddd; }
+.desktop-sidebar-toggle:hover { background: var(--theme-hover); }
 .desktop-sidebar-toggle:focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
 .mobile-exam-toggle { display: none; }
 
@@ -182,7 +182,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
   justify-content: space-between;
   gap: 12px;
   padding: 10px 10px 10px 16px;
-  border: 1px solid #c2ced1;
+  border: 1px solid var(--line);
   border-radius: 6px;
   background: #fff;
 }
@@ -214,14 +214,14 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
   place-items: center;
   border: 0;
   border-radius: 5px;
-  background: #e7f2f2;
+  background: var(--theme-soft);
   color: var(--teal-dark);
   font-size: 21px;
   cursor: pointer;
 }
 
 .exam-row button:hover {
-  background: #d5ebeb;
+  background: var(--theme-hover);
 }
 
 .question-list {
@@ -238,7 +238,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  color: #40545b;
+  color: var(--ink);
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
@@ -246,7 +246,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
 
 .question-list a:hover,
 .question-list a.active {
-  background: #cce8e8;
+  background: var(--theme-hover);
   color: var(--teal-dark);
 }
 
@@ -298,7 +298,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
     min-height: auto;
     padding: 0;
     border-right: 0;
-    border-bottom: 1px solid #cdd9dc;
+    border-bottom: 1px solid var(--line);
   }
 
   .sidebar-heading {
@@ -322,7 +322,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
     cursor: pointer;
   }
 
-  .mobile-exam-toggle:hover { background: #d8e5e5; }
+  .mobile-exam-toggle:hover { background: var(--theme-hover); }
   .mobile-exam-toggle > :first-child,
   .mobile-exam-toggle > :last-child { width: 20px; height: 20px; }
 
@@ -338,8 +338,8 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
     overflow-y: auto;
     scrollbar-gutter: stable;
     overscroll-behavior-y: contain;
-    border-bottom: 1px solid #cdd9dc;
-    background: #e3e9e9;
+    border-bottom: 1px solid var(--line);
+    background: var(--theme-sidebar);
     box-shadow: 0 10px 16px rgba(18, 42, 48, .12);
   }
 

@@ -27,7 +27,7 @@ body {
 button, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a:focus-visible, button:focus-visible, input:focus-visible {
-  outline: 3px solid rgba(8, 127, 131, 0.28);
+  outline: 3px solid color-mix(in srgb, var(--teal) 30%, transparent);
   outline-offset: 3px;
 }
 

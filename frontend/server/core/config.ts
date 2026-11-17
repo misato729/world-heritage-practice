@@ -1,14 +1,16 @@
 import { EXAM_CONFIG, parseExamConfig, type ExamConfiguration } from '../../shared/examConfig.ts'
 
+import { gradeConfig } from '../../shared/grades.ts'
+import { currentGrade } from './grade.ts'
+
 export let configuration = EXAM_CONFIG
 export let paymentsEnabled = configuration.payments.enabled
-export let freeExamMax = configuration.payments.free_exam_count
+export const freeExamMax = () => gradeConfig(currentGrade(), configuration).payments.free_exam_count
 export const environment = () => process.env.APP_ENV || process.env.NODE_ENV || 'development'
 export function setConfigurationForTesting(next: ExamConfiguration) {
   if (environment() !== 'test') throw new Error('Configuration injection is test-only')
   configuration = parseExamConfig(next)
   paymentsEnabled = configuration.payments.enabled
-  freeExamMax = configuration.payments.free_exam_count
 }
 export function authSecret(): string {
   const secret = process.env.BETTER_AUTH_SECRET || ''

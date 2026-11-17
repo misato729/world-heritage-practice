@@ -1,8 +1,13 @@
-import { GRADES, gradeConfig, parseGrade } from '../../shared/grades'
+import { GRADES, gradeConfig, parseGrade, type Grade } from '../../shared/grades'
 import { createExamCatalog } from '~/utils/examCatalog'
-export function useGrade() {
+// Preserve the grade serialized with static HTML during hydration. The app
+// then remounts grade-dependent screens once with the actual browser grade.
+export function useGradeState() {
  const route = useRoute()
- const grade = parseGrade(route.query.grade)
+ return useState<Grade>('display-grade', () => parseGrade(route.query.grade))
+}
+export function useGrade() {
+ const grade = useGradeState().value
  const config = gradeConfig(grade)
  return { grade, grades: GRADES, config, label: GRADES.find(g => g.code === grade)!.label,
  EXAM_CATALOG: createExamCatalog(config), QUESTIONS_PER_EXAM: config.exam.questions_per_exam,

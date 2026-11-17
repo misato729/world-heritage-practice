@@ -58,9 +58,12 @@ try {
   // Mark ownership before inspecting a signal delivered while CREATE was running.
   created = true
   checkShutdown()
-  for (const command of ['db:migrate', 'questions:import_content']) {
-    await run(['--experimental-strip-types', 'server/operations/cli.ts', command], {
-      ...env, CONFIRM: 'IMPORT_INTO_EMPTY_DATABASE', INPUT: fixturePath,
+  await run(['--experimental-strip-types', 'server/operations/cli.ts', 'db:migrate'], env)
+  for (const grade of ['2', 'pre1', '1']) {
+    const { questions: gradeQuestions } = loadE2EFixture(grade)
+    await writeFile(fixturePath, JSON.stringify({ schema_version: 1, questions: gradeQuestions }), { mode: 0o600 })
+    await run(['--experimental-strip-types', 'server/operations/cli.ts', 'questions:import_content'], {
+      ...env, EXAM_GRADE: grade, CONFIRM: 'IMPORT_INTO_EMPTY_DATABASE', INPUT: fixturePath,
     })
   }
   console.log(`E2E isolated server starting at ${settings.origin}.`)

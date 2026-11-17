@@ -1,3 +1,5 @@
+import { gradeConfig } from '../../shared/grades.ts'
+import { currentGrade } from '../core/grade.ts'
 import { configuration, environment } from '../core/config.ts'
 import type { ExamConfiguration } from '../../app/utils/examConfig.ts'
 
@@ -40,7 +42,7 @@ export function paymentSettings(env: Environment = process.env, config: ExamConf
   return {
     featureEnabled, salesEnabled, enabled: featureEnabled && salesEnabled && issues.length === 0,
     issues, livemode, amount: config.payments.amount, currency: config.payments.currency,
-    freeExamMax: config.payments.free_exam_count, siteName: config.site.name,
+    freeExamMax: gradeConfig(currentGrade(), config).payments.free_exam_count, siteName: config.site.name,
     secretKey: env.STRIPE_SECRET_KEY || '', webhookSecret: env.STRIPE_WEBHOOK_SECRET || '', priceId: env.STRIPE_PRICE_ID || '',
     portalConfigurationId: env.STRIPE_PORTAL_CONFIGURATION_ID?.trim() || '',
     frontendUrl: (env.FRONTEND_URL || 'http://localhost:3100').replace(/\/$/, ''),
