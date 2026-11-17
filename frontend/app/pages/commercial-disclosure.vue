@@ -1,25 +1,8 @@
 <script setup lang="ts">
-import { isSellerInformationComplete, type SellerInformation } from '~/utils/sellerInformation'
-
-type PaymentConfig = { seller?: SellerInformation }
-type ApiResponse<T> = { data: T }
-
-const { $api: api } = useNuxtApp()
-const { data: paymentConfigResponse } = await useFetch<ApiResponse<PaymentConfig>>(
-  '/api/v1/payments/config',
-  { $fetch: api, server: false, immediate: PAYMENTS_ENABLED },
-)
-const seller = computed(() => ({
-  name: paymentConfigResponse.value?.data.seller?.name || '',
-  representative: paymentConfigResponse.value?.data.seller?.representative || '',
-  address: paymentConfigResponse.value?.data.seller?.address || '',
-  phone: paymentConfigResponse.value?.data.seller?.phone || '',
-  email: paymentConfigResponse.value?.data.seller?.email || '',
-  contact_disclosure_mode: paymentConfigResponse.value?.data.seller?.contact_disclosure_mode ?? 'public',
-  contact_disclosure_ready: paymentConfigResponse.value?.data.seller?.contact_disclosure_ready === true,
-}))
-const requestDisclosure = computed(() => seller.value.contact_disclosure_mode === 'on_request')
-const sellerConfigured = computed(() => isSellerInformationComplete(seller.value))
+const SELLER_NAME = '大野佳樹'
+const SELLER_REPRESENTATIVE = '大野佳樹'
+const SELLER_PHONE = '050-6870-0005'
+const SELLER_EMAIL = 'misato0729.official@gmail.com'
 
 useSeoMeta({
   title: `特定商取引法に基づく表記｜${SITE.name}`,
@@ -34,18 +17,14 @@ useSeoMeta({
       <p>{{ PAYMENTS_ENABLED ? 'プレミアム会員の購入条件と販売事業者情報です。' : '現在、有料機能を提供していません。' }}</p>
     </header>
 
-    <div v-if="PAYMENTS_ENABLED && !sellerConfigured" class="legal-warning" role="status">
-      現在は販売準備中です。販売者情報と必要な対応体制を確認しています。
-    </div>
-
-    <article v-if="PAYMENTS_ENABLED" class="legal-document disclosure-table">
+    <article class="legal-document disclosure-table">
       <dl>
-        <div><dt>販売事業者</dt><dd>{{ seller.name || '販売開始前に掲載' }}</dd></div>
-        <div><dt>運営責任者</dt><dd>{{ seller.representative || '販売開始前に掲載' }}</dd></div>
-        <div><dt>所在地</dt><dd>{{ requestDisclosure ? '請求があった場合に遅滞なく開示します。' : (seller.address || '販売開始前に掲載') }}</dd></div>
-        <div><dt>電話番号</dt><dd>{{ requestDisclosure ? '請求があった場合に遅滞なく開示します。' : (seller.phone || '販売開始前に掲載') }}</dd></div>
-        <div><dt>問い合わせ先</dt><dd><a v-if="seller.email" :href="`mailto:${seller.email}`">{{ seller.email }}</a><span v-else>販売開始前に掲載</span></dd></div>
-        <div v-if="requestDisclosure"><dt>開示の請求方法</dt><dd>上記の問い合わせ先へ、所在地・電話番号の開示を希望する旨をメールでご連絡ください。購入前の請求にも、申込みの意思決定に先立って十分な時間的余裕をもって、電子メールで遅滞なく開示します。開示に費用はかかりません。</dd></div>
+        <div><dt>販売事業者</dt><dd>{{ SELLER_NAME }}</dd></div>
+        <div><dt>運営責任者</dt><dd>{{ SELLER_REPRESENTATIVE }}</dd></div>
+        <div><dt>所在地</dt><dd>請求があった場合に遅滞なく開示します。</dd></div>
+        <div><dt>電話番号</dt><dd>{{ SELLER_PHONE }}</dd></div>
+        <div><dt>問い合わせ先</dt><dd><a :href="`mailto:${SELLER_EMAIL}`">{{ SELLER_EMAIL }}</a></dd></div>
+        <div><dt>所在地の開示請求方法</dt><dd>上記の問い合わせ先へ、所在地の開示を希望する旨をメールでご連絡ください。購入前の請求にも、申込みの意思決定に先立って十分な時間的余裕をもって、電子メールで遅滞なく開示します。開示に費用はかかりません。</dd></div>
         <div><dt>販売価格</dt><dd>月額{{ PRICE_LABEL }}（税込）・毎月自動更新</dd></div>
         <div><dt>販売価格以外の負担</dt><dd>インターネット接続に必要な通信料は利用者の負担となります。</dd></div>
         <div><dt>支払方法</dt><dd>クレジットカード（対応端末ではApple Pay・Google Pay）（利用可能な方法はStripeの決済画面に表示されます）</dd></div>
