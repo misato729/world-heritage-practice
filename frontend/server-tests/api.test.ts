@@ -255,3 +255,20 @@ test('native authentication throttling returns a retry interval without setting 
   assert.ok(Number(response.headers.get('retry-after')) > 0)
   assert.equal(response.cookie, '')
 })
+
+
+test('account deletion limits repeated password verification and preserves the account', integration, async () => {
+  const session = await account()
+  for (let i = 0; i < 10; i++) assert.equal((await request('/me', { method: 'DELETE', cookie: session.cookie, body: { current_password: 'wrong' } })).status, 422)
+  const blocked = await request('/me', { method: 'DELETE', cookie: session.cookie, body: { current_password: password } })
+  assert.equal(blocked.status, 429)
+  assert.ok(Number(blocked.headers.get('retry-after')) > 0)
+  assert.equal((await request('/me', { cookie: session.cookie })).status, 200)
+})
+
+
+test('Portal requests are rate limited before creating further provider sessions', integration, async () => {
+  const session = await account()
+  for (let i = 0; i < 10; i++) assert.equal((await request('/payments/portal', { method: 'POST', cookie: session.cookie, body: {} })).status, 409)
+  assert.equal((await request('/payments/portal', { method: 'POST', cookie: session.cookie, body: {} })).status, 429)
+})

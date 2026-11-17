@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 208,
-  "updated_at": "2026-11-16T12:46:52.452Z",
+  "revision": 215,
+  "updated_at": "2026-11-17T03:52:39.015Z",
   "workspace_relative_to_repo": ".",
-  "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-16T12-46-52-452Z-r208.json",
+  "active_context": "development",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-17T03-52-39-015Z-r215.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -4476,6 +4476,132 @@
             "outcome": "passed",
             "summary": "確認済みM01の90問・360肢を本番追加。既存1800問と13モデルを保持、repeat0・一時入力削除。CI4件、公開PCSP代表18+旧4画面、独立データ22項目とUI6画像の照合に成功。",
             "at": "2026-11-16T12:46:50.077Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "security_assessment_20261116",
+      "context": "development",
+      "title": "世界遺産ラボの脆弱性診断と再現根拠の確認",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: 世界遺産ラボの脆弱性診断を行ってください",
+      "next_action": "docs/security-assessment-20261116.mdのV1〜V3を優先して、実装依頼に基づき修正・再診断する。",
+      "evidence": [
+        "docs/security-assessment-20261116.md",
+        "local-only/security-assessment-20261116/source-fingerprints.json",
+        "local-only/security-assessment-20261116/verification-summary.json",
+        "local-only/security-assessment-20261116/boundary-review.md",
+        "local-only/security-assessment-20261116/cleanup.json"
+      ],
+      "last_verified_at": "2026-11-16T10:05:44.610Z",
+      "verification_scope": "現在の作業ツリー176ファイル指紋維持、関連205検査成功、依存監査16package/30advisory、診断3指摘。V1/V2を合成test APIで再現、V3を実Nitroルートと公開Fly匿名GETで確認。独立反証レビュー合格。アプリ修正/本番更新なし。専用DB停止削除済み。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "依存関係監査・保護検査・対象セキュリティ回帰と候補の安全な再現を実行し、結果/限界/対象版を記録する",
+          "verification": "npm audit、private-source check、使い捨てtest DBの既存回帰、必要な局所再現。失敗は隠さず分類する。",
+          "status": "passed",
+          "evidence": [
+            "local-only/security-assessment-20261116/verification-summary.json",
+            "local-only/security-assessment-20261116/final-consistency.json",
+            "local-only/security-assessment-20261116/focused-probes.json",
+            "local-only/security-assessment-20261116/proxy-canonicalization.json",
+            "local-only/security-assessment-20261116/public-proxy-paths.json"
+          ],
+          "checked_at": "2026-11-16T10:05:44.610Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が認証・権限境界と診断指摘の根拠・影響・誤検知を独立確認する",
+          "verification": "security_boundary_review担当によるソース確認と最終指摘の反証レビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/security-assessment-20261116/boundary-review.md",
+            "docs/security-assessment-20261116.md"
+          ],
+          "checked_at": "2026-11-16T10:05:44.610Z",
+          "reviewer": "security_boundary_review"
+        }
+      ],
+      "execution": {
+        "worker": "root_security_assessment",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "診断の受入条件を確認。関連205検査成功、3指摘の再現と依存監査・公開GETの結果を報告。独立反証レビュー合格。アプリは未修正。",
+            "at": "2026-11-16T10:05:57.953Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "security_fix_release_20261117",
+      "context": "development",
+      "title": "診断3指摘と関連強化の修正・検証・本番配信",
+      "status": "done",
+      "depends_on": [
+        "security_assessment_20261116"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-17 ユーザー: 修正とデプロイを行ってください",
+      "next_action": "Git保存は別依頼に基づく。",
+      "evidence": [
+        "docs/security-fix-release-20261117.md",
+        "local-only/security-fix-20261117/verification.json",
+        "local-only/security-fix-20261117/review.md",
+        "local-only/security-fix-20261117/fly-release-result.json",
+        "local-only/security-fix-20261117/netlify-release-result.json",
+        "local-only/security-fix-20261117/production-check.json"
+      ],
+      "last_verified_at": "2026-11-17T03:52:37.539Z",
+      "verification_scope": "固定manifest41d3db5a7729。API117/単体172/追加17成功、監査0、static/typecheck成功、独立review合格。Fly既存設定維持、Netlify ready。公開API8とPCSP含む16ケース成功。DBスキーマ/教材変更なし。commit/pushなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "修正の自動回帰・本番代表確認",
+          "verification": "対象に必要な既存検査を選び、結果と根拠を記録する",
+          "status": "passed",
+          "evidence": [
+            "local-only/security-fix-20261117/verification.json",
+            "local-only/security-fix-20261117/production-check.json",
+            "local-only/security-fix-20261117/api-production-result.json",
+            "docs/security-fix-release-20261117.md"
+          ],
+          "checked_at": "2026-11-17T03:52:37.539Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が認証・Webhook・proxy境界と固定配信版を独立確認",
+          "verification": "別担当のレビューで未解決の問題がないことを確認する",
+          "status": "passed",
+          "evidence": [
+            "local-only/security-fix-20261117/review.md",
+            "local-only/security-fix-20261117/review.json"
+          ],
+          "checked_at": "2026-11-17T03:52:37.539Z",
+          "reviewer": "fix_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "3指摘と関連強化を修正。固定版の自動検査/独立review/本番配信と公開API・PCSP確認に合格。",
+            "at": "2026-11-17T03:52:38.099Z",
             "failed_criteria": []
           }
         ]

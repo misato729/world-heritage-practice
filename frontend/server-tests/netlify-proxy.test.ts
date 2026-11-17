@@ -261,3 +261,14 @@ test('the Nitro scanner test app registers the real middleware before API and au
     })
   })
 })
+
+
+test('noncanonical API paths cannot skip the proxy boundary', async () => {
+  await withProxy(async () => {
+    await withServer(await createApiTestApp(), async base => {
+      for (const path of ['/%61pi/v1/me', '/%61pi/v1/payments/config', '/api%2fv1/me', '/%61pi/v1/health']) {
+        assert.equal((await fetch(base + path)).status, 403, path)
+      }
+    })
+  })
+})

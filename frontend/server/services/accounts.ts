@@ -6,6 +6,7 @@ import { query, record, transaction } from '../core/db.ts'
 import { userPayload, type User } from '../core/auth.ts'
 import { getAuth } from '../core/better-auth.ts'
 import { fail } from '../core/errors.ts'
+import { throttle } from '../core/rate-limit.ts'
 import { expirePendingCheckouts } from './payments.ts'
 
 export async function getAccount(user: User | null) {
@@ -16,6 +17,8 @@ export async function getAccount(user: User | null) {
 export async function deleteAccount(event: H3Event, user: User | null) {
   if (!user) fail(401, 'unauthorized', 'ログインが必要です')
 
+  await throttle(event, 'account_delete_ip')
+  await throttle(event, 'account_delete_user', String(user.id))
   const input = await readBody<{ current_password?: unknown }>(event)
   const invalidPassword = (): never => fail(422, 'validation_error', '現在のパスワードを確認してください', { current_password: ['が正しくありません'] })
   if (typeof input?.current_password !== 'string' || input.current_password.length > 128) return invalidPassword()

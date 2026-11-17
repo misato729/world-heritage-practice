@@ -1,5 +1,6 @@
+import { readWebhookBody } from '../core/webhook-body.ts'
 import { monthlyCheckout } from './subscriptions.ts'
-import { getHeader, readRawBody, setResponseStatus, type H3Event } from 'h3'
+import { getHeader, setResponseStatus, type H3Event } from 'h3'
 import type { User } from '../core/auth.ts'
 import { ApiError, fail } from '../core/errors.ts'
 import { throttle } from '../core/rate-limit.ts'
@@ -33,9 +34,11 @@ export async function receiveStripeWebhook(event: H3Event) {
     error.expectedUnavailability = true
     throw error
   }
-  const rawBody = await readRawBody(event, false)
+  const signature = getHeader(event, 'stripe-signature') || ''
+  if (!signature || signature.length > 4096) fail(400, 'invalid_webhook', 'Webhookを検証できません')
+  const rawBody = await readWebhookBody(event)
   let stripeEvent
-  try { stripeEvent = verifyStripeWebhook(rawBody || Buffer.alloc(0), getHeader(event, 'stripe-signature') || '', settings.webhookSecret) }
+  try { stripeEvent = verifyStripeWebhook(rawBody || Buffer.alloc(0), signature, settings.webhookSecret) }
   catch { fail(400, 'invalid_webhook', 'Webhookを検証できません') }
   try { await processStripeEvent(stripeEvent, { settings }) }
   catch (error) {

@@ -5,53 +5,14 @@ import { createRequire } from 'node:module'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { after, test } from 'node:test'
-import { NODE_FORGE_SECURITY_PATCH, applyRsaSecurityPatch, assertSupportedForgeLockfile, patchNodeForge, sha256 } from '../scripts/patch-node-forge.mjs'
+import { NODE_FORGE_SECURITY_RELEASE, assertSupportedForgeLockfile, patchNodeForge } from '../scripts/patch-node-forge.mjs'
 
 const require = createRequire(import.meta.url)
 const installedDirectory = dirname(require.resolve('node-forge/package.json'))
-const installedSource = readFileSync(resolve(installedDirectory, 'lib/rsa.js'), 'utf8')
-assert.equal(sha256(installedSource), NODE_FORGE_SECURITY_PATCH.patchedSha256,
-  'Run the dependency postinstall step before testing; the installed Forge must be patched.')
-
-// Reconstruct the exact published source as a negative control, in a temporary
-// package only. No vulnerable source is restored into the application's install.
-function publishedSource(patched: string): string {
-  const lines = patched.split('\n')
-  const diff = readFileSync(new URL('../patches/node-forge-1.4.0.patch', import.meta.url), 'utf8').trimEnd().split('\n')
-  const output: string[] = []
-  let cursor = 0
-  for (let index = 0; index < diff.length; index++) {
-    const hunk = /^@@ -\d+,\d+ \+(\d+),\d+ @@/.exec(diff[index]!)
-    if (!hunk) continue
-    const start = Number(hunk[1]) - 1
-    output.push(...lines.slice(cursor, start))
-    cursor = start
-    while (index + 1 < diff.length && !diff[index + 1]!.startsWith('@@')) {
-      const line = diff[++index]!
-      if (line[0] === ' ' || line[0] === '+') assert.equal(lines[cursor++], line.slice(1))
-      if (line[0] === ' ' || line[0] === '-') output.push(line.slice(1))
-    }
-  }
-  output.push(...lines.slice(cursor))
-  const original = output.join('\n')
-  assert.equal(sha256(original), NODE_FORGE_SECURITY_PATCH.originalSha256)
-  return original
-}
-
-const originalSource = publishedSource(installedSource)
+const securedForge = require('node-forge')
 const temporaryRoot = mkdtempSync(join(tmpdir(), 'exam-forge-security-'))
 after(() => rmSync(temporaryRoot, { recursive: true, force: true }))
 
-function isolatedForge(name: string, source: string) {
-  const directory = join(temporaryRoot, name)
-  mkdirSync(directory)
-  cpSync(resolve(installedDirectory, 'lib'), join(directory, 'lib'), { recursive: true })
-  writeFileSync(join(directory, 'lib/rsa.js'), source)
-  return require(join(directory, 'lib/index.js'))
-}
-
-const vulnerableForge = isolatedForge('original', originalSource)
-const securedForge = isolatedForge('patched', installedSource)
 const message = Buffer.from('Dependency security regression: synthetic RSA test data only.')
 const hashes = ['sha256', 'sha384', 'sha512'] as const
 type Hash = typeof hashes[number]
@@ -89,43 +50,43 @@ function publicForgeKey(forge: any, keyPair: typeof keyPairs[number]) {
   return forge.pki.publicKeyFromPem(keyPair.publicKey.export({ type: 'spki', format: 'pem' }))
 }
 
-test('the installed dependency has the reviewed backport and retains its published version', () => {
-  assert.equal(patchNodeForge({ checkOnly: true }), 'already-patched')
+test('the upstream security release is installed and unexpected dependency copies fail closed', () => {
+  assert.equal(patchNodeForge({ checkOnly: true }), 'upstream-secured')
   const metadata = JSON.parse(readFileSync(resolve(installedDirectory, 'package.json'), 'utf8'))
-  assert.equal(metadata.version, '1.4.0')
-  assert.equal(applyRsaSecurityPatch(originalSource), installedSource)
-  assert.throws(() => applyRsaSecurityPatch(`${originalSource}\n`), /Unexpected original/)
+  assert.equal(metadata.version, NODE_FORGE_SECURITY_RELEASE.version)
   const lockfile = JSON.parse(readFileSync(new URL('../package-lock.json', import.meta.url), 'utf8'))
   assert.doesNotThrow(() => assertSupportedForgeLockfile(lockfile))
   lockfile.packages['node_modules/unexpected-package/node_modules/node-forge'] = { version: '1.4.0' }
   assert.throws(() => assertSupportedForgeLockfile(lockfile), /Unexpected node-forge dependency graph/)
 })
 
-test('patch application is idempotent, check-only does not repair, and unknown inputs fail closed', () => {
-  const directory = join(temporaryRoot, 'patch-lifecycle')
-  mkdirSync(join(directory, 'lib'), { recursive: true })
+test('release verification never repairs modified sources and rejects unreviewed versions', () => {
+  const directory = join(temporaryRoot, 'release-verification')
+  mkdirSync(directory)
+  cpSync(resolve(installedDirectory, 'lib'), join(directory, 'lib'), { recursive: true })
   const metadataPath = join(directory, 'package.json')
   const rsaPath = join(directory, 'lib/rsa.js')
+  const asn1Path = join(directory, 'lib/asn1.js')
+  writeFileSync(metadataPath, JSON.stringify({ name: 'node-forge', version: NODE_FORGE_SECURITY_RELEASE.version }))
+  assert.equal(patchNodeForge({ packageDirectory: directory }), 'upstream-secured')
+  assert.equal(patchNodeForge({ packageDirectory: directory, checkOnly: true }), 'upstream-secured')
+  for (const path of [rsaPath, asn1Path]) {
+    const original = readFileSync(path, 'utf8')
+    writeFileSync(path, `${original}\n`)
+    for (const checkOnly of [true, false]) {
+      assert.throws(() => patchNodeForge({ packageDirectory: directory, checkOnly }), /Unexpected installed/)
+      assert.equal(readFileSync(path, 'utf8'), `${original}\n`)
+    }
+    writeFileSync(path, original)
+  }
   writeFileSync(metadataPath, JSON.stringify({ name: 'node-forge', version: '1.4.0' }))
-  writeFileSync(rsaPath, originalSource)
-  assert.throws(() => patchNodeForge({ packageDirectory: directory, checkOnly: true }), /backport is missing/)
-  assert.equal(readFileSync(rsaPath, 'utf8'), originalSource)
-  assert.equal(patchNodeForge({ packageDirectory: directory }), 'patched')
-  assert.equal(patchNodeForge({ packageDirectory: directory }), 'already-patched')
-  assert.equal(patchNodeForge({ packageDirectory: directory, checkOnly: true }), 'already-patched')
-  assert.equal(sha256(readFileSync(rsaPath)), NODE_FORGE_SECURITY_PATCH.patchedSha256)
-  writeFileSync(rsaPath, `${installedSource}\n`)
-  assert.throws(() => patchNodeForge({ packageDirectory: directory }), /Unexpected installed/)
-  assert.equal(readFileSync(rsaPath, 'utf8'), `${installedSource}\n`)
-  writeFileSync(metadataPath, JSON.stringify({ name: 'node-forge', version: '1.4.1' }))
   assert.throws(() => patchNodeForge({ packageDirectory: directory }), /Unexpected node-forge package\/version/)
 })
 
-test('patched verification rejects malformed DigestInfo accepted by published 1.4.0, including e=3', () => {
+test('upstream verification rejects malformed DigestInfo, including e=3', () => {
   for (const keyPair of keyPairs) {
     for (const hash of hashes) {
       const digest = createHash(hash).update(message).digest('latin1')
-      const originalKey = publicForgeKey(vulnerableForge, keyPair)
       const patchedKey = publicForgeKey(securedForge, keyPair)
       const vectors = {
         'extra nested element': digestInfo(hash, Buffer.from('0500', 'hex'), Buffer.from('0203aabbcc', 'hex')),
@@ -137,7 +98,6 @@ test('patched verification rejects malformed DigestInfo accepted by published 1.
       for (const [name, info] of Object.entries(vectors)) {
         const signature = signRawDigestInfo(info, keyPair.privateKey).toString('latin1')
         const context = `${hash}, e=${keyPair.exponent}, ${name}`
-        assert.equal(originalKey.verify(digest, signature), true, `Vulnerable negative control: ${context}`)
         assert.throws(() => patchedKey.verify(digest, signature), /DigestInfo/, context)
       }
     }
@@ -148,7 +108,7 @@ test('SHA-256/384/512 signatures interoperate with Node/OpenSSL and Forge retain
   for (const keyPair of keyPairs) {
     for (const hash of hashes) {
       const digest = createHash(hash).update(message).digest('latin1')
-      for (const forge of [vulnerableForge, securedForge]) {
+      for (const forge of [securedForge]) {
         const publicKey = publicForgeKey(forge, keyPair)
         const nativeSignature = sign(hash, message, keyPair.privateKey)
         assert.equal(publicKey.verify(digest, nativeSignature.toString('latin1')), true)
@@ -179,11 +139,41 @@ test('strict trailing-byte and outer-element rejection is retained', () => {
   const digest = createHash(hash).update(message).digest('latin1')
   const originalInfo = digestInfo(hash)
   const withOuterExtra = der(0x30, Buffer.concat([originalInfo.subarray(2), Buffer.from('0500', 'hex')]))
-  for (const forge of [vulnerableForge, securedForge]) {
+  for (const forge of [securedForge]) {
     const publicKey = publicForgeKey(forge, keyPair)
     for (const info of [Buffer.concat([originalInfo, Buffer.from([0])]), withOuterExtra]) {
       const signature = signRawDigestInfo(info, keyPair.privateKey).toString('latin1')
       assert.throws(() => publicKey.verify(digest, signature))
     }
   }
+})
+
+test('the archive dependency override preserves nested glob and exclusion behavior', async () => {
+  // Nitro uses archiver, whose readdir-glob dependency is overridden to the
+  // upstream release using minimatch 11. Exercise its actual integration.
+  const { ZipArchive } = await import('archiver')
+  const directory = join(temporaryRoot, 'archive-input')
+  mkdirSync(join(directory, 'nested'), { recursive: true })
+  writeFileSync(join(directory, 'root.txt'), 'synthetic root')
+  writeFileSync(join(directory, 'nested/keep.txt'), 'synthetic nested')
+  writeFileSync(join(directory, 'nested/skip.txt'), 'excluded synthetic file')
+  writeFileSync(join(directory, 'nested/other.json'), '{}')
+  const archive = new ZipArchive()
+  const entries: string[] = []
+  const chunks: Buffer[] = []
+  const completed = new Promise<void>((resolve, reject) => {
+    archive.on('error', reject)
+    archive.on('warning', reject)
+    archive.on('entry', (entry: { name: string }) => entries.push(entry.name))
+    archive.on('data', (chunk: Buffer) => chunks.push(chunk))
+    archive.on('end', resolve)
+  })
+  archive.glob('**/*.txt', { cwd: directory, ignore: ['**/skip.txt'] })
+  await archive.finalize()
+  await completed
+  assert.deepEqual(entries.sort(), ['nested/keep.txt', 'root.txt'])
+  const zip = Buffer.concat(chunks)
+  assert.equal(zip.readUInt32LE(0), 0x04034b50)
+  assert.equal(zip.readUInt32LE(zip.length - 22), 0x06054b50)
+  assert.equal(zip.readUInt16LE(zip.length - 12), 2)
 })

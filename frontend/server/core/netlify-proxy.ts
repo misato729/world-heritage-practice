@@ -7,7 +7,13 @@ import { ApiError, fail } from './errors.ts'
 const verifiedAddresses = new WeakMap<H3Event, string>()
 
 function protectedApi(event: H3Event) {
-  const path = getRequestURL(event).pathname.replace(/\/$/, '')
+  const rawPath = getRequestURL(event).pathname
+  // H3 decodes path segments before matching routes. Reject encoded API paths
+  // rather than granting public exceptions to a different representation.
+  let decoded: string
+  try { decoded = decodeURIComponent(rawPath) } catch { return rejectProxy() }
+  if (decoded !== rawPath && /^\/api(?:\/|$)/.test(decoded)) return rejectProxy()
+  const path = decoded.replace(/\/$/, '')
   if (!/^\/api(?:\/|$)/.test(path)) return false
   // Fly health checks and Stripe's independently signed webhook arrive directly.
   if (path === '/api/v1/health' && ['GET', 'HEAD'].includes(event.method)) return false
