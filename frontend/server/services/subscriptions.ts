@@ -1,3 +1,5 @@
+import { subscriptionCheckoutMessage } from '../../shared/subscriptionTerms.ts'
+import { configuration } from '../core/config.ts'
 import { randomInt, randomUUID } from 'node:crypto'
 import type Stripe from 'stripe'
 import { query, transaction, getDatabase, type Database } from '../core/db.ts'
@@ -14,6 +16,7 @@ export async function monthlyCheckout(user: User, options: PaymentOptions = {}) 
  const settings = options.settings ?? paymentSettings()
  if (!settings.enabled) fail(503, 'payment_unavailable', '現在、決済を開始できません')
  const client = options.client ?? paymentStripeClient(settings)
+ const checkoutMessage = subscriptionCheckoutMessage(configuration, settings.frontendUrl)
  return transaction(async db => {
   await query('SELECT id FROM users WHERE id=$1 FOR UPDATE', [user.id], db)
   const row = await db.subscription.findUnique({where:{user_id:user.id}})
@@ -21,8 +24,12 @@ export async function monthlyCheckout(user: User, options: PaymentOptions = {}) 
   if (row?.checkout_session_id && !row.stripe_subscription_id) {
    const pending = await client.checkout.sessions.retrieve(row.checkout_session_id)
    if (pending.livemode !== settings.livemode) throw new Error('Provider mode mismatch')
-   if (pending.status === 'open' && pending.url) return {checkout_session_id:pending.id,checkout_url:pending.url}
-   if (pending.status !== 'expired') fail(409,'checkout_session_in_progress','決済の反映を確認中です')
+   if (pending.status === 'open' && pending.url) {
+    if (pending.custom_text?.submit?.message === checkoutMessage) return {checkout_session_id:pending.id,checkout_url:pending.url}
+    // An open Checkout created before a terms change must not show stale terms.
+    const expired = await client.checkout.sessions.expire(pending.id)
+    if (expired.status !== 'expired') fail(409,'checkout_session_in_progress','決済の状態を確認してから再度お試しください')
+   } else if (pending.status !== 'expired') fail(409,'checkout_session_in_progress','決済の反映を確認中です')
   }
   const price = await client.prices.retrieve(settings.priceId)
   if (!validMonthlyPrice(price) || price.livemode !== settings.livemode) fail(503,'payment_unavailable','税込500円の月額プラン設定を確認できません')
@@ -33,7 +40,7 @@ export async function monthlyCheckout(user: User, options: PaymentOptions = {}) 
    integration_identifier:'heritage_monthly_'+Array.from({length:8},()=>String.fromCharCode(97+randomInt(26))).join(''),
    allow_promotion_codes:false, automatic_tax:{enabled:false}, consent_collection:{terms_of_service:'required'},
    custom_text:{
-    submit:{message:'月額500円（税込）で自動更新します。全級共通で模試4以降の公開問題が対象です。現在は2級の模試1〜20と準1級の模試1〜10を公開し、1級は準備中です。契約管理から解約できます。'},
+    submit:{message:checkoutMessage},
     terms_of_service_acceptance:{message:`世界遺産ラボの[利用規約](${settings.frontendUrl}/terms)・[プライバシーポリシー](${settings.frontendUrl}/privacy-policy)・[特定商取引法に基づく表記](${settings.frontendUrl}/commercial-disclosure)を確認し、月額500円（税込）の自動更新契約に同意します。`},
    },
    success_url:settings.frontendUrl+'/premium/complete', cancel_url:settings.frontendUrl+'/premium?canceled=1',

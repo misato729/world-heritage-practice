@@ -1,8 +1,13 @@
 <script setup lang="ts">
 const portalError = ref('')
+const openingPortal = ref(false)
 const openPortal = async () => {
+ if (openingPortal.value) return
+ openingPortal.value = true
+ portalError.value = ''
  try { const {data} = await useNuxtApp().$api<{data:{url:string}}>('/api/v1/payments/portal',{method:'POST',body:{}}); window.location.assign(data.url) }
  catch { portalError.value = '契約管理を開けませんでした。時間をおいて再度お試しください。' }
+ finally { openingPortal.value = false }
 }
 
 const { config: EXAM_CONFIG } = useGrade()
@@ -11,7 +16,17 @@ import { apiFormErrors, focusFormError } from '~/utils/apiFormErrors'
 definePageMeta({ middleware: 'auth' })
 const route = useRoute()
 const settingsSection = useTemplateRef<HTMLElement>('settingsSection')
-const alignAccountSettings = async () => { if(route.hash !== '#account-settings') return; await nextTick(); if(route.hash === '#account-settings') settingsSection.value?.scrollIntoView({block:'start'}) }
+const subscriptionSection = useTemplateRef<HTMLElement>('subscriptionSection')
+const alignAccountSettings = async () => {
+  const hash = route.hash
+  if (!['#account-settings', '#subscription-management'].includes(hash)) return
+  await nextTick()
+  if (route.hash !== hash) return
+  const section = hash === '#subscription-management' ? subscriptionSection.value : settingsSection.value
+  section?.scrollIntoView({ block: 'start' })
+}
+onMounted(alignAccountSettings)
+watch(() => route.hash, alignAccountSettings, { flush: 'post' })
 
 const { isLoggedIn, user, logout, deleteAccount: removeAccount, changePassword, ensureCurrentUser } = useAuth()
 await ensureCurrentUser()
@@ -90,9 +105,17 @@ const deleteAccount = async () => {
         <div><span>メールアドレス</span><strong>{{ user?.email }}</strong></div>
         <div><span>会員区分</span><strong>{{ membershipLabel }}</strong></div>
         <div v-if="PAYMENTS_ENABLED && user?.membership.purchased_at"><span>購入確認日時</span><strong>{{ new Date(user.membership.purchased_at).toLocaleString('ja-JP') }}</strong></div>
-        <button v-if="user?.subscription" type="button" @click="openPortal">契約・支払方法・解約の管理</button><p v-if="portalError" role="alert">{{ portalError }}</p>
-        <div v-if="PAYMENTS_ENABLED && user?.membership.status === 'active'"><span>有効期限</span><strong>{{ user?.membership.expires_at ? new Date(user.membership.expires_at).toLocaleDateString('ja-JP') : '既存の会員資格' }}</strong></div>
+        <div v-if="PAYMENTS_ENABLED && user?.membership.status === 'active' && !user?.subscription"><span>有効期限</span><strong>{{ user?.membership.expires_at ? new Date(user.membership.expires_at).toLocaleDateString('ja-JP') : '既存の会員資格' }}</strong></div>
         <div v-if="PAYMENTS_ENABLED && user?.verification_access && user?.membership.status !== 'active'"><span>検証用資格の期限</span><strong>{{ new Date(user.verification_access.expires_at).toLocaleString('ja-JP') }}</strong></div>
+      </section>
+      <section v-if="user?.subscription" id="subscription-management" ref="subscriptionSection" class="content-panel subscription-management" aria-labelledby="subscription-heading">
+        <h2 id="subscription-heading">契約・解約の管理</h2>
+        <p v-if="user.subscription.cancel_at_period_end" role="status">解約予約済みです。次回の自動更新はありません。</p>
+        <p v-if="user.subscription.paid_until">支払済み利用期間の終了：{{ new Date(user.subscription.paid_until).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }) }}（日本時間）</p>
+        <button class="primary-link" type="button" :disabled="openingPortal" @click="openPortal">{{ openingPortal ? '契約管理を開いています' : '契約・支払方法・解約の管理' }}</button>
+        <p v-if="portalError" class="form-error" role="alert">{{ portalError }}</p>
+        <p>最新の更新日・解約完了状況はStripe管理画面で確認してください。</p>
+        <SubscriptionCancellationGuide />
       </section>
       <AchievementReport @settled.once="alignAccountSettings" />
       <section id="account-settings" ref="settingsSection" class="account-settings" aria-labelledby="account-settings-heading">
@@ -143,6 +166,8 @@ const deleteAccount = async () => {
 </template>
 
 <style scoped>
+.subscription-management { scroll-margin-top: calc(var(--site-navigation-height, var(--header-height)) + 20px); }
+.subscription-management button { margin-bottom: 12px; }
 .account-info h2 { margin:0; font-size:1.25rem; }
 .account-info strong { overflow-wrap:anywhere; }
 .account-settings { margin-top:28px; scroll-margin-top:calc(var(--site-navigation-height, var(--header-height)) + 20px); }

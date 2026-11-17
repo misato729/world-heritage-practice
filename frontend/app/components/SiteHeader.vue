@@ -16,6 +16,7 @@ const menuItems = computed(() => [
         ...(!PAYMENTS_ENABLED || user.value?.paid_content_access
           ? [{ label: 'お気に入り一覧', to: '/favorites', icon: 'i-lucide-star' }]
           : []),
+        ...(user.value?.subscription ? [{ label: '契約・解約の管理', to: '/account#subscription-management', icon: 'i-lucide-credit-card' }] : []),
         { label: 'アカウント設定', to: '/account#account-settings', icon: 'i-lucide-user-round' },
         ...(user.value?.role === 'admin'
           ? [{ label: '管理画面', to: '/admin/questions', icon: 'i-lucide-shield-check' }]

@@ -31,7 +31,7 @@ useSeoMeta({
         <div><dt>支払時期</dt><dd>初回申込時と、その後毎月の更新日に決済されます。</dd></div>
         <div><dt>提供内容</dt><dd>1級・準1級・2級共通で、2級の模試4以降・準1級の模試3以降・1級の模試2以降の公開問題とお気に入り機能を利用できます。公開済みの教材が利用対象です。2級の模試1〜3・準1級の模試1〜2・1級の模試1は無料です。</dd></div>
         <div><dt>提供時期</dt><dd>決済完了をStripeの通知で確認後、直ちに利用できます。通知の遅延時は反映まで時間を要する場合があります。</dd></div>
-        <div><dt>解約</dt><dd>アカウントの契約管理から解約できます。期間末解約の場合は支払済み期間の終了まで利用でき、次回の更新を停止します。</dd></div>
+        <div><dt>解約</dt><dd><SubscriptionCancellationGuide /></dd></div>
         <div><dt>返品・返金</dt><dd>デジタルコンテンツの性質上、提供開始後の利用者都合による返品・返金は原則として受け付けません。重複決済、提供不能その他契約内容に適合しない場合は、上記問い合わせ先へご連絡ください。法令上認められる権利を制限するものではありません。</dd></div>
         <div><dt>利用環境</dt><dd>最新版の主要ブラウザとインターネット接続が必要です。CookieとJavaScriptを有効にしてください。</dd></div>
       </dl>
@@ -45,14 +45,14 @@ useSeoMeta({
 .legal-warning { max-width: 900px; margin-bottom: 18px; padding: 15px 18px; border: 1px solid #dfc278; border-radius: 7px; background: #fff9e8; color: #6c5519; font-weight: 700; line-height: 1.7; }
 .disclosure-table { padding: 0; overflow: hidden; }
 .disclosure-table dl { margin: 0; }
-.disclosure-table dl div { display: grid; grid-template-columns: minmax(180px, .35fr) minmax(0, 1fr); border-bottom: 1px solid var(--line); }
-.disclosure-table dl div:last-child { border-bottom: 0; }
+.disclosure-table dl > div { display: grid; grid-template-columns: minmax(180px, .35fr) minmax(0, 1fr); border-bottom: 1px solid var(--line); }
+.disclosure-table dl > div:last-child { border-bottom: 0; }
 .disclosure-table dt, .disclosure-table dd { margin: 0; padding: 18px 22px; line-height: 1.8; }
 .disclosure-table dt { background: #edf4f4; font-weight: 800; }
 .disclosure-table dd { color: #42555d; overflow-wrap: anywhere; }
 .disclosure-table a { color: var(--teal-dark); font-weight: 700; }
 @media (max-width: 640px) {
-  .disclosure-table dl div { grid-template-columns: 1fr; }
+  .disclosure-table dl > div { grid-template-columns: 1fr; }
   .disclosure-table dt { padding-bottom: 8px; }
   .disclosure-table dd { padding-top: 8px; }
 }

@@ -114,8 +114,13 @@ const startCheckout = async () => {
           <li><UIcon name="i-lucide-circle-check" />模擬試験{{ EXAM_CONFIG.payments.free_exam_count + 1 }}以降の公開問題</li>
           <li><UIcon name="i-lucide-circle-check" />お気に入り登録とサイドバーでの目印表示</li>
         </ul>
-        <p class="scope-note">現在は準1級の模試1〜10、2級の模試1〜20を収録しています。1級の教材は準備中です。有料機能は支払済みの利用期間中に利用できます。期間末解約では次回の更新を停止し、支払済み期間の終了まで利用できます。</p>
+        <p class="scope-note">公開済みの教材が利用対象です。未公開教材の追加や公開時期を保証するものではありません。有料機能は支払済みの利用期間中に利用できます。期間末解約では次回の更新を停止し、支払済み期間の終了まで利用できます。</p>
       </div>
+    </section>
+
+    <section id="cancellation-guide" class="content-panel cancellation-panel" aria-labelledby="cancellation-heading">
+      <h2 id="cancellation-heading">解約方法・更新停止の期限</h2>
+      <SubscriptionCancellationGuide />
     </section>
 
     <section class="purchase-panel content-panel">
@@ -157,7 +162,7 @@ const startCheckout = async () => {
           <span>
             <GradeLink to="/terms" target="_blank">利用規約</GradeLink>、
             <GradeLink to="/privacy-policy" target="_blank">プライバシーポリシー</GradeLink>、
-            <GradeLink to="/commercial-disclosure" target="_blank">特定商取引法に基づく表記</GradeLink>を確認し、{{ PRICE_LABEL }}（税込）／月の自動更新契約に同意します。
+            <GradeLink to="/commercial-disclosure" target="_blank">特定商取引法に基づく表記</GradeLink>と<a href="#cancellation-guide">解約方法・更新停止の期限</a>を確認し、{{ PRICE_LABEL }}（税込）／月の自動更新契約に同意します。
           </span>
         </label>
         <p v-if="errorMessage" class="form-error" role="alert">{{ errorMessage }}</p>

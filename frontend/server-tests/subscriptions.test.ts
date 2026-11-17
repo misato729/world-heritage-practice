@@ -6,7 +6,7 @@ import { gradeConfig } from '../shared/grades.ts'
 import { gradeScope } from '../server/core/grade.ts'
 import { hasPaidAccess, type User } from '../server/core/auth.ts'
 import { authorizeExam, getQuestion, listExams } from '../server/services/learning.ts'
-import { validMonthlyPrice, monthlyCheckout, syncSubscription, stopSubscription } from '../server/services/subscriptions.ts'
+import { validMonthlyPrice, monthlyCheckout, syncSubscription, stopSubscription, subscriptionPortal } from '../server/services/subscriptions.ts'
 import { processStripeEvent } from '../server/services/payment-webhooks.ts'
 import { paymentSettings } from '../server/services/payment-settings.ts'
 import type { PaymentStripeClient } from '../server/services/payment-client.ts'
@@ -37,9 +37,10 @@ test('grade contexts are concurrent and isolate question IDs, catalogs and the f
 test('monthly checkout is shared and idempotent; renewal, failure, expiry and account cancellation retain bounded access',async()=>isolatedTransaction(async db=>{
  const user=await userFixture(db)
  let creates=0
+ let checkoutText=''
  let period=Math.floor(Date.now()/1000)+86400
  let status='active',paid=true,canceled=false
- const client={prices:{retrieve:async()=>price},checkout:{sessions:{create:async(params:any)=>{creates++;assert.equal(params.mode,'subscription');assert.deepEqual(params.allowed_payment_method_types,['card']);assert.equal('payment_method_types' in params,false);return {id:'cs_'+user.id,status:'open',url:'https://checkout.stripe.com/synthetic',livemode:false}},retrieve:async()=>({id:'cs_'+user.id,status:'open',url:'https://checkout.stripe.com/synthetic',livemode:false,client_reference_id:String(user.id),subscription:'sub_'+user.id}),expire:async()=>({status:'expired'})}},subscriptions:{retrieve:async()=>({id:'sub_'+user.id,customer:'cus_'+user.id,livemode:false,status,cancel_at_period_end:canceled,metadata:{service:'world-heritage-lab',user_id:String(user.id),stripe_price_id:price.id},items:{data:[{price,quantity:1}]},latest_invoice:{status:paid?'paid':'open',amount_paid:paid?500:0,currency:'jpy',livemode:false,lines:{data:[{pricing:{price_details:{price:price.id}},period:{end:period}}]}}}),cancel:async()=>({status:'canceled',livemode:false})}} as unknown as PaymentStripeClient
+ const client={prices:{retrieve:async()=>price},checkout:{sessions:{create:async(params:any)=>{creates++;checkoutText=params.custom_text.submit.message;assert.ok(checkoutText.includes('次回の契約更新日時より前'));assert.ok(checkoutText.includes('準1級は模試1〜2が無料'));assert.ok(checkoutText.length<=1200);assert.equal(params.mode,'subscription');assert.deepEqual(params.allowed_payment_method_types,['card']);assert.equal('payment_method_types' in params,false);return {id:'cs_'+user.id,status:'open',url:'https://checkout.stripe.com/synthetic',livemode:false}},retrieve:async()=>({id:'cs_'+user.id,status:'open',url:'https://checkout.stripe.com/synthetic',livemode:false,custom_text:{submit:{message:checkoutText}},client_reference_id:String(user.id),subscription:'sub_'+user.id}),expire:async()=>({status:'expired'})}},subscriptions:{retrieve:async()=>({id:'sub_'+user.id,customer:'cus_'+user.id,livemode:false,status,cancel_at_period_end:canceled,metadata:{service:'world-heritage-lab',user_id:String(user.id),stripe_price_id:price.id},items:{data:[{price,quantity:1}]},latest_invoice:{status:paid?'paid':'open',amount_paid:paid?500:0,currency:'jpy',livemode:false,lines:{data:[{pricing:{price_details:{price:price.id}},period:{end:period}}]}}}),cancel:async()=>({status:'canceled',livemode:false})}} as unknown as PaymentStripeClient
  await monthlyCheckout(user,{db,client,settings});await monthlyCheckout(user,{db,client,settings});assert.equal(creates,1)
  assert.equal(await hasPaidAccess(user,db),false)
  await syncSubscription('sub_'+user.id,db,client,settings)
@@ -67,3 +68,29 @@ test('monthly checkout is shared and idempotent; renewal, failure, expiry and ac
  assert.equal(await db.subscription.count({where:{user_id:user.id}}),0)
 }))
 after(closeDatabase)
+
+test('stale open Checkout expires before replacement; provider uncertainty never creates another session', async () => isolatedTransaction(async db => {
+ const user=await userFixture(db)
+ await db.subscription.create({data:{user_id:user.id,checkout_session_id:'cs_stale',status:'pending'}})
+ let expired=false,creates=0,expireStatus='expired',pendingStatus='open'
+ const client={prices:{retrieve:async()=>price},checkout:{sessions:{
+  retrieve:async()=>({id:'cs_stale',status:pendingStatus,url:'https://checkout.stripe.com/stale',livemode:false,custom_text:{submit:{message:'旧説明'}}}),
+  expire:async(id:string)=>{assert.equal(id,'cs_stale');expired=true;return {status:expireStatus}},
+  create:async(params:any)=>{assert.ok(expired);creates++;assert.match(params.custom_text.submit.message,/解約手順/);return {id:'cs_new',status:'open',url:'https://checkout.stripe.com/new',livemode:false}}
+ }}} as unknown as PaymentStripeClient
+ const result=await monthlyCheckout(user,{db,client,settings});assert.equal(result.checkout_session_id,'cs_new');assert.equal(creates,1)
+ await db.subscription.update({where:{user_id:user.id},data:{checkout_session_id:'cs_stale'}})
+ expireStatus='complete'
+ await assert.rejects(monthlyCheckout(user,{db,client,settings}));assert.equal(creates,1)
+ pendingStatus='complete';expired=false
+ await assert.rejects(monthlyCheckout(user,{db,client,settings}));assert.equal(expired,false);assert.equal(creates,1)
+}))
+
+
+test('existing subscribers can open cancellation management even while sales and paid features are disabled',async()=>isolatedTransaction(async db=>{
+ const user=await userFixture(db)
+ await db.subscription.create({data:{user_id:user.id,stripe_customer_id:'cus_existing',stripe_subscription_id:'sub_existing',status:'active'}})
+ const client={billingPortal:{sessions:{create:async(params:any)=>{assert.equal(params.customer,'cus_existing');return {url:'https://billing.stripe.com/synthetic'}}}}} as unknown as PaymentStripeClient
+ const result=await subscriptionPortal(user,{db,client,settings:{...settings,enabled:false,featureEnabled:false}})
+ assert.equal(result.data.url,'https://billing.stripe.com/synthetic')
+}))
