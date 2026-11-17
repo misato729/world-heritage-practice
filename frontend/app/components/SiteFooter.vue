@@ -17,6 +17,7 @@ const { apiStatus } = useApiStatus()
           <GradeLink to="/privacy-policy">プライバシーポリシー</GradeLink>
           <GradeLink to="/terms">利用規約</GradeLink>
           <GradeLink v-if="PAYMENTS_ENABLED" to="/commercial-disclosure">特定商取引法に基づく表記</GradeLink>
+          <GradeLink to="/support">開発者支援</GradeLink>
         </nav>
       </div>
       <div class="api-status" :class="apiStatus" role="status" aria-live="polite">
