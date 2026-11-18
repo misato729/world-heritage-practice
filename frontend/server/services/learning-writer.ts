@@ -114,6 +114,26 @@ export async function saveQuestion(raw: QuestionInput, options: SaveOptions = {}
   }
 }
 
+export type PublicationStatus = QuestionInput['publication_status']
+
+/**
+ * Change only the publication status of whole exam sets in the current grade.
+ * Content, choices, answer histories and favorites are kept, so a set can be
+ * published again without losing learners' records. Publishing requires every
+ * question number of each set, as for single-question saves.
+ */
+export async function setExamsPublication(examNumbers: number[], status: PublicationStatus, db: Database,
+  config: ExamConfiguration = gradeConfig(currentGrade(), configuration)): Promise<{ changedQuestions: number }> {
+  await query('SELECT pg_advisory_xact_lock($1)::text', [QUESTION_WRITE_LOCK], db)
+  const exams = [...new Set(examNumbers)]
+  if (status === 'published') for (const exam of exams) await validateCompleteExam(exam, db, config)
+  const result = await db.question.updateMany({
+    where: { grade: currentGrade(), exam_number: { in: exams }, publication_status: { not: status } },
+    data: { publication_status: status, updated_at: new Date() },
+  })
+  return { changedQuestions: result.count }
+}
+
 export async function deleteQuestion(id: number, db?: Database): Promise<void> {
   await transaction(async connection => {
     await query('SELECT pg_advisory_xact_lock($1)::text', [QUESTION_WRITE_LOCK], connection)

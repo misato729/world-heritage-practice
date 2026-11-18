@@ -144,7 +144,8 @@ function serializeHistory(row: HistoryRow, fullAccess: boolean) {
 export async function listHistory(user: User | null, params: Record<string, unknown>, db: Database = getDatabase()) {
   const current = requireUser(user)
   const { page, perPage } = pagination(params)
-  const where = { user_id: current.id, question: { grade: currentGrade() } }
+  // Histories of withdrawn (draft/private) questions stay stored but are not shown.
+  const where = { user_id: current.id, question: { grade: currentGrade(), publication_status: 'published' } }
   const count = await db.answerHistory.count({ where })
   const rows = record(await db.answerHistory.findMany({ where, include: { question: true, selected_choice: true },
     orderBy: [{ created_at: 'desc' }, { id: 'desc' }], take: perPage, skip: (page - 1) * perPage }))
@@ -154,7 +155,7 @@ export async function listHistory(user: User | null, params: Record<string, unkn
 
 export async function getHistory(id: number, user: User | null, db: Database = getDatabase()) {
   const current = requireUser(user)
-  const found = await db.answerHistory.findFirst({ where: { user_id: current.id, id, question: { grade: currentGrade() } }, include: { question: true, selected_choice: true } })
+  const found = await db.answerHistory.findFirst({ where: { user_id: current.id, id, question: { grade: currentGrade(), publication_status: 'published' } }, include: { question: true, selected_choice: true } })
   if (!found) return notFound()
   const row = { ...record(found), answered_at: found.created_at } as unknown as HistoryRow
   await authorizeExam(Number(row.question.exam_number), current, db)

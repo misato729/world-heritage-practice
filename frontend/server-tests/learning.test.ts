@@ -8,7 +8,7 @@ import { gradeScope } from '../server/core/grade.ts'
 import { closeDatabase, isolatedTransaction, query, type Database } from '../server/core/db.ts'
 import type { User } from '../server/core/auth.ts'
 import { excerptFrom, sanitizeQuestionInput, validateQuestionInput, type QuestionInput } from '../server/services/learning-validation.ts'
-import { deleteQuestion, loadQuestion, materialDigest, saveQuestion } from '../server/services/learning-writer.ts'
+import { deleteQuestion, loadQuestion, materialDigest, saveQuestion, setExamsPublication } from '../server/services/learning-writer.ts'
 import { answerQuestion, getHistory, getQuestion, listAdminQuestions, listExams, listFavorites, listHistory, nextQuestion, putFavorite, removeFavorite } from '../server/services/learning.ts'
 
 process.env.APP_ENV = 'test'
@@ -160,6 +160,28 @@ test('category catalogs retain exact published positions and isolate all three g
     assert.deepEqual((await listExams(null, {}, db)).data.find(item => item.exam_number === exam + 1)?.question_numbers, [1, 2, 3])
     await assert.rejects(listExams(null, { major_categories: 'unknown' }, db), apiError(400))
   })
+}))
+
+test('private sets disappear from learner questions, lists, history and favorites but keep the stored records', integration, async () => isolated(async (db, exam) => {
+  const owner = await user(db)
+  const questions = []
+  for (const number of [1, 2, 3]) questions.push(await saveQuestion(input({ exam_number: exam, question_number: number }), { db }))
+  const question = questions[0]!
+  const historyId = (await answerQuestion(question.id, question.choices[0]!.id, owner, db)).data.answer_history_id!
+  await putFavorite(question.id, owner, db)
+  assert.equal((await listHistory(owner, {}, db)).meta.total_count, 1)
+  assert.equal((await setExamsPublication([exam], 'private', db)).changedQuestions, 3)
+  await assert.rejects(getQuestion(question.id, owner, db), apiError(404))
+  assert.equal((await listExams(owner, {}, db)).data.some(item => item.exam_number === exam), false)
+  assert.equal((await listHistory(owner, {}, db)).meta.total_count, 0)
+  await assert.rejects(getHistory(historyId, owner, db), apiError(404))
+  assert.equal((await listFavorites(owner, {}, db)).data.length, 0)
+  await assert.rejects(answerQuestion(question.id, question.choices[0]!.id, owner, db), apiError(404))
+  assert.equal(await db.answerHistory.count({ where: { question_id: question.id } }), 1)
+  assert.equal(await db.favorite.count({ where: { question_id: question.id } }), 1)
+  assert.equal((await setExamsPublication([exam], 'published', db)).changedQuestions, 3)
+  assert.equal((await getHistory(historyId, owner, db)).data.id, historyId)
+  assert.equal((await listFavorites(owner, {}, db)).data.length, 1)
 }))
 
 test('signed-in answers, history ownership, favorite idempotency and pagination retain the API contract', integration, async () => isolated(async (db, exam) => {

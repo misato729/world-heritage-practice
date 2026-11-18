@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url'
 import { query, transaction, getDatabase, record, type Database } from '../core/db.ts'
 import { environment, configuration } from '../core/config.ts'
 import { ContentValidationError, contentDocumentSchema, parseQuestionArchiveEntries, type QuestionInput } from '../../shared/schemas/content.ts'
-import { saveQuestion, validateCompleteExam } from '../services/learning-writer.ts'
+import { saveQuestion, setExamsPublication, validateCompleteExam } from '../services/learning-writer.ts'
 
 export class OperationError extends Error {}
 export const ARCHIVE_FORMAT = 'exam-practice-question-archive'
@@ -185,6 +185,87 @@ export async function appendArchive(document: unknown, options: AppendOptions, e
 }
 export async function appendArchiveFile(path: string, options: AppendOptions) {
   return appendArchive(await readJson(path), options)
+}
+
+export const PUBLICATION_CONFIRMATION = 'SET_EXAM_PUBLICATION_STATUS'
+const publicationStatuses = ['draft', 'published', 'private'] as const
+type PublicationOptions = { confirmation?: string, exams?: number[], status?: string, beforeSha256?: string, afterSha256?: string,
+  totalQuestionsBefore?: number, otherGradeQuestionCounts?: Record<string, number> }
+/** Parse `11-20` or `11,12` into exam numbers without accepting partial or out-of-range input. */
+export function parseExamNumbers(value: string | undefined): number[] {
+  const text = (value ?? '').trim()
+  const range = /^(\d{1,4})-(\d{1,4})$/.exec(text)
+  const [low, high] = range ? [Number(range[1]), Number(range[2])] : [0, 0]
+  // Check bounds before building a range so oversized input cannot allocate.
+  const numbers = range ? (low >= 1 && high <= configuration.exam.set_count && low <= high ? Array.from({ length: high - low + 1 }, (_, i) => low + i) : [])
+    : /^\d{1,4}(,\d{1,4})*$/.test(text) ? text.split(',').map(Number) : []
+  if (!numbers.length || new Set(numbers).size !== numbers.length ||
+      numbers.some(n => !Number.isSafeInteger(n) || n < 1 || n > configuration.exam.set_count)) {
+    throw new OperationError(`対象の模試番号を1〜${configuration.exam.set_count}の範囲（例：11-20）で指定してください`)
+  }
+  return numbers.sort((a, b) => a - b)
+}
+/**
+ * Change the publication status of whole, complete exam sets in the current
+ * grade only. Content, choices, IDs, creation times, member histories,
+ * favorites and contracts are verified unchanged inside the transaction.
+ */
+export async function setExamPublication(options: PublicationOptions, existing?: Database) {
+  if (options.confirmation !== PUBLICATION_CONFIRMATION) throw new OperationError('模試の公開状態を変更する明示的な確認が必要です')
+  if (!publicationStatuses.includes(options.status as typeof publicationStatuses[number])) throw new OperationError('公開状態はdraft・published・privateから指定してください')
+  const status = options.status as typeof publicationStatuses[number]
+  const exams = options.exams ?? []
+  if (!exams.length || exams.some(n => !Number.isSafeInteger(n) || n < 1 || n > configuration.exam.set_count) || new Set(exams).size !== exams.length) {
+    throw new OperationError('対象の模試番号を指定してください')
+  }
+  for (const hash of [options.beforeSha256, options.afterSha256]) {
+    if (!hash || !/^[0-9a-f]{64}$/.test(hash)) throw new OperationError('変更前・変更後の照合値を指定してください')
+  }
+  const otherGrades = configuration.grades.map(g => g.code).filter(grade => grade !== currentGrade()).sort()
+  if (!Number.isSafeInteger(options.totalQuestionsBefore) || options.totalQuestionsBefore! < 0 ||
+      !object(options.otherGradeQuestionCounts) || Object.keys(options.otherGradeQuestionCounts).sort().join(',') !== otherGrades.join(',') ||
+      Object.values(options.otherGradeQuestionCounts).some(count => !Number.isSafeInteger(count) || count < 0)) {
+    throw new OperationError('変更前の全体件数と他級の件数を指定してください')
+  }
+  const perExam = gradeConfig(currentGrade(), configuration).exam.questions_per_exam
+  const run = async (db: Database) => {
+    await query('SELECT pg_advisory_xact_lock($1)::text', [QUESTION_LOCK], db)
+    await query('LOCK TABLE questions, question_choices IN SHARE ROW EXCLUSIVE MODE', [], db)
+    const before = await storedQuestions(db), protectedBefore = await protectedState(db)
+    if (before.length !== options.totalQuestionsBefore ||
+        otherGrades.some(grade => before.filter(q => q.grade === grade).length !== options.otherGradeQuestionCounts![grade])) {
+      throw new OperationError('変更前の全体件数又は他級の件数が一致しません')
+    }
+    const scoped = before.filter(q => q.grade === currentGrade())
+    const currentSha = createArchive(scoped.map(archiveQuestion)).sha256
+    const repeated = currentSha === options.afterSha256
+    if (!repeated && currentSha !== options.beforeSha256) throw new OperationError('変更前の教材が一致しません')
+    const targets = scoped.filter(q => exams.includes(q.exam_number))
+    for (const exam of exams) {
+      const numbers = targets.filter(q => q.exam_number === exam).map(q => q.question_number).sort((a, b) => a - b)
+      if (numbers.length !== perExam || numbers.some((n, i) => n !== i + 1)) throw new OperationError(`模試${exam}は問1〜${perExam}がそろっていません`)
+    }
+    const expectedChanges = targets.filter(q => q.publication_status !== status).length
+    const changed = repeated ? 0 : (await setExamsPublication(exams, status, db)).changedQuestions
+    if (changed !== (repeated ? 0 : expectedChanges)) throw new OperationError('公開状態を変更した件数が一致しません')
+    const after = await storedQuestions(db), byId = new Map(after.map(q => [q.id, q])), targetIds = new Set(targets.map(q => q.id))
+    if (before.some(q => !byId.has(q.id))) throw new OperationError('変更後の教材又は既存データの保持確認に失敗しました')
+    const withoutPublication = (q: StoredQuestion | undefined) => q && storedDigest({ ...q, publication_status: null, updated_at: null })
+    if (createArchive(after.filter(q => q.grade === currentGrade()).map(archiveQuestion)).sha256 !== options.afterSha256 ||
+        after.length !== before.length ||
+        before.some(q => targetIds.has(q.id)
+          ? withoutPublication(byId.get(q.id)) !== withoutPublication(q) || byId.get(q.id)!.publication_status !== status
+          : storedDigest(byId.get(q.id)) !== storedDigest(q)) ||
+        await protectedState(db) !== protectedBefore) {
+      throw new OperationError('変更後の教材又は既存データの保持確認に失敗しました')
+    }
+    return { status: repeated || changed === 0 ? 'unchanged' as const : 'updated' as const, grade: currentGrade(), exams,
+      publicationStatus: status, targetQuestions: targets.length, changedQuestions: changed,
+      totalQuestions: after.length, totalChoices: after.reduce((sum, q) => sum + q.choices.length, 0),
+      contentChoicesIdsAndCreationTimesUnchanged: true, nonTargetQuestionsUnchanged: true, protected13ModelsUnchangedWithinTransaction: true,
+      beforeSha256: options.beforeSha256!, afterSha256: options.afterSha256! }
+  }
+  return existing ? run(existing) : getDatabase().$transaction(run, { isolationLevel: 'RepeatableRead', timeout: 180_000, maxWait: 10_000 })
 }
 export async function seedContent(options: { path?: string, db?: Database, mode?: string } = {}) {
   if (currentGrade() !== '2' || (options.mode ?? environment()) !== 'development') return { status: 'skipped' as const }
