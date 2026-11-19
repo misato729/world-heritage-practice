@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test'
 import { loadE2EFixture } from '../scripts/e2e-fixture.mjs'
 
 const { config } = loadE2EFixture()
+// Slots after the grade's selectable number are shown as 開発中 without links or toggles.
+const available = Math.min(config.grades.find(g => g.code === '2')?.available_exam_count ?? config.exam.set_count, config.exam.set_count)
 
 for (const kind of ['anonymous', 'free', 'premium'] as const) {
   test(`static home and sidebar keep links without problem requests for ${kind}`, async ({ page }, testInfo) => {
@@ -27,19 +29,32 @@ for (const kind of ['anonymous', 'free', 'premium'] as const) {
     // Qualification has resolved before checking premium destinations.
     if (user) await expect(page.locator('.site-header .account-link')).toBeVisible()
     for (let number = 1; number <= config.exam.set_count; number++) {
+      const card = page.locator('.exam-grid .exam-card').nth(number - 1)
+      if (number > available) {
+        await expect(card).toHaveAttribute('aria-disabled', 'true')
+        await expect(card).not.toHaveAttribute('href', /.*/)
+        await expect(card).toContainText('開発中')
+        continue
+      }
       const locked = config.payments.enabled && number > config.payments.free_exam_count && !fullAccess
-      await expect(page.locator('.exam-grid .exam-card').nth(number - 1)).toHaveAttribute('href', locked ? '/premium' : `/practice/${number}/1`)
+      await expect(card).toHaveAttribute('href', locked ? '/premium' : `/practice/${number}/1`)
     }
     const mobile = page.locator('.mobile-exam-toggle')
     if (await mobile.isVisible()) await mobile.click()
-    const exam = page.locator('.exam-sidebar .exam-group').nth(config.exam.set_count - 1)
+    const development = page.locator('.exam-sidebar .exam-row-development')
+    await expect(development).toHaveCount(config.exam.set_count - available)
+    if (available < config.exam.set_count) {
+      await expect(development.first()).toHaveText(`模擬試験 ${available + 1}（開発中）`)
+      await expect(development.first().locator('a, button')).toHaveCount(0)
+    }
+    const exam = page.locator('.exam-sidebar .exam-group').nth(available - 1)
     await exam.getByRole('button').click()
     const questions = exam.locator('.question-list a')
     await expect(questions).toHaveCount(config.exam.questions_per_exam)
-    const locked = config.payments.enabled && config.exam.set_count > config.payments.free_exam_count && !fullAccess
+    const locked = config.payments.enabled && available > config.payments.free_exam_count && !fullAccess
     for (let number = 1; number <= config.exam.questions_per_exam; number++) {
       await expect(questions.nth(number - 1)).toHaveText(`問${number}`)
-      await expect(questions.nth(number - 1)).toHaveAttribute('href', locked ? '/premium' : `/practice/${config.exam.set_count}/${number}`)
+      await expect(questions.nth(number - 1)).toHaveAttribute('href', locked ? '/premium' : `/practice/${available}/${number}`)
     }
     await questions.last().scrollIntoViewIfNeeded()
     await expect(questions.last()).toBeVisible()
@@ -53,12 +68,12 @@ for (const kind of ['anonymous', 'free', 'premium'] as const) {
       expect((await page.request.get('/api/v1/exams')).ok()).toBe(true)
       await exam.getByRole('button').click()
       await exam.getByRole('button').click()
-      await expect(questions.nth(0)).toHaveAttribute('href', locked ? '/premium' : `/practice/${config.exam.set_count}/1`)
+      await expect(questions.nth(0)).toHaveAttribute('href', locked ? '/premium' : `/practice/${available}/1`)
       expect(problemRequests).toEqual([])
     }
     await page.goto('/privacy-policy')
     if (await mobile.isVisible()) await mobile.click()
-    const staticExam = page.locator('.exam-sidebar .exam-group').nth(config.exam.set_count - 1)
+    const staticExam = page.locator('.exam-sidebar .exam-group').nth(available - 1)
     if (await staticExam.getByRole('button').getAttribute('aria-expanded') !== 'true') await staticExam.getByRole('button').click()
     await expect(staticExam.locator('.question-list a')).toHaveCount(config.exam.questions_per_exam)
     expect(problemRequests).toEqual([])
