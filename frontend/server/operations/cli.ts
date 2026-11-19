@@ -8,14 +8,14 @@ import { closeDatabase } from '../core/db.ts'
 import { closeRateLimitStore } from '../core/rate-limit.ts'
 import { ApiError } from '../core/errors.ts'
 import { migrate } from '../database/migrate.ts'
-import { OperationError, importContent, importArchiveFile, appendArchiveFile, exportArchive, seedContent, setExamPublication, parseExamNumbers } from './content.ts'
+import { OperationError, importContent, importArchiveFile, appendArchiveFile, exportArchive, seedContent, setExamPublication, parseExamNumbers, replaceExamContentFile } from './content.ts'
 import { createAdmin, grantVerification, revokeVerification } from './accounts.ts'
 import { auditOperations, expirePendingForUser } from './audit.ts'
 import { restoreDrill } from './restore-drill.ts'
 import { syncMajorCategories } from './categories.ts'
 import { environment } from '../core/config.ts'
 
-export const commands = ['subscriptions:sync', 'db:migrate', 'db:baseline', 'db:seed', 'categories:sync', 'questions:import_content', 'questions:import', 'questions:append', 'questions:set_publication', 'questions:export',
+export const commands = ['subscriptions:sync', 'db:migrate', 'db:baseline', 'db:seed', 'categories:sync', 'questions:import_content', 'questions:import', 'questions:append', 'questions:set_publication', 'questions:replace_exams', 'questions:export',
   'admin:create', 'verification_access:grant', 'verification_access:revoke', 'payments:expire_pending_checkouts', 'operations:audit', 'operations:restore_drill'] as const
 
 /** Inputs arrive through environment variables so passwords never enter command arguments. */
@@ -60,6 +60,17 @@ async function runScopedCommand(command: string | undefined, env: NodeJS.Process
         beforeSha256: env.EXPECTED_BEFORE_SHA256, afterSha256: env.EXPECTED_AFTER_SHA256,
         totalQuestionsBefore: env.EXPECTED_TOTAL_BEFORE ? Number(env.EXPECTED_TOTAL_BEFORE) : undefined,
         otherGradeQuestionCounts: counts })
+    }
+    case 'questions:replace_exams': {
+      if (!env.INPUT) throw new OperationError('INPUTに差替教材のアーカイブのパスを指定してください')
+      let counts: Record<string, number>
+      try { counts = JSON.parse(env.EXPECTED_OTHER_GRADE_COUNTS || '') }
+      catch { throw new OperationError('他級の件数をJSONで指定してください') }
+      const number = (value: string | undefined) => value === undefined || value === '' ? undefined : Number(value)
+      return replaceExamContentFile(env.INPUT, { confirmation: env.CONFIRM, beforeSha256: env.EXPECTED_BEFORE_SHA256,
+        afterSha256: env.EXPECTED_AFTER_SHA256, replacementSha256: env.EXPECTED_REPLACEMENT_SHA256,
+        totalQuestionsBefore: number(env.EXPECTED_TOTAL_BEFORE), otherGradeQuestionCounts: counts,
+        expectedHistoryResets: number(env.EXPECTED_HISTORY_RESETS) })
     }
     case 'questions:export': return exportArchive(env.OUTPUT || '')
     case 'admin:create': return createAdmin({ email: env.ADMIN_EMAIL, password: env.ADMIN_PASSWORD, name: env.ADMIN_NAME })

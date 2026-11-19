@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url'
 import { query, transaction, getDatabase, record, type Database } from '../core/db.ts'
 import { environment, configuration } from '../core/config.ts'
 import { ContentValidationError, contentDocumentSchema, parseQuestionArchiveEntries, type QuestionInput } from '../../shared/schemas/content.ts'
-import { saveQuestion, setExamsPublication, validateCompleteExam } from '../services/learning-writer.ts'
+import { materialDigest, saveQuestion, setExamsPublication, validateCompleteExam } from '../services/learning-writer.ts'
 
 export class OperationError extends Error {}
 export const ARCHIVE_FORMAT = 'exam-practice-question-archive'
@@ -108,11 +108,12 @@ function archiveQuestion(question: StoredQuestion): QuestionInput {
 // Preserve dates and safe numeric IDs when fingerprinting stored rows. Values
 // remain in the CLI process; results contain only counts and equality flags.
 const storedDigest = (value: unknown) => digest(JSON.parse(JSON.stringify(value)))
-async function protectedState(db: Database) {
+async function protectedState(db: Database, excludeHistoriesOfQuestionIds: number[] = []) {
   const rows = await Promise.all([
     db.majorCategory.findMany({ orderBy: { code: 'asc' } }),
     db.user.findMany({ orderBy: { id: 'asc' } }),
-    db.answerHistory.findMany({ orderBy: { id: 'asc' } }),
+    db.answerHistory.findMany({ orderBy: { id: 'asc' },
+      ...(excludeHistoriesOfQuestionIds.length ? { where: { question_id: { notIn: excludeHistoriesOfQuestionIds } } } : {}) }),
     db.favorite.findMany({ orderBy: { id: 'asc' } }),
     db.payment.findMany({ orderBy: { id: 'asc' } }),
     db.membership.findMany({ orderBy: { id: 'asc' } }),
@@ -266,6 +267,101 @@ export async function setExamPublication(options: PublicationOptions, existing?:
       beforeSha256: options.beforeSha256!, afterSha256: options.afterSha256! }
   }
   return existing ? run(existing) : getDatabase().$transaction(run, { isolationLevel: 'RepeatableRead', timeout: 180_000, maxWait: 10_000 })
+}
+export const REPLACE_CONFIRMATION = 'REPLACE_EXAM_CONTENT'
+type ReplaceOptions = { confirmation?: string, beforeSha256?: string, afterSha256?: string, replacementSha256?: string,
+  totalQuestionsBefore?: number, otherGradeQuestionCounts?: Record<string, number>, expectedHistoryResets?: number }
+/**
+ * Replace the content of whole, existing exam sets in the current grade through
+ * the common writer, keeping question/choice IDs and creation times. The writer
+ * removes answer histories only for questions whose presentation changed; the
+ * caller must state that number in advance. Other sets, other grades, favorites,
+ * members and contracts are verified unchanged inside one transaction.
+ */
+export async function replaceExamContent(document: unknown, options: ReplaceOptions, existing?: Database) {
+  if (options.confirmation !== REPLACE_CONFIRMATION) throw new OperationError('既存の模試の内容を差し替える明示的な確認が必要です')
+  for (const hash of [options.beforeSha256, options.afterSha256, options.replacementSha256]) {
+    if (!hash || !/^[0-9a-f]{64}$/.test(hash)) throw new OperationError('変更前・変更後・差替教材の照合値を指定してください')
+  }
+  const otherGrades = configuration.grades.map(g => g.code).filter(grade => grade !== currentGrade()).sort()
+  if (!Number.isSafeInteger(options.totalQuestionsBefore) || options.totalQuestionsBefore! < 0 ||
+      !Number.isSafeInteger(options.expectedHistoryResets) || options.expectedHistoryResets! < 0 ||
+      !object(options.otherGradeQuestionCounts) || Object.keys(options.otherGradeQuestionCounts).sort().join(',') !== otherGrades.join(',') ||
+      Object.values(options.otherGradeQuestionCounts).some(count => !Number.isSafeInteger(count) || count < 0)) {
+    throw new OperationError('変更前の全体件数・他級の件数・削除する解答履歴の件数を指定してください')
+  }
+  const archive = validateArchive(document)
+  if (archive.sha256 !== options.replacementSha256 || archive.question_count === 0) throw new OperationError('差替教材の照合値が一致しません')
+  const perExam = gradeConfig(currentGrade(), configuration).exam.questions_per_exam
+  const exams = [...new Set(archive.questions.map(q => q.exam_number))].sort((a, b) => a - b)
+  for (const exam of exams) {
+    const numbers = archive.questions.filter(q => q.exam_number === exam).map(q => q.question_number).sort((a, b) => a - b)
+    if (numbers.length !== perExam || numbers.some((n, i) => n !== i + 1)) throw new OperationError(`差替教材の模試${exam}は問1〜${perExam}がそろっていません`)
+  }
+  const key = (q: { exam_number: number, question_number: number }) => `${q.exam_number}:${q.question_number}`
+  const wanted = new Map(archive.questions.map(q => [key(q), q]))
+  const run = async (db: Database) => {
+    // Take the table locks before the first query fixes the snapshot, so that a
+    // learner answer cannot be inserted unseen during the run (answers wait).
+    await query('LOCK TABLE answer_histories IN SHARE MODE', [], db)
+    await query('LOCK TABLE questions, question_choices IN SHARE ROW EXCLUSIVE MODE', [], db)
+    await query('SELECT pg_advisory_xact_lock($1)::text', [QUESTION_LOCK], db)
+    const before = await storedQuestions(db)
+    if (before.length !== options.totalQuestionsBefore ||
+        otherGrades.some(grade => before.filter(q => q.grade === grade).length !== options.otherGradeQuestionCounts![grade])) {
+      throw new OperationError('変更前の全体件数又は他級の件数が一致しません')
+    }
+    const scoped = before.filter(q => q.grade === currentGrade())
+    const currentSha = createArchive(scoped.map(archiveQuestion)).sha256
+    const repeated = currentSha === options.afterSha256
+    if (!repeated && currentSha !== options.beforeSha256) throw new OperationError('変更前の教材が一致しません')
+    const targets = scoped.filter(q => exams.includes(q.exam_number))
+    if (targets.length !== archive.question_count || targets.some(q => !wanted.has(key(q)))) throw new OperationError('差し替える模試の既存の問題がそろっていません')
+    if (repeated && createArchive(targets.map(archiveQuestion)).sha256 !== archive.sha256) throw new OperationError('差替済みの教材が差替教材と一致しません')
+    const contentChanged = targets.filter(old => materialDigest(archiveQuestion(old)) !== materialDigest(wanted.get(key(old))!)).length
+    const targetIds = targets.map(q => q.id)
+    const protectedBefore = await protectedState(db, targetIds)
+    const targetHistoriesBefore = record(await db.answerHistory.findMany({ where: { question_id: { in: targetIds } }, orderBy: { id: 'asc' } }))
+    let resets = 0
+    if (!repeated) {
+      for (const old of targets) {
+        const next = wanted.get(key(old))!
+        const choices = next.choices.map(choice => {
+          const previous = old.choices.find(c => c.choice_label === choice.choice_label)
+          if (!previous) throw new OperationError('選択肢ラベルが既存の問題と一致しません')
+          return { ...choice, id: previous.id }
+        })
+        await saveQuestion({ ...next, choices }, { id: old.id, db, requireCompleteExam: false })
+      }
+      for (const exam of exams) if (archive.questions.some(q => q.exam_number === exam && q.publication_status === 'published')) await validateCompleteExam(exam, db)
+    }
+    const targetHistoriesAfter = record(await db.answerHistory.findMany({ where: { question_id: { in: targetIds } }, orderBy: { id: 'asc' } }))
+    resets = targetHistoriesBefore.length - targetHistoriesAfter.length
+    const keptIds = new Set(targetHistoriesAfter.map(h => h.id))
+    if (resets !== (repeated ? 0 : options.expectedHistoryResets) ||
+        targetHistoriesAfter.some(h => !targetHistoriesBefore.some(b => b.id === h.id && storedDigest(b) === storedDigest(h)))) {
+      throw new OperationError('削除される解答履歴の件数が指定と一致しません')
+    }
+    const after = await storedQuestions(db), byId = new Map(after.map(q => [q.id, q])), targetSet = new Set(targetIds)
+    if (before.some(q => !byId.has(q.id))) throw new OperationError('変更後の教材又は既存データの保持確認に失敗しました')
+    const identity = (q: StoredQuestion) => storedDigest({ id: q.id, grade: q.grade, exam_number: q.exam_number, question_number: q.question_number,
+      created_at: q.created_at, choices: q.choices.map(c => ({ id: c.id, question_id: c.question_id, choice_label: c.choice_label, created_at: c.created_at })) })
+    if (createArchive(after.filter(q => q.grade === currentGrade()).map(archiveQuestion)).sha256 !== options.afterSha256 ||
+        after.length !== before.length ||
+        before.some(q => targetSet.has(q.id) ? identity(byId.get(q.id)!) !== identity(q) : storedDigest(byId.get(q.id)) !== storedDigest(q)) ||
+        await protectedState(db, targetIds) !== protectedBefore) {
+      throw new OperationError('変更後の教材又は既存データの保持確認に失敗しました')
+    }
+    return { status: repeated ? 'unchanged' as const : 'replaced' as const, grade: currentGrade(), exams,
+      replacedQuestions: repeated ? 0 : targets.length, contentChangedQuestions: repeated ? 0 : contentChanged, answerHistoriesReset: resets, answerHistoriesKeptOnTargets: keptIds.size,
+      totalQuestions: after.length, totalChoices: after.reduce((sum, q) => sum + q.choices.length, 0),
+      questionAndChoiceIdsAndCreationTimesKept: true, nonTargetQuestionsUnchanged: true, otherProtectedDataUnchangedWithinTransaction: true,
+      beforeSha256: options.beforeSha256!, afterSha256: options.afterSha256!, replacementSha256: archive.sha256 }
+  }
+  return existing ? run(existing) : getDatabase().$transaction(run, { isolationLevel: 'RepeatableRead', timeout: 600_000, maxWait: 10_000 })
+}
+export async function replaceExamContentFile(path: string, options: ReplaceOptions) {
+  return replaceExamContent(await readJson(path), options)
 }
 export async function seedContent(options: { path?: string, db?: Database, mode?: string } = {}) {
   if (currentGrade() !== '2' || (options.mode ?? environment()) !== 'development') return { status: 'skipped' as const }

@@ -1,6 +1,6 @@
 # 世界遺産ラボの教材データ
 
-`questions.json` は `schema_version: 1` の教材正本です。2級模試1〜20の各60問、合計1200問を収録します。模試11〜20は2026年11月18日の依頼により `publication_status: "private"`（非公開）とし、公開は模試1〜10です。各回の問題、解答解説、解答用紙を `mock-exam-NN.questions.md`、`mock-exam-NN.answers.md`、`mock-exam-NN.answer-sheet.md` に保存しています。[模試6〜10の作成・確認記録](../docs/grade2-mocks-06-10-20261114.md)を参照してください。
+`questions.json` は `schema_version: 1` の教材正本です。2級模試1〜20の各60問、合計1200問を収録します。模試11〜20は2026年11月18日の依頼により `publication_status: "private"`（非公開）としました。2026年11月19日に模試1〜3を過去問準拠の改稿版へ差し替え、模試4〜10は改稿が終わるまで非公開です。各回の問題、解答解説、解答用紙を `mock-exam-NN.questions.md`、`mock-exam-NN.answers.md`、`mock-exam-NN.answer-sheet.md` に保存しています。[模試6〜10の作成・確認記録](../docs/grade2-mocks-06-10-20261114.md)を参照してください。
 
 試験設定は `config/exam.json`、形式の正本は `frontend/shared/schemas/` です。公開セットは問1〜60をそろえ、選択肢①〜④、正答1件、解説・出典を含めます。登録前には [カスタマイズ手順](../docs/customization.md) を確認します。
 
