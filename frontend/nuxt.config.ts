@@ -7,6 +7,15 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ui: { fonts: false, colorMode: false },
   modules: ['@nuxt/ui'],
+  // Learning-map statuses choose icons dynamically; always ship them locally.
+  icon: {
+    clientBundle: {
+      icons: [
+        'lucide:badge-check', 'lucide:circle-check', 'lucide:x',
+        'lucide:circle-x', 'lucide:minus', 'lucide:notebook-pen',
+      ],
+    },
+  },
   // Nitro resolves shared modules after the intermediate SSR build. Keep their
   // paths absolute until that bundle step, independent of Nuxt's cache directory.
   vite: { build: { rolldownOptions: { makeAbsoluteExternalsRelative: false } } },
