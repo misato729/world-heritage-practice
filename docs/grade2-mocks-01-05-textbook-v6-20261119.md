@@ -28,6 +28,11 @@
 
 ## 本番反映
 
-（配信後に追記する）
+- `main`：[5154fb5](https://github.com/misato729/world-heritage-practice/commit/5154fb522111cf77f7ae0e71eb8c54a24e6bc774)。CI 4件（harness・verify・browser・netlify-static）成功。
+- 変更前にNeonの復旧用ブランチ `backup-grade2-v6-1-5-20261119`（`br-odd-cherry-ao69neje`、計算用サーバーなし）を作成。作成に使ったツールが期限を設定できないため、不要になったら手動で削除する。
+- Fly：`grade2-v6-1-5-5154fb522111` を既存1台へ反映（設定・秘密値は不変）。push直後のregistryがmanifestを返さず2回失敗した。machineは旧imageのままだったことを確認し、registryでmanifestの取得（200）を確かめてから同じimageで再実行して成功した。
+- 本番の差し替え：`questions:replace_exams` で模試1〜5の300問を差し替え（内容変更288問）、承認どおり解答履歴6件を削除、再実行 `unchanged`。2級の教材指紋は変更前 `0c0f0ec4…` から変更後 `5bce0139…` になり、ローカルの正本と一致。全2700問、2級の公開は模試1〜5。
+- Netlify：`6afe930c74909be06053e09f`（ready・production）。有料問題文の照合で一致0。
+- 公開後の確認：公開APIの模試一覧は2級1〜5（4・5は会員限定）。模試1問14・模試3問54は新しい問題文で、回答前に正答・解説を返さない。模試4の問は未ログインで401、模試6は404。公開サイトで模試1問14をPC幅で回答し、正誤・解説の表示を確認した。模試3問54をスマートフォン幅（375px）で表示し、横はみ出しがないことを確認した。
 
 詳細な照合記録・盲解結果・検査ログは `local-only/grade2-textbook-new-20261119/`、`local-only/grade2-mocks-01-10-review-20261118/`、`local-only/grade2-v6-release-20261119/` に保存し、Git・Dockerの送信対象に含めない。
