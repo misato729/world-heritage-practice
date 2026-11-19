@@ -124,14 +124,14 @@
 
 ### 問9　正答：①（2点）
 
-『マンダラ山地のディイ・ギッド・ビイの文化的景観』は①のカメルーンの遺産である。2025年にはアフリカから4件が新たに登録された。
+2026年の第48回世界遺産委員会では、コモロ、サントメ・プリンシペ、南スーダンの3か国で自国初の世界遺産が記載された。コモロでは、歴史的なスルタン国の都市群（メディナ）が記載された。
 
-- ①：正しい。カメルーン極北州に位置し、7つの村にまたがる16の考古遺跡（ディイ・ギッド・ビイ）と農業用の段々畑からなる文化的景観である。
-- ②：誤り。同じ2025年に、シエラレオネの『ゴラ・ティワイ複合地域』が自然遺産として登録された。
-- ③：誤り。同じ2025年に、ギニアビサウの『ビジャゴ諸島の沿岸・海洋生態系』が自然遺産として登録された。
-- ④：誤り。同じ2025年に、マラウイの『ムランジェ山の文化的景観』が登録された。
+- ①：正しい。
+- ②：誤り。ブータンは暫定リストに遺産を記載しているが、2026年の委員会の終了時点で世界遺産をもっていない。
+- ③：誤り。ブルネイは、2026年の委員会の終了時点で世界遺産をもっていない。
+- ④：誤り。東ティモールは、2026年の委員会の終了時点で世界遺産をもっていない。
 
-出典：UNESCO World Heritage Centre「Diy-Gid-Biy Cultural Landscape of the Mandara Mountains」（確認日 2026-11-18） | https://whc.unesco.org/en/list/1745／UNESCO World Heritage Centre「New Inscribed Properties (47COM)」（確認日 2026-11-18） | https://whc.unesco.org/en/newproperties/?meeting=47COM&mode=list&inscribed=1
+出典：ユネスコ「UNESCO World Heritage: 25 new sites inscribed」（2026-07-28、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-25-new-sites-inscribed／UNESCO世界遺産センター「Timor-Leste」「Bhutan」（締約国ページ、確認日 2026-11-19） | https://whc.unesco.org/en/statesparties/tl／https://whc.unesco.org/en/statesparties/bt/
 
 ### 問10　正答：③（1点）
 

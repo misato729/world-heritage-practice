@@ -154,14 +154,14 @@
 
 ### 問12　正答：①（2点）
 
-中国政府の発表によると、『西夏陵』は11〜13世紀（1038〜1227年）の西夏の皇帝陵墓群で、西夏は中国北西部でタングートによって建てられた王朝である。
+2025年7月にパリで開かれた第47回世界遺産委員会では、26件が新たに記載されて世界遺産の総数は1,248件となった。また、マダガスカル、エジプト、リビアのアフリカの3件の遺産が危機遺産リストから外された。
 
 - ①：正しい。
-- ②：誤り。西夏を建てたのは契丹ではなく、タングートである。
-- ③：誤り。西夏を建てたのは女真ではなく、タングートである。
-- ④：誤り。鮮卑は北魏を建てた民族で、西夏を建てた民族ではない。
+- ②：誤り。新たに記載されたのは26件だが、総数は1,248件で、1,300件は超えていない。
+- ③：誤り。『飛鳥・藤原の宮都』の記載が決まったのは、2026年に韓国の釜山で開かれた第48回世界遺産委員会である。
+- ④：誤り。ノイシュヴァンシュタイン城などからなる『バイエルン王ルートヴィヒ2世の宮殿群』は、この委員会で世界遺産リストに記載された。
 
-出典：中華人民共和国国務院 english.www.gov.cn「China's Xixia Imperial Tombs inscribed as UNESCO World Heritage Site」（確認日 2026-11-18） | https://english.www.gov.cn/news/202507/12/content_WS6871aca5c6d0868f4e8f41d3.html／くわしく学ぶ世界遺産300〈第6版〉世界遺産検定2級公式テキスト 第2刷 p.161「雲岡石窟」 | https://www.sekaken.jp/books/2text/
+出典：ユネスコ「UNESCO World Heritage: 26 new sites inscribed」（2025-07-17、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-26-new-sites-inscribed-0／外務省「Inscription of “Ancient Capitals of Asuka and Fujiwara” on the World Heritage List」（確認日 2026-11-19） | https://www.mofa.go.jp/press/release/pressite_000001_02540.html／UNESCO世界遺産センター「New Inscribed Properties (47COM)」（確認日 2026-11-19） | https://whc.unesco.org/en/newproperties/meeting=47COM&mode=table
 
 ### 問13　正答：④（1点）
 

@@ -407,14 +407,14 @@
 
 ### 問35　正答：①（2点）
 
-第20回政府間委員会はインドのニューデリーで開催され、日本が提案した「和紙」「山・鉾・屋台行事」「伝統建築工匠の技」の拡張について、2025年12月11日に代表一覧表への「記載」が決議されたため、①が正しい。
+2026年7月に韓国の釜山で開かれた第48回世界遺産委員会では、25件が新たに記載され、コモロ、サントメ・プリンシペ、南スーダンの3か国で自国初の世界遺産が誕生した。
 
-- ①：正しい。いずれも既に代表一覧表に記載されている遺産に、新たな対象を加える拡張の提案であった。
-- ②：誤り。「伝統的酒造り」の記載は、2024年12月の第19回政府間委員会で決議された。
-- ③：誤り。アスンシオン（パラグアイ）は2024年の第19回政府間委員会の開催都市である。
-- ④：誤り。2024年の第19回政府間委員会の開催都市と決定の組み合わせであり、2025年のものではない。
+- ①：正しい。
+- ②：誤り。『ウィーンの歴史地区』は、この委員会で危機遺産リストから外された。
+- ③：誤り。25件が新たに記載されたことは正しいが、第48回は韓国の釜山で開かれた。トルコのイスタンブルは、2027年の第49回世界遺産委員会の開催地である。
+- ④：誤り。『彦根城』は、2026年9月に文化審議会で今年度の世界文化遺産の推薦候補に選ばれ、2028年の登録をめざしている。
 
-出典：UNESCO無形文化遺産「India to host the 20th session of the Committee in 2025」（確認日 2026-11-18） | https://ich.unesco.org/en/news/india-to-host-the-20th-session-of-the-committee-in-2025-13542／文化庁「「和紙：日本の手漉和紙技術」「山・鉾・屋台行事」「伝統建築工匠の技：木造建造物を受け継ぐための伝統技術」の拡張提案に係るユネスコ無形文化遺産代表一覧表登録」（確認日 2026-11-18） | https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/94300501.html／UNESCO無形文化遺産「Nineteenth session of the Intergovernmental Committee」（確認日 2026-11-18） | https://ich.unesco.org/en/19com／文化庁「「伝統的酒造り」のユネスコ無形文化遺産代表一覧表登録」（確認日 2026-11-18） | https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/94142301.html
+出典：ユネスコ「UNESCO World Heritage: 25 new sites inscribed」（2026-07-28、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-25-new-sites-inscribed／滋賀県「「彦根城」世界遺産登録に係る審議結果 - 国内推薦候補に選定 -」（2026-09-03、確認日 2026-11-19） | https://www.pref.shiga.lg.jp/sd00/press-release/32998.html
 
 ### 問36　正答：②（2点）
 
@@ -616,14 +616,14 @@ ICOMOSとアドバイザー契約を結んで推薦書を作成し、その助�
 
 ### 問54　正答：②（2点）
 
-2025年7月にパリで開かれた第47回世界遺産委員会で、ベトナムの『イエントゥ－ヴィンギエム－コンソン、キエップバックの記念物と景観群』が登録基準（iii）（vi）で記載された。陳朝の王たち、とりわけチャン・ニャン・トン（陳仁宗）と結び付いた、ベトナム独自の禅である竹林禅（チュック・ラム禅）を伝える遺産で、ベトナムの世界遺産は9件となった。
+2026年の第48回世界遺産委員会で、レバノンの『フェニキア都市ティルス』が危機遺産リストに記載された。この委員会では計6件が危機遺産リストに加わり、レバノンでは新たに世界遺産となった「アメル山の城塞群」も、記載と同時に危機遺産リストに記載された。
 
-- ①：誤り。この委員会で記載された中国の遺産は『西夏陵』で、西夏の皇帝の陵墓群である。
+- ①：誤り。『アンジャル』は、この委員会で危機遺産リストに記載されていない。
 - ②：正しい。
-- ③：誤り。この委員会で記載された韓国の遺産は『盤亀川沿いの岩刻画』で、先史時代の岩刻画である。
-- ④：誤り。この委員会で記載された朝鮮民主主義人民共和国の遺産は『金剛山』で、文化的景観として記載された山岳の遺産である。竹林禅の聖地ではない。
+- ③：誤り。『フェニキア都市ビブロス』は、この委員会で危機遺産リストに記載されていない。
+- ④：誤り。『カディーシャ渓谷（聖なる谷）と神の杉の森』は、この委員会で危機遺産リストに記載されていない。
 
-出典：ユネスコ「Yen Tu-Vinh Nghiem-Con Son, Kiep Bac officially inscribed on the World Heritage List」（確認日 2026-11-19） | https://www.unesco.org/en/articles/yen-tu-vinh-nghiem-con-son-kiep-bac-officially-inscribed-world-heritage-list／UNESCO世界遺産センター「Decision 47 COM 8B.22」（確認日 2026-11-19） | https://whc.unesco.org/en/decisions/8956/／UNESCO世界遺産センター「New Inscribed Properties (47COM)」（確認日 2026-11-19） | https://whc.unesco.org/en/newproperties/meeting=47COM&mode=table／UNESCO世界遺産センター「Decision 47 COM 8B.9」（確認日 2026-11-19） | https://whc.unesco.org/en/decisions/8943/
+出典：ユネスコ「Facing major threats, six new sites join UNESCO’s List of World Heritage in Danger」（2026-07-26、確認日 2026-11-19） | https://www.unesco.org/en/articles/facing-major-threats-six-new-sites-join-unescos-list-world-heritage-danger-three-them-emergency／ユネスコ「UNESCO World Heritage: 25 new sites inscribed」（2026-07-28、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-25-new-sites-inscribed／くわしく学ぶ世界遺産300〈第6版〉世界遺産検定2級公式テキスト 第2刷 p.017「世界遺産地図（西アジア）」 | https://www.sekaken.jp/books/2text/
 
 ### 問55　正答：④（2点）
 

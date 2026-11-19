@@ -444,17 +444,17 @@
         },
         {
           "type": "text",
-          "text": "（配点：2点）\n\n下線部（d）「世界遺産委員会」に関し、2025年7月に第47回世界遺産委員会が開催された都市として、正しいものはどれか。"
+          "text": "（配点：2点）\n\n下線部（d）「世界遺産委員会」に関し、2026年7月に韓国の釜山で開かれた第48回世界遺産委員会で、世界遺産リストへの記載が決まった日本の遺産として、正しいものはどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "第47回世界遺産委員会は、2025年7月6〜16日にパリのユネスコ本部で開催された。"
+          "text": "2026年7月26日、韓国の釜山で開かれた第48回世界遺産委員会で、奈良県の『飛鳥・藤原の宮都』の世界遺産リストへの記載が決まった。飛鳥宮跡や藤原宮跡、高松塚古墳、石舞台古墳などの19の構成資産からなり、6世紀末から8世紀初頭にかけて中央集権国家の宮都が形づくられていく過程を示す遺産として、登録基準（ii）（iii）で記載された。"
         },
         {
           "type": "text",
-          "text": "①：誤り。ニューデリーは第46回（2024年）の開催都市である。"
+          "text": "①：誤り。『彦根城』は、2026年9月に文化審議会で今年度の世界文化遺産の推薦候補に選ばれ、2028年の登録をめざしている。"
         },
         {
           "type": "text",
@@ -462,21 +462,21 @@
         },
         {
           "type": "text",
-          "text": "③：誤り。リヤドは第45回拡大会合（2023年）の開催都市である。"
+          "text": "③：誤り。『古都鎌倉の寺院・神社ほか』は日本の暫定リストに記載されているが、2026年の委員会では審議されていない。"
         },
         {
           "type": "text",
-          "text": "④：誤り。バクーは第43回（2019年）の開催都市である。"
+          "text": "④：誤り。『佐渡島の金山』は、2024年にインドのニューデリーで開かれた第46回世界遺産委員会で記載された。"
         }
       ],
-      "source_text": "UNESCO世界遺産センター「47th session of the World Heritage Committee」（確認日 2026-11-18） | https://whc.unesco.org/en/sessions/47COM／UNESCO世界遺産センター「46th session of the World Heritage Committee」（確認日 2026-11-18） | https://whc.unesco.org/en/sessions/46COM／UNESCO世界遺産センター「Extended 45th session of the World Heritage Committee」（確認日 2026-11-18） | https://whc.unesco.org/en/sessions/45COM／UNESCO世界遺産センター「43rd session of the World Heritage Committee」（確認日 2026-11-18） | https://whc.unesco.org/en/sessions/43COM",
+      "source_text": "外務省「Inscription of “Ancient Capitals of Asuka and Fujiwara” on the World Heritage List」（確認日 2026-11-19） | https://www.mofa.go.jp/press/release/pressite_000001_02540.html／UNESCO世界遺産センター「Decision 48 COM 8B.19」（確認日 2026-11-19） | https://whc.unesco.org/en/decisions/9173／滋賀県「「彦根城」世界遺産登録に係る審議結果 - 国内推薦候補に選定 -」（2026-09-03、確認日 2026-11-19） | https://www.pref.shiga.lg.jp/sd00/press-release/32998.html／くわしく学ぶ世界遺産300〈第6版〉世界遺産検定2級公式テキスト 第2刷 p.103〜104「日本の暫定リスト記載物件（2025年2月時点）」／p.048「佐渡島の金山」 | https://www.sekaken.jp/books/2text/",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "ニューデリー"
+              "text": "『彦根城』"
             }
           ],
           "is_correct": false,
@@ -487,7 +487,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "パリ"
+              "text": "『飛鳥・藤原の宮都』"
             }
           ],
           "is_correct": true,
@@ -498,7 +498,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "リヤド"
+              "text": "『古都鎌倉の寺院・神社ほか』"
             }
           ],
           "is_correct": false,
@@ -509,7 +509,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "バクー"
+              "text": "『佐渡島の金山』"
             }
           ],
           "is_correct": false,
@@ -1323,13 +1323,13 @@
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：2点）\n\n2025年11月、ユネスコ総会での承認を経て、オードレ・アズレ氏の後任となる新しいユネスコ事務局長が就任した。この事務局長の出身国として、正しいものはどれか。"
+          "text": "（配点：2点）\n\n2026年7月の第48回世界遺産委員会の終了時点で、世界遺産リストに記載されている遺産の総数として、正しいものはどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "2025年11月、ウズベキスタンのサマルカンドで開かれた第43回ユネスコ総会で、執行委員会が指名したエジプトのハーリド・エル＝エナーニー（Khaled El-Enany）氏が事務局長に選出され、11月15日に就任した。エル＝エナーニー氏はエジプト学者で、エジプトの考古大臣、観光・考古大臣を務めた。アラブ諸国出身として初めての事務局長で、2017年から務めたオードレ・アズレ氏の後任となった。"
+          "text": "2025年7月の第47回世界遺産委員会で26件、2026年7月の第48回世界遺産委員会で25件が新たに記載され、世界遺産の総数は2025年の1,248件から、173か国の1,273件となった。"
         },
         {
           "type": "text",
@@ -1337,25 +1337,25 @@
         },
         {
           "type": "text",
-          "text": "②：誤り。コンゴ共和国のフィルマン・エドゥアール・マトコ氏も事務局長の候補者となったが、執行委員会が指名したのはエル＝エナーニー氏である。"
+          "text": "②：誤り。1,199件は、2023年9月の第45回世界遺産委員会の終了時点の総数である。"
         },
         {
           "type": "text",
-          "text": "③：誤り。ブルガリア出身のイリナ・ボコヴァ氏は、2009〜2017年に事務局長を務めた。"
+          "text": "③：誤り。2025年の総数1,248件に、2026年に新たに記載された25件を加えた1,273件が正しい。"
         },
         {
           "type": "text",
-          "text": "④：誤り。セネガル出身のアマドゥ＝マハタール・ムボウ氏は、1974〜1987年に事務局長を務めたアフリカ出身で初めての事務局長である。"
+          "text": "④：誤り。1,223件は、2025年3月時点の総数である。"
         }
       ],
-      "source_text": "ユネスコ「Khaled El-Enany elected Director-General of UNESCO」（確認日 2026-11-19） | https://www.unesco.org/en/articles/khaled-el-enany-elected-director-general-unesco／ユネスコ「Khaled El-Enany nominated by UNESCO’s Executive Board for the post of Director-General」（確認日 2026-11-19） | https://www.unesco.org/en/articles/khaled-el-enany-nominated-unescos-executive-board-post-director-general／ユネスコ執行委員会「Procedure for the nomination of the Director-General of UNESCO」（確認日 2026-11-19） | https://www.unesco.org/en/executive-board/dg-candidates",
+      "source_text": "ユネスコ「UNESCO World Heritage: 25 new sites inscribed」（2026-07-28、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-25-new-sites-inscribed／ユネスコ「UNESCO World Heritage: 26 new sites inscribed」（2025-07-17、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-26-new-sites-inscribed-0／くわしく学ぶ世界遺産300〈第6版〉世界遺産検定2級公式テキスト 第2刷 p.024「世界遺産条約」 | https://www.sekaken.jp/books/2text/／ユネスコ「UNESCO World Heritage: 42 new sites inscribed」（2023年、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-42-new-sites-inscribed",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "エジプト"
+              "text": "1,273件"
             }
           ],
           "is_correct": true,
@@ -1366,7 +1366,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "コンゴ共和国"
+              "text": "1,199件"
             }
           ],
           "is_correct": false,
@@ -1377,7 +1377,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "ブルガリア"
+              "text": "1,301件"
             }
           ],
           "is_correct": false,
@@ -1388,7 +1388,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "セネガル"
+              "text": "1,223件"
             }
           ],
           "is_correct": false,
@@ -7586,17 +7586,13 @@
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：2点）\n\n2025年に世界遺産リストに記載された中国の『西夏陵』に関する次の文中の空欄に当てはまる語句として、正しいものはどれか。"
-        },
-        {
-          "type": "text",
-          "text": "『西夏陵』は、11〜13世紀に中国北西部を支配した西夏の皇帝陵墓群で、9基の皇帝陵や多数の陪葬墓などからなる。西夏は、（　　）によって建てられた王朝である。"
+          "text": "（配点：2点）\n\n2025年7月にパリで開かれた第47回世界遺産委員会の説明として、正しいものはどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "中国政府の発表によると、『西夏陵』は11〜13世紀（1038〜1227年）の西夏の皇帝陵墓群で、西夏は中国北西部でタングートによって建てられた王朝である。"
+          "text": "2025年7月にパリで開かれた第47回世界遺産委員会では、26件が新たに記載されて世界遺産の総数は1,248件となった。また、マダガスカル、エジプト、リビアのアフリカの3件の遺産が危機遺産リストから外された。"
         },
         {
           "type": "text",
@@ -7604,25 +7600,25 @@
         },
         {
           "type": "text",
-          "text": "②：誤り。西夏を建てたのは契丹ではなく、タングートである。"
+          "text": "②：誤り。新たに記載されたのは26件だが、総数は1,248件で、1,300件は超えていない。"
         },
         {
           "type": "text",
-          "text": "③：誤り。西夏を建てたのは女真ではなく、タングートである。"
+          "text": "③：誤り。『飛鳥・藤原の宮都』の記載が決まったのは、2026年に韓国の釜山で開かれた第48回世界遺産委員会である。"
         },
         {
           "type": "text",
-          "text": "④：誤り。鮮卑は北魏を建てた民族で、西夏を建てた民族ではない。"
+          "text": "④：誤り。ノイシュヴァンシュタイン城などからなる『バイエルン王ルートヴィヒ2世の宮殿群』は、この委員会で世界遺産リストに記載された。"
         }
       ],
-      "source_text": "中華人民共和国国務院 english.www.gov.cn「China's Xixia Imperial Tombs inscribed as UNESCO World Heritage Site」（確認日 2026-11-18） | https://english.www.gov.cn/news/202507/12/content_WS6871aca5c6d0868f4e8f41d3.html／くわしく学ぶ世界遺産300〈第6版〉世界遺産検定2級公式テキスト 第2刷 p.161「雲岡石窟」 | https://www.sekaken.jp/books/2text/",
+      "source_text": "ユネスコ「UNESCO World Heritage: 26 new sites inscribed」（2025-07-17、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-26-new-sites-inscribed-0／外務省「Inscription of “Ancient Capitals of Asuka and Fujiwara” on the World Heritage List」（確認日 2026-11-19） | https://www.mofa.go.jp/press/release/pressite_000001_02540.html／UNESCO世界遺産センター「New Inscribed Properties (47COM)」（確認日 2026-11-19） | https://whc.unesco.org/en/newproperties/meeting=47COM&mode=table",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "タングート"
+              "text": "マダガスカル、エジプト、リビアの3件の遺産が、危機遺産リストから外された"
             }
           ],
           "is_correct": true,
@@ -7633,7 +7629,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "契丹"
+              "text": "新たに26件が記載され、世界遺産の総数が初めて1,300件を超えた"
             }
           ],
           "is_correct": false,
@@ -7644,7 +7640,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "女真"
+              "text": "日本が推薦した『飛鳥・藤原の宮都』が、世界遺産リストに記載された"
             }
           ],
           "is_correct": false,
@@ -7655,7 +7651,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "鮮卑"
+              "text": "ドイツの『バイエルン王ルートヴィヒ2世の宮殿群』の審議は、翌年に延期された"
             }
           ],
           "is_correct": false,
@@ -16395,44 +16391,44 @@
       "exam_number": 3,
       "question_number": 35,
       "major_category_code": "other",
-      "category_code": "related_programs",
+      "category_code": "heritage_current_affairs",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：2点）\n\n2025年12月に開催された無形文化遺産保護条約の第20回政府間委員会について、開催都市と日本に関する決定の組み合わせとして、正しいものはどれか。"
+          "text": "（配点：2点）\n\n2026年7月に開かれた第48回世界遺産委員会の説明として、正しいものはどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "第20回政府間委員会はインドのニューデリーで開催され、日本が提案した「和紙」「山・鉾・屋台行事」「伝統建築工匠の技」の拡張について、2025年12月11日に代表一覧表への「記載」が決議されたため、①が正しい。"
+          "text": "2026年7月に韓国の釜山で開かれた第48回世界遺産委員会では、25件が新たに記載され、コモロ、サントメ・プリンシペ、南スーダンの3か国で自国初の世界遺産が誕生した。"
         },
         {
           "type": "text",
-          "text": "①：正しい。いずれも既に代表一覧表に記載されている遺産に、新たな対象を加える拡張の提案であった。"
+          "text": "①：正しい。"
         },
         {
           "type": "text",
-          "text": "②：誤り。「伝統的酒造り」の記載は、2024年12月の第19回政府間委員会で決議された。"
+          "text": "②：誤り。『ウィーンの歴史地区』は、この委員会で危機遺産リストから外された。"
         },
         {
           "type": "text",
-          "text": "③：誤り。アスンシオン（パラグアイ）は2024年の第19回政府間委員会の開催都市である。"
+          "text": "③：誤り。25件が新たに記載されたことは正しいが、第48回は韓国の釜山で開かれた。トルコのイスタンブルは、2027年の第49回世界遺産委員会の開催地である。"
         },
         {
           "type": "text",
-          "text": "④：誤り。2024年の第19回政府間委員会の開催都市と決定の組み合わせであり、2025年のものではない。"
+          "text": "④：誤り。『彦根城』は、2026年9月に文化審議会で今年度の世界文化遺産の推薦候補に選ばれ、2028年の登録をめざしている。"
         }
       ],
-      "source_text": "UNESCO無形文化遺産「India to host the 20th session of the Committee in 2025」（確認日 2026-11-18） | https://ich.unesco.org/en/news/india-to-host-the-20th-session-of-the-committee-in-2025-13542／文化庁「「和紙：日本の手漉和紙技術」「山・鉾・屋台行事」「伝統建築工匠の技：木造建造物を受け継ぐための伝統技術」の拡張提案に係るユネスコ無形文化遺産代表一覧表登録」（確認日 2026-11-18） | https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/94300501.html／UNESCO無形文化遺産「Nineteenth session of the Intergovernmental Committee」（確認日 2026-11-18） | https://ich.unesco.org/en/19com／文化庁「「伝統的酒造り」のユネスコ無形文化遺産代表一覧表登録」（確認日 2026-11-18） | https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/94142301.html",
+      "source_text": "ユネスコ「UNESCO World Heritage: 25 new sites inscribed」（2026-07-28、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-25-new-sites-inscribed／滋賀県「「彦根城」世界遺産登録に係る審議結果 - 国内推薦候補に選定 -」（2026-09-03、確認日 2026-11-19） | https://www.pref.shiga.lg.jp/sd00/press-release/32998.html",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "ニューデリー ― 「和紙」「山・鉾・屋台行事」「伝統建築工匠の技」の拡張による記載"
+              "text": "南スーダンなど3か国で、自国で初めての世界遺産が記載された"
             }
           ],
           "is_correct": true,
@@ -16443,7 +16439,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "ニューデリー ― 「伝統的酒造り」の代表一覧表への新規の記載"
+              "text": "『ウィーンの歴史地区』が、危機遺産リストに新たに記載された"
             }
           ],
           "is_correct": false,
@@ -16454,7 +16450,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "アスンシオン ― 「和紙」「山・鉾・屋台行事」「伝統建築工匠の技」の拡張による記載"
+              "text": "委員会はトルコのイスタンブルで開かれ、25件が新たに記載された"
             }
           ],
           "is_correct": false,
@@ -16465,7 +16461,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "アスンシオン ― 「伝統的酒造り」の代表一覧表への新規の記載"
+              "text": "日本の『彦根城』が、世界遺産リストに記載された"
             }
           ],
           "is_correct": false,
@@ -18561,22 +18557,22 @@
       "exam_number": 3,
       "question_number": 54,
       "major_category_code": "other",
-      "category_code": "heritage_current_affairs",
+      "category_code": "heritage_conservation",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：2点）\n\n2025年の第47回世界遺産委員会で、ある王朝の王たちと深く結び付いた禅宗の一派の聖地となった山岳の寺院や記念物と、その景観からなる遺産が世界遺産リストに記載された。この遺産の保有国として、正しいものはどれか。"
+          "text": "（配点：2点）\n\n2026年の第48回世界遺産委員会で危機遺産リストに記載された、レバノンの遺産として、正しいものはどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "2025年7月にパリで開かれた第47回世界遺産委員会で、ベトナムの『イエントゥ－ヴィンギエム－コンソン、キエップバックの記念物と景観群』が登録基準（iii）（vi）で記載された。陳朝の王たち、とりわけチャン・ニャン・トン（陳仁宗）と結び付いた、ベトナム独自の禅である竹林禅（チュック・ラム禅）を伝える遺産で、ベトナムの世界遺産は9件となった。"
+          "text": "2026年の第48回世界遺産委員会で、レバノンの『フェニキア都市ティルス』が危機遺産リストに記載された。この委員会では計6件が危機遺産リストに加わり、レバノンでは新たに世界遺産となった「アメル山の城塞群」も、記載と同時に危機遺産リストに記載された。"
         },
         {
           "type": "text",
-          "text": "①：誤り。この委員会で記載された中国の遺産は『西夏陵』で、西夏の皇帝の陵墓群である。"
+          "text": "①：誤り。『アンジャル』は、この委員会で危機遺産リストに記載されていない。"
         },
         {
           "type": "text",
@@ -18584,21 +18580,21 @@
         },
         {
           "type": "text",
-          "text": "③：誤り。この委員会で記載された韓国の遺産は『盤亀川沿いの岩刻画』で、先史時代の岩刻画である。"
+          "text": "③：誤り。『フェニキア都市ビブロス』は、この委員会で危機遺産リストに記載されていない。"
         },
         {
           "type": "text",
-          "text": "④：誤り。この委員会で記載された朝鮮民主主義人民共和国の遺産は『金剛山』で、文化的景観として記載された山岳の遺産である。竹林禅の聖地ではない。"
+          "text": "④：誤り。『カディーシャ渓谷（聖なる谷）と神の杉の森』は、この委員会で危機遺産リストに記載されていない。"
         }
       ],
-      "source_text": "ユネスコ「Yen Tu-Vinh Nghiem-Con Son, Kiep Bac officially inscribed on the World Heritage List」（確認日 2026-11-19） | https://www.unesco.org/en/articles/yen-tu-vinh-nghiem-con-son-kiep-bac-officially-inscribed-world-heritage-list／UNESCO世界遺産センター「Decision 47 COM 8B.22」（確認日 2026-11-19） | https://whc.unesco.org/en/decisions/8956/／UNESCO世界遺産センター「New Inscribed Properties (47COM)」（確認日 2026-11-19） | https://whc.unesco.org/en/newproperties/meeting=47COM&mode=table／UNESCO世界遺産センター「Decision 47 COM 8B.9」（確認日 2026-11-19） | https://whc.unesco.org/en/decisions/8943/",
+      "source_text": "ユネスコ「Facing major threats, six new sites join UNESCO’s List of World Heritage in Danger」（2026-07-26、確認日 2026-11-19） | https://www.unesco.org/en/articles/facing-major-threats-six-new-sites-join-unescos-list-world-heritage-danger-three-them-emergency／ユネスコ「UNESCO World Heritage: 25 new sites inscribed」（2026-07-28、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-25-new-sites-inscribed／くわしく学ぶ世界遺産300〈第6版〉世界遺産検定2級公式テキスト 第2刷 p.017「世界遺産地図（西アジア）」 | https://www.sekaken.jp/books/2text/",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "中国"
+              "text": "『アンジャル』"
             }
           ],
           "is_correct": false,
@@ -18609,7 +18605,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "ベトナム"
+              "text": "『フェニキア都市ティルス』"
             }
           ],
           "is_correct": true,
@@ -18620,7 +18616,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "大韓民国"
+              "text": "『フェニキア都市ビブロス』"
             }
           ],
           "is_correct": false,
@@ -18631,7 +18627,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "朝鮮民主主義人民共和国"
+              "text": "『カディーシャ渓谷（聖なる谷）と神の杉の森』"
             }
           ],
           "is_correct": false,
@@ -20890,44 +20886,44 @@
       "exam_number": 4,
       "question_number": 19,
       "major_category_code": "other",
-      "category_code": "related_programs",
+      "category_code": "heritage_current_affairs",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：2点）\n\n2023年にユネスコ「世界の記憶」への登録が決まった「智証大師円珍関係文書典籍」に関し、円珍が渡った中国の王朝（A）と、この資料の申請者のひとつである寺院（B）の組み合わせとして、正しいものはどれか。"
+          "text": "（配点：2点）\n\n2026年11月時点の、『彦根城』の世界遺産登録に向けた動きの説明として、正しいものはどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "「智証大師円珍関係文書典籍―日本・中国の文化交流史―」は、唐に渡り日本に密教をもたらした円珍に関する史料群で、宗教法人園城寺と東京国立博物館が申請した。"
+          "text": "滋賀県の『彦根城』は、2023年9月にプレリミナリー・アセスメント（事前評価）の申請書を提出した日本初の遺産である。2026年9月3日、文化審議会の世界文化遺産部会で今年度の世界文化遺産の推薦候補に選ばれ、2028年の世界遺産登録をめざしている。"
         },
         {
           "type": "text",
-          "text": "①：誤り。Aは正しいが、申請者は園城寺と東京国立博物館で、延暦寺ではない。"
+          "text": "①：誤り。2026年7月の第48回世界遺産委員会で記載が決まった日本の遺産は『飛鳥・藤原の宮都』である。"
         },
         {
           "type": "text",
-          "text": "②：正しい。Aは唐、Bは園城寺である。円珍が唐から持ち帰った唐代の通行許可書の原本も含まれる。"
+          "text": "②：正しい。"
         },
         {
           "type": "text",
-          "text": "③：誤り。Bは正しいが、円珍が渡ったのは唐である。"
+          "text": "③：誤り。彦根城は、日本の暫定リストに記載されたまま推薦の準備が進められている。"
         },
         {
           "type": "text",
-          "text": "④：誤り。円珍が渡ったのは唐で、申請者は園城寺と東京国立博物館である。"
+          "text": "④：誤り。彦根城がめざしている登録は2028年で、2027年の第49回世界遺産委員会では審議されない。"
         }
       ],
-      "source_text": "文部科学省「「智証大師円珍関係文書典籍ー日本・中国の文化交流史ー」のユネスコ「世界の記憶」登録決定について」（確認日 2026-11-18） | https://www.mext.go.jp/unesco/006/1373633_00022.htm",
+      "source_text": "滋賀県「「彦根城」世界遺産登録に係る審議結果 - 国内推薦候補に選定 -」（2026-09-03、確認日 2026-11-19） | https://www.pref.shiga.lg.jp/sd00/press-release/32998.html／外務省「Inscription of “Ancient Capitals of Asuka and Fujiwara” on the World Heritage List」（確認日 2026-11-19） | https://www.mofa.go.jp/press/release/pressite_000001_02540.html／くわしく学ぶ世界遺産300〈第6版〉世界遺産検定2級公式テキスト 第2刷 p.033「プレリミナリー・アセスメント」／p.104「日本の暫定リスト記載物件（2025年2月時点）」 | https://www.sekaken.jp/books/2text/",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "A．唐－B．延暦寺"
+              "text": "2026年7月の第48回世界遺産委員会で、世界遺産リストへの記載が決まった"
             }
           ],
           "is_correct": false,
@@ -20938,7 +20934,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "A．唐－B．園城寺"
+              "text": "2026年9月、文化審議会で今年度の世界文化遺産の推薦候補に選ばれた"
             }
           ],
           "is_correct": true,
@@ -20949,7 +20945,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "A．宋－B．園城寺"
+              "text": "プレリミナリー・アセスメントの結果を受けて、日本の暫定リストから外された"
             }
           ],
           "is_correct": false,
@@ -20960,7 +20956,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "A．宋－B．延暦寺"
+              "text": "2027年の第49回世界遺産委員会で、記載の可否が審議される予定である"
             }
           ],
           "is_correct": false,
@@ -26498,39 +26494,39 @@
       "content_blocks": [
         {
           "type": "text",
-          "text": "（配点：2点）\n\n2025年の第47回世界遺産委員会で世界遺産リストに記載された『マンダラ山地のディイ・ギッド・ビイの文化的景観』の保有国として、正しいものはどれか。"
+          "text": "（配点：2点）\n\n2026年の第48回世界遺産委員会で、自国で初めての世界遺産が記載された国として、正しいものはどれか。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "『マンダラ山地のディイ・ギッド・ビイの文化的景観』は①のカメルーンの遺産である。2025年にはアフリカから4件が新たに登録された。"
+          "text": "2026年の第48回世界遺産委員会では、コモロ、サントメ・プリンシペ、南スーダンの3か国で自国初の世界遺産が記載された。コモロでは、歴史的なスルタン国の都市群（メディナ）が記載された。"
         },
         {
           "type": "text",
-          "text": "①：正しい。カメルーン極北州に位置し、7つの村にまたがる16の考古遺跡（ディイ・ギッド・ビイ）と農業用の段々畑からなる文化的景観である。"
+          "text": "①：正しい。"
         },
         {
           "type": "text",
-          "text": "②：誤り。同じ2025年に、シエラレオネの『ゴラ・ティワイ複合地域』が自然遺産として登録された。"
+          "text": "②：誤り。ブータンは暫定リストに遺産を記載しているが、2026年の委員会の終了時点で世界遺産をもっていない。"
         },
         {
           "type": "text",
-          "text": "③：誤り。同じ2025年に、ギニアビサウの『ビジャゴ諸島の沿岸・海洋生態系』が自然遺産として登録された。"
+          "text": "③：誤り。ブルネイは、2026年の委員会の終了時点で世界遺産をもっていない。"
         },
         {
           "type": "text",
-          "text": "④：誤り。同じ2025年に、マラウイの『ムランジェ山の文化的景観』が登録された。"
+          "text": "④：誤り。東ティモールは、2026年の委員会の終了時点で世界遺産をもっていない。"
         }
       ],
-      "source_text": "UNESCO World Heritage Centre「Diy-Gid-Biy Cultural Landscape of the Mandara Mountains」（確認日 2026-11-18） | https://whc.unesco.org/en/list/1745／UNESCO World Heritage Centre「New Inscribed Properties (47COM)」（確認日 2026-11-18） | https://whc.unesco.org/en/newproperties/?meeting=47COM&mode=list&inscribed=1",
+      "source_text": "ユネスコ「UNESCO World Heritage: 25 new sites inscribed」（2026-07-28、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-25-new-sites-inscribed／UNESCO世界遺産センター「Timor-Leste」「Bhutan」（締約国ページ、確認日 2026-11-19） | https://whc.unesco.org/en/statesparties/tl／https://whc.unesco.org/en/statesparties/bt/",
       "choices": [
         {
           "choice_label": "①",
           "content_blocks": [
             {
               "type": "text",
-              "text": "カメルーン"
+              "text": "コモロ"
             }
           ],
           "is_correct": true,
@@ -26541,7 +26537,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "シエラレオネ"
+              "text": "ブータン"
             }
           ],
           "is_correct": false,
@@ -26552,7 +26548,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "ギニアビサウ"
+              "text": "ブルネイ"
             }
           ],
           "is_correct": false,
@@ -26563,7 +26559,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "マラウイ"
+              "text": "東ティモール"
             }
           ],
           "is_correct": false,

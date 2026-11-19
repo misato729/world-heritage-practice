@@ -66,14 +66,14 @@ ICOMOSは1965年にヴェネツィア憲章の原則を基に設立された、�
 
 ### 問4　正答：②（2点）
 
-第47回世界遺産委員会は、2025年7月6〜16日にパリのユネスコ本部で開催された。
+2026年7月26日、韓国の釜山で開かれた第48回世界遺産委員会で、奈良県の『飛鳥・藤原の宮都』の世界遺産リストへの記載が決まった。飛鳥宮跡や藤原宮跡、高松塚古墳、石舞台古墳などの19の構成資産からなり、6世紀末から8世紀初頭にかけて中央集権国家の宮都が形づくられていく過程を示す遺産として、登録基準（ii）（iii）で記載された。
 
-- ①：誤り。ニューデリーは第46回（2024年）の開催都市である。
+- ①：誤り。『彦根城』は、2026年9月に文化審議会で今年度の世界文化遺産の推薦候補に選ばれ、2028年の登録をめざしている。
 - ②：正しい。
-- ③：誤り。リヤドは第45回拡大会合（2023年）の開催都市である。
-- ④：誤り。バクーは第43回（2019年）の開催都市である。
+- ③：誤り。『古都鎌倉の寺院・神社ほか』は日本の暫定リストに記載されているが、2026年の委員会では審議されていない。
+- ④：誤り。『佐渡島の金山』は、2024年にインドのニューデリーで開かれた第46回世界遺産委員会で記載された。
 
-出典：UNESCO世界遺産センター「47th session of the World Heritage Committee」（確認日 2026-11-18） | https://whc.unesco.org/en/sessions/47COM／UNESCO世界遺産センター「46th session of the World Heritage Committee」（確認日 2026-11-18） | https://whc.unesco.org/en/sessions/46COM／UNESCO世界遺産センター「Extended 45th session of the World Heritage Committee」（確認日 2026-11-18） | https://whc.unesco.org/en/sessions/45COM／UNESCO世界遺産センター「43rd session of the World Heritage Committee」（確認日 2026-11-18） | https://whc.unesco.org/en/sessions/43COM
+出典：外務省「Inscription of “Ancient Capitals of Asuka and Fujiwara” on the World Heritage List」（確認日 2026-11-19） | https://www.mofa.go.jp/press/release/pressite_000001_02540.html／UNESCO世界遺産センター「Decision 48 COM 8B.19」（確認日 2026-11-19） | https://whc.unesco.org/en/decisions/9173／滋賀県「「彦根城」世界遺産登録に係る審議結果 - 国内推薦候補に選定 -」（2026-09-03、確認日 2026-11-19） | https://www.pref.shiga.lg.jp/sd00/press-release/32998.html／くわしく学ぶ世界遺産300〈第6版〉世界遺産検定2級公式テキスト 第2刷 p.103〜104「日本の暫定リスト記載物件（2025年2月時点）」／p.048「佐渡島の金山」 | https://www.sekaken.jp/books/2text/
 
 ### 問5　正答：②（1点）
 
@@ -176,14 +176,14 @@ ICOMOSは1965年にヴェネツィア憲章の原則を基に設立された、�
 
 ### 問14　正答：①（2点）
 
-2025年11月、ウズベキスタンのサマルカンドで開かれた第43回ユネスコ総会で、執行委員会が指名したエジプトのハーリド・エル＝エナーニー（Khaled El-Enany）氏が事務局長に選出され、11月15日に就任した。エル＝エナーニー氏はエジプト学者で、エジプトの考古大臣、観光・考古大臣を務めた。アラブ諸国出身として初めての事務局長で、2017年から務めたオードレ・アズレ氏の後任となった。
+2025年7月の第47回世界遺産委員会で26件、2026年7月の第48回世界遺産委員会で25件が新たに記載され、世界遺産の総数は2025年の1,248件から、173か国の1,273件となった。
 
 - ①：正しい。
-- ②：誤り。コンゴ共和国のフィルマン・エドゥアール・マトコ氏も事務局長の候補者となったが、執行委員会が指名したのはエル＝エナーニー氏である。
-- ③：誤り。ブルガリア出身のイリナ・ボコヴァ氏は、2009〜2017年に事務局長を務めた。
-- ④：誤り。セネガル出身のアマドゥ＝マハタール・ムボウ氏は、1974〜1987年に事務局長を務めたアフリカ出身で初めての事務局長である。
+- ②：誤り。1,199件は、2023年9月の第45回世界遺産委員会の終了時点の総数である。
+- ③：誤り。2025年の総数1,248件に、2026年に新たに記載された25件を加えた1,273件が正しい。
+- ④：誤り。1,223件は、2025年3月時点の総数である。
 
-出典：ユネスコ「Khaled El-Enany elected Director-General of UNESCO」（確認日 2026-11-19） | https://www.unesco.org/en/articles/khaled-el-enany-elected-director-general-unesco／ユネスコ「Khaled El-Enany nominated by UNESCO’s Executive Board for the post of Director-General」（確認日 2026-11-19） | https://www.unesco.org/en/articles/khaled-el-enany-nominated-unescos-executive-board-post-director-general／ユネスコ執行委員会「Procedure for the nomination of the Director-General of UNESCO」（確認日 2026-11-19） | https://www.unesco.org/en/executive-board/dg-candidates
+出典：ユネスコ「UNESCO World Heritage: 25 new sites inscribed」（2026-07-28、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-25-new-sites-inscribed／ユネスコ「UNESCO World Heritage: 26 new sites inscribed」（2025-07-17、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-26-new-sites-inscribed-0／くわしく学ぶ世界遺産300〈第6版〉世界遺産検定2級公式テキスト 第2刷 p.024「世界遺産条約」 | https://www.sekaken.jp/books/2text/／ユネスコ「UNESCO World Heritage: 42 new sites inscribed」（2023年、確認日 2026-11-19） | https://www.unesco.org/en/articles/unesco-world-heritage-42-new-sites-inscribed
 
 ### 問15　正答：④（2点）
 
