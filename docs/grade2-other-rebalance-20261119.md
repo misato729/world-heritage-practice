@@ -37,6 +37,12 @@
 
 ## 本番反映
 
-（配信後に追記する）
+- `main`：[d7e3405](https://github.com/misato729/world-heritage-practice/commit/d7e3405)（「その他」の差し替え）、[1fb3de5](https://github.com/misato729/world-heritage-practice/commit/1fb3de5aaae9a0007e87bc9705872d5303c4a983)（準1級・1級の開発中表示）。CI 4件（harness・verify・browser・netlify-static）成功。
+- 変更前にNeonの復旧用ブランチ `backup-grade2-other-rb-20261119`（`br-curly-dew-aozuzyut`、計算用サーバーなし、期限なし）を作成。不要になったら手動で削除する。
+- 本番の事前確認（読み取りのみ）：2級の教材指紋が変更前 `5bce0139…` と一致。差し替えで削除される解答履歴は会員1名の1件、お気に入り0件。ユーザーの承認を得て削除した。事前確認の初回は、Flyのmachineがアイドルで自動停止していたためSSHが接続できず、公開APIへの通常のリクエストで起動してから再実行した。
+- Fly：`grade2-other-rb-1fb3de5aaae9` を既存1台へ反映（設定・秘密値は不変）。push直後のregistryがmanifestを返さず1回失敗した。machineが旧imageのままであることを確認し、manifestが取得できる（200）まで待ってから同じimageで再実行して成功した。
+- 本番の差し替え：`questions:replace_exams` で模試1〜5の300問を書き込み（内容変更7問）、解答履歴1件を削除、再実行 `unchanged`。2級の教材指紋は変更後 `67c70399…` でローカルの正本と一致。全2700問、2級の公開は模試1〜5。
+- Netlify：`6aff017481353f96b2d4491f`（ready・production）。有料問題文の照合で一致0。
+- 公開後の確認：公開APIで、無料の5問（模試1問4・14、模試2問12、模試3問35・54）が新しい問題文で、回答前に正答・解説を返さないこと、有料の模試4問19・模試5問9が未ログインで401であることを確認した。模試一覧は2級1〜5、準1級1〜10、1級1〜10。公開サイトで準1級・1級は模試10がリンク、11〜20が「開発中」で操作要素なし。1級はスマートフォン幅（375px）で横はみ出しなし。
 
 詳細は `local-only/grade2-v6-release-20261119/other-type-check.md`、`local-only/grade2-other-rebalance-release-20261119/` に保存し、Git・Dockerの送信対象に含めない。
