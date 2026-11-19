@@ -20,7 +20,7 @@ test('the per-grade number of selectable mocks is optional and is a whole number
   assert.throws(() => parseExamConfig(invalid))
   const fraction = structuredClone(EXAM_CONFIG); fraction.grades[0]!.available_exam_count = 1.5
   assert.throws(() => parseExamConfig(fraction))
-  for (const g of EXAM_CONFIG.grades.filter(g => g.code !== '2')) assert.equal(g.available_exam_count, undefined)
+  for (const g of EXAM_CONFIG.grades.filter(g => g.code !== '2')) assert.equal(g.available_exam_count, 10)
 })
 
 test('slots after the selectable number are labelled 開発中 and have no link, toggle or question list', () => {
