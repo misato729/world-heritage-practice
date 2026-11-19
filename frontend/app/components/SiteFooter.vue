@@ -19,6 +19,7 @@ const { apiStatus } = useApiStatus()
           <GradeLink v-if="PAYMENTS_ENABLED" to="/commercial-disclosure">特定商取引法に基づく表記</GradeLink>
           <GradeLink to="/support">開発者支援</GradeLink>
         </nav>
+        <p class="footer-disclaimer">本サイトは独自に運営する学習サービスです。世界遺産検定を主催する特定非営利活動法人 世界遺産アカデミーが提供・公認するものではありません。模擬試験は独自に作成したもので、実際の検定の問題ではありません。「世界遺産検定」の名称や公式テキストなどに関する権利は、それぞれの権利者に帰属します。</p>
       </div>
       <div class="api-status" :class="apiStatus" role="status" aria-live="polite">
         <span class="status-dot" aria-hidden="true" />
@@ -52,6 +53,7 @@ const { apiStatus } = useApiStatus()
 .footer-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .footer-links a { color: var(--ink); font-weight: 700; text-underline-offset: 3px; }
 .footer-links a:hover { color: var(--teal-dark); }
+.footer-disclaimer { max-width: 680px; margin: 0; font-size: 12px; line-height: 1.7; }
 .api-status {
   min-height: 36px;
   flex: 0 0 auto;

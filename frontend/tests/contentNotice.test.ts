@@ -26,3 +26,10 @@ test('the footer keeps policy links and API connection status', () => {
   }
   assert.match(footer, /role="status"/)
 })
+
+test('the footer states that the site is independent of the exam organizer', () => {
+  const footer = source('components/SiteFooter.vue')
+  assert.match(footer, /<p class="footer-disclaimer">本サイトは独自に運営する学習サービスです。世界遺産検定を主催する特定非営利活動法人 世界遺産アカデミーが提供・公認するものではありません。/)
+  assert.match(footer, /模擬試験は独自に作成したもので、実際の検定の問題ではありません。/)
+  for (const layout of ['layouts/default.vue', 'layouts/admin.vue']) assert.match(source(layout), /<SiteFooter/, layout)
+})
