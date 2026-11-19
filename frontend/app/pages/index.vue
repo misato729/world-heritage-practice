@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { label: gradeLabel, config, EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM } = useGrade()
+const { label: gradeLabel, config, EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM, AVAILABLE_EXAM_MAX } = useGrade()
+// Slots after the grade's selectable number are still being written: shown, not selectable.
+const examInDevelopment = (examNumber: number) => AVAILABLE_EXAM_MAX !== undefined && examNumber > AVAILABLE_EXAM_MAX
 import { MAX_REVIEW_POSITIONS } from '~/utils/reviewPositions'
 import { createPracticeSelectionSchema } from '../../shared/schemas/practice.ts'
 import { apiFormErrors, focusFormError } from '~/utils/apiFormErrors'
@@ -41,7 +43,7 @@ const hasFullAccess = computed(() => (
 ))
 const freeExams = computed(() => EXAM_CATALOG.filter(exam => exam.exam_number <= FREE_EXAM_MAX))
 const availableExams = computed(() => (
-  hasFullAccess.value ? EXAM_CATALOG : freeExams.value
+  (hasFullAccess.value ? EXAM_CATALOG : freeExams.value).filter(exam => !examInDevelopment(exam.exam_number))
 ))
 const availableExamNumbers = computed(() => availableExams.value.map(exam => exam.exam_number))
 const conditions = reactive({ exam_numbers: [...availableExamNumbers.value], major_categories: [...categoryValues] })
@@ -247,16 +249,26 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
           </GradeLink>
         </div>
         <div class="exam-grid">
-          <GradeLink
-            v-for="exam in EXAM_CATALOG"
-            :key="exam.exam_number"
-            class="exam-card"
-            :to="examTarget(exam.exam_number)"
-            :aria-label="examIsLocked(exam.exam_number) ? `模擬試験${exam.exam_number}はプレミアム会員向けです` : `模擬試験${exam.exam_number}を始める`"
-          >
-            <strong>{{ exam.exam_number }}</strong>
-            <UIcon v-if="examIsLocked(exam.exam_number)" name="i-lucide-lock-keyhole" aria-hidden="true" />
-          </GradeLink>
+          <template v-for="exam in EXAM_CATALOG" :key="exam.exam_number">
+            <span
+              v-if="examInDevelopment(exam.exam_number)"
+              class="exam-card exam-card-development"
+              aria-disabled="true"
+              :aria-label="`模擬試験${exam.exam_number}（開発中）`"
+            >
+              <strong>{{ exam.exam_number }}</strong>
+              <small>開発中</small>
+            </span>
+            <GradeLink
+              v-else
+              class="exam-card"
+              :to="examTarget(exam.exam_number)"
+              :aria-label="examIsLocked(exam.exam_number) ? `模擬試験${exam.exam_number}はプレミアム会員向けです` : `模擬試験${exam.exam_number}を始める`"
+            >
+              <strong>{{ exam.exam_number }}</strong>
+              <UIcon v-if="examIsLocked(exam.exam_number)" name="i-lucide-lock-keyhole" aria-hidden="true" />
+            </GradeLink>
+          </template>
         </div>
       </div>
 
@@ -445,6 +457,10 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 .exam-card:hover { border-color: var(--teal); background: var(--theme-soft); transform: translateY(-1px); }
 .exam-card strong { color: var(--teal-dark); font-size: 20px; line-height: 1; transform: translateY(-1px); }
 .exam-card :deep(.iconify) { position: absolute; top: 7px; right: 7px; width: 13px; height: 13px; color: var(--muted); }
+.exam-card-development { align-content: center; gap: 4px; background: #f3f5f6; cursor: not-allowed; }
+.exam-card-development:hover { border-color: var(--line); background: #f3f5f6; transform: none; }
+.exam-card-development strong { color: var(--muted); }
+.exam-card-development small { color: var(--muted); font-size: 10px; font-weight: 700; line-height: 1; }
 .premium-info-link { display: inline-flex; align-items: center; gap: 5px; color: var(--teal-dark); font-size: 13px; font-weight: 800; }
 .condition-error { margin: 0; padding: 16px 26px; color: #a23b2a; }
 .condition-form { border: 1px solid var(--line); border-radius: 8px; background: #fff; }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ExamCatalogEntry } from '~/utils/examCatalog'
-const { EXAM_CATALOG, FREE_EXAM_MAX } = useGrade()
+const { EXAM_CATALOG, FREE_EXAM_MAX, AVAILABLE_EXAM_MAX } = useGrade()
 import { hasFullExamAccess } from '~/utils/examConfig'
 
 defineProps<{ collapsed: boolean }>()
@@ -14,6 +14,7 @@ const { isFavoriteAt } = useFavorites()
 
 const exams = computed(() => EXAM_CATALOG)
 const isExamLocked = (exam: ExamCatalogEntry) => exam.exam_number > FREE_EXAM_MAX && !hasFullExamAccess(user.value)
+const isExamInDevelopment = (exam: ExamCatalogEntry) => AVAILABLE_EXAM_MAX !== undefined && exam.exam_number > AVAILABLE_EXAM_MAX
 
 const toggleExam = (exam: number) => {
   openExam.value = openExam.value === exam ? null : exam
@@ -82,6 +83,13 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
           class="exam-group"
         >
           <div
+            v-if="isExamInDevelopment(exam)"
+            class="exam-row exam-row-development"
+          >
+            <span class="exam-link exam-link-disabled" aria-disabled="true">模擬試験 {{ exam.exam_number }}（開発中）</span>
+          </div>
+          <div
+            v-else
             class="exam-row"
             :class="{ current: route.path.startsWith(`/practice/${exam.exam_number}/`) }"
           >
@@ -107,7 +115,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
 
           <Transition name="questions">
             <nav
-              v-if="openExam === exam.exam_number"
+              v-if="openExam === exam.exam_number && !isExamInDevelopment(exam)"
               :id="`exam-${exam.exam_number}-questions`"
               class="question-list"
               :aria-label="`模擬試験${exam.exam_number}の問題一覧`"
@@ -204,6 +212,18 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
 
 .exam-row.current {
   border-color: var(--teal);
+}
+
+/* Slots still being written: shown for orientation, not selectable. */
+.exam-row-development {
+  background: #f3f5f6;
+}
+
+.exam-link-disabled,
+.exam-link-disabled:hover {
+  color: var(--muted, #6b7a80);
+  font-weight: 700;
+  cursor: not-allowed;
 }
 
 .exam-row button {
