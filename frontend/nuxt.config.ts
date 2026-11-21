@@ -5,6 +5,8 @@ export default defineNuxtConfig({
   ...e2eBuildConfiguration(),
   compatibilityDate: '2024-07-03',
   devtools: { enabled: false },
+  // Static Netlify builds do not need intermediate source maps.
+  ...(process.env.NETLIFY === 'true' ? { sourcemap: { server: false, client: false } } : {}),
   ui: { fonts: false, colorMode: false },
   modules: ['@nuxt/ui'],
   // Learning-map statuses choose icons dynamically; always ship them locally.

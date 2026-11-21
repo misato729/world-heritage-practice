@@ -115,3 +115,26 @@ jobs:
           node-version: ${{ steps.netlify.outputs.node-version }}
       - name: Generate and verify the Netlify publish directory
         run: python3 scripts/check-netlify-build.py
+
+  deploy-production:
+    needs: [harness, verify, browser, netlify-static]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: world-heritage-production-fly
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@98172f70657cb3e15db199af139be99bd3e61200
+      - name: Deploy current main to Fly.io
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          current_main=$(git ls-remote --exit-code origin refs/heads/main | cut -f1)
+          if [ "$current_main" != "$GITHUB_SHA" ]; then
+            echo "A newer revision is on main. Skipping this deployment."
+            exit 0
+          fi
+          flyctl deploy --remote-only --app world-heritage-practice --config fly.toml
