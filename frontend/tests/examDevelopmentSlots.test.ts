@@ -13,7 +13,7 @@ const template = component.split('<template>')[1]!
 
 test('the per-grade number of selectable mocks is optional and is a whole number of zero or more', () => {
   const grade2 = EXAM_CONFIG.grades.find(g => g.code === '2')!
-  assert.equal(grade2.available_exam_count, 5)
+  assert.equal(grade2.available_exam_count, 10)
   const valid = structuredClone(EXAM_CONFIG); valid.grades[1]!.available_exam_count = 0
   assert.equal(parseExamConfig(valid).grades[1]!.available_exam_count, 0)
   const invalid = structuredClone(EXAM_CONFIG); invalid.grades[0]!.available_exam_count = -1
