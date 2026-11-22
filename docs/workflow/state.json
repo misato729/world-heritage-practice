@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 270,
-  "updated_at": "2026-11-22T13:19:30.428Z",
+  "revision": 274,
+  "updated_at": "2026-11-22T17:50:52.658Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-22T13-19-30-428Z-r270.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-22T17-50-52-658Z-r274.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -5933,6 +5933,244 @@
             "outcome": "passed",
             "summary": "検証と独立レビューを確認し適用完了。詳細は docs/pre1-full-revision-20261122.md",
             "at": "2026-11-22T13:19:29.974Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_review_pilot_20261122",
+      "context": "product",
+      "title": "1級900問の比較レビューと代表3問の改稿案・合意",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-22 「2級と準1級と同じ要領で1級の問題もレビュー」「代表3問を作る」",
+      "next_action": "2026-11-22 ユーザーが代表3問に合意（「全回へ展開」）。全回改稿は grade1_full_revision_20261122 で扱う",
+      "evidence": [
+        "local-only/grade1-review-20261122/review.md",
+        "local-only/grade1-review-20261122/sample/adjudication.md"
+      ],
+      "last_verified_at": "2026-11-22T15:00:00.000Z",
+      "verification_scope": "模試1〜10の現行原稿（指紋はmetrics.json）。検証と代表案のみ、原稿・DB操作なし",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "過去問と模試の同一指標、漏れ候補、解説とテキストOCRの一致、代表3問の構造と一致検査",
+          "verification": "metrics.py・overlap2.py・sample/render.py の出力と対象指紋を確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-review-20261122/metrics.json",
+            "local-only/grade1-review-20261122/overlap-unquoted.json",
+            "local-only/grade1-review-20261122/sample/drafts.json"
+          ],
+          "checked_at": "2026-11-22T15:00:00.000Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "正答未見の担当による代表3問の盲解と原典裁定",
+          "verification": "初答・確信度・最短解法・全肢判断・指摘の重大度を確認し、原典で裁定",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-review-20261122/sample/blind/first.json",
+            "local-only/grade1-review-20261122/sample/adjudication.md"
+          ],
+          "checked_at": "2026-11-22T15:00:00.000Z",
+          "reviewer": "盲解担当（別エージェント、正答・解説未見）"
+        }
+      ],
+      "execution": {
+        "worker": "Claude（レビュー・代表改稿担当）",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "過去問との同一指標比較・漏れ候補・解説一致の検査と、代表3問の盲解（3問一致、修正必須0）を確認。ユーザー合意済み",
+            "at": "2026-11-22T15:00:00.000Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_full_revision_20261122",
+      "context": "product",
+      "title": "1級模試2〜10の過去問準拠の全回改稿（解説の書換え・その他の差替え・語句型への作替え）",
+      "status": "done",
+      "depends_on": [
+        "grade1_review_pilot_20261122"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-22 「全回へ展開」（代表3問の基準で模試2〜10を改稿。DB・本番・コミットは別途依頼）",
+      "next_action": "開発DB・本番への反映とコミットは別途依頼を待つ",
+      "evidence": [
+        "local-only/grade1-full-20261122/reviews/final-20261122.md",
+        "docs/grade1-full-revision-20261122.md"
+      ],
+      "last_verified_at": "2026-11-22T16:30:00.000Z",
+      "verification_scope": "模試2〜10のローカル原稿。DB操作なし。模試1は対象外",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "各回90問・200点・分野別配点、提示変更問の一覧、解説とテキストOCRの20字一致、問題・解説Markdownの生成",
+          "verification": "tools.py build・stats.py・render-deliverables.py の出力と対象指紋を確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-full-20261122/build/summary.json",
+            "local-only/grade1-full-20261122/reviews/final-20261122.md"
+          ],
+          "checked_at": "2026-11-22T16:30:00.000Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "提示を変えた全問について、正答未見の別担当の盲解と原典裁定",
+          "verification": "初答・確信度・最短解法・指摘の重大度を確認し、修正必須の指摘を解消。修正で提示が変わった問は旧正答未見の担当が再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-full-20261122/blind/first-a.json",
+            "local-only/grade1-full-20261122/blind/first-b.json",
+            "local-only/grade1-full-20261122/blind/first-r2.json",
+            "local-only/grade1-full-20261122/reviews/final-20261122.md"
+          ],
+          "checked_at": "2026-11-22T16:30:00.000Z",
+          "reviewer": "盲解担当3名（別エージェント、正答・解説未見）"
+        }
+      ],
+      "execution": {
+        "worker": "Claude（改稿担当）",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "模試2〜10の改稿（解説474問、その他20問、語句型40問）。構造・一致検査は全回通過、提示変更60問の盲解は59問一致・1問不明、修正必須0。ローカル原稿のみ",
+            "at": "2026-11-22T14:49:59.891Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_full_revision_integration_20261122",
+      "context": "operations",
+      "title": "1級模試2〜10改稿版の開発DB反映",
+      "status": "done",
+      "depends_on": [
+        "grade1_full_revision_20261122"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-22 「開発DBへ反映」",
+      "next_action": "本番反映とコミットは別途依頼を待つ",
+      "evidence": [
+        "docs/grade1-full-revision-20261122.md",
+        "local-only/grade1-full-20261122/integration/applied-result.json"
+      ],
+      "last_verified_at": "2026-11-22T17:15:00.000Z",
+      "verification_scope": "専用開発DB（127.0.0.1:55440）。本番・Gitは対象外",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "変換の全件照合、バックアップの復元、拒否・取消・適用・再実行・再接続の検査、適用後の全件照合",
+          "verification": "conversion-check.json、test-result.json、applied-result.json、verify-after-screen-check.json",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-full-20261122/integration/conversion-check.json",
+            "local-only/grade1-full-20261122/integration/test-result.json",
+            "local-only/grade1-full-20261122/integration/applied-result.json",
+            "local-only/grade1-full-20261122/integration/verify-after-screen-check.json"
+          ],
+          "checked_at": "2026-11-22T17:15:00.000Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "更新スクリプトの適用前の独立コードレビュー",
+          "verification": "接続先の固定、更新範囲、模試ごとのtransaction、結果ファイルの照合",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-full-20261122/integration/independent-code-review.json",
+            "local-only/grade1-full-20261122/integration/independent-code-review.md"
+          ],
+          "checked_at": "2026-11-22T17:15:00.000Z",
+          "reviewer": "独立レビュー担当（別エージェント）"
+        }
+      ],
+      "execution": {
+        "worker": "Claude（反映担当）",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "1級模試2〜10の改稿版を開発DBへ反映（534問を既存ID保持で更新、全2700問照合、再実行no-op）。本番・Gitは未変更",
+            "at": "2026-11-22T17:12:39.719Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_full_revision_production_20261123",
+      "context": "operations",
+      "title": "1級模試2〜10改稿版の本番反映（解答履歴の削除条件の修正を含む）",
+      "status": "done",
+      "depends_on": [
+        "grade1_full_revision_integration_20261122"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-23 「本番へ反映」「解説だけが変わる問は履歴消さないでください」「pushして配信」",
+      "next_action": "記録のコミットとNeon復旧用ブランチの削除は別途依頼を待つ",
+      "evidence": [
+        "docs/grade1-full-revision-20261122.md",
+        "local-only/grade1-full-20261122/production/production-apply-result.json",
+        "local-only/grade1-full-20261122/production/production-after.json"
+      ],
+      "last_verified_at": "2026-11-22T18:00:00.000Z",
+      "verification_scope": "本番DBの1級模試2〜10、コミットf3cb2deの配信",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "サーバー側テスト、CI、本番の事前確認、リハーサル、適用結果、適用後の読み取り照合",
+          "verification": "CI run 45049568300、rehearsal-result.json、production-apply-result.json、production-after.json",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-full-20261122/production/rehearsal-result.json",
+            "local-only/grade1-full-20261122/production/production-apply-result.json",
+            "local-only/grade1-full-20261122/production/production-after.json"
+          ],
+          "checked_at": "2026-11-22T18:00:00.000Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "コード変更と本番適用スクリプトの適用前の独立レビュー",
+          "verification": "履歴削除条件、接続先の境界、期待値の検算、再実行の安全性",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-full-20261122/production/code-review-history-20261123.md",
+            "local-only/grade1-full-20261122/production/independent-review.json",
+            "local-only/grade1-full-20261122/production/independent-review.md"
+          ],
+          "checked_at": "2026-11-22T18:00:00.000Z",
+          "reviewer": "独立レビュー担当（別エージェント2名）"
+        }
+      ],
+      "execution": {
+        "worker": "Claude（反映担当）",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "履歴削除条件を修正して配信（f3cb2de）後、1級模試2〜10の改稿版を本番へ反映。534問更新、履歴は3件削除・211件保持、適用後の照合合格",
+            "at": "2026-11-22T17:50:52.658Z",
             "failed_criteria": []
           }
         ]
