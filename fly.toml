@@ -20,7 +20,17 @@ PAID_MEMBERSHIP_ENABLED = "false"
 PASSWORD_RESET_ENABLED = "false"
 ERROR_NOTIFICATIONS_ENABLED = "false"
 
+# Run migrations once per deploy. Running them on every cold start delayed
+# listening past the Fly proxy's connect timeout after auto-stop, so the first
+# sign-in/sign-up request after idle failed.
+[deploy]
+release_command = "sh -c 'DATABASE_URL=\"${DATABASE_URL_UNPOOLED:-$DATABASE_URL}\" npm run db:migrate'"
+
+[processes]
+app = "node .output/server/index.mjs"
+
 [http_service]
+processes = ["app"]
 internal_port = 3000
 force_https = true
 auto_stop_machines = "stop"
