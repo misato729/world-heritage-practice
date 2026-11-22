@@ -243,7 +243,7 @@ test('paid-mode authorization conceals restricted histories and preserves favori
   assert.equal((await query('SELECT id FROM favorites WHERE user_id=$1', [owner.id], db)).length, 1)
 }))
 
-test('no-op and visibility-only saves preserve histories, identities and favorites; material edits invalidate histories', integration, async () => isolated(async (db, exam) => {
+test('no-op, visibility-only and explanation/source-only saves preserve histories, identities and favorites; edits to the answered content invalidate histories', integration, async () => isolated(async (db, exam) => {
   const owner = await user(db)
   const initial = input({ exam_number: exam })
   const question = await saveQuestion(initial, { db })
@@ -254,6 +254,13 @@ test('no-op and visibility-only saves preserve histories, identities and favorit
   await saveQuestion(initial, { id: question.id, db })
   assert.deepEqual(await loadQuestion(question.id, db), before)
   await saveQuestion({ ...initial, publication_status: 'private' }, { id: question.id, db })
+  assert.equal((await query('SELECT id FROM answer_histories WHERE id=$1', [answer.data.answer_history_id], db)).length, 1)
+  // Explanation, source and category are read after answering: the history stays and the new text is stored.
+  const explained = await saveQuestion({ ...initial, publication_status: 'private', explanation_blocks: [{ type: 'text', text: 'Changed explanation' }],
+    source_text: 'Changed source | https://example.invalid/changed' }, { id: question.id, db })
+  assert.deepEqual(explained.explanation_blocks, [{ type: 'text', text: 'Changed explanation' }])
+  assert.equal(explained.source_text, 'Changed source | https://example.invalid/changed')
+  assert.deepEqual(explained.choices.map(choice => choice.id), ids)
   assert.equal((await query('SELECT id FROM answer_histories WHERE id=$1', [answer.data.answer_history_id], db)).length, 1)
   const changed = await saveQuestion({ ...initial, content_blocks: [{ type: 'text', text: 'Changed question' }] }, { id: question.id, db })
   assert.deepEqual(changed.choices.map(choice => choice.id), ids)

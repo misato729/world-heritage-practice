@@ -10,8 +10,9 @@ import { createTestContent } from '../test-support/question-fixture.ts'
 const available = { skip: !Boolean(process.env.DATABASE_URL || process.env.PGHOST || process.env.TEST_DATABASE_URL) }
 const questions = createTestContent(configuration).questions
 const all = createArchive(questions)
-// Exam 1 is rewritten except question 2, which keeps its presentation.
-const rewritten = questions.filter(q => q.exam_number === 1).map(q => q.question_number === 2 ? q : {
+// Exam 1 is rewritten except question 2, which is identical, and question 3, where only the explanation and source change.
+const rewritten = questions.filter(q => q.exam_number === 1).map(q => q.question_number === 2 ? q : q.question_number === 3 ? {
+  ...q, explanation_blocks: [{ type: 'text' as const, text: 'Synthetic rewritten explanation 3' }], source_text: 'Synthetic rewritten source | https://example.invalid/rewritten' } : {
   ...q, content_blocks: [{ type: 'text' as const, text: `Synthetic rewritten question ${q.question_number}` }],
   choices: q.choices.map((c, i) => ({ ...c, content_blocks: [{ type: 'text' as const, text: `Rewritten choice ${i + 1}` }], is_correct: i === 0 })) })
 const replacement = createArchive(rewritten)
@@ -42,16 +43,17 @@ test('replacement requires confirmation, three checksums, counts and the history
   await assert.rejects(replaceExamContent(partial, { ...options, replacementSha256: partial.sha256 }, db), OperationError)
 })
 
-test('replacing a set keeps IDs and creation times, other sets/grades, favorites and contracts, and resets only histories of changed questions', available, async () => isolated(async db => {
+test('replacing a set keeps IDs and creation times, other sets/grades, favorites and contracts, and resets only histories of questions whose answered content changed', available, async () => isolated(async db => {
   const before = await rows(db), now = new Date()
   const changed = before.find(q => q.grade === '2' && q.exam_number === 1 && q.question_number === 1)!
   const kept = before.find(q => q.grade === '2' && q.exam_number === 1 && q.question_number === 2)!
+  const explained = before.find(q => q.grade === '2' && q.exam_number === 1 && q.question_number === 3)!
   const other = before.find(q => q.grade === '2' && q.exam_number === 2 && q.question_number === 1)!
   const user = await db.user.create({ data: { name: 'Replace synthetic user', email: `replace-${randomUUID()}@example.invalid`, created_at: now, updated_at: now } })
-  for (const q of [changed, kept, other]) await db.answerHistory.create({ data: { user_id: user.id, question_id: q.id, selected_choice_id: q.choices[0]!.id, is_correct: false, created_at: now, updated_at: now } })
+  for (const q of [changed, kept, explained, other]) await db.answerHistory.create({ data: { user_id: user.id, question_id: q.id, selected_choice_id: q.choices[0]!.id, is_correct: false, created_at: now, updated_at: now } })
   await db.favorite.create({ data: { user_id: user.id, question_id: changed.id, created_at: now, updated_at: now } })
   await db.subscription.create({ data: { user_id: user.id, status: 'active', paid_until: new Date(Date.now() + 86_400_000) } })
-  const keptHistories = await db.answerHistory.findMany({ where: { question_id: { in: [kept.id, other.id] } }, orderBy: { id: 'asc' } })
+  const keptHistories = await db.answerHistory.findMany({ where: { question_id: { in: [kept.id, explained.id, other.id] } }, orderBy: { id: 'asc' } })
   const favoritesBefore = await db.favorite.findMany(), subscriptionsBefore = await db.subscription.findMany()
 
   const result = await replaceExamContent(replacement, options, db)
@@ -65,6 +67,9 @@ test('replacing a set keeps IDs and creation times, other sets/grades, favorites
     if (!(q.grade === '2' && q.exam_number === 1)) assert.deepEqual(now, q)
   }
   assert.equal((byId.get(changed.id)!.content_blocks as { text: string }[])[0]!.text, 'Synthetic rewritten question 1')
+  // The explanation-only question is content-changed (counted above) and stored, but its history is kept.
+  assert.equal((byId.get(explained.id)!.explanation_blocks as { text: string }[])[0]!.text, 'Synthetic rewritten explanation 3')
+  assert.deepEqual(byId.get(explained.id)!.content_blocks, explained.content_blocks); assert.deepEqual(byId.get(explained.id)!.choices, explained.choices)
   assert.deepEqual(await db.answerHistory.findMany({ orderBy: { id: 'asc' } }), keptHistories)
   assert.deepEqual(await db.favorite.findMany(), favoritesBefore); assert.deepEqual(await db.subscription.findMany(), subscriptionsBefore)
   const repeat = await replaceExamContent(replacement, options, db)

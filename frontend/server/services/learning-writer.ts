@@ -36,6 +36,20 @@ export function materialDigest(question: QuestionInput | QuestionRecord): string
   }))).digest('hex')
 }
 
+/**
+ * What a learner saw and answered: position, question content and the choices with
+ * the correct one. Explanations, sources and categories are read after answering, so
+ * changing only those keeps existing answer histories valid.
+ */
+export function answerDigest(question: QuestionInput | QuestionRecord): string {
+  return createHash('sha256').update(JSON.stringify(canonical({
+    exam_number: question.exam_number, question_number: question.question_number,
+    content_blocks: question.content_blocks,
+    choices: question.choices.map(choice => ({ choice_label: choice.choice_label,
+      content_blocks: choice.content_blocks, is_correct: choice.is_correct, display_order: choice.display_order })),
+  }))).digest('hex')
+}
+
 export async function loadQuestion(id: number, db: Database, options: { published?: boolean, lock?: boolean } = {}): Promise<QuestionRecord> {
   // Prisma does not expose PostgreSQL row locks; keep the lock inside the same transaction.
   if (options.lock) await query(`SELECT id FROM questions WHERE id = $1${options.published ? " AND publication_status = 'published'" : ''} FOR UPDATE`, [id], db)
@@ -83,7 +97,8 @@ export async function saveQuestion(raw: QuestionInput, options: SaveOptions = {}
           await db.question.update({ where: { id: before.id }, data: { ...data, updated_at: new Date() } })
         }
         id = before.id
-        if (changed) await db.answerHistory.deleteMany({ where: { question_id: id } })
+        // Histories are invalidated only when the answered content changed, not for explanation/source/category edits.
+        if (answerDigest(before) !== answerDigest(input)) await db.answerHistory.deleteMany({ where: { question_id: id } })
       } else {
         const saved = record(await db.question.create({ data: { ...data, created_at: new Date(), updated_at: new Date() }, select: { id: true } }))
         id = saved.id
