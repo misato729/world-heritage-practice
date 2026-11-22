@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 238,
-  "updated_at": "2026-11-17T10:48:07.513Z",
+  "revision": 270,
+  "updated_at": "2026-11-22T13:19:30.428Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-17T10-48-07-513Z-r238.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-22T13-19-30-428Z-r270.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -4265,138 +4265,293 @@
       }
     },
     {
+      "id": "security_assessment_20261116",
+      "context": "development",
+      "title": "世界遺産ラボの脆弱性診断と再現根拠の確認",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-16 ユーザー: 世界遺産ラボの脆弱性診断を行ってください",
+      "next_action": "docs/security-assessment-20261116.mdのV1〜V3を優先して、実装依頼に基づき修正・再診断する。",
+      "evidence": [
+        "docs/security-assessment-20261116.md",
+        "local-only/security-assessment-20261116/source-fingerprints.json",
+        "local-only/security-assessment-20261116/verification-summary.json",
+        "local-only/security-assessment-20261116/boundary-review.md",
+        "local-only/security-assessment-20261116/cleanup.json"
+      ],
+      "last_verified_at": "2026-11-16T10:05:44.610Z",
+      "verification_scope": "現在の作業ツリー176ファイル指紋維持、関連205検査成功、依存監査16package/30advisory、診断3指摘。V1/V2を合成test APIで再現、V3を実Nitroルートと公開Fly匿名GETで確認。独立反証レビュー合格。アプリ修正/本番更新なし。専用DB停止削除済み。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "依存関係監査・保護検査・対象セキュリティ回帰と候補の安全な再現を実行し、結果/限界/対象版を記録する",
+          "verification": "npm audit、private-source check、使い捨てtest DBの既存回帰、必要な局所再現。失敗は隠さず分類する。",
+          "status": "passed",
+          "evidence": [
+            "local-only/security-assessment-20261116/verification-summary.json",
+            "local-only/security-assessment-20261116/final-consistency.json",
+            "local-only/security-assessment-20261116/focused-probes.json",
+            "local-only/security-assessment-20261116/proxy-canonicalization.json",
+            "local-only/security-assessment-20261116/public-proxy-paths.json"
+          ],
+          "checked_at": "2026-11-16T10:05:44.610Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が認証・権限境界と診断指摘の根拠・影響・誤検知を独立確認する",
+          "verification": "security_boundary_review担当によるソース確認と最終指摘の反証レビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/security-assessment-20261116/boundary-review.md",
+            "docs/security-assessment-20261116.md"
+          ],
+          "checked_at": "2026-11-16T10:05:44.610Z",
+          "reviewer": "security_boundary_review"
+        }
+      ],
+      "execution": {
+        "worker": "root_security_assessment",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "診断の受入条件を確認。関連205検査成功、3指摘の再現と依存監査・公開GETの結果を報告。独立反証レビュー合格。アプリは未修正。",
+            "at": "2026-11-16T10:05:57.953Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
       "id": "grade1_m02_04_authoring_20261116",
       "context": "product",
       "title": "1級模試2〜4の新規作成と全問独立内容確認",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "grade1_passage_disclosure_20261116"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-16 ユーザー: 同じ要領で模試2〜10を作成。全810問の内容点検を行い、ブラウザのみ9セット全体から無作為約30問。",
-      "next_action": "利用枠2%の指示で作問中断。docs/grade1-mocks-02-10-progress-20261116.mdと担当引継ぎから未完作成・全問独立点検を再開する。DB未登録。",
+      "next_action": "本番公開・Git送信は別途依頼を待つ",
       "evidence": [
-        "local-only/grade1-mocks-02-10-20261116/authoring-contract.md",
-        "local-only/grade1-mocks-02-10-20261116/blueprint.json",
-        "docs/grade1-mocks-02-10-progress-20261116.md"
+        "local-only/grade1-mocks-02-10-20261116/validity-report-20261118.md",
+        "local-only/grade1-mocks-02-10-20261116/content-final-acceptance.json",
+        "local-only/grade1-mocks-02-10-20261116/resume-brief-20261117.md",
+        "local-only/grade1-mocks-02-10-20261116/exam-02/render-checks.json",
+        "local-only/grade1-mocks-02-10-20261116/exam-03/render-checks.json",
+        "local-only/grade1-mocks-02-10-20261116/exam-04/render-checks.json"
       ],
-      "last_verified_at": null,
-      "verification_scope": "作成と確認は未完。90問の初稿固定と受入合格を区別する。内容全810問点検、ブラウザ9セット合計30問の方針を保持。",
+      "last_verified_at": "2026-11-18T21:55:36.876Z",
+      "verification_scope": "模試2〜4の各90問200点・分野配点・4肢1正答・リード3・写真4地図1を構造検査。作者と別担当が全問を正答非表示で盲解し、全肢を原典の頁画像で照合。改稿問は旧正答未見の担当が再盲解。回間重複（決め手同一）監査済み。2026-11-19に問89の選択肢表記を模試1にそろえた（内容不変）。実受験者データなし。",
       "acceptance": [
         {
           "id": "automated",
           "kind": "automated",
           "description": "各90問200点/指定分類配点/4肢1正答/3共通リード/写真4と地図1/参照・原稿・解答MD一致を検査する",
           "verification": "構造・参照・出典欄・文字数と形式分布・重複・固定版指紋を検査",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-20261116/exam-02/render-checks.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-03/render-checks.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-04/render-checks.json",
+            "local-only/grade1-mocks-02-10-20261116/content-final-acceptance.json",
+            "local-only/grade1-mocks-02-10-20261116/cross-exam-20261118/duplicate-audit-8exams-final.json",
+            "local-only/grade1-mocks-02-10-20261116/cross-exam-20261118/duplicate-audit-m10.json"
+          ],
+          "checked_at": "2026-11-18T21:55:36.876Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "作者と別担当が全270問を正答非表示で解き、全肢・出典・解説・最短解法・漏出を独立確認する",
           "verification": "全問盲解記録、全肢原典照合と過去問形式比較、写真地図の権利と対応を裁定",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-20261116/exam-02/review-20261117-rv02.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-02/review-20261118-fix61-root.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-02/review-20261118-r3-root.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-02/review-20261118-rv02b.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-03/review-20261118-r2-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-03/review-20261118-r3-root.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-03/review-20261118-rv03.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-04/review-20261118-r2-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-04/review-20261118-rv04.json",
+            "local-only/grade1-mocks-02-10-20261116/media-final-review.json"
+          ],
+          "checked_at": "2026-11-18T21:55:36.876Z",
+          "reviewer": "grade1_independent_reviewers_20261117_19"
         }
       ],
       "execution": {
         "worker": "grade1_author_02_04",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "全問の独立盲解・原典照合・改稿問の再盲解・回間重複監査を終え、構造検査と受入記録に合格した",
+            "at": "2026-11-18T21:55:53.537Z",
+            "failed_criteria": []
+          }
+        ]
       }
     },
     {
       "id": "grade1_m05_07_authoring_20261116",
       "context": "product",
       "title": "1級模試5〜7の新規作成と全問独立内容確認",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "grade1_passage_disclosure_20261116"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-16 ユーザー: 同じ要領で模試2〜10を作成。全810問の内容点検を行い、ブラウザのみ9セット全体から無作為約30問。",
-      "next_action": "利用枠2%の指示で作問中断。docs/grade1-mocks-02-10-progress-20261116.mdと担当引継ぎから未完作成・全問独立点検を再開する。DB未登録。",
+      "next_action": "本番公開・Git送信は別途依頼を待つ",
       "evidence": [
-        "local-only/grade1-mocks-02-10-20261116/authoring-contract.md",
-        "local-only/grade1-mocks-02-10-20261116/blueprint.json",
-        "docs/grade1-mocks-02-10-progress-20261116.md"
+        "local-only/grade1-mocks-02-10-20261116/validity-report-20261118.md",
+        "local-only/grade1-mocks-02-10-20261116/content-final-acceptance.json",
+        "local-only/grade1-mocks-02-10-20261116/resume-brief-20261117.md",
+        "local-only/grade1-mocks-02-10-20261116/exam-05/render-checks.json",
+        "local-only/grade1-mocks-02-10-20261116/exam-06/render-checks.json",
+        "local-only/grade1-mocks-02-10-20261116/exam-07/render-checks.json"
       ],
-      "last_verified_at": null,
-      "verification_scope": "作成と確認は未完。90問の初稿固定と受入合格を区別する。内容全810問点検、ブラウザ9セット合計30問の方針を保持。",
+      "last_verified_at": "2026-11-18T21:55:36.876Z",
+      "verification_scope": "模試5〜7の各90問200点・分野配点・4肢1正答・リード3・写真4地図1を構造検査。作者と別担当が全問を正答非表示で盲解し、全肢を原典の頁画像で照合。改稿問は旧正答未見の担当が再盲解。回間重複（決め手同一）監査済み。2026-11-19に問89の選択肢表記を模試1にそろえた（内容不変）。実受験者データなし。",
       "acceptance": [
         {
           "id": "automated",
           "kind": "automated",
           "description": "各90問200点/指定分類配点/4肢1正答/3共通リード/写真4と地図1/参照・原稿・解答MD一致を検査する",
           "verification": "構造・参照・出典欄・文字数と形式分布・重複・固定版指紋を検査",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-20261116/exam-05/render-checks.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-06/render-checks.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-07/render-checks.json",
+            "local-only/grade1-mocks-02-10-20261116/content-final-acceptance.json",
+            "local-only/grade1-mocks-02-10-20261116/cross-exam-20261118/duplicate-audit-8exams-final.json",
+            "local-only/grade1-mocks-02-10-20261116/cross-exam-20261118/duplicate-audit-m10.json"
+          ],
+          "checked_at": "2026-11-18T21:55:36.876Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "作者と別担当が全270問を正答非表示で解き、全肢・出典・解説・最短解法・漏出を独立確認する",
           "verification": "全問盲解記録、全肢原典照合と過去問形式比較、写真地図の権利と対応を裁定",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-20261116/exam-05/review-20261117-r3-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-05/review-20261117-r4-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-05/review-20261117-rv05.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-05/review-20261118-r5-root.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-06/review-20261117-rv06.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-06/review-20261118-r3-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-06/review-20261118-r4-root.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-06/review-20261118-rv06b.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-07/review-20261118-r2-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-07/review-20261118-r3-root.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-07/review-20261118-rv07.json",
+            "local-only/grade1-mocks-02-10-20261116/media-final-review.json"
+          ],
+          "checked_at": "2026-11-18T21:55:36.876Z",
+          "reviewer": "grade1_independent_reviewers_20261117_19"
         }
       ],
       "execution": {
         "worker": "grade1_author_05_07",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "全問の独立盲解・原典照合・改稿問の再盲解・回間重複監査を終え、構造検査と受入記録に合格した",
+            "at": "2026-11-18T21:55:54.862Z",
+            "failed_criteria": []
+          }
+        ]
       }
     },
     {
       "id": "grade1_m08_10_authoring_20261116",
       "context": "product",
       "title": "1級模試8〜10の新規作成と全問独立内容確認",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "grade1_passage_disclosure_20261116"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-16 ユーザー: 同じ要領で模試2〜10を作成。全810問の内容点検を行い、ブラウザのみ9セット全体から無作為約30問。",
-      "next_action": "利用枠2%の指示で作問中断。docs/grade1-mocks-02-10-progress-20261116.mdと担当引継ぎから未完作成・全問独立点検を再開する。DB未登録。",
+      "next_action": "本番公開・Git送信は別途依頼を待つ",
       "evidence": [
-        "local-only/grade1-mocks-02-10-20261116/authoring-contract.md",
-        "local-only/grade1-mocks-02-10-20261116/blueprint.json",
-        "docs/grade1-mocks-02-10-progress-20261116.md"
+        "local-only/grade1-mocks-02-10-20261116/validity-report-20261118.md",
+        "local-only/grade1-mocks-02-10-20261116/content-final-acceptance.json",
+        "local-only/grade1-mocks-02-10-20261116/resume-brief-20261117.md",
+        "local-only/grade1-mocks-02-10-20261116/exam-08/render-checks.json",
+        "local-only/grade1-mocks-02-10-20261116/exam-09/render-checks.json",
+        "local-only/grade1-mocks-02-10-20261116/exam-10/render-checks.json"
       ],
-      "last_verified_at": null,
-      "verification_scope": "作成と確認は未完。90問の初稿固定と受入合格を区別する。内容全810問点検、ブラウザ9セット合計30問の方針を保持。",
+      "last_verified_at": "2026-11-18T21:55:36.876Z",
+      "verification_scope": "模試8〜10の各90問200点・分野配点・4肢1正答・リード3・写真4地図1を構造検査。作者と別担当が全問を正答非表示で盲解し、全肢を原典の頁画像で照合。改稿問は旧正答未見の担当が再盲解。回間重複（決め手同一）監査済み。2026-11-19に問89の選択肢表記を模試1にそろえた（内容不変）。実受験者データなし。",
       "acceptance": [
         {
           "id": "automated",
           "kind": "automated",
           "description": "各90問200点/指定分類配点/4肢1正答/3共通リード/写真4と地図1/参照・原稿・解答MD一致を検査する",
           "verification": "構造・参照・出典欄・文字数と形式分布・重複・固定版指紋を検査",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-20261116/exam-08/render-checks.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-09/render-checks.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-10/render-checks.json",
+            "local-only/grade1-mocks-02-10-20261116/content-final-acceptance.json",
+            "local-only/grade1-mocks-02-10-20261116/cross-exam-20261118/duplicate-audit-8exams-final.json",
+            "local-only/grade1-mocks-02-10-20261116/cross-exam-20261118/duplicate-audit-m10.json"
+          ],
+          "checked_at": "2026-11-18T21:55:36.876Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "作者と別担当が全270問を正答非表示で解き、全肢・出典・解説・最短解法・漏出を独立確認する",
           "verification": "全問盲解記録、全肢原典照合と過去問形式比較、写真地図の権利と対応を裁定",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-20261116/exam-08/review-20261117-r3-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-08/review-20261117-r4-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-08/review-20261117-r5-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-08/review-20261117-rv08.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-08/review-20261118-r6-root.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-09/review-20261117-r3-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-09/review-20261117-r4-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-09/review-20261117-rv09.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-10/review-20261118-r2-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-10/review-20261118-r3-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-10/review-20261118-r4-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-10/review-20261118-r5-rv.json",
+            "local-only/grade1-mocks-02-10-20261116/exam-10/review-20261118-rv10.json",
+            "local-only/grade1-mocks-02-10-20261116/media-final-review.json"
+          ],
+          "checked_at": "2026-11-18T21:55:36.876Z",
+          "reviewer": "grade1_independent_reviewers_20261117_19"
         }
       ],
       "execution": {
         "worker": "grade1_author_08_10",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "全問の独立盲解・原典照合・改稿問の再盲解・回間重複監査を終え、構造検査と受入記録に合格した",
+            "at": "2026-11-18T21:55:56.001Z",
+            "failed_criteria": []
+          }
+        ]
       }
     },
     {
@@ -4482,62 +4637,64 @@
       }
     },
     {
-      "id": "security_assessment_20261116",
+      "id": "grade_presentation_access_20261117",
       "context": "development",
-      "title": "世界遺産ラボの脆弱性診断と再現根拠の確認",
+      "title": "級別配色・解答級の記憶・無料範囲3/2/1",
       "status": "done",
       "depends_on": [],
       "authorization": "requested",
-      "request_ref": "2026-11-16 ユーザー: 世界遺産ラボの脆弱性診断を行ってください",
-      "next_action": "docs/security-assessment-20261116.mdのV1〜V3を優先して、実装依頼に基づき修正・再診断する。",
+      "request_ref": "2026-11-17 ユーザー: 参考書に合う級別テーマ、級選択ボタン、最後に解いた級、無料範囲2級3/準1級2/1級1と会員案内。",
+      "next_action": "追加依頼を待つ。未コミット・未送信・本番未反映。",
       "evidence": [
-        "docs/security-assessment-20261116.md",
-        "local-only/security-assessment-20261116/source-fingerprints.json",
-        "local-only/security-assessment-20261116/verification-summary.json",
-        "local-only/security-assessment-20261116/boundary-review.md",
-        "local-only/security-assessment-20261116/cleanup.json"
+        "docs/grade-presentation-access-20261117.md",
+        "docs/grade-presentation-access-review-20261117.md"
       ],
-      "last_verified_at": "2026-11-16T10:05:44.610Z",
-      "verification_scope": "現在の作業ツリー176ファイル指紋維持、関連205検査成功、依存監査16package/30advisory、診断3指摘。V1/V2を合成test APIで再現、V3を実Nitroルートと公開Fly匿名GETで確認。独立反証レビュー合格。アプリ修正/本番更新なし。専用DB停止削除済み。",
+      "last_verified_at": "2026-11-17T02:33:44.596Z",
+      "verification_scope": "ローカル実装: 単体171/171、サーバー変更範囲22/22、型/共有schema/保護検査、独立レビュー、全級PC/SP Playwright46/46。実教材・既存DB・Stripe資源・Git送信・本番は対象外。",
       "acceptance": [
         {
-          "id": "automated",
+          "id": "checks",
           "kind": "automated",
-          "description": "依存関係監査・保護検査・対象セキュリティ回帰と候補の安全な再現を実行し、結果/限界/対象版を記録する",
-          "verification": "npm audit、private-source check、使い捨てtest DBの既存回帰、必要な局所再現。失敗は隠さず分類する。",
+          "description": "級別無料境界と全級テーマ/選択/解答級の記憶を検査",
+          "verification": "共有schema・API権限/履歴/復習/実績・型・Playwright PC/SP・資料保護",
           "status": "passed",
           "evidence": [
-            "local-only/security-assessment-20261116/verification-summary.json",
-            "local-only/security-assessment-20261116/final-consistency.json",
-            "local-only/security-assessment-20261116/focused-probes.json",
-            "local-only/security-assessment-20261116/proxy-canonicalization.json",
-            "local-only/security-assessment-20261116/public-proxy-paths.json"
+            "docs/grade-presentation-access-20261117.md"
           ],
-          "checked_at": "2026-11-16T10:05:44.610Z"
+          "checked_at": "2026-11-17T02:33:44.596Z"
         },
         {
           "id": "review",
           "kind": "review",
-          "description": "別担当が認証・権限境界と診断指摘の根拠・影響・誤検知を独立確認する",
-          "verification": "security_boundary_review担当によるソース確認と最終指摘の反証レビュー",
+          "description": "級ごとの権限境界と設定/表示/検査結果を独立確認",
+          "verification": "別担当によるコードと検証結果の照合",
           "status": "passed",
           "evidence": [
-            "local-only/security-assessment-20261116/boundary-review.md",
-            "docs/security-assessment-20261116.md"
+            "docs/grade-presentation-access-review-20261117.md"
           ],
-          "checked_at": "2026-11-16T10:05:44.610Z",
-          "reviewer": "security_boundary_review"
+          "checked_at": "2026-11-17T02:33:44.596Z",
+          "reviewer": "grade_access_review"
         }
       ],
       "execution": {
-        "worker": "root_security_assessment",
+        "worker": "grade-presentation-root",
         "max_attempts": 3,
         "attempts": [
           {
             "number": 1,
+            "outcome": "failed",
+            "summary": "静的HTMLと準1級/1級の級別無料枠でhydration不一致。通常42ケース成功、初期化を修正し再検査する。",
+            "at": "2026-11-17T02:24:09.015Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
             "outcome": "passed",
-            "summary": "診断の受入条件を確認。関連205検査成功、3指摘の再現と依存監査・公開GETの結果を報告。独立反証レビュー合格。アプリは未修正。",
-            "at": "2026-11-16T10:05:57.953Z",
+            "summary": "静的HTMLの級復元を修正し全級PC/SP46件成功。独立レビュー・型・単体171・API変更範囲22も確認。",
+            "at": "2026-11-17T02:33:45.264Z",
             "failed_criteria": []
           }
         ]
@@ -4602,6 +4759,60 @@
             "outcome": "passed",
             "summary": "3指摘と関連強化を修正。固定版の自動検査/独立review/本番配信と公開API・PCSP確認に合格。",
             "at": "2026-11-17T03:52:38.099Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "subscription_cancellation_disclosure_20261117",
+      "context": "development",
+      "title": "解約手順と申込時表示の具体化",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-17 解約方法・申込表示不足の指摘に対しユーザー「では修正してください」",
+      "next_action": "追加依頼を待つ。実契約操作・Git送信・本番変更なし。",
+      "evidence": [
+        "docs/subscription-cancellation-disclosure-20261117.md",
+        "docs/subscription-cancellation-disclosure-review-20261117.md"
+      ],
+      "last_verified_at": "2026-11-17T04:35:54.198Z",
+      "verification_scope": "Stripe専用設定のGET、共有文言/Checkout/旧セッション差替え・販売停止時Portal検査5件、単体173＋最終文言1、最終型、全級PC/SP解約8件・静的回帰14件（再利用範囲は記録）、独立レビュー。実Stripe契約/設定変更・Git送信・本番変更なし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "共有の解約方法/期限/効果/返金表示と導線、Checkoutの現行文言を確認",
+          "verification": "単体・型・独立test DBのサーバー検査・Playwright全級PC/SP・資料保護",
+          "status": "passed",
+          "evidence": [
+            "docs/subscription-cancellation-disclosure-20261117.md"
+          ],
+          "checked_at": "2026-11-17T04:35:54.198Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "表示と実装/設定の一致および旧Checkout再利用を独立確認",
+          "verification": "別担当が課金API差分と検査根拠をレビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/subscription-cancellation-disclosure-review-20261117.md"
+          ],
+          "checked_at": "2026-11-17T04:35:54.198Z",
+          "reviewer": "grade_access_review"
+        }
+      ],
+      "execution": {
+        "worker": "cancellation-root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "解約表示・導線とCheckout説明を修正。専用設定GET・型・単体・サーバー5・全級PC/SP8・静的回帰・独立レビュー成功。",
+            "at": "2026-11-17T04:35:54.619Z",
             "failed_criteria": []
           }
         ]
@@ -5001,6 +5212,727 @@
             "outcome": "passed",
             "summary": "起動先行計画の初回評価成功。本番600問一致、1履歴のみreset・9保持、元設定復帰、PCSP代表4確認と独立レビューpassed",
             "at": "2026-11-17T10:48:06.432Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "custom_domain_20261118",
+      "context": "operations",
+      "title": "world-heritage.misato-lab.comへ公開URLを設定",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-18 ユーザー依頼：取得済みmisato-lab.comのworld-heritageサブドメイン設定。DNSムームードメイン",
+      "next_action": "新URLを利用。コミットpushは別途明示依頼を待つ。",
+      "evidence": [
+        "docs/custom-domain-20261118.md",
+        "local-only/domain-migration-20261118/final-proof.json",
+        "local-only/domain-migration-20261118/independent-review.md"
+      ],
+      "last_verified_at": "2026-11-18T02:52:46.626Z",
+      "verification_scope": "新旧DNS/TLS/署名proxy/認証境界、NRTとimage維持、GASとFlyの公開origin整合、Stripe設定とスタブURL生成、全級PCSP6ケース、単体9件、独立レビュー。実メール送信・実決済・実会員作成なし。コミットpush未依頼。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "DNS/TLSと新originのAPI/認証/メール・課金導線の検証が成功する",
+          "verification": "公開DNS/証明書/HTTP、全級PCSP、既存自動検査と合成データ、設定前後指紋を確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/domain-migration-20261118/final-proof.json",
+            "local-only/domain-migration-20261118/public-ui-result.json",
+            "local-only/domain-migration-20261118/old-host-and-origins.json",
+            "local-only/domain-migration-20261118/targeted-tests.log"
+          ],
+          "checked_at": "2026-11-18T02:52:46.626Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "実装担当以外が受入条件と成果物を確認する",
+          "verification": "別担当のレビューで未解決の問題がないことを確認する",
+          "status": "passed",
+          "evidence": [
+            "local-only/domain-migration-20261118/independent-review.md"
+          ],
+          "checked_at": "2026-11-18T02:52:46.626Z",
+          "reviewer": "domain_migration_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "新旧HTTPS・認証境界、公開URL整合、PCSP6件、単体9件、独立レビュー成功。",
+            "at": "2026-11-18T02:52:47.075Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "canonical_domain_only_20261118",
+      "context": "operations",
+      "title": "一般公開前の旧URL互換設定を撤去",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-18 旧URLに関することを全て削除",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "local-only/domain-migration-20261118/canonical-only-checks.json",
+        "local-only/domain-migration-20261118/canonical-only-review.md"
+      ],
+      "last_verified_at": "2026-11-18T03:13:46.003Z",
+      "verification_scope": "Fly同一image/NRT/flags保持・正規origin401/対象外origin403・GAS verify-only実行・資料保護とdiff検査。標準ホストの閲覧停止、実決済、実メール送信は対象外。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "依頼された変更範囲の検査が成功する",
+          "verification": "対象に必要な既存検査を選び、結果と根拠を記録する",
+          "status": "passed",
+          "evidence": [
+            "local-only/domain-migration-20261118/canonical-only-checks.json"
+          ],
+          "checked_at": "2026-11-18T03:13:46.003Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "実装担当以外が受入条件と成果物を確認する",
+          "verification": "別担当のレビューで未解決の問題がないことを確認する",
+          "status": "passed",
+          "evidence": [
+            "local-only/domain-migration-20261118/canonical-only-review.md"
+          ],
+          "checked_at": "2026-11-18T03:13:46.003Z",
+          "reviewer": "domain_migration_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "正規ドメイン単独設定、GAS互換処理撤去、文書整理を検査・独立レビュー",
+            "at": "2026-11-18T03:13:46.620Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_mocks_11_20_private_20261118",
+      "context": "operations",
+      "title": "2級模試11〜20の非公開化（開発正本・本番）",
+      "status": "doing",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-18 「11以降は非公開にしてください」＋本番まで反映の回答",
+      "next_action": "Docker復旧後に開発DBへ同じCLIで反映",
+      "evidence": [
+        "docs/grade2-mocks-11-20-private-20261118.md",
+        "local-only/exam-publication-20261118/production-apply-result.json",
+        "local-only/exam-publication-20261118/reviews/independent-code-review.md"
+      ],
+      "last_verified_at": "2026-11-18T12:24:12.713Z",
+      "verification_scope": "本番：事前読取・600問private化・再接続反復unchanged・公開API（2級1〜10、模試11/20は404）・PC/SP概要表示。CI4件・server171/unit173/typecheck。開発DB（Docker停止中）は未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "CLI・履歴非表示の検査、CI、本番の事前確認・適用・反復unchanged・公開API確認が成功する",
+          "verification": "server/unit/typecheck・CI4件・production-before/apply・公開API/PC/SP確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/exam-publication-20261118/ci-result.json",
+            "local-only/exam-publication-20261118/production-before.json",
+            "local-only/exam-publication-20261118/production-apply-result.json",
+            "local-only/exam-publication-20261118/netlify-release-result.json"
+          ],
+          "checked_at": "2026-11-18T12:24:12.713Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "実装担当以外がCLI・可視性・文言を確認する",
+          "verification": "独立コードレビューと再レビューで未解決P1/P2（事業判断を除く）なし",
+          "status": "passed",
+          "evidence": [
+            "local-only/exam-publication-20261118/reviews/independent-code-review.md"
+          ],
+          "checked_at": "2026-11-18T12:24:12.713Z",
+          "reviewer": "independent_code_review_subagent"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "本番の非公開化と公開確認、独立レビュー合格。開発DBはDocker停止のため未反映",
+            "at": "2026-11-18T12:24:35.697Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_mocks_01_10_rework_20261118",
+      "context": "product",
+      "title": "2級模試1〜10の過去問準拠の全面改稿",
+      "status": "doing",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-18 「2級の過去問（模試）の質が低い。レビューの上、修正」＋全面改稿・代表例承認（Yes, roll it out）",
+      "next_action": "模試1〜3（改稿原稿1・3・7）は2026-11-19に本番反映済み。改稿原稿2・4・5・6・8・9・10の修正・再盲解を再開し、完成後に模試4〜10として差し替える（別の明示依頼で本番反映）",
+      "evidence": [
+        "docs/grade2-mocks-01-03-rework-release-20261119.md",
+        "local-only/grade2-mocks-01-10-review-20261118/authoring-standard.md",
+        "local-only/grade2-mocks-01-10-review-20261118/blind/reblind-r2-result-mock-01.json",
+        "local-only/grade2-mocks-01-10-review-20261118/blind/reblind-r3-result-mock-03.json",
+        "local-only/grade2-mocks-01-10-review-20261118/blind/reblind-r3-result-mock-07.json",
+        "local-only/grade2-mocks-01-10-review-20261118/representative-mock01.md",
+        "local-only/grade2-mocks-01-10-review-20261118/review-findings.md",
+        "local-only/grade2-rework-release-20261119/production-apply-result.json",
+        "local-only/grade2-rework-release-20261119/reviews/independent-code-review.md"
+      ],
+      "last_verified_at": null,
+      "verification_scope": "",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "各回の構成・配点・形式数・正答位置・最長肢率・書式・スキーマ・既存テストが成功する",
+          "verification": "validate-draft.py・check-template・unit/server test",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "作者以外が正答を見ずに盲解し、一意性・全肢・誤答肢・範囲を確認する",
+          "verification": "blind/result-mock-NN.json と compare.json の裁定",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
+      }
+    },
+    {
+      "id": "grade1_m02_10_integration_20261119",
+      "context": "development",
+      "title": "1級模試2〜10の開発DB登録と抜き取り30問のPC/SP表示確認",
+      "status": "done",
+      "depends_on": [
+        "grade1_m02_04_authoring_20261116",
+        "grade1_m05_07_authoring_20261116",
+        "grade1_m08_10_authoring_20261116"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-19 ユーザー: 模試2〜10を開発DBに登録して画面で確認するかの問いに「開発DBに登録する」。開発サーバー3110の切替も同日承認。",
+      "next_action": "本番公開・Git送信は別途依頼を待つ",
+      "evidence": [
+        "docs/grade1-mocks-02-10-integration-20261119.md",
+        "local-only/grade1-mocks-02-10-20261116/integration/conversion-result.json",
+        "local-only/grade1-mocks-02-10-20261116/integration/baseline-metadata.json",
+        "local-only/grade1-mocks-02-10-20261116/integration/writer-test-result.json",
+        "local-only/grade1-mocks-02-10-20261116/integration/isolated-result.json",
+        "local-only/grade1-mocks-02-10-20261116/integration/browser-result-isolated.json",
+        "local-only/grade1-mocks-02-10-20261116/integration/cleanup-result.json",
+        "local-only/grade1-mocks-02-10-20261116/integration/applied-result.json",
+        "local-only/grade1-mocks-02-10-20261116/integration/development-runtime.json",
+        "local-only/grade1-mocks-02-10-20261116/integration/browser-result-development.json",
+        "local-only/grade1-mocks-02-10-20261116/integration/reviews/final-development-review.json"
+      ],
+      "last_verified_at": "2026-11-18T21:55:36.876Z",
+      "verification_scope": "810問3240肢・画像45件を開発DBへ追加し計2700問10800肢。既存1890問7560肢と保護13モデル不変。バックアップ復元・23問後取消・反復no-op・再接続を使い捨てDBで確認。隔離環境で固定30問をPC1280/SP390で表示・回答。実開発は未ログインで30問×2幅のロックとAPI拒否のみ（会員0）。物理実機・本番・Git送信なし。Node v22.15.1で実行。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "変換・基準とバックアップ・使い捨てDBのwriter検査・隔離PC/SP30問・実開発追加と既存保持・開発画面ロック",
+          "verification": "共有スキーマ検証、指紋照合、共通writer、Playwright、登録前後の全行/保護メタデータ照合",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-20261116/integration/conversion-result.json",
+            "local-only/grade1-mocks-02-10-20261116/integration/writer-test-result.json",
+            "local-only/grade1-mocks-02-10-20261116/integration/isolated-result.json",
+            "local-only/grade1-mocks-02-10-20261116/integration/browser-result-isolated.json",
+            "local-only/grade1-mocks-02-10-20261116/integration/cleanup-result.json",
+            "local-only/grade1-mocks-02-10-20261116/integration/applied-result.json",
+            "local-only/grade1-mocks-02-10-20261116/integration/browser-result-development.json"
+          ],
+          "checked_at": "2026-11-18T21:55:36.876Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が変換全件・画像権利・登録コード・隔離結果・開発適用結果を独立確認",
+          "verification": "独立担当による照合スクリプトでの全件照合、Commons等の権利確認、静的レビュー、実行前・最終レビュー",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-20261116/integration/reviews/conversion-review.json",
+            "local-only/grade1-mocks-02-10-20261116/integration/reviews/static-review.json",
+            "local-only/grade1-mocks-02-10-20261116/integration/reviews/runtime-review.json",
+            "local-only/grade1-mocks-02-10-20261116/integration/reviews/final-development-review.json",
+            "local-only/grade1-mocks-02-10-20261116/media-final-review.json"
+          ],
+          "checked_at": "2026-11-18T21:55:36.876Z",
+          "reviewer": "grade1_integration_reviewer_20261119"
+        }
+      ],
+      "execution": {
+        "worker": "root_grade1_m02_10_integration",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "810問を開発DBへ追加し既存1890問を保持。使い捨てDBでwriter検査とPC/SP30問、開発画面でロックを確認し、独立レビューに合格した",
+            "at": "2026-11-18T21:56:10.532Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade1_m02_10_production_20261119",
+      "context": "operations",
+      "title": "1級模試2〜10のGit配信・本番反映",
+      "status": "done",
+      "depends_on": [
+        "grade1_m02_10_integration_20261119"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-19 ユーザー: 本番反映までしてください。一括追加の失敗後、模試ごとの分割追加の方針に「ではその対応でお願いします」。",
+      "next_action": "追加依頼を待つ",
+      "evidence": [
+        "docs/grade1-mocks-02-10-release-20261119.md",
+        "local-only/grade1-mocks-02-10-release-20261119/export-result.json",
+        "local-only/grade1-mocks-02-10-release-20261119/ci-result.json",
+        "local-only/grade1-mocks-02-10-release-20261119/static-build-result.json",
+        "local-only/grade1-mocks-02-10-release-20261119/fly-release-result.json",
+        "local-only/grade1-mocks-02-10-release-20261119/netlify-release-result.json",
+        "local-only/grade1-mocks-02-10-release-20261119/neon-backup-ready.json",
+        "local-only/grade1-mocks-02-10-release-20261119/production-append-result.json",
+        "local-only/grade1-mocks-02-10-release-20261119/production-after-failed-append.json",
+        "local-only/grade1-mocks-02-10-release-20261119/steps-run.json",
+        "local-only/grade1-mocks-02-10-release-20261119/production-steps-result.json",
+        "local-only/grade1-mocks-02-10-release-20261119/steps-restoration.json",
+        "local-only/grade1-mocks-02-10-release-20261119/steps-cleanup.json",
+        "local-only/grade1-mocks-02-10-release-20261119/production-after.json",
+        "local-only/grade1-mocks-02-10-release-20261119/production-check-after.json",
+        "local-only/grade1-mocks-02-10-release-20261119/reviews/final-production-review.json"
+      ],
+      "last_verified_at": "2026-11-18T23:19:54.801Z",
+      "verification_scope": "commit 23b48d4（38ファイル）をpushしCI4件成功。Fly・Netlifyへ配信。本番DBへ模試ごと9回のquestions:appendで810問追加し2700問（1級900）。一括追加の失敗は取消を確認。自動停止の一時抑止と復帰、一時ファイル削除を確認。公開確認は匿名GETのみ（一覧・30問401・画像38件・PC/SP表示）。有料表示は開発時の合成会員検証を継承。物理実機なし。",
+      "acceptance": [
+        {
+          "id": "automated",
+          "kind": "automated",
+          "description": "CI・静的出力の漏出検査・Fly/Netlify配信・本番追加と保持・反映後の読取確認と公開確認",
+          "verification": "受領記録の指紋・件数照合、本番内CLI、Playwright",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-release-20261119/ci-result.json",
+            "local-only/grade1-mocks-02-10-release-20261119/static-build-result.json",
+            "local-only/grade1-mocks-02-10-release-20261119/fly-release-result.json",
+            "local-only/grade1-mocks-02-10-release-20261119/netlify-release-result.json",
+            "local-only/grade1-mocks-02-10-release-20261119/production-steps-result.json",
+            "local-only/grade1-mocks-02-10-release-20261119/production-after.json",
+            "local-only/grade1-mocks-02-10-release-20261119/production-check-after.json"
+          ],
+          "checked_at": "2026-11-18T23:19:54.801Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当がpush前・追加前・反映後にスクリプト・範囲・結果を独立確認",
+          "verification": "静的レビュー、flyctlを模した実行、受領記録と画面の照合",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade1-mocks-02-10-release-20261119/reviews/pre-release-review.json",
+            "local-only/grade1-mocks-02-10-release-20261119/reviews/pre-append-review.json",
+            "local-only/grade1-mocks-02-10-release-20261119/reviews/pre-append-review-3.json",
+            "local-only/grade1-mocks-02-10-release-20261119/reviews/final-production-review.json"
+          ],
+          "checked_at": "2026-11-18T23:19:54.801Z",
+          "reviewer": "grade1_release_reviewer_20261119"
+        }
+      ],
+      "execution": {
+        "worker": "root_grade1_m02_10_release",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "commit 23b48d4を配信し、本番DBへ模試ごと9回で810問を追加。公開確認と独立レビューに合格した",
+            "at": "2026-11-18T23:20:03.695Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_mocks_01_03_release_20261119",
+      "context": "operations",
+      "title": "2級改稿版模試1〜3の本番差し替えと模試4〜10の非公開化",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-19 「1,3,7を真っ先に完成させ、1,2,3として本番反映」＋履歴削除可・模試4〜10は改稿完了まで非公開の回答",
+      "next_action": "模試4〜10の改稿の再開を待つ",
+      "evidence": [
+        "docs/grade2-mocks-01-03-rework-release-20261119.md",
+        "local-only/grade2-rework-release-20261119/production-apply-result.json",
+        "local-only/grade2-rework-release-20261119/netlify-release-result.json",
+        "local-only/grade2-rework-release-20261119/reviews/independent-code-review.md"
+      ],
+      "last_verified_at": "2026-11-19T00:13:59.000Z",
+      "verification_scope": "CI4件、server174/unit173/typecheck、ローカルリハーサル、本番事前確認・差替180問・履歴1件削除・4〜10非公開420問・再実行unchanged、公開API（2級1〜3）とPC/SP画面。開発DBはDocker停止のため未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "差替CLIの検査・CI・本番反映と公開確認が成功する",
+          "verification": "テスト・CI・production-apply・公開API/画面",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-rework-release-20261119/ci-result.json",
+            "local-only/grade2-rework-release-20261119/production-apply-result.json",
+            "local-only/grade2-rework-release-20261119/netlify-release-result.json"
+          ],
+          "checked_at": "2026-11-19T00:13:59.000Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "実装担当以外が差替CLIを確認し、作者以外が3回分を盲解する",
+          "verification": "独立コードレビュー（再レビュー合格）と盲解・再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-rework-release-20261119/reviews/independent-code-review.md",
+            "local-only/grade2-mocks-01-10-review-20261118/blind/reblind-r3-result-mock-07.json"
+          ],
+          "checked_at": "2026-11-19T00:13:59.000Z",
+          "reviewer": "independent_code_review_subagent / blind_solver_subagents"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "改稿版模試1〜3の本番差し替え・模試4〜10の非公開化・公開確認を完了",
+            "at": "2026-11-19T00:13:59.776Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "grade2_06_10_v6_candidates_20261121",
+      "context": "product",
+      "title": "2級模試6〜10の第6版公開候補原稿",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-21ユーザー依頼・原稿2/4/5/6/9をローカルで完成",
+      "next_action": "統合・本番反映の明示指示待ち",
+      "evidence": [
+        "local-only/grade2-candidates-20261121/report.md"
+      ],
+      "last_verified_at": "2026-11-22",
+      "verification_scope": "ローカルの5原稿・全300問。第6版・一次資料、盲解と変更先の再盲解、構成、原稿の指紋とMarkdownを確認。実受験者の難度測定・教材統合・配信は範囲外。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "300問の第6版・一次資料照合と構成検査",
+          "verification": "各60問の照合記録、5本のvalidate-draft、配点・題材重複・指紋",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-candidates-20261121/report.md"
+          ],
+          "checked_at": "2026-11-22"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "変更問・影響先とその他25問を別担当が盲解し原典裁定",
+          "verification": "正答を除いたシート、独立解答、比較と再盲解の結果",
+          "status": "passed",
+          "evidence": [
+            "local-only/grade2-candidates-20261121/report.md"
+          ],
+          "checked_at": "2026-11-22",
+          "reviewer": "blind_first、blind_round2、blind56、blind_six、verify_last、fresh_five、fresh_six（照合記録の版別結果参照）"
+        }
+      ],
+      "execution": {
+        "worker": "作問担当チーム",
+        "max_attempts": 5,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回候補の独立盲解で原稿2・4・9に漏出・原典間不一致等があり再評価。詳細はローカルの版別盲解結果。",
+            "at": "2026-11-21T04:20:30.022Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "5本300問の受入条件を確認し、公開候補原稿・出典・独立盲解を確定",
+            "at": "2026-11-21T17:11:35.268Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_review_pilot_20261122",
+      "context": "product",
+      "title": "準1級600問の比較と代表改稿・合意",
+      "status": "waiting_for_material",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-22 準1級模試1〜10の質と妥当性レビュー依頼",
+      "next_action": "代表大問へのユーザー合意後、全体へ展開する",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "11月17日改訂版、DB操作なし",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "過去問・模試の同一指標と代表改稿の全肢・出典を確認",
+          "verification": "版・指標・根拠・対象指紋を確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "正答未見の担当による代表大問の盲解と裁定",
+          "verification": "初答・再確認・最短解法・全肢判断・未解決指摘を確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "代表改稿担当",
+        "max_attempts": 3,
+        "attempts": []
+      }
+    },
+    {
+      "id": "pre1_full_revision_20261122",
+      "context": "product",
+      "title": "準1級模試1〜10の代表承認後の改稿",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026年11月22日 代表案承認と全回改稿依頼",
+      "next_action": "開発DB反映・コミット・本番反映の依頼を待つ",
+      "evidence": [
+        "local-only/pre1-full-20261122/reviews/claude-final-20261122.md",
+        "local-only/pre1-full-20261122/conversion-check.json"
+      ],
+      "last_verified_at": "2026-11-22T12:17:45.999Z",
+      "verification_scope": "ローカル教材のみ。提示変更64問は現行提示に対する未見盲解と原典裁定（追加修正後は重大0・軽微0、留意点は記録）、600問の構造・配点・変換・Markdown照合。開発DB・本番・コミットは未実施。地図写真未再現、実受験者データ未測定。 その後「その他」26問の小分類を修正（提示・正答・解説は不変、archive 640acad0…）。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "600問の構造・分野・差分・準1級設定での変換",
+          "verification": "セット別検査、原稿・Markdown・archive照合",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-full-20261122/draft-checks.json",
+            "local-only/pre1-full-20261122/conversion-check.json",
+            "local-only/pre1-full-20261122/reviews/claude-final-20261122.md"
+          ],
+          "checked_at": "2026-11-22T12:17:45.999Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "変更提示の未見盲解・原典裁定",
+          "verification": "独立初答と根拠、必要時の再盲解",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-full-20261122/blind/result-a.json",
+            "local-only/pre1-full-20261122/blind/result-b.json",
+            "local-only/pre1-full-20261122/blind/result-c.json",
+            "local-only/pre1-full-20261122/blind/result-r1.json",
+            "local-only/pre1-full-20261122/blind/result-r2r3-news.json",
+            "local-only/pre1-full-20261122/blind/result-r3-book.json",
+            "local-only/pre1-full-20261122/blind/result-r4.json",
+            "local-only/pre1-full-20261122/reviews/claude-final-20261122.md",
+            "local-only/pre1-full-20261122/blind/result-r5.json"
+          ],
+          "checked_at": "2026-11-22T12:17:45.999Z",
+          "reviewer": "Codex盲解担当a/b/c/r1、Claude未見担当 r2r3-news / r3-book / r4 / r5"
+        }
+      ],
+      "execution": {
+        "worker": "Codex作問担当→Claude（2026-11-22引き継ぎ）",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "提示変更64問の現行提示に対する未見盲解・原典裁定（重大0、軽微6は記録）と600問の構造・変換・Markdown照合を確認。ローカル教材のみ",
+            "at": "2026-11-22T12:12:47.957Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_full_revision_integration_20261122",
+      "context": "product",
+      "title": "準1級11月22日改稿版600問の開発DB反映とPCSP表示確認",
+      "status": "done",
+      "depends_on": [
+        "pre1_full_revision_20261122"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026年11月22日 ユーザー指示「開発DBへ反映」",
+      "next_action": "コミット・pushは別途依頼を待つ",
+      "evidence": [
+        "docs/pre1-full-revision-20261122.md",
+        "local-only/pre1-full-20261122/integration-2/applied-result.json"
+      ],
+      "last_verified_at": "2026-11-22T13:19:28.210Z",
+      "verification_scope": "専用開発DBの準1級600問（113問＋小分類26問の再適用）。backup復元・履歴非0拒否・rollback・全件一致・ID/他級保持・no-op。画面は匿名2問（PC1・SP1）のみ、ローカル起動Nuxtで確認。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "バックアップ復元、履歴非0拒否、rollback、全件一致、既存ID・他級保持、反復no-opと代表PCSP表示",
+          "verification": "使い捨てtest DBで検証後に開発DBへ適用し別接続で照合",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-full-20261122/integration/test-result.json",
+            "local-only/pre1-full-20261122/integration/applied-result.json",
+            "local-only/pre1-full-20261122/integration-2/test-result.json",
+            "local-only/pre1-full-20261122/integration-2/applied-result.json",
+            "docs/pre1-full-revision-20261122.md"
+          ],
+          "checked_at": "2026-11-22T13:19:28.210Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "更新コード・結果を別担当が独立レビュー",
+          "verification": "コード指紋・test結果・適用結果の独立確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-full-20261122/integration/independent-code-review.json"
+          ],
+          "checked_at": "2026-11-22T13:19:28.210Z",
+          "reviewer": "claude_independent_db_review"
+        }
+      ],
+      "execution": {
+        "worker": "Claude",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "検証と独立レビューを確認し適用完了。詳細は docs/pre1-full-revision-20261122.md",
+            "at": "2026-11-22T13:19:28.676Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "pre1_full_revision_production_20261122",
+      "context": "operations",
+      "title": "準1級11月22日改稿版600問の本番反映",
+      "status": "done",
+      "depends_on": [
+        "pre1_full_revision_integration_20261122"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026年11月22日 ユーザー指示「おわったら本番反映もしてください」",
+      "next_action": "コミット・pushは別途依頼を待つ",
+      "evidence": [
+        "docs/pre1-full-revision-20261122.md",
+        "local-only/pre1-full-20261122/production/production-apply-result.json"
+      ],
+      "last_verified_at": "2026-11-22T13:19:28.210Z",
+      "verification_scope": "本番DBの準1級600問差し替え（変更113、履歴削除0、履歴2件保持、再実行unchanged、適用後読み取り照合）。公開画面は匿名2問の表示（PC1・SP1）のみ。回答送信・有料範囲・実機は未確認。コミットなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "事前読み取り照合、復旧用ブランチ、リハーサル、本番差替え結果・再実行unchanged・履歴保持、公開画面の代表確認",
+          "verification": "件数・指紋・履歴件数の照合とPCSP代表表示",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-full-20261122/production/production-before.json",
+            "local-only/pre1-full-20261122/production/neon-backup.json",
+            "local-only/pre1-full-20261122/production/rehearsal-result.json",
+            "local-only/pre1-full-20261122/production/production-apply-result.json",
+            "local-only/pre1-full-20261122/production/production-after.json",
+            "docs/pre1-full-revision-20261122.md"
+          ],
+          "checked_at": "2026-11-22T13:19:28.210Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "本番適用スクリプトと期待値を別担当が適用前に独立レビュー",
+          "verification": "スクリプト再生成指紋・期待値・履歴影響・rollback設計の確認",
+          "status": "passed",
+          "evidence": [
+            "local-only/pre1-full-20261122/production/independent-review.json"
+          ],
+          "checked_at": "2026-11-22T13:19:28.210Z",
+          "reviewer": "claude_independent_production_review"
+        }
+      ],
+      "execution": {
+        "worker": "Claude",
+        "max_attempts": 2,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "検証と独立レビューを確認し適用完了。詳細は docs/pre1-full-revision-20261122.md",
+            "at": "2026-11-22T13:19:29.974Z",
             "failed_criteria": []
           }
         ]
