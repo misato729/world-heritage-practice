@@ -13,7 +13,7 @@
     "overview": [
       {
         "title": "級別の演習",
-        "body": "1級は90問、準1級・2級は60問の模試構成です。現在は1級・準1級の模試1〜10と、2級の模試1〜10を公開しています。"
+        "body": "1級は90問、準1級・2級は60問の模試構成です。現在は1級の模試1〜15と、準1級・2級の模試1〜10を公開しています。"
       },
       {
         "title": "学習範囲",
@@ -175,7 +175,7 @@
       "label": "1級",
       "questions_per_exam": 90,
       "free_exam_count": 1,
-      "available_exam_count": 10,
+      "available_exam_count": 15,
       "primary_color": "#34363a"
     }
   ]

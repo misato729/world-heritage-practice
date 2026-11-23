@@ -1,6 +1,6 @@
 # 世界遺産ラボの写真・地図の出典
 
-各画像の権利・利用条件は以下のとおりです。画像は1級の模試で使用しています。見出しのない最初の5件は模試1、「模試2〜10」の節は各見出しの模試・問番号で使用しています。同じファイルを複数の問で使う場合は、それぞれの問に記載しています。
+各画像の権利・利用条件は以下のとおりです。画像は1級の模試で使用しています。見出しのない最初の5件は模試1、「模試2〜10」「模試11〜15」の節は各見出しの模試・問番号で使用しています。同じファイルを複数の問で使う場合は、それぞれの問に記載しています。
 
 ## 写真（問8）
 
@@ -303,3 +303,155 @@ Jpatokal | https://commons.wikimedia.org/wiki/User:Jpatokal | Nikko Toshogu Yome
 ファイル：[68d814329197c7d58eafaf6705bebbf69d71a417903936b7ce009e9fa8dfa5dc.png](/question-media/68d814329197c7d58eafaf6705bebbf69d71a417903936b7ce009e9fa8dfa5dc.png)
 
 世界遺産ラボ | Natural Earth | https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson | Public Domain（地理データ） | https://www.naturalearthdata.com/about/terms-of-use/ | Natural Earthの公開地理データを用いて独自描画。
+
+## 模試11〜15
+
+### 模試11 写真（問8）
+
+ファイル：[be45bd66074ec08a0b0c0b715926a3e04046ae82d254e6b2b9bfd2da82000b70.jpg](/question-media/be45bd66074ec08a0b0c0b715926a3e04046ae82d254e6b2b9bfd2da82000b70.jpg)
+
+Pascal Reusch | https://commons.wikimedia.org/wiki/User:Reuschp | Baths of Caracalla.JPG | https://commons.wikimedia.org/wiki/File:Baths_of_Caracalla.JPG | CC BY-SA 3.0 | https://creativecommons.org/licenses/by-sa/3.0/ | 本教材での改変：Wikimedia Commonsが生成した縮小版（幅1920px）を取得して使用。トリミング・色調整・加筆なし。 | 写真には上記の利用許諾条件が適用されます。
+
+### 模試11 写真（問11）
+
+ファイル：[a84111c2ad22fb5da08a0f18371b5853decaca971be3b06d49f0e223575f2ff6.jpg](/question-media/a84111c2ad22fb5da08a0f18371b5853decaca971be3b06d49f0e223575f2ff6.jpg)
+
+Bernard Gagnon | https://commons.wikimedia.org/wiki/User:Bgag | Sydney Opera House 01.jpg | https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_01.jpg | CC BY-SA 3.0 | https://creativecommons.org/licenses/by-sa/3.0/ | 本教材での改変：Wikimedia Commonsが生成した縮小版（幅1920px）を取得して使用。トリミング・色調整・加筆なし。 | 写真には上記の利用許諾条件が適用されます。
+
+### 模試11 写真（問45）
+
+ファイル：[5ea89f3de517c74a2355ed120cdcd17bbb95bc6517802460ea5fec73bb44bec2.jpg](/question-media/5ea89f3de517c74a2355ed120cdcd17bbb95bc6517802460ea5fec73bb44bec2.jpg)
+
+w_lemay | https://www.flickr.com/photos/59081381@N03/ | Passage, Mammoth Cave, Mammoth Cave National Park, Mammoth Cave, KY - 52726550184.jpg | https://commons.wikimedia.org/wiki/File:Passage,_Mammoth_Cave,_Mammoth_Cave_National_Park,_Mammoth_Cave,_KY_-_52726550184.jpg | CC BY-SA 2.0 | https://creativecommons.org/licenses/by-sa/2.0/ | 本教材での改変：Wikimedia Commonsが生成した縮小版（幅1920px）を取得して使用。トリミング・色調整・加筆なし。 | 写真には上記の利用許諾条件が適用されます。
+
+### 模試11 写真（問56）
+
+ファイル：[42c30be5c6e5aaba2d401cc67d502058dc6b8e697dfba3e664a8c799268e499d.jpg](/question-media/42c30be5c6e5aaba2d401cc67d502058dc6b8e697dfba3e664a8c799268e499d.jpg)
+
+Zairon | https://commons.wikimedia.org/wiki/User:Zairon | Nikko Nikko Tosho-gu Hai-den Kara-mon 3.jpg | https://commons.wikimedia.org/wiki/File:Nikko_Nikko_Tosho-gu_Hai-den_Kara-mon_3.jpg | CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0/ | 本教材での改変：Wikimedia Commonsが生成した縮小版（幅1920px）を取得して使用。トリミング・色調整・加筆なし。 | 写真には上記の利用許諾条件が適用されます。
+
+### 模試11 地図（問89）
+
+ファイル：[dcf95fbe4ebf0cf36232f2a3306690bb18a36fcd2db89182a23b3a1386470b24.png](/question-media/dcf95fbe4ebf0cf36232f2a3306690bb18a36fcd2db89182a23b3a1386470b24.png)
+
+世界遺産ラボ | Natural Earth | https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson | Public Domain（地理データ） | https://www.naturalearthdata.com/about/terms-of-use/ | Natural Earthの公開地理データを用いて独自描画。
+
+### 模試12 写真（問8）
+
+ファイル：[a13426163b293369fa130c4ccc180d76c7414118ae21555031009302f762a8b4.jpg](/question-media/a13426163b293369fa130c4ccc180d76c7414118ae21555031009302f762a8b4.jpg)
+
+Bernard Gagnon | https://commons.wikimedia.org/wiki/User:Bgag | Naqsh-e Jahan Square, Isfahan 02.jpg | https://commons.wikimedia.org/wiki/File:Naqsh-e_Jahan_Square,_Isfahan_02.jpg | CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0/ | 本教材で縮小・再保存（トリミング・色調整なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試12 写真（問11）
+
+ファイル：[c0e1c9bed8a64d057d7604e0f3f734bdb7d3c03c4e75def3426b0dab64fbdd8f.jpg](/question-media/c0e1c9bed8a64d057d7604e0f3f734bdb7d3c03c4e75def3426b0dab64fbdd8f.jpg)
+
+Bernard Spragg. NZ | https://www.flickr.com/people/88123769@N02 | Sydney Opera House. (50729318547).jpg | https://commons.wikimedia.org/wiki/File:Sydney_Opera_House._(50729318547).jpg | CC0 1.0 | https://creativecommons.org/publicdomain/zero/1.0/ | 本教材で縮小・再保存（トリミング・色調整なし）。
+
+### 模試12 写真（問45）
+
+ファイル：[5be60b8985a696fa564208e2e578785c7943134a7ee55307e7ead343206343fc.jpg](/question-media/5be60b8985a696fa564208e2e578785c7943134a7ee55307e7ead343206343fc.jpg)
+
+Iraphne R. Childs | Lake McKenzie, K'gari (Fraser Island) 1984 QUT-478.jpg | https://commons.wikimedia.org/wiki/File:Lake_McKenzie,_K'gari_(Fraser_Island)_1984_QUT-478.jpg | CC BY 4.0 | https://creativecommons.org/licenses/by/4.0/ | Copyright Iraphne R. Childs. | 本教材で縮小・再保存（トリミング・色調整なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試12 写真（問56）
+
+ファイル：[c3e1c542de0ab7f8b84b6d002a7ef77954b2f92f506308206cd6c47e639df287.jpg](/question-media/c3e1c542de0ab7f8b84b6d002a7ef77954b2f92f506308206cd6c47e639df287.jpg)
+
+Taisyo | https://commons.wikimedia.org/wiki/User:Taisyo | Senjokaku 2011.JPG | https://commons.wikimedia.org/wiki/File:Senjokaku_2011.JPG | CC BY 3.0 | https://creativecommons.org/licenses/by/3.0/ | 本教材で縮小・再保存（トリミング・色調整なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試12 地図（問89）
+
+ファイル：[2c5f5624822aaa9520031f736e9f65c606e040d6909dbb6652cb314896cfa506.png](/question-media/2c5f5624822aaa9520031f736e9f65c606e040d6909dbb6652cb314896cfa506.png)
+
+世界遺産ラボ | Natural Earth | https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson | Public Domain（地理データ） | https://www.naturalearthdata.com/about/terms-of-use/ | Natural Earthの公開地理データを用いて独自描画。
+
+### 模試13 写真（問8）
+
+ファイル：[6c78bc850d7bb0fc6d0db4ca1003dbb4f921dc7e8d2cc7032e4e2fb4e56ad944.jpg](/question-media/6c78bc850d7bb0fc6d0db4ca1003dbb4f921dc7e8d2cc7032e4e2fb4e56ad944.jpg)
+
+Ank Kumar | https://commons.wikimedia.org/wiki/User:Ank_gsx | Hagia Sophia Grand Mosque, Istanbul, Türkiye ( Ank Kumar, Infosys Limited) 04.jpg | https://commons.wikimedia.org/wiki/File:Hagia_Sophia_Grand_Mosque,_Istanbul,_T%C3%BCrkiye_(_Ank_Kumar,_Infosys_Limited)_04.jpg | CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試13 写真（問11）
+
+ファイル：[361ecaf982f69234fef49b7f8a6d9793c54e4cc26b0375852f04439219216342.jpg](/question-media/361ecaf982f69234fef49b7f8a6d9793c54e4cc26b0375852f04439219216342.jpg)
+
+Baummapper | https://de.wikipedia.org/wiki/Benutzer:Baummapper | Bergpark Wilhelmshöhe - Große Kaskaden 2020-05-14 d.JPG | https://commons.wikimedia.org/wiki/File:Bergpark_Wilhelmsh%C3%B6he_-_Gro%C3%9Fe_Kaskaden_2020-05-14_d.JPG | CC BY-SA 3.0 DE | https://creativecommons.org/licenses/by-sa/3.0/de/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試13 写真（問45）
+
+ファイル：[c708fe6c6fa5e05d5acbcdd68e5616354c68a64997c42144d5688eabb2d4e222.jpg](/question-media/c708fe6c6fa5e05d5acbcdd68e5616354c68a64997c42144d5688eabb2d4e222.jpg)
+
+Roryjm0 | https://commons.wikimedia.org/w/index.php?title=User:Roryjm0&action=edit&redlink=1 | Zebra herd in Ngorongoro Crater 02.jpg | https://commons.wikimedia.org/wiki/File:Zebra_herd_in_Ngorongoro_Crater_02.jpg | CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試13 写真（問56）
+
+ファイル：[a690c90b3dc7d66e78368e0754e7eb288f4dd6bb76a85c7f428cf278f18869ac.jpg](/question-media/a690c90b3dc7d66e78368e0754e7eb288f4dd6bb76a85c7f428cf278f18869ac.jpg)
+
+Martin Falbisoner | https://commons.wikimedia.org/wiki/User:Martin_Falbisoner | Himeji Castle, November 2016 -02.jpg | https://commons.wikimedia.org/wiki/File:Himeji_Castle,_November_2016_-02.jpg | CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試13 地図（問89）
+
+ファイル：[5991c87b1e5b7e46dc487e94fd439ab4be84f0d99f1e2b02c82df0f2c65538b6.png](/question-media/5991c87b1e5b7e46dc487e94fd439ab4be84f0d99f1e2b02c82df0f2c65538b6.png)
+
+世界遺産ラボ | Natural Earth | https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson | Public Domain（地理データ） | https://www.naturalearthdata.com/about/terms-of-use/ | Natural Earthの公開地理データを用いて独自描画。
+
+### 模試14 写真（問8）
+
+ファイル：[acc93edf1161c3869d7ce1bf20701c983afe8fff067b16d6df6cb86e763ea9bb.jpg](/question-media/acc93edf1161c3869d7ce1bf20701c983afe8fff067b16d6df6cb86e763ea9bb.jpg)
+
+Premeditated | https://commons.wikimedia.org/wiki/User:Premeditated | Gate of Salutation (Topkapı Palace) (2024).jpg | https://commons.wikimedia.org/wiki/File:Gate_of_Salutation_(Topkap%C4%B1_Palace)_(2024).jpg | CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試14 写真（問11）
+
+ファイル：[849926c2e888353b5dc5723763be240b03f46d4462d3268ccba91ea3430a13dc.jpg](/question-media/849926c2e888353b5dc5723763be240b03f46d4462d3268ccba91ea3430a13dc.jpg)
+
+Krzysztof Golik | https://commons.wikimedia.org/wiki/User:Tournasol7 | Maison Carree in Nimes (3).jpg | https://commons.wikimedia.org/wiki/File:Maison_Carree_in_Nimes_(3).jpg | CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試14 写真（問45）
+
+ファイル：[1661ff582c1f3cef3c017cc4ae2678340d1ffe9fc2bf68272b55d9a8854d76d4.jpg](/question-media/1661ff582c1f3cef3c017cc4ae2678340d1ffe9fc2bf68272b55d9a8854d76d4.jpg)
+
+Yoo Chung | https://commons.wikimedia.org/wiki/User:YooChung | Seongsan Ilchulbong from the ocean.jpg | https://commons.wikimedia.org/wiki/File:Seongsan_Ilchulbong_from_the_ocean.jpg | CC BY-SA 3.0 | https://creativecommons.org/licenses/by-sa/3.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試14 写真（問56）
+
+ファイル：[c4381636a9ac1f60d8d4083af64c33fbc25ee0db2785998714b40ea811703d03.jpg](/question-media/c4381636a9ac1f60d8d4083af64c33fbc25ee0db2785998714b40ea811703d03.jpg)
+
+DXR | https://commons.wikimedia.org/wiki/User:DXR | Atomic Bomb Dome and Motoyaso River, Hiroshima, Northwest view 20190417 1.jpg | https://commons.wikimedia.org/wiki/File:Atomic_Bomb_Dome_and_Motoyaso_River,_Hiroshima,_Northwest_view_20190417_1.jpg | CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試14 地図（問89）
+
+ファイル：[5c7e96db31de998ba2598901a706aab96f0ee787e0ebcac2025535cbaaa9f1a6.png](/question-media/5c7e96db31de998ba2598901a706aab96f0ee787e0ebcac2025535cbaaa9f1a6.png)
+
+世界遺産ラボ | Natural Earth | https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson | Public Domain（地理データ） | https://www.naturalearthdata.com/about/terms-of-use/ | Natural Earthの公開地理データを用いて独自描画。
+
+### 模試15 写真（問8）
+
+ファイル：[739495fc4dd92a963b5d0f3801d5cadfadef47015e2577b74a8af6c16eb10250.jpg](/question-media/739495fc4dd92a963b5d0f3801d5cadfadef47015e2577b74a8af6c16eb10250.jpg)
+
+Granadino anti-andaluz | https://commons.wikimedia.org/wiki/User:Granadino_anti-andaluz | La Giralda de Sevilla.jpg | https://commons.wikimedia.org/wiki/File:La_Giralda_de_Sevilla.jpg | CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試15 写真（問11）
+
+ファイル：[7b78e4f3923271d147561c155deb2680c09286ddc1d12c68e5101d7fcec08154.jpg](/question-media/7b78e4f3923271d147561c155deb2680c09286ddc1d12c68e5101d7fcec08154.jpg)
+
+Zairon | https://commons.wikimedia.org/wiki/User:Zairon | Graz Schloss Eggenberg 1.JPG | https://commons.wikimedia.org/wiki/File:Graz_Schloss_Eggenberg_1.JPG | CC BY-SA 3.0 | https://creativecommons.org/licenses/by-sa/3.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試15 写真（問45）
+
+ファイル：[fb09a97808b3a7f1dae504c45081e6455e0524c81895c3f012f848e516719981.jpg](/question-media/fb09a97808b3a7f1dae504c45081e6455e0524c81895c3f012f848e516719981.jpg)
+
+Ken Lund | https://www.flickr.com/people/75683070@N00 | Sulphur Dioxide Plume from Halemaumau Crater, Kīlauea Caldera, Hawaiʻi Volcanoes National Park, Hawaii (4528644995).jpg | https://commons.wikimedia.org/wiki/File:Sulphur_Dioxide_Plume_from_Halemaumau_Crater,_K%C4%ABlauea_Caldera,_Hawai%CA%BBi_Volcanoes_National_Park,_Hawaii_(4528644995).jpg | CC BY-SA 2.0 | https://creativecommons.org/licenses/by-sa/2.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試15 写真（問56）
+
+ファイル：[9f3ea2e8656ec141ed56216e99cbb4eb4571462691ef137d85b91222ed70c05e.jpg](/question-media/9f3ea2e8656ec141ed56216e99cbb4eb4571462691ef137d85b91222ed70c05e.jpg)
+
+Ootahara | https://commons.wikimedia.org/wiki/User:Ootahara | Kominato Beach that I looked at from the Nakayama Pass in Chichijima Island,Ogasawara,Tokyo,Japan.jpg | https://commons.wikimedia.org/wiki/File:Kominato_Beach_that_I_looked_at_from_the_Nakayama_Pass_in_Chichijima_Island,Ogasawara,Tokyo,Japan.jpg | CC0 | https://creativecommons.org/publicdomain/zero/1.0/ | 本教材で長辺1600pxへ縮小（トリミング・色調補正なし）。写真には上記の利用許諾条件が適用されます。
+
+### 模試15 地図（問89）
+
+ファイル：[42c8ccea439c6db7d8c1819cf4f2683e66335202a7271acb5e733f171c18f62c.png](/question-media/42c8ccea439c6db7d8c1819cf4f2683e66335202a7271acb5e733f171c18f62c.png)
+
+世界遺産ラボ | Natural Earth | https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_admin_0_countries.geojson | Public Domain（地理データ） | https://www.naturalearthdata.com/about/terms-of-use/ | Natural Earthの公開地理データを用いて独自描画。
